@@ -5,7 +5,9 @@
 namespace Contentstack\Utility;
 
 require_once __DIR__ . "/models/result.php";
+require_once __DIR__ . "/models/csexception.php";
 
+use Contentstack\Error\CSException;
 use Contentstack\Result\Result;
 
 if (!function_exists('validateInput')) {
@@ -201,18 +203,26 @@ if (!function_exists('request')) {
     function request($queryObject = '', $type = '') {
         $server_output = '';
         if($queryObject) {
-            $ch = curl_init(URL($queryObject, $type));
-            // debug(URL($queryObject, $type));
+            $http = curl_init(URL($queryObject, $type));
             // setting the GET request
-            curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "GET");
+//            curl_setopt($http, CURLOPT_HEADER, TRUE);
+            // setting the GET request
+            curl_setopt($http, CURLOPT_CUSTOMREQUEST, "GET");
             // receive server response ...
-            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-            $server_output = curl_exec ($ch);
-            // wrapper the server result
-            $server_output = wrapResult($server_output, $queryObject);
-            curl_close ($ch);
+            curl_setopt($http, CURLOPT_RETURNTRANSFER, TRUE);
+            $response = curl_exec($http);
+            // status code extraction
+            $httpcode = curl_getinfo($http, CURLINFO_HTTP_CODE);
+            // close the curl             
+            curl_close ($http);
+            if($httpcode > 199 && $httpcode < 300) {
+                // wrapper the server result
+                $response = wrapResult($response, $queryObject);
+            } else {
+                throw new CSException($response, $httpcode);
+            }
         }
-        return $server_output;
+        return $response;
     }
 }
 
