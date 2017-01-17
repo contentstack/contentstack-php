@@ -1,7 +1,6 @@
 <?php
 namespace Contentstack\Result;
 
-
 class Result {
     private $object;
 
