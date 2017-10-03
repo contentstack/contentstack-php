@@ -3,26 +3,28 @@
  * Dependency loading
  * */
 
-namespace Contentstack\Stack\ContentType\Query;
+namespace Contentstack\Stack\Assets\QueryAssets;
 
-use Contentstack\Stack\ContentType\BaseQuery\BaseQuery;
+use Contentstack\Stack\Assets\AssetsQuery\AssetsQuery;
 use Contentstack\Utility;
 
-require_once __DIR__."/base_query.php";
+require_once __DIR__."/assetsquery.php";
 require_once __DIR__."/../utility.php";
 
-class Query extends BaseQuery {
+class QueryAssets extends AssetsQuery {
     var $operation;
     var $_query;
+    var $assets;
 
     /*
      * Query
      * Query Class to initalize your Query
      * @param
      * */
-    public function __construct($contentType = '') {
+    public function __construct($stack = '') {
         $this->_query = array();
-        parent::__construct($contentType, $this);
+        $this->assets = $stack;
+        parent::__construct($this);
        // \Contentstack\Utility\debug($this);
     }
 
@@ -32,7 +34,7 @@ class Query extends BaseQuery {
      * */
     public function find() {
         $this->operation = __FUNCTION__;
-        return Utility\request($this);
+        return Utility\request($this, assets);
     }
 
     /*
@@ -44,4 +46,6 @@ class Query extends BaseQuery {
         $this->_query['limit'] = 1;
         return Utility\request($this);
     }
+
+
 }
