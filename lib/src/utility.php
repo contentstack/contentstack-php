@@ -59,8 +59,11 @@ if(!function_exists('getDomain')) {
      * @return String
      * */
     function getDomain($query) {
-        $stack = $query;
+        $stack = $query;  
         if($query && isset($query->contentType)) $stack = $query->contentType->stack;
+        if($query && isset($query->stack)) $stack = $query->stack;
+        if($query && isset($query->assets)) 
+            $stack = $query->assets->stack;
         return $stack->getProtocol().'://'.$stack->getHost().':'.$stack->getPort().VERSION;
     }
 }
@@ -82,12 +85,19 @@ if(!function_exists('URL')) {
             case 'get_last_activites':
                 $URL = getDomain($queryObject).CONTENT_TYPES;
                 break;
+            case 'asset':
+                $URL = getDomain($queryObject).ASSETS.$queryObject->assetUid;
+                break;
+            case 'assets':
+                $URL = getDomain($queryObject).ASSETS;
+                break;                      
             default:
                 $URL = getDomain($queryObject).CONTENT_TYPES.$queryObject->contentType->uid.ENTRIES;
                 if(isset($queryObject->entryUid)) $URL.=$queryObject->entryUid;
         }
         $queryParams = generateQueryParams($queryObject);
         return $URL.'?'.$queryParams;
+
     }
 }
 
@@ -104,8 +114,12 @@ if(!function_exists('headers')) {
         if($query) {
             if(isset($query->header)) {
                 $headers = $query->header;
+            } else if($query && isset($query->stack)){
+                $headers = $query->stack->header;
             } else if($query && isset($query->contentType)){
                 $headers = $query->contentType->stack->header;
+            } else{
+                $headers = $query->assets->stack->header;
             }
         }
         return $headers;
@@ -127,7 +141,16 @@ if(!function_exists('generateQuery')) {
             $subQuery = array();
             if(count($query->subQuery) > 0) $subQuery['query'] = json_encode($query->subQuery);
             $result = array_merge($query->_query, $subQuery);
-        } else {
+        } else if (isset($query->stack)) {       
+            $query->_query['environment'] = $query->stack->getEnvironment();
+            $result = array_merge($result, $query->_query);
+
+        }else if (isset($query->assets)) {       
+            $query->_query['environment'] = $query->assets->stack->getEnvironment();
+            $result = array_merge($result, $query->_query);
+
+        } 
+        else {
             $query->_query['environment'] = $query->getEnvironment();
             $result = array_merge($result, $query->_query);
         }
@@ -144,10 +167,12 @@ if(!function_exists('generateQueryParams')) {
      * @return QueryParameters
      * */
     function generateQueryParams($query = array()) {
+        
         $QueryParams = generateQuery($query);
         $Headers     = headers($query);
         $result      = array_merge($QueryParams, $Headers);
         return http_build_query($result);
+
     }
 }
 
@@ -160,6 +185,7 @@ if(!function_exists('wrapResult')) {
      * @return ResultWrapped Object
      * */
     function wrapResult($result = '', $queryObject = '') {
+
         $result = $wrapper = json_decode($result, true);
         if($result && $queryObject && isset($queryObject->operation)) {
             $flag =  (isset($queryObject->json_translate) && $queryObject->json_translate);
@@ -172,7 +198,10 @@ if(!function_exists('wrapResult')) {
                     }
                     break;
                 case 'fetch':
-                    if(isKeySet($result, 'entry')) $wrapper = (!$flag) ? new Result($result['entry']) : $result['entry'];
+                    if(isKeySet($result, 'entry'))
+                        $wrapper = (!$flag) ? new Result($result['entry']) : $result['entry'];
+                    if(isKeySet($result, 'asset'))
+                        $wrapper = (!$flag) ? new Result($result['asset']) : $result['asset'];
                     break;
                 case 'find':
                     $wrapper = array();
@@ -181,6 +210,13 @@ if(!function_exists('wrapResult')) {
                             $result['entries'][$i] = new Result($result['entries'][$i]);
                         }
                         array_push($wrapper, $result['entries']);
+                    }
+                    if(isKeySet($result, 'assets')) {
+                    for($i = 0, $_i = count($result['assets']); $i < $_i && !$flag; $i++) {
+                            $result['assets'][$i] = new Result($result['assets'][$i]);
+                        }
+                        array_push($wrapper, $result['assets']);    
+                    
                     }
                     if(\Contentstack\Utility\isKeySet($result, 'schema')) array_push($wrapper, $result['schema']);
                     if(\Contentstack\Utility\isKeySet($result, 'content_type')) array_push($wrapper, $result['content_type']);
@@ -193,6 +229,7 @@ if(!function_exists('wrapResult')) {
 }
 
 if (!function_exists('request')) {
+    
     /*
      * request
      * request to the API server based on the data
@@ -200,12 +237,15 @@ if (!function_exists('request')) {
      *  @queryObject - Object - Query Object
      * @return Result
      * */
+
     function request($queryObject = '', $type = '') {
+      //   \Contentstack\Utility\debug($queryObject);
         $server_output = '';
         if($queryObject) {
             $http = curl_init(URL($queryObject, $type));
+        //    \Contentstack\Utility\debug(URL($queryObject, $type));
             // setting the GET request
-//            curl_setopt($http, CURLOPT_HEADER, TRUE);
+            curl_setopt($http, CURLOPT_HEADER, FALSE);
             // setting the GET request
             curl_setopt($http, CURLOPT_CUSTOMREQUEST, "GET");
             // receive server response ...
@@ -213,11 +253,12 @@ if (!function_exists('request')) {
             $response = curl_exec($http);
             // status code extraction
             $httpcode = curl_getinfo($http, CURLINFO_HTTP_CODE);
-            // close the curl             
+            // close the curl            
             curl_close ($http);
             if($httpcode > 199 && $httpcode < 300) {
                 // wrapper the server result
-                $response = wrapResult($response, $queryObject);
+                $response = wrapResult($response, $queryObject);               
+
             } else {
                 throw new CSException($response, $httpcode);
             }
@@ -259,9 +300,8 @@ if (!function_exists('debug')) {
      * */
     function debug($input, $exit = false) {
         echo "<pre>";
-        print_r($input);
+        print_r ($input);
         echo "</pre>";
         if($exit) exit();
     }
 }
-
