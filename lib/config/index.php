@@ -13,4 +13,5 @@ define('PORT', 443);
 // URL's relevant constants
 define('CONTENT_TYPES', '/content_types/');
 define('ENTRIES', '/entries/');
+define('ASSETS', '/assets/');
 define('ENVIRONMENTS', '/environments/');

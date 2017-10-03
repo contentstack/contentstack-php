@@ -3,8 +3,12 @@ namespace Contentstack\Stack;
 
 use Contentstack\Utility;
 use Contentstack\Stack\ContentType\ContentType;
+use Contentstack\Stack\Assets\Assets;
+use Contentstack\Stack\Asset\Asset;
 
 require_once __DIR__."/content_type.php";
+require_once __DIR__."/assets.php";
+require_once __DIR__."/asset.php";
 require_once __DIR__."/../../config/index.php";
 
 /*
@@ -25,7 +29,7 @@ class Stack {
     /*
      * Constructor of the Stack
      * */
-    public function __construct($api_*** = '', $access_token = '', $environment = 'development') {
+    public function __construct($api_*** = '', $access_token = '', $environment = '') {
         $this->header = Utility\validateInput('stack', array('api_***' => $api_***, 'access_token' => $access_token, 'environment' => $environment));
         $this->environment = $this->header['environment'];
         unset($this->header['environment']);
@@ -39,7 +43,16 @@ class Stack {
      * @return ContentType
      * */
     public function ContentType($contentTypeId = '') {
+        
         return new ContentType($contentTypeId, $this);
+    }
+
+    public function Assets(){
+        return new Assets($this);
+    }
+
+    public function Asset($assetUid = '') {
+        return new Asset($assetUid, $this);
     }
 
     /*

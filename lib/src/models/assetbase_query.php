@@ -1,7 +1,6 @@
 <?php
 
-namespace Contentstack\Stack\ContentType\BaseQuery;
-
+namespace Contentstack\Stack\Assets\BaseQuery;
 
 require_once __DIR__ . "/../helper.php";
 
@@ -13,6 +12,7 @@ abstract class BaseQuery {
     var $subQuery;
 
     public function __construct($contentType = '', $parent = '') {
+        
         $this->contentType = $contentType;
         $this->queryObject = $parent;
         $this->queryObject->_query = array();
@@ -386,6 +386,15 @@ abstract class BaseQuery {
         } catch(\Exception $e) {
             echo $e->getMessage();
         }
+    }
+
+    public function geturl($data) {
+
+        $data1 = $data['asset']['url'];
+
+        \Contentstack\Utility\debug($data1);
+
+        
     }
 
 
