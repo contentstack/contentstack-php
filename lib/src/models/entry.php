@@ -26,7 +26,8 @@ class Entry extends BaseQuery {
     public function __construct($entryUid = '', $contentType = '') {
         $this->entryUid = $entryUid;
         parent::__construct($contentType, $this);
-        if(!\Contentstack\Utility\isEmpty($entryUid)) return $this;
+        if(!\Contentstack\Utility\isEmpty($entryUid)) 
+            return $this;
     }
 
     /*
