@@ -2,12 +2,13 @@
 require_once __DIR__ . '/REST.php';
 require_once __DIR__ . '/constants.php';
 require_once __DIR__ . '/utility.php';
-
 require_once __DIR__ . '/../lib/index.php';
 
 use Contentstack\Test\REST;
 
-class ContentStackTestCases extends PHPUnit_Framework_Testcase {
+use PHPUnit\Framework\TestCase;
+
+class ContentStackTestCases extends TestCase {
     public static $rest;
     public static $Stack;
     /*
@@ -248,7 +249,7 @@ class ContentStackTestCases extends PHPUnit_Framework_Testcase {
 
     public function testFindAscending() {
         $field = 'created_at';
-        $entries = self::$Stack->ContentType(CT_ContentType)->Query()->toJSON()->ascending($field)->find();
+        $entries = self::$Stack->ContentType(CT_ContentType)->Query()->toJSON()->ascending('created_at')->find();
         $this->assertArrayHasKey(0, $entries);
         $this->assertTrue((count($entries[0]) === ENTRY_COUNT));
         $this->assertTrue(checkEntriesSorting($entries[0], $field, 'asc'));
