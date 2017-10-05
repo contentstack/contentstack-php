@@ -3,7 +3,7 @@ require_once __DIR__ . '/REST.php';
 require_once __DIR__ . '/constants.php';
 require_once __DIR__ . '/utility.php';
 
-require_once __DIR__ . '/../lib/index.php';
+require_once __DIR__ . '/../src/index.php';
 
 use Contentstack\Test\REST;
 
@@ -35,7 +35,7 @@ class ContentStackTestCases extends TestCase {
     }
 
       public function testAssetsFind() {
-        $_assets = self::$Stack->Assets()->QueryAssets()->toJSON()->find();
+        $_assets = self::$Stack->Assets()->Query()->toJSON()->find();
         $this->assertArrayHasKey(0, $_assets);
        // $this->assertTrue((count($_assets[0]) === ENTRY_COUNT));
         $this->assertTrue(checkAssetsSorting($_assets[0]));
@@ -43,11 +43,11 @@ class ContentStackTestCases extends TestCase {
 
 
     public function testAssetFetch() {
-         $_object = self::$Stack->Assets()->QueryAssets()->toJSON()->find();
+         $_object = self::$Stack->Assets()->Query()->toJSON()->find();
+         //\Contentstack\Utility\debug($_object);
          $_uid = $_object[0][0]['uid'];
-         $_asset = self::$Stack->Asset($_uid)->fetch();
-         //\Contentstack\Utility\debug($_asset);
-         $this->assertEquals($_asset->getTitle(), $_object[0][0]['title']);
+         $_asset = self::$Stack->Asset($_uid)->toJSON()->fetch();
+         $this->assertEquals($_asset->get('title'), $_object[0][0]['title']);
     }
 
     public function testFindOne() {
