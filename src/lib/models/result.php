@@ -10,7 +10,8 @@ class Result {
      * */
     public function __construct($result = '') {
         $this->object = $result;
-       // \Contentstack\Utility\debug($this);
+
+       
     }
 
     /*
