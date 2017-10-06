@@ -17,7 +17,6 @@ if (!function_exists('entriesSorting')) {
 if (!function_exists('assetsSorting')) {
 
     function checkAssetsSorting($assets = array(), $sortKey = 'updated_at', $order = 'desc') {
-        \Contentstack\Utility\debug($assets);
         $result = true;
         for($i = 0;$i < count($assets) - 1; $i++) {
             if($order === 'desc')
@@ -31,7 +30,7 @@ if (!function_exists('assetsSorting')) {
 
 if (!function_exists('sortEntries')) {
     function sortEntries($entries = array(), $sortKey = 'updated_at', $order = 'desc') {
-        \Contentstack\Utility\debug(array_column($entries, $sortKey));
+      
         usort($entries, create_function('$a, $b', '
             $a = $a["' . $sortKey . '"];
             $b = $b["' . $sortKey . '"];

@@ -17,7 +17,7 @@ require_once __DIR__.'/query.php';
 class Assets {
    
     var $stack    = '';
-
+    
 
     /*
      * Assets
@@ -31,7 +31,7 @@ class Assets {
     }
 
     public function Query() {
-        return new Query($this);
+        return new Query($this, $this->type);
     }
 
 }

@@ -44,9 +44,8 @@ class ContentStackTestCases extends TestCase {
 
     public function testAssetFetch() {
          $_object = self::$Stack->Assets()->Query()->toJSON()->find();
-         //\Contentstack\Utility\debug($_object);
          $_uid = $_object[0][0]['uid'];
-         $_asset = self::$Stack->Asset($_uid)->toJSON()->fetch();
+         $_asset = self::$Stack->Asset($_uid)->fetch();
          $this->assertEquals($_asset->get('title'), $_object[0][0]['title']);
     }
 
