@@ -14,7 +14,7 @@ include_once "../src/index.php";
 
 
 
-$stack = Contentstack::Stack('blt6fe3ebcc41393d87', 'blt1e73caa94ad25d4b', 'mobile');
+$stack = Contentstack::Stack('<<API-KEY>>', '<<Access-Token>>', '<<environment>>');
 try {
 
     //$result = $stack->ContentType('authors')->Query()->toJSON()->includeCount()->find();
