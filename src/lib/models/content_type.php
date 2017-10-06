@@ -26,6 +26,7 @@ class ContentType {
     public function __construct($uid = '', $stack = '') {
         $this->uid = $uid;
         $this->stack = $stack;
+        $this->type = 'contentType';
     }
 
     /*
@@ -43,6 +44,6 @@ class ContentType {
      * @returns Query
      * */
     public function Query() {
-        return new Query($this);
+        return new Query($this, $this->type);
     }
 }

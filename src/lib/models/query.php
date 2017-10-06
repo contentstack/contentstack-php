@@ -20,8 +20,9 @@ class Query extends BaseQuery {
      * Query Class to initalize your Query
      * @param
      * */
-    public function __construct($data = '') {
+    public function __construct($data = '', $type = '') {
         $this->_query = array();
+        $this->type = $type;
         parent::__construct($data, $this);
     
     }
@@ -32,10 +33,9 @@ class Query extends BaseQuery {
      * */
     public function find() {
         $this->operation = __FUNCTION__;
-        if($this->assets){
+        if($this->type == 'assets'){
             return Utility\request($this, 'assets');
-        }
-        else if($this->contentType){
+        }else if($this->type == 'contentType'){
             return Utility\request($this);
     }
         
