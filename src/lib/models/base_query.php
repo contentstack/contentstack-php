@@ -14,13 +14,13 @@ abstract class BaseQuery {
 
     public function __construct($data = '', $parent = '') {
 
-        \Contentstack\Utility\debug($data);
         if($data->type == 'assets'){
             $this->assets = $data;
             $this->queryObject = $parent;
             $this->queryObject->_query = array();
             $this->subQuery = array();
         }else if ($data->type == 'asset'){
+
             $this->asset = $data;
             $this->queryObject = $data;
             $this->queryObject->_query = array();
