@@ -4,7 +4,7 @@
  * */
 namespace Contentstack\Utility;
 
-require_once __DIR__ . "/models/result.php";
+ require_once __DIR__ . "/models/result.php";
 require_once __DIR__ . "/models/csexception.php";
 
 use Contentstack\Error\CSException;
