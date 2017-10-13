@@ -14,16 +14,16 @@ include_once "../src/index.php";
 
 
 
-// $stack = Contentstack::Stack('<<API-KEY>>', '<<Access-Token>>', '<<Environment>>');
-$stack = Contentstack::Stack('blte7fb8144ca21dc02', 'bltc1ab1cdf252f842c', 'development');
+ $stack = Contentstack::Stack('<<API-KEY>>', '<<Access-Token>>', '<<Environment>>');
+
 try {
 
     //$result = $stack->ContentType('authors')->Query()->toJSON()->includeCount()->find();
     // $result = $stack->ContentType('authors')->Entry('blte58928ca56939985')->Query()->toJSON()->find();
    // \Contentstack\Utility\debug($result);
 
-     $result = $stack->Assets('blt0257aedd08429657')->fetch();
-    \Contentstack\Utility\debug($result);
+    /* $result = $stack->Assets('blt0257aedd08429657')->fetch();
+    \Contentstack\Utility\debug($result);*/
 
 
 } catch(Exception $e) {
