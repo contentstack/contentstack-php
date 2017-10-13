@@ -48,6 +48,11 @@ class Query extends BaseQuery {
     public function findOne() {
         $this->operation = __FUNCTION__;
         $this->_query['limit'] = 1;
-        return Utility\request($this);
+        if($this->type == 'assets'){
+            return Utility\request($this, 'assets');
+        }else if($this->type == 'contentType'){
+            return Utility\request($this);
+    }
+        
     }
 }
