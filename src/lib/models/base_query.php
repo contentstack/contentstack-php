@@ -22,11 +22,12 @@ abstract class BaseQuery {
         }else if ($data->type == 'asset'){
 
             $this->asset = $data;
-            $this->queryObject = $data;
+            $this->queryObject = $parent;
             $this->queryObject->_query = array();
             $this->subQuery = array();
           
-        }else{
+        }
+        else{
             $this->contentType = $data;
             $this->queryObject = $parent;
             $this->queryObject->_query = array();
