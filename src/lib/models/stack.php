@@ -47,12 +47,15 @@ class Stack {
         return new ContentType($contentTypeId, $this);
     }
 
-    public function Assets(){
-        return new Assets($this);
-    }
 
-    public function Asset($assetUid = '') {
-        return new Asset($assetUid, $this);
+    /*
+     * Assets
+     * Assets Class to initalize your Assets
+     * @param
+     *      
+     * */
+    public function Assets($assetUid = '') {
+        return new Assets($assetUid, $this);
     }
 
     /*
