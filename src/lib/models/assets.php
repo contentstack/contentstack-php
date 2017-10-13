@@ -4,7 +4,8 @@
  * */
 namespace Contentstack\Stack\Assets;
 
-use Contentstack\Stack\Assets\QueryAssets\QueryAssets;
+
+use Contentstack\Stack\ContentType\BaseQuery\BaseQuery;
 use Contentstack\Stack\ContentType\Query\Query;
 use Contentstack\Utility;
 
@@ -14,24 +15,53 @@ require_once __DIR__.'/query.php';
 /*
  * Class Assets
  * */
-class Assets {
+class Assets extends BaseQuery  {
+
+    var $operation;
+    var $assetUid = '';
+    var  $stack = '';
+    var  $type = '';
    
-    var $stack    = '';
-    
+   
 
     /*
-     * Assets
-     * Assets Class to initalize your Assets
+     * 
+     * Assets constructor
      * @param
      *      
      * */
-    public function __construct($stack = '') {  
+    public function __construct($asset_uid = '', $stack = '') { 
+       
          $this->stack = $stack;
-         $this->type = 'assets';
+         if($asset_uid == ''){
+            $this->type = 'assets';
+        }else{
+            $this->type = 'asset';
+
+         }
+         $this->assetUid = $asset_uid; 
+         parent::__construct($this, $assetUid);
+
     }
 
+    /*
+     * Query
+     * Query object to create the "Query" on the specified ContentType
+     * @returns Query
+     * */
     public function Query() {
         return new Query($this, $this->type);
     }
+
+
+     /*
+     * fetch
+     * Fetch the specified assets
+     * */
+    public function fetch() {
+        $this->operation = __FUNCTION__;
+       return \Contentstack\Utility\request($this, 'asset');
+    }
+
 
 }
