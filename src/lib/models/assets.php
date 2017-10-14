@@ -25,7 +25,6 @@ class Assets extends BaseQuery  {
     var $type = '';
    
    
-
     /*
      * 
      * Assets constructor
@@ -43,9 +42,6 @@ class Assets extends BaseQuery  {
             parent::__construct($this, $asset_uid);
             
          }
-         
-         
-
     }
 
     /*
