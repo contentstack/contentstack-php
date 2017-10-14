@@ -19,6 +19,7 @@ abstract class BaseQuery {
             $this->queryObject = $parent;
             $this->queryObject->_query = array();
             $this->subQuery = array();
+            \Contentstack\Utility\debug($this);
 
         }else if ($data->type === 'asset'){
 
