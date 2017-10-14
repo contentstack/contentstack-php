@@ -243,7 +243,7 @@ if (!function_exists('request')) {
         $server_output = '';
         if($queryObject) {
             $http = curl_init(URL($queryObject, $type));
-        //    \Contentstack\Utility\debug(URL($queryObject, $type));
+            
             // setting the GET request
             curl_setopt($http, CURLOPT_HEADER, FALSE);
             // setting the GET request
@@ -253,6 +253,7 @@ if (!function_exists('request')) {
             $response = curl_exec($http);
             // status code extraction
             $httpcode = curl_getinfo($http, CURLINFO_HTTP_CODE);
+
             // close the curl            
             curl_close ($http);
             if($httpcode > 199 && $httpcode < 300) {
