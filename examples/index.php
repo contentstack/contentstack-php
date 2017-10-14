@@ -14,7 +14,7 @@ include_once "../src/index.php";
 
 
 
- $stack = Contentstack::Stack('<<API-KEY>>', '<<Access-Token>>', '<<Environment>>');
+ $stack = Contentstack::Stack('blt083702663130b7e9', 'blt268601de952a9c77', 'mobile');
 
 try {
 
@@ -22,8 +22,8 @@ try {
     // $result = $stack->ContentType('authors')->Entry('blte58928ca56939985')->Query()->toJSON()->find();
    // \Contentstack\Utility\debug($result);
 
-    /* $result = $stack->Assets('blt0257aedd08429657')->fetch();
-    \Contentstack\Utility\debug($result);*/
+     $result = $stack->Assets('bltc657a17149324f50')->fetch();
+    \Contentstack\Utility\debug($result);
 
 
 } catch(Exception $e) {
