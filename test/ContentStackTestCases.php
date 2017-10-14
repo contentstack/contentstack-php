@@ -8,6 +8,7 @@ require_once __DIR__ . '/../src/index.php';
 use Contentstack\Test\REST;
 
 use PHPUnit\Framework\TestCase;
+
 class ContentStackTestCases extends TestCase {
     public static $rest;
     public static $Stack;
@@ -35,17 +36,18 @@ class ContentStackTestCases extends TestCase {
     }
 
       public function testAssetsFind() {
-        $_assets = self::$Stack->Assets()->Query()->toJSON()->find();
-        $this->assertArrayHasKey(0, $_assets);
-       // $this->assertTrue((count($_assets[0]) === ENTRY_COUNT));
-        $this->assertTrue(checkAssetsSorting($_assets[0]));
-    }
 
+         $_assets = self::$Stack->Assets()->Query()->toJSON()->find();
+         $this->assertArrayHasKey(0, $_assets);
+         $this->assertTrue(checkAssetsSorting($_assets[0])); 
+    
+    }
 
     public function testAssetFetch() {
          $_object = self::$Stack->Assets()->Query()->toJSON()->find();
+         //\Contentstack\Utility\debug($_object[0][0]['uid']);
          $_uid = $_object[0][0]['uid'];
-         $_asset = self::$Stack->Asset($_uid)->fetch();
+         $_asset = self::$Stack->Assets($_uid)->fetch();
          $this->assertEquals($_asset->get('title'), $_object[0][0]['title']);
     }
 
