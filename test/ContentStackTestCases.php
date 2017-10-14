@@ -35,7 +35,7 @@ class ContentStackTestCases extends TestCase {
         $this->assertTrue(checkEntriesSorting($_entries[0]));
     }
 
-      public function testAssetsFind() {
+    public function testAssetsFind() {
 
          $_assets = self::$Stack->Assets()->Query()->toJSON()->find();
          $this->assertArrayHasKey(0, $_assets);
@@ -43,9 +43,8 @@ class ContentStackTestCases extends TestCase {
     
     }
 
-    public function testAssetFetch() {
+    public function testAssetsFetch() {
          $_object = self::$Stack->Assets()->Query()->toJSON()->find();
-         //\Contentstack\Utility\debug($_object[0][0]['uid']);
          $_uid = $_object[0][0]['uid'];
          $_asset = self::$Stack->Assets($_uid)->fetch();
          $this->assertEquals($_asset->get('title'), $_object[0][0]['title']);
