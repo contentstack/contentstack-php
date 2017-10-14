@@ -113,7 +113,8 @@ class REST
      * */
     public function createUserSession()
     {
-        $user = $this->sendRequest('user-session', array('user' => array('email' => '<Email-id>', 'password' => '<password>')));
+       // $user = $this->sendRequest('user-session', array('user' => array('email' => '<Email-id>', 'password' => '<password>')));
+        $user = $this->sendRequest('user-session', array('user' => array('email' => 'rohit.mishra@raweng.com', 'password' => 'comeonyaar123')));
         if (isset($user['user'])) {
             $this->set('user', $user['user']);
             $this->headers['authtoken'] = (isset($user['user']['authtoken'])) ? $user['user']['authtoken'] : '';
