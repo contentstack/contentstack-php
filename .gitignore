@@ -1,3 +1,4 @@
+.vscode/
 .idea/
 test/report.html
 test/result.json

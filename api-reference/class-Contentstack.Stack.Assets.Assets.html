@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 
-	<title>Class Contentstack\Stack\ContentType\Entry\Entry</title>
+	<title>Class Contentstack\Stack\Assets\Assets</title>
 
 	<link rel="stylesheet" href="resources/style.css?e99947befd7bf673c6b43ff75e9e0f170c88a60e">
 
@@ -40,12 +40,12 @@
 					</a>
 
 						<ul>
-				<li>
+				<li class="active">
 					<a href="namespace-Contentstack.Stack.Assets.html">
 						Assets					</a>
 
 						</li>
-				<li class="active">
+				<li>
 					<a href="namespace-Contentstack.Stack.ContentType.html">
 						ContentType<span></span>
 					</a>
@@ -56,7 +56,7 @@
 						BaseQuery					</a>
 
 						</li>
-				<li class="active">
+				<li>
 					<a href="namespace-Contentstack.Stack.ContentType.Entry.html">
 						Entry					</a>
 
@@ -87,7 +87,7 @@
 		<div id="elements">
 			<h3>Classes</h3>
 			<ul>
-				<li class="active"><a href="class-Contentstack.Stack.ContentType.Entry.Entry.html">Entry</a></li>
+				<li class="active"><a href="class-Contentstack.Stack.Assets.Assets.html">Assets</a></li>
 			</ul>
 
 
@@ -114,7 +114,7 @@
 				<a href="index.html" title="Overview"><span>Overview</span></a>
 			</li>
 			<li>
-				<a href="namespace-Contentstack.Stack.ContentType.Entry.html" title="Summary of Contentstack\Stack\ContentType\Entry"><span>Namespace</span></a>
+				<a href="namespace-Contentstack.Stack.Assets.html" title="Summary of Contentstack\Stack\Assets"><span>Namespace</span></a>
 			</li>
 			<li class="active">
 <span>Class</span>			</li>
@@ -126,7 +126,7 @@
 	</div>
 
 <div id="content" class="class">
-	<h1>Class Entry</h1>
+	<h1>Class Assets</h1>
 
 
 
@@ -139,7 +139,7 @@
 		</dd>
 		<dd style="padding-left:30px">
 			<img src="resources/inherit.png" alt="Extended by">
-<b><span>Contentstack\Stack\ContentType\Entry\Entry</span></b>			
+<b><span>Contentstack\Stack\Assets\Assets</span></b>			
 			
 			
 		</dd>
@@ -155,10 +155,10 @@
 	<div class="info">
 		
 		
-		<b>Namespace:</b> <a href="namespace-Contentstack.html">Contentstack</a>\<a href="namespace-Contentstack.Stack.html">Stack</a>\<a href="namespace-Contentstack.Stack.ContentType.html">ContentType</a>\<a href="namespace-Contentstack.Stack.ContentType.Entry.html">Entry</a><br>
+		<b>Namespace:</b> <a href="namespace-Contentstack.html">Contentstack</a>\<a href="namespace-Contentstack.Stack.html">Stack</a>\<a href="namespace-Contentstack.Stack.Assets.html">Assets</a><br>
 		
 
-			<b>Located at</b> <a href="source-class-Contentstack.Stack.ContentType.Entry.Entry.html#14-41" title="Go to source code">lib/models/entry.php</a>
+			<b>Located at</b> <a href="source-class-Contentstack.Stack.Assets.Assets.html#20-65" title="Go to source code">lib/models/assets.php</a>
 		<br>
 	</div>
 
@@ -178,7 +178,7 @@
 
 		<td class="name"><div>
 		<a class="anchor" href="#___construct">#</a>
-		<code><a href="source-class-Contentstack.Stack.ContentType.Entry.Entry.html#26-31" title="Go to source code">__construct</a>( <span> <var>$entryUid</var> = <span class="php-quote">''</span></span>, <span> <var>$contentType</var> = <span class="php-quote">''</span></span> )</code>
+		<code><a href="source-class-Contentstack.Stack.Assets.Assets.html#34-45" title="Go to source code">__construct</a>( <span> <var>$asset_uid</var> = <span class="php-quote">''</span></span>, <span> <var>$stack</var> = <span class="php-quote">''</span></span> )</code>
 
 		<div class="description short">
 			
@@ -198,6 +198,36 @@
 		</div>
 		</div></td>
 	</tr>
+	<tr data-order="Query" id="_Query">
+
+		<td class="attributes"><code>
+			 public 
+
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_Query">#</a>
+		<code><a href="source-class-Contentstack.Stack.Assets.Assets.html#52-54" title="Go to source code">Query</a>( )</code>
+
+		<div class="description short">
+			
+		</div>
+
+		<div class="description detailed hidden">
+			
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
 	<tr data-order="fetch" id="_fetch">
 
 		<td class="attributes"><code>
@@ -210,7 +240,7 @@
 
 		<td class="name"><div>
 		<a class="anchor" href="#_fetch">#</a>
-		<code><a href="source-class-Contentstack.Stack.ContentType.Entry.Entry.html#37-40" title="Go to source code">fetch</a>( )</code>
+		<code><a href="source-class-Contentstack.Stack.Assets.Assets.html#61-64" title="Go to source code">fetch</a>( )</code>
 
 		<div class="description short">
 			
@@ -288,7 +318,7 @@
 		</code></td>
 
 		<td class="name">
-				<a href="source-class-Contentstack.Stack.ContentType.Entry.Entry.html#15" title="Go to source code"><var>$operation</var></a>
+				<a href="source-class-Contentstack.Stack.Assets.Assets.html#22" title="Go to source code"><var>$operation</var></a>
 
 			<div class="description short">
 				
@@ -306,14 +336,14 @@
 			</div>
 		</td>
 	</tr>
-	<tr data-order="_query" id="$_query">
+	<tr data-order="assetUid" id="$assetUid">
 		<td class="attributes"><code>
 			public  
-			
+			string
 		</code></td>
 
 		<td class="name">
-				<a href="source-class-Contentstack.Stack.ContentType.Entry.Entry.html#16" title="Go to source code"><var>$_query</var></a>
+				<a href="source-class-Contentstack.Stack.Assets.Assets.html#23" title="Go to source code"><var>$assetUid</var></a>
 
 			<div class="description short">
 				
@@ -326,19 +356,19 @@
 		</td>
 		<td class="value">
 			<div>
-				<a href="#$_query" class="anchor">#</a>
-				<code></code>
+				<a href="#$assetUid" class="anchor">#</a>
+				<code><span class="php-quote">''</span></code>
 			</div>
 		</td>
 	</tr>
-	<tr data-order="entryUid" id="$entryUid">
+	<tr data-order="stack" id="$stack">
 		<td class="attributes"><code>
 			public  
-			
+			string
 		</code></td>
 
 		<td class="name">
-				<a href="source-class-Contentstack.Stack.ContentType.Entry.Entry.html#17" title="Go to source code"><var>$entryUid</var></a>
+				<a href="source-class-Contentstack.Stack.Assets.Assets.html#24" title="Go to source code"><var>$stack</var></a>
 
 			<div class="description short">
 				
@@ -351,19 +381,19 @@
 		</td>
 		<td class="value">
 			<div>
-				<a href="#$entryUid" class="anchor">#</a>
-				<code></code>
+				<a href="#$stack" class="anchor">#</a>
+				<code><span class="php-quote">''</span></code>
 			</div>
 		</td>
 	</tr>
-	<tr data-order="contentType" id="$contentType">
+	<tr data-order="type" id="$type">
 		<td class="attributes"><code>
 			public  
-			array
+			string
 		</code></td>
 
 		<td class="name">
-				<a href="source-class-Contentstack.Stack.ContentType.Entry.Entry.html#18" title="Go to source code"><var>$contentType</var></a>
+				<a href="source-class-Contentstack.Stack.Assets.Assets.html#25" title="Go to source code"><var>$type</var></a>
 
 			<div class="description short">
 				
@@ -376,8 +406,8 @@
 		</td>
 		<td class="value">
 			<div>
-				<a href="#$contentType" class="anchor">#</a>
-				<code><span class="php-keyword1">array</span>()</code>
+				<a href="#$type" class="anchor">#</a>
+				<code><span class="php-quote">''</span></code>
 			</div>
 		</td>
 	</tr>
