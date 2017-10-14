@@ -33,6 +33,7 @@ class Query extends BaseQuery {
      * */
     public function find() {
         $this->operation = __FUNCTION__;
+
         if($this->type == 'assets'){
             return Utility\request($this, 'assets');
         }else if($this->type == 'contentType'){
