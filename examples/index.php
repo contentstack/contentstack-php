@@ -14,13 +14,20 @@ include_once "../src/index.php";
 
 
 
- $stack = Contentstack::Stack('<<API-KEY>>', '<<Access-TOKEN>>', '<<DEVELOPMENT>>');
+ $stack = Contentstack::Stack('***REMOVED***', '***REMOVED***', 'development');
 
 try {
 
     //$result = $stack->ContentType('authors')->Query()->toJSON()->includeCount()->find();
     // $result = $stack->ContentType('authors')->Entry('blte58928ca56939985')->Query()->toJSON()->find();
    // \Contentstack\Utility\debug($result);
+
+    $result = $stack->Assets('blt20a90a9d5b9c6802')->fetch();
+
+     $asset_url = $result->get('url');
+   // \Contentstack\Utility\debug($result->getTitle());
+     $result = $stack->ImageTrasformation($asset_url, array('height'=> 100, 'weight'=> 100, 'disable' => 'upscale'));
+       \Contentstack\Utility\debug($result);
 
      /*$result = $stack->Assets('bltc657a17149324f50')->fetch();
     \Contentstack\Utility\debug($result);*/
