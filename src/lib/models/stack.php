@@ -4,6 +4,7 @@ namespace Contentstack\Stack;
 use Contentstack\Utility;
 use Contentstack\Stack\ContentType\ContentType;
 use Contentstack\Stack\Assets\Assets;
+use Contentstack\Stack\ImageTrasformation\ImageTrasformation;
 //use Contentstack\Stack\Asset\Asset;
 
 require_once __DIR__."/content_type.php";
@@ -57,6 +58,39 @@ class Stack {
     public function Assets($assetUid = '') {
         return new Assets($assetUid, $this);
     }
+
+
+  /*
+     * ImageTrasformation
+     * ImageTransformation function
+     * @param
+     *      
+     * */    
+    public function ImageTrasformation($url, $array){
+        
+          $url_query_para = $url;
+          $i = 0;
+          $len = count($array);
+          foreach( $array as $*** => $value){
+
+                if ($i == 0){                  
+                    $url_query_para .= "?" .$*** . "=" .$value ."&";
+
+                    }else{
+
+                        if($i != $len - 1){
+                            $url_query_para .= $*** . "=" .$value ."&";
+                       
+                        }else{
+                            $url_query_para .= $*** . "=" .$value;
+                        }
+                    }
+                 $i++;          
+
+             }         
+             return $url_query_para;
+        }
+
 
     /*
      * To get the last_activity information of the configured environment from all the content types
