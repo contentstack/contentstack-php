@@ -49,6 +49,7 @@ class REST
             "url" => "/cb1",
             "title" => "CB1"
         )), true));
+
         if(file_exists(RESULT_PATH) && ENV === 'TEST_LOCAL') {
             echo "\n Skipping tear up as result already present";
             $myfile = fopen(RESULT_PATH, "r") or die("Unable to open file!");
@@ -113,11 +114,11 @@ class REST
      * */
     public function createUserSession()
     {
-       $user = $this->sendRequest('user-session', array('user' => array('email' => 'email-id', 'password' => 'password')));
-
+       $user = $this->sendRequest('user-session', array('user' => array('email' => 'rohit.mishra@raweng.com', 'password' => 'comeonyaar123')));
         if (isset($user['user'])) {
             $this->set('user', $user['user']);
             $this->headers['authtoken'] = (isset($user['user']['authtoken'])) ? $user['user']['authtoken'] : '';
+            $this->headers['organization_uid'] = (isset($user['user']['org_uid']) && is_array($user['user']['org_uid'])) ? $user['user']['org_uid'][0] : '';
             echo "\nUser Session created.";
         } else {
             echo "\nUser Session not created.";
