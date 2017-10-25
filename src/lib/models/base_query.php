@@ -18,16 +18,12 @@ abstract class BaseQuery {
             $this->assets = $data;
             $this->queryObject = $parent;
             $this->queryObject->_query = array();
-            $this->subQuery = array();
-            \Contentstack\Utility\debug($this);
-
+            $this->subQuery = array(); 
         }else if ($data->type === 'asset'){
-
             $this->asset = $data;
             $this->queryObject = $data;
             $this->queryObject->_query = array();
-            $this->subQuery = array();
-          
+            $this->subQuery = array();        
         }
         else{
             $this->contentType = $data;
@@ -45,7 +41,6 @@ abstract class BaseQuery {
      * @return Result|array
      * */
     public function toJSON() {
-
         $this->json_translate = true;
         return $this->queryObject;
     }
