@@ -18,6 +18,6 @@ abstract class Contentstack {
      *  @return Stack
      * */
     public static function Stack($api_key = '', $access_token = '', $environment = 'development') {
-        return new Stack($api_key, $access_token, $environment);
+        return new Stack($api_key, $access_token, $organization_uid, $environment);
     }
 }
