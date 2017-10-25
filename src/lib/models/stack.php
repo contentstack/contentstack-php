@@ -4,8 +4,6 @@ namespace Contentstack\Stack;
 use Contentstack\Utility;
 use Contentstack\Stack\ContentType\ContentType;
 use Contentstack\Stack\Assets\Assets;
-use Contentstack\Stack\ImageTrasformation\ImageTrasformation;
-//use Contentstack\Stack\Asset\Asset;
 
 require_once __DIR__."/content_type.php";
 require_once __DIR__."/assets.php";
@@ -67,28 +65,26 @@ class Stack {
      *      
      * */    
     public function ImageTrasformation($url, $array){
-        
-          $url_query_para = $url;
-          $i = 0;
-          $len = count($array);
-          foreach( $array as $key => $value){
 
-                if ($i == 0){                  
-                    $url_query_para .= "?" .$key . "=" .$value ."&";
+                  $url_query_param = $url;
+                  $i = 0;
+                  $len = count($array);
+                  foreach( $array as $key => $value){
 
-                    }else{
+                    if ($i == 0){                  
+                            $url_query_param .= "?" .$key . "=" .$value ."&";
+                            }else{
+                                if($i != $len - 1){
+                                    $url_query_param .= $key . "=" .$value ."&";   
+                                }else{
+                                    $url_query_param .= $key . "=" .$value;
+                                }
+                            }
+                        $i++;          
+                    }         
+                     return $url_query_param;
 
-                        if($i != $len - 1){
-                            $url_query_para .= $key . "=" .$value ."&";
-                       
-                        }else{
-                            $url_query_para .= $key . "=" .$value;
-                        }
-                    }
-                 $i++;          
-
-             }         
-             return $url_query_para;
+         
         }
 
 
