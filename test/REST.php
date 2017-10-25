@@ -113,7 +113,7 @@ class REST
      * */
     public function createUserSession()
     {
-       $user = $this->sendRequest('user-session', array('user' => array('email' => '<Email-id>', 'password' => '<password>')));
+       $user = $this->sendRequest('user-session', array('user' => array('email' => 'email-id', 'password' => 'password')));
 
         if (isset($user['user'])) {
             $this->set('user', $user['user']);
@@ -130,9 +130,12 @@ class REST
     public function createStack()
     {
         $this->createUserSession();
+        //$this->set('organization_id', $headers['blt2b4991176c6c1d25']);
         $stack = $this->sendRequest('stack', array('stack' => array('name' => 'php-sdk-test')));
+
         if (isset($stack['stack'])) {
             $this->set('stack', $stack['stack']);
+            //$this->set('org_uid', $headers['blt2b4991176c6c1d25']);
             $this->headers['api_key'] = (isset($stack['stack']['api_key'])) ? $stack['stack']['api_key'] : '';
             echo "\nStack created.";
         } else {
@@ -310,6 +313,7 @@ class REST
         $transformedHeader = array();
         if (is_array($headers)) {
             $headers['Content-Type'] = 'application/json';
+            $headers['org_uid'] = 'blt2b4991176c6c1d25';
             if (is_array($headers)) {
                 foreach ($headers as $key => $val) array_push($transformedHeader, $key . ':' . $val);
             }
@@ -318,7 +322,7 @@ class REST
     }
 
     public function generateURL($type = '', $values = array())
-    {
+    {   
         $_url = PROTOCOL . '://' . HOST . ((!empty(PORT) && is_numeric(PORT)) ? ':' . PORT : '') . VERSION;
         switch ($type) {
             case 'stack':
@@ -357,19 +361,6 @@ class REST
         curl_close($ch);
         return $result;
     }
-
-   /* public function sendAssetsRequest($type = '', $payload = array(), $method = 'POST', $values = array())
-    {
-        $ch = curl_init($this->generateURL($type, $values));
-        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, $method);
-        curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($payload));
-        curl_setopt($ch, CURLOPT_HTTPHEADER, $this->generateHeaders($this->headers));
-        // receive server response ...
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        $result = json_decode(curl_exec($ch), true);
-        curl_close($ch);
-        return $result;
-    }*/
 
     public function getAPIKEY() {
         $stack = $this->get('stack');
