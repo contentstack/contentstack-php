@@ -50,6 +50,20 @@ class ContentStackTestCases extends TestCase {
          $this->assertEquals($_asset->get('title'), $_object[0][0]['title']);
     }
 
+
+    public function testImageTransformation() {
+         $_object = self::$Stack->Assets()->Query()->toJSON()->find();
+         $_uid = $_object[0][0]['uid'];
+         $_asset = self::$Stack->Assets($_uid)->fetch();
+         $_imagetransformation = self::$Stack->ImageTrasformation($_asset, array('height'=> 100, 'weight'=> 100, 'disable' => 'upscale'));
+         $data = parse_url($result, PHP_URL_QUERY);
+         parse_str($data, $get_array);
+         $default_array = array('height'=> 100, 'weight'=> 100, 'disable' => 'upscale'); 
+         $result=array_diff($get_array, $default_array);
+         $this->assertEquals($get_array, $default_array);
+    }
+
+
     public function testFindOne() {
         $_entry = self::$Stack->ContentType(CT_ContentType)->Query()->toJSON()->findOne();
        // $this->assertObjectHasAttribute('object', $_entry);
