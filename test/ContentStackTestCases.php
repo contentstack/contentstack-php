@@ -36,11 +36,9 @@ class ContentStackTestCases extends TestCase {
     }
 
     public function testAssetsFind() {
-
          $_assets = self::$Stack->Assets()->Query()->toJSON()->find();
          $this->assertArrayHasKey(0, $_assets);
          $this->assertTrue(checkAssetsSorting($_assets[0])); 
-    
     }
 
     public function testAssetsFetch() {
@@ -55,12 +53,31 @@ class ContentStackTestCases extends TestCase {
          $_object = self::$Stack->Assets()->Query()->toJSON()->find();
          $_uid = $_object[0][0]['uid'];
          $_asset = self::$Stack->Assets($_uid)->fetch();
-         $_imagetransformation = self::$Stack->ImageTrasformation($_asset, array('height'=> 100, 'weight'=> 100, 'disable' => 'upscale'));
-         $data = parse_url($result, PHP_URL_QUERY);
-         parse_str($data, $get_array);
-         $default_array = array('height'=> 100, 'weight'=> 100, 'disable' => 'upscale'); 
-         $result=array_diff($get_array, $default_array);
-         $this->assertEquals($get_array, $default_array);
+         $_url   = $_asset->get('url');
+         if($_url){
+
+         $_resizeimagetransformation = self::$Stack->ImageTrasformation($_url, array('height'=> 100, 'weight'=> 100, 'disable' => 'upscale'));
+         $_cropimagetransformation = self::$Stack->ImageTrasformation($_url, array('crop'=> 100,200));
+         $_resizecropimagetransformation = self::$Stack->ImageTrasformation($_url, array('height'=> 100, 'weight'=> 100, 'disable' => 'upscale', 'crop'=> 100,200));
+        
+         $resize_data     = parse_url($_resizeimagetransformation, PHP_URL_QUERY);
+         $crop_data       = parse_url($_cropimagetransformation, PHP_URL_QUERY);
+         $resizecrop_data = parse_url($_resizecropimagetransformation, PHP_URL_QUERY);
+         
+         parse_str($resize_data, $get_array_resize);
+         parse_str($crop_data, $get_array_crop);
+         parse_str($resizecrop_data, $get_array_resizecrop);
+
+         $resize_default_array = array('height'=> 100,'weight'=> 100, 'disable' => 'upscale');
+         $crop_default_array = array('crop'=> 100,200);
+         $resizecrop_default_array = array('height'=> 100,'weight'=> 100, 'disable' => 'upscale', 'crop'=> 100,200);
+
+         $this->assertEquals($get_array_resize, $resize_default_array);
+         $this->assertEquals($get_array_crop, $crop_default_array);
+         $this->assertEquals($get_array_resizecrop, $resizecrop_default_array);
+         }
+         
+         
     }
 
 
