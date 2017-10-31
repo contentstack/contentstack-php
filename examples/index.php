@@ -12,13 +12,17 @@ ini_set('display_errors', 'On');
 use Contentstack\Contentstack;
 include_once "../src/index.php";
 
-  $stack = Contentstack::Stack('<<API-KEY>>', '<<ACCESS-TOKEN>>', '<<ENVIRONMENT>>');
+  $stack = Contentstack::Stack('***REMOVED***', '***REMOVED***', 'development');
 
 try {
 
-    //$result = $stack->ContentType('authors')->Query()->toJSON()->includeCount()->find();
+     $result = $stack->ContentType('authors')->Query()->toJSON()->includeCount()->find();
     // $result = $stack->ContentType('authors')->Entry('blte58928ca56939985')->Query()->toJSON()->find();
    // \Contentstack\Utility\debug($result);
+   /* $result = $stack->Assets('blt34440151b4e8fe7c')->fetch();
+    $data   = $result->get('url');
+    $result = $stack->ImageTrasformation($data, array('height'=> 100, 'weight'=> 100, 'disable' => 'upscale'));*/
+    \Contentstack\Utility\debug($result);
 
 
 } catch(Exception $e) {
