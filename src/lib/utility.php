@@ -68,15 +68,15 @@ if(!function_exists('getDomain')) {
     }
 }
 
-if(!function_exists('URL')) {
+if(!function_exists('contentstack_url')) {
     /*
-     * URL
-     * URL method to create the url based on the request
+     * contentstack_url
+     * contentstack_url method to create the url based on the request
      * @param
      *  @queryObject - Object - Query Object
      * @return URL()string
      * */
-    function URL($queryObject = '', $type = '') {
+    function contentstack_url($queryObject = '', $type = '') {
 
         $URL = '';
         switch ($type) {
@@ -229,24 +229,24 @@ if(!function_exists('wrapResult')) {
     }
 }
 
-if (!function_exists('request')) {
+if (!function_exists('contentstack_request')) {
     
     /*
-     * request
-     * request to the API server based on the data
+     * contentstack_request
+     * contentstack_request to the API server based on the data
      * @param
      *  @queryObject - Object - Query Object
      * @return Result
      * */
 
-    function request($queryObject = '', $type = '') {
+    function contentstack_request($queryObject = '', $type = ''){
         $server_output = '';
         if($queryObject) {
-            $http = curl_init(URL($queryObject, $type));
+            $http = curl_init(contentstack_url($queryObject, $type));
             
             // setting the GET request
             curl_setopt($http, CURLOPT_HEADER, FALSE);
-            // setting the GET request
+            // setting the                    GET request
             curl_setopt($http, CURLOPT_CUSTOMREQUEST, "GET");
             // receive server response ...
             curl_setopt($http, CURLOPT_RETURNTRANSFER, TRUE);
