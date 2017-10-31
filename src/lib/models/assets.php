@@ -6,18 +6,18 @@ namespace Contentstack\Stack\Assets;
 
 
 use Contentstack\Stack\ContentType\Query\Query;
-use Contentstack\Stack\ContentType\BaseQuery\BaseQuery;
+// use Contentstack\Stack\ContentType\BaseQuery\BaseQuery;
 use Contentstack\Utility;
 
 
 require_once __DIR__.'/query.php';
-require_once __DIR__."/base_query.php";
+// require_once __DIR__."/base_query.php";
 
 
 /*
  * Class Assets
  * */
-class Assets extends BaseQuery  {
+class Assets {
 
     var $operation;
     var $assetUid = '';
@@ -38,9 +38,7 @@ class Assets extends BaseQuery  {
             $this->type = 'assets';
         }else{
             $this->type = 'asset';
-            $this->assetUid = $asset_uid; 
-            parent::__construct($this, $asset_uid);
-            
+            $this->assetUid = $asset_uid;  
          }
     }
 
@@ -60,6 +58,6 @@ class Assets extends BaseQuery  {
      * */
     public function fetch() {
         $this->operation = __FUNCTION__;
-       return \Contentstack\Utility\request($this, 'asset');
+       return \Contentstack\Utility\contentstack_request($this, 'asset');
     }
 }
