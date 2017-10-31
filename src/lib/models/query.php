@@ -33,13 +33,11 @@ class Query extends BaseQuery {
      * */
     public function find() {
         $this->operation = __FUNCTION__;
-
         if($this->type == 'assets'){
-            return Utility\request($this, 'assets');
+            return \Contentstack\Utility\contentstack_request($this, 'assets');
         }else if($this->type == 'contentType'){
-            return Utility\request($this);
-    }
-        
+            return \Contentstack\Utility\contentstack_request($this);
+    }        
     }
 
     /*
@@ -52,7 +50,7 @@ class Query extends BaseQuery {
         if($this->type == 'assets'){
             return Utility\request($this, 'assets');
         }else if($this->type == 'contentType'){
-            return Utility\request($this);
+            return \Contentstack\Utility\contentstack_request($this);
     }
         
     }
