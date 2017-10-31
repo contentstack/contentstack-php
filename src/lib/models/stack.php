@@ -41,8 +41,7 @@ class Stack {
      *      string|contentTypeId - valid content type uid relevant to configured stack
      * @return ContentType
      * */
-    public function ContentType($contentTypeId = '') {
-        
+    public function ContentType($contentTypeId = '') { 
         return new ContentType($contentTypeId, $this);
     }
 
@@ -58,34 +57,37 @@ class Stack {
     }
 
 
-  /*
-     * ImageTrasformation
-     * ImageTransformation function
-     * @param
-     *      
-     * */    
-    public function ImageTrasformation($url, $array){
-
-                  $url_query_param = $url;
-                  $i = 0;
-                  $len = count($array);
-                  foreach( $array as $key => $value){
-
-                    if ($i == 0){                  
+      /*
+         * ImageTrasform
+         * ImageTransformation function is define for image manipulation with different
+         * parameters in second parameter in array form 
+         * @param url : Image url on which we want to manipulate.
+         * @param array : It is an second parameter in which we want to place different different manipulation value in form of array        
+         *      
+         * */    
+    public function ImageTrasformation($url, $array){     
+            if(gettype($array) == 'array'){
+                   $url_query_param = $url;                  
+                   $i = 0;
+                   $len = count($array);
+                   foreach( $array as $key => $value){
+                        if ($i == 0){                  
                             $url_query_param .= "?" .$key . "=" .$value ."&";
-                            }else{
+                        }else{
                                 if($i != $len - 1){
-                                    $url_query_param .= $key . "=" .$value ."&";   
+                                        $url_query_param .= $key . "=" .$value ."&";   
                                 }else{
-                                    $url_query_param .= $key . "=" .$value;
-                                }
+                                        $url_query_param .= $key . "=" .$value;
+                                    }
                             }
-                        $i++;          
+                    $i++;          
                     }         
-                     return $url_query_param;
+                    return $url_query_param;
+                    }else{
+                            \Contentstack\Utility\debug("Please provide second parameter in Array form");
+                        }                                   
+            }
 
-         
-        }
 
 
     /*
