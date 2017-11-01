@@ -86,7 +86,7 @@ class Stack {
                     }else{
                             \Contentstack\Utility\debug("Please provide second parameter in Array form");
                         }                                   
-            }
+    }
 
 
 

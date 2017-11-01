@@ -18,8 +18,8 @@ abstract class BaseQuery {
             $this->assets = $data;
             $this->queryObject = $parent;
             $this->queryObject->_query = array();
-            $this->subQuery = array(); 
-        }else if ($data->type === 'asset'){
+            $this->subQuery = array();
+        }elseif ($data->type === 'asset'){
             $this->asset = $data;
             $this->queryObject = $data;
             $this->queryObject->_query = array();
