@@ -77,7 +77,6 @@ if(!function_exists('contentstack_url')) {
      * @return URL()string
      * */
     function contentstack_url($queryObject = '', $type = '') {
-
         $URL = '';
         switch ($type) {
             case 'set_environment':
@@ -142,15 +141,17 @@ if(!function_exists('generateQuery')) {
             $subQuery = array();
             if(count($query->subQuery) > 0) $subQuery['query'] = json_encode($query->subQuery);
             $result = array_merge($query->_query, $subQuery);
-        } else if (isset($query->stack)) {       
+        } elseif (isset($query->stack)) {       
             $query->_query['environment'] = $query->stack->getEnvironment();
             $result = array_merge($result, $query->_query);
 
-        }else if (isset($query->assets)) {       
+        }elseif(isset($query->assets)) {
             $query->_query['environment'] = $query->assets->stack->getEnvironment();
-            $result = array_merge($result, $query->_query);
-
-        } 
+            $subQuery = array();
+            if(count($query->subQuery) > 0) 
+                $subQuery['query'] = json_encode($query->subQuery);
+            $result = array_merge($query->_query, $subQuery);
+        }
         else {
             $query->_query['environment'] = $query->getEnvironment();
             $result = array_merge($result, $query->_query);
@@ -187,7 +188,7 @@ if(!function_exists('wrapResult')) {
      * */
     function wrapResult($result = '', $queryObject = '') {
 
-        $result = $wrapper = json_decode($result, true);
+        $result = $wrapper = json_decode($result, true);            
         if($result && $queryObject && isset($queryObject->operation)) {
             $flag =  (isset($queryObject->json_translate) && $queryObject->json_translate);
             switch ($queryObject->operation) {
@@ -212,15 +213,19 @@ if(!function_exists('wrapResult')) {
                         }
                         array_push($wrapper, $result['entries']);
                     }
-                    if(isKeySet($result, 'assets')) {
+                    /*if(isKeySet($result, 'assets')) {
                     for($i = 0, $_i = count($result['assets']); $i < $_i && !$flag; $i++) {
                             $result['assets'][$i] = new Result($result['assets'][$i]);
                         }
                         array_push($wrapper, $result['assets']);    
                     
-                    }
-                    if(\Contentstack\Utility\isKeySet($result, 'schema')) array_push($wrapper, $result['schema']);
-                    if(\Contentstack\Utility\isKeySet($result, 'content_type')) array_push($wrapper, $result['content_type']);
+                    }*/
+                    if(\Contentstack\Utility\isKeySet($result, 'assets')) 
+                        array_push($wrapper, $result['assets']);
+                    if(\Contentstack\Utility\isKeySet($result, 'schema')) 
+                        array_push($wrapper, $result['schema']);
+                    if(\Contentstack\Utility\isKeySet($result, 'content_type')) 
+                        array_push($wrapper, $result['content_type']);
                     if(\Contentstack\Utility\isKeySet($result, 'count')) array_push($wrapper, $result['count']);
                     break;
             }
@@ -242,24 +247,26 @@ if (!function_exists('contentstack_request')) {
     function contentstack_request($queryObject = '', $type = ''){
         $server_output = '';
         if($queryObject) {
-            $http = curl_init(contentstack_url($queryObject, $type));
-            
+           // debug("i am here");
+              \Contentstack\Utility\debug(contentstack_url($queryObject, $type));
+            $http = curl_init(contentstack_url($queryObject, $type));  
+
             // setting the GET request
             curl_setopt($http, CURLOPT_HEADER, FALSE);
-            // setting the                    GET request
+            // setting the GET request
             curl_setopt($http, CURLOPT_CUSTOMREQUEST, "GET");
             // receive server response ...
             curl_setopt($http, CURLOPT_RETURNTRANSFER, TRUE);
             $response = curl_exec($http);
+                        
             // status code extraction
             $httpcode = curl_getinfo($http, CURLINFO_HTTP_CODE);
-
             // close the curl            
             curl_close ($http);
             if($httpcode > 199 && $httpcode < 300) {
                 // wrapper the server result
-                $response = wrapResult($response, $queryObject);               
-
+                $response = wrapResult($response, $queryObject);
+                                     
             } else {
                 throw new CSException($response, $httpcode);
             }
