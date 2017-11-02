@@ -59,33 +59,24 @@ class Stack {
 
       /*
          * ImageTrasform
-         * ImageTransformation function is define for image manipulation with different
+         * ImageTrasform function is define for image manipulation with different
          * parameters in second parameter in array form 
          * @param url : Image url on which we want to manipulate.
-         * @param array : It is an second parameter in which we want to place different different manipulation value in form of array        
+         * @param parameters : It is an second parameter in which we want to place different different manipulation value in form of array        
          *      
          * */    
-    public function ImageTrasformation($url, $array){     
-            if(gettype($array) == 'array'){
-                   $url_query_param = $url;                  
-                   $i = 0;
-                   $len = count($array);
-                   foreach( $array as $key => $value){
-                        if ($i == 0){                  
-                            $url_query_param .= "?" .$key . "=" .$value ."&";
-                        }else{
-                                if($i != $len - 1){
-                                        $url_query_param .= $key . "=" .$value ."&";   
-                                }else{
-                                        $url_query_param .= $key . "=" .$value;
-                                    }
-                            }
-                    $i++;          
-                    }         
-                    return $url_query_param;
-                    }else{
-                            \Contentstack\Utility\debug("Please provide second parameter in Array form");
-                        }                                   
+    public function ImageTrasform($url, $parameters){     
+        if (is_string($url) === TRUE && strlen($url) > 0 && is_array($parameters) === TRUE && count($parameters) > 0) {
+            $params = array();
+            foreach($parameters as $key => $value){
+                array_push($params, $key . '=' .$value);
+            }         
+            $params = implode("&", $params);
+            $url = (strpos($url, '?') === FALSE) ? $url .'?'.$params: $url .'&'.$params;
+            return $url;
+        } else {
+            \Contentstack\Utility\debug("Please provide valid url and array of transformation parameters.");
+        }                                   
     }
 
 
