@@ -16,12 +16,12 @@ include_once "../src/index.php";
 
 try {
 
-     $result = $stack->ContentType('authors')->Query()->toJSON()->includeCount()->find();
-    // $result = $stack->ContentType('authors')->Entry('blte58928ca56939985')->Query()->toJSON()->find();
+     //$result = $stack->ContentType('authors')->Query()->toJSON()->includeCount()->find();
+     //$result = $stack->ContentType('authors')->Entry('blte58928ca56939985')->toJSON()->fetch();
    // \Contentstack\Utility\debug($result);
-   /* $result = $stack->Assets('blt34440151b4e8fe7c')->fetch();
+    $result = $stack->Assets('blt20a90a9d5b9c6802')->fetch();
     $data   = $result->get('url');
-    $result = $stack->ImageTrasformation($data, array('height'=> 100, 'weight'=> 100, 'disable' => 'upscale'));*/
+    $result = $stack->ImageTrasform($data, array('height'=> 100, 'weight'=> 100, 'disable' => 'upscale'));
     \Contentstack\Utility\debug($result);
 
 
