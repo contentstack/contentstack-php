@@ -213,15 +213,14 @@ if(!function_exists('wrapResult')) {
                         }
                         array_push($wrapper, $result['entries']);
                     }
-                    /*if(isKeySet($result, 'assets')) {
+                    if(isKeySet($result, 'assets')) {
                     for($i = 0, $_i = count($result['assets']); $i < $_i && !$flag; $i++) {
                             $result['assets'][$i] = new Result($result['assets'][$i]);
                         }
                         array_push($wrapper, $result['assets']);    
                     
-                    }*/
-                    if(\Contentstack\Utility\isKeySet($result, 'assets')) 
-                        array_push($wrapper, $result['assets']);
+                    }
+                
                     if(\Contentstack\Utility\isKeySet($result, 'schema')) 
                         array_push($wrapper, $result['schema']);
                     if(\Contentstack\Utility\isKeySet($result, 'content_type')) 
@@ -248,7 +247,7 @@ if (!function_exists('contentstack_request')) {
         $server_output = '';
         if($queryObject) {
            // debug("i am here");
-              \Contentstack\Utility\debug(contentstack_url($queryObject, $type));
+              // \Contentstack\Utility\debug(contentstack_url($queryObject, $type), true);
             $http = curl_init(contentstack_url($queryObject, $type));  
 
             // setting the GET request
