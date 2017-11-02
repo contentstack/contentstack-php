@@ -52,7 +52,7 @@ abstract class BaseQuery {
      * @return Query
      * */
     public function except($level = 'BASE', $field_uids = array()) {
-        $this->queryObject->_query = call_user_func('projection', 'except', $this->queryObject->_query, $level, $field_uids);
+        $this->queryObject->_query = call_user_func('contentstackProjection', 'except', $this->queryObject->_query, $level, $field_uids);
         return $this->queryObject;
     }
 
@@ -63,7 +63,7 @@ abstract class BaseQuery {
      * @return Query
      * */
     public function only($level = 'BASE', $field_uids = array()) {
-        $this->queryObject->_query = call_user_func('projection', 'only', $this->queryObject->_query, $level, $field_uids);
+        $this->queryObject->_query = call_user_func('contentstackProjection', 'only', $this->queryObject->_query, $level, $field_uids);
         return $this->queryObject;
     }
 
@@ -74,19 +74,19 @@ abstract class BaseQuery {
      * @return Query
      * */
     public function includeReference($field_uids = array()) {
-        $this->queryObject->_query = call_user_func('references', 'include', $this->queryObject->_query, $field_uids);
+        $this->queryObject->_query = call_user_func('contentstackReferences', 'include', $this->queryObject->_query, $field_uids);
         return $this->queryObject;
     }
 
     /*
-     * search
+     * contentstackSearch
      * To search the given string in the entries
      * @param
      *      $search - string to be search in entries
      * @return Query
      * */
     public function search($search = '') {
-        $this->queryObject->_query = call_user_func('search', 'typeahead', $this->queryObject->_query, $search);
+        $this->queryObject->_query = call_user_func('contentstackSearch', 'typeahead', $this->queryObject->_query, $search);
         return $this->queryObject;
     }
 
@@ -99,7 +99,7 @@ abstract class BaseQuery {
      * @return 
      * */
     public function regex() {
-        $this->subQuery = call_user_func_array('regexp', array('$regex', $this->subQuery, func_get_args()));
+        $this->subQuery = call_user_func_array('contentstackRegexp', array('$regex', $this->subQuery, func_get_args()));
         return $this->queryObject;
     }
     
@@ -111,7 +111,7 @@ abstract class BaseQuery {
      * @return Query
      * */
     public function logicalAND() {
-        $this->subQuery = call_user_func('logical', '$and', $this->subQuery, func_get_args());
+        $this->subQuery = call_user_func('contentstackLogical', '$and', $this->subQuery, func_get_args());
         return $this->queryObject;
     }
 
@@ -123,7 +123,7 @@ abstract class BaseQuery {
      * @return Query
      * */
     public function logicalOR() {
-        $this->subQuery = call_user_func('logical', '$or', $this->subQuery, func_get_args());
+        $this->subQuery = call_user_func('contentstackLogical', '$or', $this->subQuery, func_get_args());
         return $this->queryObject;
     }
 
@@ -135,7 +135,7 @@ abstract class BaseQuery {
      * @return Query
      * */
     public function ascending($field_uid = '') {
-        $this->queryObject->_query = call_user_func('sorting', 'asc', $this->queryObject->_query, $field_uid);
+        $this->queryObject->_query = call_user_func('contentstackSorting', 'asc', $this->queryObject->_query, $field_uid);
         return $this->queryObject;
     }
 
@@ -147,7 +147,7 @@ abstract class BaseQuery {
      * @return Query
      * */
     public function descending($field_uid = '') {
-        $this->queryObject->_query = call_user_func('sorting', 'desc', $this->queryObject->_query, $field_uid);
+        $this->queryObject->_query = call_user_func('contentstackSorting', 'desc', $this->queryObject->_query, $field_uid);
         return $this->queryObject;
     }
 
@@ -159,7 +159,7 @@ abstract class BaseQuery {
      * @return Query
      * */
     public function notExists($field_uid = '') {
-        $this->subQuery = call_user_func('existence', '$exists', $this->subQuery, $field_uid, false);
+        $this->subQuery = call_user_func('contentstackExistence', '$exists', $this->subQuery, $field_uid, false);
         return $this->queryObject;
     }
 
@@ -171,7 +171,7 @@ abstract class BaseQuery {
      * @return Query
      * */
     public function exists($field_uid = '') {
-        $this->subQuery = call_user_func('existence', '$exists', $this->subQuery, $field_uid, true);
+        $this->subQuery = call_user_func('contentstackExistence', '$exists', $this->subQuery, $field_uid, true);
         return $this->queryObject;
     }
 
@@ -183,7 +183,7 @@ abstract class BaseQuery {
      * @return Query
      * */
     public function includeSchema() {
-        $this->queryObject->_query = call_user_func('addBoolean', 'include_schema', $this->queryObject->_query);
+        $this->queryObject->_query = call_user_func('contentstackAddBoolean', 'include_schema', $this->queryObject->_query);
         return $this->queryObject;
     }
 
@@ -195,7 +195,7 @@ abstract class BaseQuery {
      * @return Query
      * */
     public function includeContentType() {
-        $this->queryObject->_query = call_user_func('addBoolean', 'include_content_type', $this->queryObject->_query);
+        $this->queryObject->_query = call_user_func('contentstackAddBoolean', 'include_content_type', $this->queryObject->_query);
         return $this->queryObject;
     }
 
@@ -206,7 +206,7 @@ abstract class BaseQuery {
      * @return Query
      * */
     public function includeCount() {
-        $this->queryObject->_query = call_user_func('addBoolean', 'include_count', $this->queryObject->_query);
+        $this->queryObject->_query = call_user_func('contentstackAddBoolean', 'include_count', $this->queryObject->_query);
         return $this->queryObject;
     }
 
@@ -218,7 +218,7 @@ abstract class BaseQuery {
      * */
     public function count() {
         $this->operation = __FUNCTION__;
-        $this->queryObject->_query = call_user_func('addBoolean', 'count', $this->queryObject->_query);
+        $this->queryObject->_query = call_user_func('contentstackAddBoolean', 'count', $this->queryObject->_query);
         return $this->queryObject;
     }
 
@@ -229,7 +229,7 @@ abstract class BaseQuery {
      * @return Query
      * */
     public function includeOwner() {
-        $this->queryObject->_query = call_user_func('addBoolean', 'include_owner', $this->queryObject->_query);
+        $this->queryObject->_query = call_user_func('contentstackAddBoolean', 'include_owner', $this->queryObject->_query);
         return $this->queryObject;
     }
 
@@ -241,7 +241,7 @@ abstract class BaseQuery {
      * @return Query
      * */
     public function language($lang = '') {
-        $this->queryObject->_query = call_user_func('language', $this->queryObject->_query, 'locale', $lang);
+        $this->queryObject->_query = call_user_func('contentstackLanguage', $this->queryObject->_query, 'locale', $lang);
         return $this->queryObject;
     }
     /*
@@ -252,7 +252,7 @@ abstract class BaseQuery {
      * @return Query
      * */
     public function skip($skip = 0) {
-        $this->queryObject->_query = call_user_func('pagination', 'skip', $this->queryObject->_query, $skip);
+        $this->queryObject->_query = call_user_func('contentstackPagination', 'skip', $this->queryObject->_query, $skip);
         return $this->queryObject;
     }
     /*
@@ -263,7 +263,7 @@ abstract class BaseQuery {
      * @return Query
      * */
     public function tags($tags = array()) {
-        $this->queryObject->_query = call_user_func('tags', 'tags', $this->queryObject->_query, $tags);
+        $this->queryObject->_query = call_user_func('contentstackTags', 'contentstackTags', $this->queryObject->_query, $tags);
         return $this->queryObject;
     }
 
@@ -276,7 +276,7 @@ abstract class BaseQuery {
      * */
     public function limit($limit = '') {
 
-        $this->queryObject->_query = call_user_func('pagination', 'limit', $this->queryObject->_query, $limit);
+        $this->queryObject->_query = call_user_func('contentstackPagination', 'limit', $this->queryObject->_query, $limit);
         return $this->queryObject;
     }
 
@@ -289,7 +289,7 @@ abstract class BaseQuery {
      * @return Query
      * */
     public function containedIn($field = '', $value = array()) {
-        $this->subQuery = call_user_func('contains', '$in', $this->subQuery, $field, $value);
+        $this->subQuery = call_user_func('contentstackContains', '$in', $this->subQuery, $field, $value);
         return $this->queryObject;
     }
 
@@ -302,7 +302,7 @@ abstract class BaseQuery {
      * @return Query
      * */
     public function notContainedIn($field = '', $value = array()) {
-        $this->subQuery = call_user_func('contains', '$nin', $this->subQuery, $field, $value);
+        $this->subQuery = call_user_func('contentstackContains', '$nin', $this->subQuery, $field, $value);
         return $this->queryObject;
     }
 
@@ -327,7 +327,7 @@ abstract class BaseQuery {
      *      $value     - value against which comparision is going to happen
      * */
     public function lessThan($field = '', $value = '') {
-        $this->subQuery = call_user_func('comparision', '$lt', $this->subQuery, $field, $value);
+        $this->subQuery = call_user_func('contentstackComparision', '$lt', $this->subQuery, $field, $value);
         return $this->queryObject;
     }
 
@@ -339,7 +339,7 @@ abstract class BaseQuery {
      *      $value     - value against which comparision is going to happen
      * */
     public function lessThanEqualTo($field = '', $value = '') {
-        $this->subQuery = call_user_func('comparision', '$lte', $this->subQuery, $field, $value);
+        $this->subQuery = call_user_func('contentstackComparision', '$lte', $this->subQuery, $field, $value);
         return $this->queryObject;
     }
 
@@ -351,7 +351,7 @@ abstract class BaseQuery {
      *      $value     - value against which comparision is going to happen
      * */
     public function greaterThan($field = '', $value = '') {
-        $this->subQuery = call_user_func('comparision', '$gt', $this->subQuery, $field, $value);
+        $this->subQuery = call_user_func('contentstackComparision', '$gt', $this->subQuery, $field, $value);
         return $this->queryObject;
     }
 
@@ -363,7 +363,7 @@ abstract class BaseQuery {
      *      $value     - value against which comparision is going to happen
      * */
     public function greaterThanEqualTo($field = '', $value = '') {
-        $this->subQuery = call_user_func('comparision', '$gte', $this->subQuery, $field, $value);
+        $this->subQuery = call_user_func('contentstackComparision', '$gte', $this->subQuery, $field, $value);
         return $this->queryObject;
     }
 
@@ -375,7 +375,7 @@ abstract class BaseQuery {
      *      $value     - value against which comparision is going to happen
      * */
     public function notEqualTo($field = '', $value = '') {
-        $this->subQuery = call_user_func('comparision', '$ne', $this->subQuery, $field, $value);
+        $this->subQuery = call_user_func('contentstackComparision', '$ne', $this->subQuery, $field, $value);
         return $this->queryObject;
     }
 
@@ -390,7 +390,7 @@ abstract class BaseQuery {
             $this->subQuery = json_encode($_query);
             return $this->queryObject;
         }
-        throw createError("Provide valid query");
+        throw contentstackCreateError("Provide valid query");
     }
 
     /*
