@@ -68,7 +68,7 @@ if(!function_exists('getDomain')) {
     }
 }
 
-if(!function_exists('contentstack_url')) {
+if(!function_exists('contentstackUrl')) {
     /*
      * contentstack_url
      * contentstack_url method to create the url based on the request
@@ -76,7 +76,7 @@ if(!function_exists('contentstack_url')) {
      *  @queryObject - Object - Query Object
      * @return URL()string
      * */
-    function contentstack_url($queryObject = '', $type = '') {
+    function contentstackUrl($queryObject = '', $type = '') {
         $URL = '';
         switch ($type) {
             case 'set_environment':
@@ -233,7 +233,7 @@ if(!function_exists('wrapResult')) {
     }
 }
 
-if (!function_exists('contentstack_request')) {
+if (!function_exists('contentstackRequest')) {
     
     /*
      * contentstack_request
@@ -243,12 +243,10 @@ if (!function_exists('contentstack_request')) {
      * @return Result
      * */
 
-    function contentstack_request($queryObject = '', $type = ''){
+    function contentstackRequest($queryObject = '', $type = ''){
         $server_output = '';
         if($queryObject) {
-           // debug("i am here");
-              // \Contentstack\Utility\debug(contentstack_url($queryObject, $type), true);
-            $http = curl_init(contentstack_url($queryObject, $type));  
+            $http = curl_init(contentstackUrl($queryObject, $type));  
 
             // setting the GET request
             curl_setopt($http, CURLOPT_HEADER, FALSE);
