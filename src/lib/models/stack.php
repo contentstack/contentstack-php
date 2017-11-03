@@ -50,7 +50,8 @@ class Stack {
      * Assets
      * Assets Class to initalize your Assets
      * @param
-     *      
+     *      string|assetUid - valid asset uid relevent to configured stack
+     *
      * */
     public function Assets($assetUid = '') {
         return new Assets($assetUid, $this);
@@ -61,8 +62,8 @@ class Stack {
          * ImageTrasform
          * ImageTrasform function is define for image manipulation with different
          * parameters in second parameter in array form 
-         * @param url : Image url on which we want to manipulate.
-         * @param parameters : It is an second parameter in which we want to place different different manipulation value in form of array        
+         * @param url : Image url on which we want to manipulate. 
+         * @param parameters : It is an second parameter in which we want to place different manipulation key and value in array form
          *      
          * */    
     public function ImageTrasform($url, $parameters){     
