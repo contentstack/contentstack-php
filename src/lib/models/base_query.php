@@ -263,7 +263,7 @@ abstract class BaseQuery {
      * @return Query
      * */
     public function tags($tags = array()) {
-        $this->queryObject->_query = call_user_func('contentstackTags', 'contentstackTags', $this->queryObject->_query, $tags);
+        $this->queryObject->_query = call_user_func('contentstackTags', 'tags', $this->queryObject->_query, $tags);
         return $this->queryObject;
     }
 
