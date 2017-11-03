@@ -34,9 +34,9 @@ class Query extends BaseQuery {
     public function find() {
         $this->operation = __FUNCTION__;
         if($this->type == 'assets'){
-            return \Contentstack\Utility\contentstack_request($this, 'assets');
+            return \Contentstack\Utility\contentstackRequest($this, 'assets');
         }else if($this->type == 'contentType'){
-            return \Contentstack\Utility\contentstack_request($this);
+            return \Contentstack\Utility\contentstackRequest($this);
     }        
     }
 
@@ -48,9 +48,9 @@ class Query extends BaseQuery {
         $this->operation = __FUNCTION__;
         $this->_query['limit'] = 1;
         if($this->type == 'assets'){
-            return Utility\request($this, 'assets');
+            return \Contentstack\Utility\contentstackRequest($this, 'assets');
         }else if($this->type == 'contentType'){
-            return \Contentstack\Utility\contentstack_request($this);
+            return \Contentstack\Utility\contentstackRequest($this);
     }
         
     }
