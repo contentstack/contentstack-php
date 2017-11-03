@@ -58,6 +58,6 @@ class Assets {
      * */
     public function fetch() {
         $this->operation = __FUNCTION__;
-       return \Contentstack\Utility\contentstack_request($this, 'asset');
+       return \Contentstack\Utility\contentstackRequest($this, 'asset');
     }
 }
