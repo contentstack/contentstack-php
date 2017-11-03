@@ -36,6 +36,6 @@ class Entry extends BaseQuery {
      * */
     public function fetch() {
         $this->operation = __FUNCTION__;
-        return \Contentstack\Utility\contentstack_request($this);
+        return \Contentstack\Utility\contentstackRequest($this);
     }
 }
