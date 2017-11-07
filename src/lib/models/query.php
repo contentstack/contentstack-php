@@ -43,6 +43,7 @@ class Query extends BaseQuery {
     /*
      * findOne
      * Get single entry based on the specified subquery
+     * @deprecated since verion 1.1.0
      * */
     public function findOne() {
         $this->operation = __FUNCTION__;

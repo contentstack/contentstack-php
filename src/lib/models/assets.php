@@ -29,7 +29,8 @@ class Assets {
      * 
      * Assets constructor
      * @param
-     *      
+     *        string|assetUid - valid asset uid relevent to configured stack
+     *        stack - valid stack configured details     
      * */
     public function __construct($asset_uid = '', $stack = '') { 
 
