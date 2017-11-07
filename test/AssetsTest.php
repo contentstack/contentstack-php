@@ -32,6 +32,7 @@ class AssetsTest extends TestCase {
     public function testAssetsFind() {
          $_assets = self::$Stack->Assets()->Query()->toJSON()->find();
          $this->assertArrayHasKey(0, $_assets);
+          //\Contentstack\Utility\debug(count($_assets[]), true);
          $this->assertTrue(checkAssetsSorting($_assets[0])); 
     }
 
@@ -42,7 +43,7 @@ class AssetsTest extends TestCase {
          $this->assertEquals($_asset->get('title'), $_object[0][0]['title']);
     }
 
-    public function testAsssetsFindSkip() {
+    public function testAssetsFindSkip() {
         $_assets1 = self::$Stack->Assets()->Query()->toJSON()->find();
         $this->assertArrayHasKey(0, $_assets1);
         $assets_count = count($_assets1[0]);
@@ -55,7 +56,7 @@ class AssetsTest extends TestCase {
         $this->assertEquals($_assets[0], array_slice($_assets1[0], $skip));
     }
 
-    public function testAsssetsFindSkipLimit() {
+    public function testAssetsFindSkipLimit() {
         $_assets1 = self::$Stack->Assets()->Query()->toJSON()->find();
         $this->assertArrayHasKey(0, $_assets1);
         $limit = 2;
@@ -67,7 +68,7 @@ class AssetsTest extends TestCase {
         $this->assertEquals($_assets[0], array_slice($_assets1[0], $skip, $limit));
     }
 
-    public function testAsssetsFindLimit() {
+    public function testAssetsFindLimit() {
         $limit = 1;
         $_assets = self::$Stack->Assets()->Query()->toJSON()->limit($limit)->find();
         $this->assertArrayHasKey(0, $_assets);
@@ -75,25 +76,34 @@ class AssetsTest extends TestCase {
         $this->assertTrue(checkAssetsSorting($_assets[0]));
     }
 
-     public function testAsssetsFindCount() {
+     public function testAssetsFindCount() {
         $_assets = self::$Stack->Assets()->Query()->toJSON()->count()->find();
         $assets = self::$Stack->Assets()->Query()->toJSON()->find();
         $assets_count = count($assets[0]);
         $this->assertArrayHasKey(0, $_assets);
-        $this->assertTrue(($_assets[0] === $assets_count));
+        if(($_assets[0]) > 0 ) {
+            $this->assertTrue(($_assets[0] === $assets_count));
+        }else{
+            $this->assertTrue(('0'));
+        }
+        
     }
 
-    public function testAsssetsFindIncludeCount() {
+    public function testAssetsFindIncludeCount() {
         $_assets = self::$Stack->Assets()->Query()->toJSON()->includeCount()->find();
         $assets = self::$Stack->Assets()->Query()->toJSON()->find();
         $assets_count = count($assets[0]);
         $this->assertArrayHasKey(0, $_assets);
         $this->assertArrayHasKey(1, $_assets);
         $this->assertTrue((count($_assets[0]) === $assets_count));
+        if(($_assets[1]) > 0 ) {
         $this->assertTrue(($_assets[1] === $assets_count));
+        } else {
+            $this->assertTrue(('0'));
+        }
     }
 
-    public function testAsssetsFindWhere() {
+    public function testAssetsFindWhere() {
         $_assets = self::$Stack->Assets()->Query()->toJSON()->find();
         $_assetsUid = $_assets[0][0]['uid'];
         $assets = self::$Stack->Assets()->Query()->toJSON()->where('uid', $_assetsUid)->find();
@@ -102,25 +112,33 @@ class AssetsTest extends TestCase {
         $this->assertTrue(($assets[0][0]['uid'] === $_assetsUid));
     }
 
-    public function testAsssetsFindContainedIn() {
+    public function testAssetsFindContainedIn() {
         $_set = ['image/jpeg', 'image/jpg'];
         $assets = self::$Stack->Assets()->Query()->toJSON()->containedIn('content_type', $_set)->find();
         $this->assertArrayHasKey(0, $assets);
-        foreach ($assets[0] as $*** => $val) {
+        if(count($assets[0]) !== 0){
+            foreach ($assets[0] as $*** => $val) {
             $this->assertTrue((array_search($assets[0][$***]['content_type'], $_set) !== false));
         }
+        } else {
+            $this->assertTrue('0');
+        }       
     }
 
-     public function testAsssetsFindNotContainedIn() {
-        $_set = ['image/jpeg', 'image/jpg'];
+    public function testAssetsFindNotContainedIn() {
+        $_set = ['image/jpg'];
         $assets= self::$Stack->Assets()->Query()->toJSON()->notContainedIn('content_type', $_set)->find();
         $this->assertArrayHasKey(0, $assets);
-        foreach ($assets[0] as $*** => $val) {
-            $this->assertTrue((array_search($assets[0][$***]['content_type'], $_set) === false));
-        }
+         if(count($assets[0]) !== 0){
+            foreach ($assets[0] as $*** => $val) {
+                $this->assertTrue((array_search($assets[0][$***]['content_type'], $_set) === false));
+                }
+            } else {
+                  $this->assertTrue('0');  
+            }
     }
 
-       public function testAsssetsFindAscending() {
+       public function testAssetsFindAscending() {
         $field = 'created_at';
         $_assets = self::$Stack->Assets()->Query()->toJSON()->ascending('created_at')->find();
         $assets = self::$Stack->Assets()->Query()->toJSON()->find();
@@ -130,7 +148,7 @@ class AssetsTest extends TestCase {
         $this->assertTrue(checkassetsSorting($_assets[0], $field, 'asc'));
     }
 
-    public function testAsssetsFindDescending() {
+    public function testAssetsFindDescending() {
         $field = 'created_at';
         $_assets = self::$Stack->Assets()->Query()->toJSON()->descending('created_at')->find();
         $assets = self::$Stack->Assets()->Query()->toJSON()->find();
@@ -140,43 +158,60 @@ class AssetsTest extends TestCase {
         $this->assertTrue(checkassetsSorting($_assets[0], $field, 'desc'));
     }
 
-    public function testAsssetsFindLessThan() {
+    public function testAssetsFindLessThan() {
         $_set = 9684;
         $assets = self::$Stack->Assets()->Query()->toJSON()->lessThan('file_size', $_set)->find();
         $this->assertArrayHasKey(0, $assets);
+       if(count($assets[0]) !== 0){
         foreach ($assets[0] as $*** => $val) {
             $this->assertTrue(($assets[0][$***]['file_size'] < $_set));
         }
+        } else {
+            $this->assertTrue('0');     
+        }
     }
 
-    public function testAsssetsFindLessThanEqualTo() {
+    public function testAssetsFindLessThanEqualTo() {
         $_set = 9684;
         $assets = self::$Stack->Assets()->Query()->toJSON()->lessThanEqualTo('file_size', $_set)->find();
         $this->assertArrayHasKey(0, $assets);
+        if(count($assets[0]) !== 0) {
         foreach ($assets[0] as $*** => $val) {
             $this->assertTrue(($assets[0][$***]['file_size'] <= $_set));
-        }
+            }
+        } else {
+          $this->assertTrue('0');       
+       }
     }
 
-     public function testAsssetsFindGreaterThan() {
+    public function testAssetsFindGreaterThan() {
         $_set = 7575;
         $assets = self::$Stack->Assets()->Query()->toJSON()->greaterThan('file_size', $_set)->find();
         $this->assertArrayHasKey(0, $assets);
+        if(count($assets[0]) !== 0) {
         foreach ($assets[0] as $*** => $val) {
             $this->assertTrue(($assets[0][$***]['file_size'] > $_set));
+            }
+        } else {
+              $this->assertTrue('0');                  
         }
     }
 
-     public function testAsssetsFindGreaterThanEqualTo() {
+    
+    public function testAssetsFindGreaterThanEqualTo() {
         $_set = 7575;
         $assets = self::$Stack->Assets()->Query()->toJSON()->greaterThanEqualTo('file_size', $_set)->find();
         $this->assertArrayHasKey(0, $assets);
+        if(count($assets[0]) !== 0) {
         foreach ($assets[0] as $*** => $val) {
             $this->assertTrue(($assets[0][$***]['file_size'] >= $_set));
+            }
+        } else {
+              $this->assertTrue('0');    
         }
     }
 
-    public function testAsssetsFindNotEqualTo() {
+    public function testAssetsFindNotEqualTo() {
         $_set = 7575;
         $_assets = self::$Stack->Assets()->Query()->toJSON()->find();
         $_assets_count = count($_assets[0]) - 1;
@@ -188,18 +223,22 @@ class AssetsTest extends TestCase {
         }
     }
 
-     public function testAsssetsFindExists() {
+     public function testAssetsFindExists() {
         $_assets = self::$Stack->Assets()->Query()->toJSON()->find();
         $_assets_count = count($_assets[0]);
         $assets = self::$Stack->Assets()->Query()->toJSON()->exists('title')->find();
         $this->assertArrayHasKey(0, $assets);
         $this->assertTrue((count($assets[0]) === $_assets_count));
+        if(count($_assets[0]) !== 0) {
         foreach ($assets[0] as $*** => $val) {
             $this->assertTrue(isset($assets[0][$***]['title']));
         }
+        } else {
+               $this->assertTrue('0');
+        }
     }
 
-     public function testAsssetsFindNotExists() {
+     public function testAssetsFindNotExists() {
         $_assets = self::$Stack->Assets()->Query()->toJSON()->find();
         $_assets_count = count($_assets[0]);
         $assets = self::$Stack->Assets()->Query()->toJSON()->notExists('title')->find();
@@ -208,7 +247,7 @@ class AssetsTest extends TestCase {
     }
 
 
- public function testAsssetsFindLogicalOrQueryObject() {
+ public function testAssetsFindLogicalOrQueryObject() {
         $_value = 7575;
         $query1 = self::$Stack->Assets()->Query()->greaterThan('file_size', $_value);
         $query2 = self::$Stack->Assets()->Query()->lessThan('file_size', $_value);
@@ -217,7 +256,7 @@ class AssetsTest extends TestCase {
         $this->assertTrue(checkAssetsSorting($assets[0]));
     }
 
-    public function testAsssetsFindLogicalOrRawQuery() {
+    public function testAssetsFindLogicalOrRawQuery() {
         $_value = 7575;
         $query1 = self::$Stack->Assets()->Query()->greaterThan('file_size', $_value)->getQuery();
         $query2 = self::$Stack->Assets()->Query()->lessThan('file_size', $_value)->getQuery();
@@ -226,7 +265,7 @@ class AssetsTest extends TestCase {
         $this->assertTrue(checkAssetsSorting($assets[0]));
     }
 
-    public function testAsssetsFindLogicalAndQueryObject() {
+    public function testAssetsFindLogicalAndQueryObject() {
         $_value = 7575;
         $query1 = self::$Stack->Assets()->Query()->greaterThanEqualTo('file_size', $_value);
         $query2 = self::$Stack->Assets()->Query()->lessThanEqualTo('file_size', $_value);
@@ -235,7 +274,7 @@ class AssetsTest extends TestCase {
         $this->assertTrue(checkAssetsSorting($assets[0]));
     }
 
-    public function testAsssetsFindLogicalAndRawQuery() {
+    public function testAssetsFindLogicalAndRawQuery() {
         $_value = 7575;
         $query1 = self::$Stack->Assets()->Query()->greaterThanEqualTo('file_size', $_value);
         $query2 = self::$Stack->Assets()->Query()->lessThanEqualTo('file_size', $_value);
@@ -244,7 +283,7 @@ class AssetsTest extends TestCase {
         $this->assertTrue(checkAssetsSorting($assets[0]));
     }
 
-    public function testAsssetsFindOnlyDefault() {
+    public function testAssetsFindOnlyDefault() {
         $_assets = self::$Stack->Assets()->Query()->only(array('title', 'updated_at'))->toJSON()->find();
         $_assets_count = self::$Stack->Assets()->Query()->toJSON()->find();
         $this->assertArrayHasKey(0, $_assets);
@@ -257,7 +296,7 @@ class AssetsTest extends TestCase {
         $this->assertTrue($flag);
     }
 
-    public function testAsssetsFindRegEx() {
+    public function testAssetsFindRegEx() {
         $regexp = "[0-9]";
         $_assets = self::$Stack->Assets()->Query()->regex('title', $regexp)->toJSON()->find();
         $this->assertArrayHasKey(0, $_assets);
@@ -269,7 +308,7 @@ class AssetsTest extends TestCase {
         $this->assertTrue($flag);
     }
 
-    public function testAsssetsFindRegE1xWithOpt() {
+    public function testAssetsFindRegE1xWithOpt() {
         $regexp = "[0-9]";
         $opts = "i";
         $_assets = self::$Stack->Assets()->Query()->includeCount()->regex('title', $regexp, $opts)->toJSON()->find();
@@ -282,7 +321,7 @@ class AssetsTest extends TestCase {
         $this->assertTrue($flag);
     }
 
-    public function testAsssetsFindTags() {
+    public function testAssetsFindTags() {
         $_assets = self::$Stack->Assets()->Query()->tags(array('tag-1'))->toJSON()->find();
         $this->assertArrayHasKey(0, $_assets);
         $this->assertTrue(checkassetsSorting($_assets[0]));
@@ -293,7 +332,7 @@ class AssetsTest extends TestCase {
         $this->assertTrue($flag);
     }
 
-    public function testAsssetsFindExceptBaseDefault() {
+    public function testAssetsFindExceptBaseDefault() {
         $_assets = self::$Stack->Assets()->Query()->except('BASE', array('title'))->toJSON()->find();
         $this->assertArrayHasKey(0, $_assets);
         $_assets_count = self::$Stack->Assets()->Query()->toJSON()->find();
@@ -307,7 +346,7 @@ class AssetsTest extends TestCase {
     }
 
 
-     public function testAsssetsFindOnlyBaseDefault() {
+     public function testAssetsFindOnlyBaseDefault() {
         $_assets = self::$Stack->Assets()->Query()->only('BASE', array('title', 'updated_at'))->toJSON()->find();
         $this->assertArrayHasKey(0, $_assets);
         $assets = self::$Stack->Assets()->Query()->toJSON()->find();
@@ -321,7 +360,7 @@ class AssetsTest extends TestCase {
         $this->assertTrue($flag);
     }
 
-    public function testAsssetsFindExceptDefault() {
+    public function testAssetsFindExceptDefault() {
         $_assets = self::$Stack->Assets()->Query()->except(array('boolean'))->toJSON()->find();
         $this->assertArrayHasKey(0, $_assets);
         $assets = self::$Stack->Assets()->Query()->toJSON()->find();
@@ -335,7 +374,7 @@ class AssetsTest extends TestCase {
         $this->assertTrue($flag);
     }
 
-    public function testAsssetsFindSearch() {
+    public function testAssetsFindSearch() {
         $_assets = self::$Stack->Assets()->Query()->search('image/jpeg')->toJSON()->find();
         $this->assertArrayHasKey(0, $_assets);
         $assets = self::$Stack->Assets()->Query()->toJSON()->find();
