@@ -177,7 +177,8 @@ abstract class BaseQuery {
 
     /*
      * includeSchema
-     * @deprecated since verion 3.3.0
+     * @deprecated since verion 1.1.0
+     * @Alternate includeContentType
      * To include schema along with entries
      * @param
      * @return Query
@@ -189,7 +190,6 @@ abstract class BaseQuery {
 
     /*
      * includeContentType
-     * @deprecated since verion 3.3.0
      * To include content_type along with entries
      * @param
      * @return Query

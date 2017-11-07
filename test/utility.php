@@ -17,16 +17,19 @@ if (!function_exists('entriesSorting')) {
 if (!function_exists('assetsSorting')) {
 
     function checkAssetsSorting($assets = array(), $sortKey = 'updated_at', $order = 'desc') {
-
-        $result = true;
-        for($i = 0;$i < count($assets) - 1; $i++) {
-            if($order === 'desc')
-                $result = $result && ($assets[$i][$sortKey] >= $assets[$i+1][$sortKey]);
-            else
-                $result = $result && ($assets[$i][$sortKey] <= $assets[$i+1][$sortKey]);
+        if(count($assets) > 0){     
+            $result = true;
+            for($i = 0;$i < count($assets) - 1; $i++) {
+                if($order === 'desc')
+                    $result = $result && ($assets[$i][$sortKey] >= $assets[$i+1][$sortKey]);
+                else
+                    $result = $result && ($assets[$i][$sortKey] <= $assets[$i+1][$sortKey]);
         }
         return $result;
+    } else{
+        return 0;
     }
+}
 }
 
 if (!function_exists('sortEntries')) {
