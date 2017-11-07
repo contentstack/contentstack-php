@@ -50,6 +50,7 @@ class REST
             "title" => "CB1"
         )), true));
 
+
         if(file_exists(RESULT_PATH) && ENV === 'TEST_LOCAL') {
             echo "\n Skipping tear up as result already present";
             $myfile = fopen(RESULT_PATH, "r") or die("Unable to open file!");
@@ -114,7 +115,7 @@ class REST
      * */
     public function createUserSession()
     {
-       $user = $this->sendRequest('user-session', array('user' => array('email' => '<<EMAIL-ID>>', 'password' => '<<PASSWORD>>')));
+       $user = $this->sendRequest('user-session', array('user' => array('email' => '<Email-id>', 'password' => '<password>')));
         if (isset($user['user'])) {
             $this->set('user', $user['user']);
             $this->headers['authtoken'] = (isset($user['user']['authtoken'])) ? $user['user']['authtoken'] : '';
@@ -131,9 +132,7 @@ class REST
     public function createStack()
     {
         $this->createUserSession();
-        //$this->set('organization_id', $headers['blt2b4991176c6c1d25']);
         $stack = $this->sendRequest('stack', array('stack' => array('name' => 'php-sdk-test')));
-
         if (isset($stack['stack'])) {
             $this->set('stack', $stack['stack']);
             //$this->set('org_uid', $headers['blt2b4991176c6c1d25']);
@@ -352,6 +351,7 @@ class REST
 
     public function sendRequest($type = '', $payload = array(), $method = 'POST', $values = array())
     {
+
         $ch = curl_init($this->generateURL($type, $values));
         curl_setopt($ch, CURLOPT_CUSTOMREQUEST, $method);
         curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($payload));

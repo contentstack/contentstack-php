@@ -140,6 +140,17 @@ if(!function_exists('generateQuery')) {
             $query->_query['environment'] = $query->contentType->stack->getEnvironment();
             $subQuery = array();
             if(count($query->subQuery) > 0) $subQuery['query'] = json_encode($query->subQuery);
+            $include_schema = array_search('include_schema', array_keys($query->_query));
+            $include_content_type = array_search('include_content_type', array_keys($query->_query));
+            if($include_schema < $include_content_type){
+            foreach ($query->_query as $key => $value) {
+                if($key == 'include_schema'){ 
+                    unset($query->_query['include_schema']);
+                    $query->_query["include_schema"] = "true";
+                    }
+                }
+            }
+
             $result = array_merge($query->_query, $subQuery);
         } elseif (isset($query->stack)) {       
             $query->_query['environment'] = $query->stack->getEnvironment();
@@ -169,7 +180,6 @@ if(!function_exists('generateQueryParams')) {
      * @return QueryParameters
      * */
     function generateQueryParams($query = array()) {
-        
         $QueryParams = generateQuery($query);
         $Headers     = headers($query);
         $result      = array_merge($QueryParams, $Headers);
