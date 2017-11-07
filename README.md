@@ -101,9 +101,9 @@ $imageUrl = $stack->ImageTrasform($imageUrl, array('quality'=> 100));
 
 // set the quality to 100, auto optimization, width and height
 $imageUrl = $stack->ImageTrasform($imageUrl, array('quality'=> 100,
-    'auto': 'webp',
-    'width': 100,
-    'height': 100));
+    'auto'=> 'webp',
+    'width'=> 100,
+    'height'=> 100));
 
 
 ### Helpful Links
