@@ -129,23 +129,6 @@ if (!function_exists('contentstackTags')) {
     }
 }
 
-if (!function_exists('contentstackSearch')) {
-    /*
-     * search
-     * search
-     * @param
-     *      $operator - query operator
-     *      $query - Query object
-     *      $value - search string
-     * @return $query
-     * */
-    function contentstackSearch($operator = '', $query = array(), $value = '') {
-        if(!(is_string($value) && strlen($value) > 0))
-            throw createError('Invalid input for search.Value must be of type string');
-        $query[$operator] = $value;
-        return $query;
-    }
-}
 
 if (!function_exists('contentstackComparision')) {
     /*
