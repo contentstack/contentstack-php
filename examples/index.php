@@ -12,17 +12,18 @@ ini_set('display_errors', 'On');
 use Contentstack\Contentstack;
 include_once "../src/index.php";
 
-  $stack = Contentstack::Stack('<<API-KEY>>', '<<Access-TOKEN>>', '<<ENVIRONMENT>>');
+   $stack = Contentstack::Stack('<<API-KEY>>', '<<Access-TOKEN>>', '<<DEVELOPMENT>>');
 
 try {
 
-     //$result = $stack->ContentType('authors')->Query()->toJSON()->includeCount()->find();
+     //$result = $stack->ContentType('ctwithallfields')->Query()->toJSON()->includeSchema()->includeContentType()->find();
+    // $result = $stack->ContentType('authors')->Query()->toJSON()->where('title', '')->find();
      //$result = $stack->ContentType('authors')->Entry('')->toJSON()->fetch();
    // \Contentstack\Utility\debug($result);
-    $result = $stack->Assets('')->fetch();
-    //$data   = $result->get('url');
-    //$result = $stack->ImageTrasform($data, array('height'=> 100, 'weight'=> 100, 'disable' => 'upscale'));
-    \Contentstack\Utility\debug($result);
+    // $result = $stack->Assets('bltacacd77ce6c15c12')->fetch();
+    // $data   = $result->get('url');
+    // $result = $stack->ImageTrasform($data, array('height'=> 100, 'weight'=> 100, 'disable' => 'upscale'));
+    // \Contentstack\Utility\debug($result);
 
 
 } catch(Exception $e) {
