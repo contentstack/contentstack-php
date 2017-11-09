@@ -1,4 +1,7 @@
 .vscode/
 .idea/
+composer.phar
+composer.lock
+vendor/
 test/report.html
 test/result.json
