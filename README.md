@@ -96,21 +96,22 @@ For example, if you want to crop an image (with width as 300 and height as 400),
 
 You can use the Image Delivery API functions in this SDK as well. Here are a few examples of its usage in the SDK.
 
-// set the image quality to 100
-imageUrl = Stack->imageTransform(imageUrl, array(
-'quality'=> 100
-));
+// set the image quality to 100.
 
-// resize the image by specifying width and height
-imageUrl = Stack->imageTransform(imageUrl, array(
-'width'=> 100,
-'height'=> 100
-));
+    imageUrl = Stack->imageTransform(imageUrl, array('quality'=> 100));
 
-// enable auto optimization for the image
-imageUrl = Stack.imageTransform(imageUrl, array(
-'auto'=> 'webp'
-))
+// resize the image by specifying width and height.
+
+    imageUrl = Stack->imageTransform(imageUrl, array(
+    'width'=> 100,
+    'height'=> 100
+    ));
+
+// enable auto optimization for the image.
+
+    imageUrl = Stack.imageTransform(imageUrl, array(
+    'auto'=> 'webp'
+    ))
 
 
 
