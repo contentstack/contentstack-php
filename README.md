@@ -94,16 +94,24 @@ For example, if you want to crop an image (with width as 300 and height as 400),
 
 [Read Image Delivery API documentation](https://www.contentstack.com/docs/apis/image-delivery-api/). 
 
-Following are Image Delivery API examples.
+You can use the Image Delivery API functions in this SDK as well. Here are a few examples of its usage in the SDK.
 
-// set the quality 100 
-$imageUrl = $stack->ImageTrasform($imageUrl, array('quality'=> 100));
+// set the image quality to 100
+imageUrl = Stack->imageTransform(imageUrl, array(
+'quality'=> 100
+));
 
-// set the quality to 100, auto optimization, width and height
-$imageUrl = $stack->ImageTrasform($imageUrl, array('quality'=> 100,
-    'auto'=> 'webp',
-    'width'=> 100,
-    'height'=> 100));
+// resize the image by specifying width and height
+imageUrl = Stack->imageTransform(imageUrl, array(
+'width'=> 100,
+'height'=> 100
+));
+
+// enable auto optimization for the image
+imageUrl = Stack.imageTransform(imageUrl, array(
+'auto'=> 'webp'
+))
+
 
 
 ### Helpful Links
