@@ -98,7 +98,8 @@ You can use the Image Delivery API functions in this SDK as well. Here are a few
 
 // set the image quality to 100.
 
-    imageUrl = Stack->imageTransform(imageUrl, array('quality'=> 100));
+    imageUrl = Stack->imageTransform(imageUrl, array(
+    'quality'=> 100));
 
 // resize the image by specifying width and height.
 
