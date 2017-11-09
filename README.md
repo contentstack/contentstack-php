@@ -110,7 +110,7 @@ You can use the Image Delivery API functions in this SDK as well. Here are a few
 
 // enable auto optimization for the image.
 
-    imageUrl = Stack.imageTransform(imageUrl, array(
+    imageUrl = Stack->imageTransform(imageUrl, array(
     'auto'=> 'webp'
     ))
 
@@ -119,8 +119,8 @@ You can use the Image Delivery API functions in this SDK as well. Here are a few
 ### Helpful Links
 
 - [Contentstack Website](https://www.contentstack.com) 
-- [Official Documentation](https://contentstack.com/docs) 
-- [Content Delivery API Docs](https://contentstack.com/docs/apis/content-delivery-api/) 
+- [Official Documentation](https://www.contentstack.com/docs) 
+- [Content Delivery API Docs](https://www.contentstack.com/docs/apis/content-delivery-api/) 
 
 ### The MIT License (MIT)
 
