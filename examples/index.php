@@ -12,11 +12,16 @@ ini_set('display_errors', 'On');
 use Contentstack\Contentstack;
 include_once "../src/index.php";
 
-   $stack = Contentstack::Stack('<<API-KEY>>', '<<Access-TOKEN>>', '<<DEVELOPMENT>>');
+   $stack = Contentstack::Stack('***REMOVED***', '***REMOVED***', 'mobile');
 
 try {
+       $result = $stack->ContentType('ctwithallfields')->Query()->addParam('include_dimensions', 'true')->toJSON()->find(); 
+     // $result = $stack->ContentType('ctwithallfields')->Query()->addParam('include_dimensions', true)->toJSON()->find();
+      //$result = $stack->ContentType('ctwithallfields')->Query()->includeCount('include_dimensions', true)->toJSON()->find();
+       //$result = $stack->ContentType('ctwithallfields')->Entry('blt8d1ab7600ba4c2b4')->addParam('include_dimensions', true)->toJSON()->fetch();
 
-     //$result = $stack->ContentType('ctwithallfields')->Query()->toJSON()->includeSchema()->includeContentType()->find();
+        //$result = $stack->Assets('blt9b5825dd804a9067')->addParam('include_dimensions', true)->toJSON()->fetch();
+
     // $result = $stack->ContentType('authors')->Query()->toJSON()->where('title', '')->find();
      //$result = $stack->ContentType('authors')->Entry('')->toJSON()->fetch();
    // \Contentstack\Utility\debug($result);

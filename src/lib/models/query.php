@@ -21,6 +21,7 @@ class Query extends BaseQuery {
      * @param
      * */
     public function __construct($data = '', $type = '') {
+
         $this->_query = array();
         $this->type = $type;
         parent::__construct($data, $this);
