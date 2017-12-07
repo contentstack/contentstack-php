@@ -20,19 +20,16 @@ abstract class BaseQuery {
             $this->queryObject->_query = array();
             $this->subQuery = array();
         }elseif ($data->type === 'asset'){
-            $this->asset = $data;
-            $this->queryObject = $data;
-            $this->queryObject->_query = array();
-            $this->subQuery = array();        
-        }
-        else{
-            $this->contentType = $data;
+            $this->stack = $data;
             $this->queryObject = $parent;
             $this->queryObject->_query = array();
             $this->subQuery = array();
-
+        }else{
+            $this->contentType = $data;
+            $this->queryObject = $parent;
+            $this->queryObject->_query = array();
+            $this->subQuery = array();          
         }
-
     }
 
     /*
@@ -63,7 +60,7 @@ abstract class BaseQuery {
      * @return Query
      * */
     public function only($level = 'BASE', $field_uids = array()) {
-        $this->queryObject->_query = call_user_func('contentstackProjection', 'only', $this->queryObject->_query, $level, $field_uids);
+    $this->queryObject->_query = call_user_func('contentstackProjection', 'only', $this->queryObject->_query, $level, $field_uids);
         return $this->queryObject;
     }
 
@@ -230,6 +227,18 @@ abstract class BaseQuery {
      * */
     public function includeOwner() {
         $this->queryObject->_query = call_user_func('contentstackAddBoolean', 'include_owner', $this->queryObject->_query);
+        return $this->queryObject;
+    }
+
+    /*
+     * addParam
+     * To sort the entries in addParam
+     * @param
+     *      field_uid - field uid to be sorted
+     * @return Query
+     * */
+    public function addParam($*** = '', $value = '') {
+       $this->queryObject->_query  = call_user_func('contentstackAddParam', $***, $this->queryObject->_query, $value);
         return $this->queryObject;
     }
 
@@ -403,7 +412,5 @@ abstract class BaseQuery {
         } catch(\Exception $e) {
             echo $e->getMessage();
         }
-    }
-
-
+    }   
 }
