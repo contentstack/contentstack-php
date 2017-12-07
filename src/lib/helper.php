@@ -267,6 +267,22 @@ if (!function_exists('contentstackAddBoolean')) {
     }
 }
 
+if (!function_exists('contentstackAddParam')) {
+    /*
+     * AddParam
+     * Set the locale on the Query
+     * @param
+     *      $operator - *** of the query
+     *      $query - Query object
+     *      $value - value to be set against ***
+     * @return $query
+     * */
+    function contentstackAddParam($*** = '', $query = array(), $value = '') {
+        $query[$***] =  $value;
+        return $query;
+    }
+}
+
 if (!function_exists('contentstackExistence')) {
     /*
      * existence
@@ -285,4 +301,3 @@ if (!function_exists('contentstackExistence')) {
         return $query;
     }
 }
-
