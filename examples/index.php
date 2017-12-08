@@ -12,23 +12,16 @@ ini_set('display_errors', 'On');
 use Contentstack\Contentstack;
 include_once "../src/index.php";
 
-   $stack = Contentstack::Stack('<API-KEY>', '<ACCESS-TOKEN>', '<DEVELOPMENT>');
+   $stack = Contentstack::Stack('<API-KEY>', '<ACCESS-TOKEN>', '<ENVIRONMENT>');
 
 try {
        //$result = $stack->ContentType('ctwithallfields')->Query()->addParam('include_dimensions', 'true')->toJSON()->find(); 
-     // $result = $stack->ContentType('ctwithallfields')->Query()->addParam('include_dimensions', true)->toJSON()->find();
+      //$result = $stack->ContentType('ctwithallfields')->Query()->addParam('include_dimension', 'true')->toJSON()->find();
       //$result = $stack->ContentType('ctwithallfields')->Query()->includeCount('include_dimensions', true)->toJSON()->find();
        //$result = $stack->ContentType('ctwithallfields')->Entry('blt8d1ab7600ba4c2b4')->addParam('include_dimensions', true)->toJSON()->fetch();
 
-        //$result = $stack->Assets('blt9b5825dd804a9067')->addParam('include_dimensions', true)->toJSON()->fetch();
-
-    // $result = $stack->ContentType('authors')->Query()->toJSON()->where('title', '')->find();
-     //$result = $stack->ContentType('authors')->Entry('')->toJSON()->fetch();
-   // \Contentstack\Utility\debug($result);
-    // $result = $stack->Assets('bltacacd77ce6c15c12')->fetch();
-    // $data   = $result->get('url');
-    // $result = $stack->ImageTrasform($data, array('height'=> 100, 'weight'=> 100, 'disable' => 'upscale'));
-    // \Contentstack\Utility\debug($result);
+        //$result = $stack->Assets('blt9b5825dd804a9067')->addParam('include_dimension', 'true')->toJSON()->fetch();
+    // \Contentstack\Utility\debug(($result));
 
 
 } catch(Exception $e) {
