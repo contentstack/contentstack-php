@@ -76,6 +76,21 @@ class AssetsTest extends TestCase {
         $this->assertTrue(checkAssetsSorting($_assets[0]));
     }
 
+     public function testAssetsAddParam() {
+        $_assets = self::$Stack->Assets()->Query()->addParam('include_dimension', 'true')->toJSON()->find();
+        $_object = self::$Stack->Assets()->Query()->toJSON()->find();
+         $_uid = $_object[0][0]['uid'];
+         $_asset = self::$Stack->Assets($_uid)->addParam('include_dimension', 'true')->toJSON()->fetch();
+        $this->assertTrue(array_key_exists('dimension', $_asset));
+    }
+
+    public function testAssetsmultipleAddParam() {
+         $_assets = self::$Stack->Assets()->Query()->addParam('include_dimension', 'true')->toJSON()->find();
+          $this->assertTrue(array_key_exists('dimension', $_assets[0][0]));
+         
+    }
+
+
      public function testAssetsFindCount() {
         $_assets = self::$Stack->Assets()->Query()->toJSON()->count()->find();
         $assets = self::$Stack->Assets()->Query()->toJSON()->find();
