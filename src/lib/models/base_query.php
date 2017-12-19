@@ -233,7 +233,7 @@ abstract class BaseQuery {
 
     /*
      * addParam
-     * To add key and values in string form using addParam method
+     * To add query parameter in query
      * @param
      *      key - Name of key in string
      *      value - Value of the key in string
