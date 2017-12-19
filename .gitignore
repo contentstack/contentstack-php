@@ -4,4 +4,7 @@ composer.phar
 composer.lock
 vendor/
 test/report.html
+test/AssetsTestReport.html
+test/EntryTestReport.html
+test/ImagetransformTestReport.html
 test/result.json
