@@ -19,6 +19,7 @@ abstract class BaseQuery {
             $this->queryObject = $parent;
             $this->queryObject->_query = array();
             $this->subQuery = array();
+            
         }elseif ($data->type === 'asset'){
             $this->stack = $data;
             $this->queryObject = $parent;
@@ -28,7 +29,7 @@ abstract class BaseQuery {
             $this->contentType = $data;
             $this->queryObject = $parent;
             $this->queryObject->_query = array();
-            $this->subQuery = array();          
+            $this->subQuery = array();        
         }
     }
 
@@ -232,9 +233,10 @@ abstract class BaseQuery {
 
     /*
      * addParam
-     * To sort the entries in addParam
+     * To add *** and values in string form using addParam method
      * @param
-     *      field_uid - field uid to be sorted
+     *      *** - Name of *** in string
+     *      value - Value of the *** in string
      * @return Query
      * */
     public function addParam($*** = '', $value = '') {
