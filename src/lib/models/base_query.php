@@ -233,7 +233,7 @@ abstract class BaseQuery {
 
     /*
      * addParam
-     * To add *** and values in string form using addParam method
+     * To add query parameter in query
      * @param
      *      *** - Name of *** in string
      *      value - Value of the *** in string
