@@ -49,6 +49,14 @@ class EntriesTest extends TestCase {
         $this->assertEquals($_entry['title'], $_object['title']);
     }
 
+    public function testAddParam() {
+        $_entries = self::$Stack->ContentType(CT_ContentType)->Query()->addParam('include_count', 'true')->toJSON()->find();
+        $this->assertArrayHasKey(0, $_entries);
+        $this->assertArrayHasKey(1, $_entries);
+        $this->assertTrue((count($_entries[0]) === ENTRY_COUNT));
+        $this->assertTrue(($_entries[1] === ENTRY_COUNT));  
+    }
+
     public function testFindSkip() {
         $_entries1 = self::$Stack->ContentType(CT_ContentType)->Query()->toJSON()->find();
         $this->assertArrayHasKey(0, $_entries1);
