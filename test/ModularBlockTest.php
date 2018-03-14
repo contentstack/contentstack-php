@@ -154,19 +154,6 @@ class ModularBlockTest extends TestCase {
         }
     }
 
-    // public function testFindLessThanEqualTo() {
-    //     $_set = 14;
-    //     $_actualCount = 2
-    //     $entries = self::$Stack->ContentType(CT_ModularContentType)->Query()->toJSON()->
-    //                  lessThanEqualTo('modular_blocks.test1.number', $_set)->find();
-    //     $this->assertArrayHasKey(0, $entries);
-    //     $this->assertTrue((count($entries[0]) === $_actualCount));
-    //     foreach ($entries[0] as $key => $val) {
-    //         $this->assertTrue(($entries[0][$key]['modular_blocks'][0]['test1']['number'] <= $_set));
-    //     }
-    // }
-
-
     public function testFindGreaterThan() {
         $_set = 14;
         $_actualCount = 2;
