@@ -7,5 +7,8 @@ vendor/
 test/report.html
 test/AssetsTestReport.html
 test/EntryTestReport.html
+test/Entriestestreport.html
 test/ImagetransformTestReport.html
+test/ModularBlockReport.html
+test/ModularBlockTest.php
 test/result.json
