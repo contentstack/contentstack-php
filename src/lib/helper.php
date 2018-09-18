@@ -37,7 +37,7 @@ if (!function_exists('contentstackSearch')) {
      * */
     function contentstackSearch($operator = '', $query = array(), $value = '') {
         if(!(!\Contentstack\Utility\isEmpty($value) && is_string($value)))
-            throw createError('Invalid input for "'.contentstackGetFunctionName().'". String value expected.');
+            throw contentstackCreateError('Invalid input for "'.contentstackGetFunctionName().'". String value expected.');
         $query[$operator] = $value;
         return $query;
     }
@@ -54,7 +54,7 @@ if (!function_exists('contentstackReferences')) {
      * */
     function contentstackReferences($operator = '', $query = array(), $value = array()) {
         if(!is_array($value))
-            throw createError('Invalid input for includeReferences. Array expected.');
+            throw contentstackCreateError('Invalid input for includeReferences. Array expected.');
         $query[$operator] = $value;
         return $query;
     }
@@ -74,7 +74,7 @@ if (!function_exists('contentstackProjection')) {
             $value = $level;
             $level = 'BASE';
         }
-        if(!(!\Contentstack\Utility\isEmpty($level) && is_string($level) && is_array($value))) throw createError('Invalid Input');
+        if(!(!\Contentstack\Utility\isEmpty($level) && is_string($level) && is_array($value))) throw contentstackCreateError('Invalid Input');
         if(!\Contentstack\Utility\isKeySet($query, $operator)) $query[$operator] = array();
         if(!\Contentstack\Utility\isKeySet($query[$operator], $level)) $query[$operator][$level] = array();
         $query[$operator][$level] = array_merge($query[$operator][$level], $value);
@@ -97,16 +97,16 @@ if (!function_exists('contentstackRegexp')) {
     function contentstackRegexp($operator = '', $query = array(), $values = array()) {
         if(count($values) === 2 || count($values) === 3) {
             if(\Contentstack\Utility\isEmpty($values[0]) && \Contentstack\Utility\isEmpty($values[1]) && is_string($values[0]) && is_string($values[1]))
-                throw createError('Invalid input for regex.Key must be string and value must be valid RegularExpression');
+                throw contentstackCreateError('Invalid input for regex.Key must be string and value must be valid RegularExpression');
             if(isset($values[2]) && !(is_string($values[2]) && strlen($values[2]) > 0)) {
-                throw createError('Invalid options for regex. Please provide the valid options');
+                throw contentstackCreateError('Invalid options for regex. Please provide the valid options');
             }
             $query[$values[0]] = array($operator => $values[1]);
             if(isset($values[2]))
                 $query[$values[0]]['$options'] = $values[2];
             return $query;
         } else {
-            throw createError('Invalid input for regex. At least 2 or maximum 3 arguments are required.');
+            throw contentstackCreateError('Invalid input for regex. At least 2 or maximum 3 arguments are required.');
         }
     }
 }
@@ -123,7 +123,7 @@ if (!function_exists('contentstackTags')) {
      * */
     function contentstackTags($operator = '', $query = array(), $value = '') {
         if(!(is_array($value) && count($value) > 0))
-            throw createError('Invalid input for tags.Value must be valid array of tags');
+            throw contentstackCreateError('Invalid input for tags.Value must be valid array of tags');
         $query[$operator] = $value;
         return $query;
     }
@@ -143,7 +143,7 @@ if (!function_exists('contentstackComparision')) {
      * */
     function contentstackComparision($operator = '', $query = array(), $*** = '', $value = '') {
         if(!(!\Contentstack\Utility\isEmpty($***) && is_string($***) && !\Contentstack\Utility\isEmpty($value)))
-            throw createError('Invalid input for "'.contentstackGetFunctionName().'". Key must be string and value should be valid not empty.');
+            throw contentstackCreateError('Invalid input for "'.contentstackGetFunctionName().'". Key must be string and value should be valid not empty.');
         $query[$***] = array($operator => $value);
         return $query;
     }
@@ -162,7 +162,7 @@ if (!function_exists('contentstackLogical')) {
      * */
     function contentstackLogical($operator = '', $query = array(), $value = array()) {
         if(!(is_array($value) && count($value) > 0))
-            throw createError('Invalid input for "'.contentstackGetFunctionName().'". At least one Query or array object is expected');
+            throw contentstackCreateError('Invalid input for "'.contentstackGetFunctionName().'". At least one Query or array object is expected');
         foreach($value as $*** => $_qry) {
             if(!\Contentstack\Utility\isKeySet($query, $operator)) $query[$operator] = array();
             if($_qry instanceof \Contentstack\Stack\ContentType\BaseQuery\BaseQuery)
@@ -171,7 +171,7 @@ if (!function_exists('contentstackLogical')) {
                 array_push($query[$operator], $_qry);
             else {
                 unset($query[$operator]);
-                throw createError('Query objects are expected as arguments');
+                throw contentstackCreateError('Query objects are expected as arguments');
             }
         }
         return $query;
@@ -191,7 +191,7 @@ if (!function_exists('contentstackContains')) {
      * */
     function contentstackContains($operator = '', $query = array(), $*** = '', $value = array()) {
         if (!(!\Contentstack\Utility\isEmpty($***) && is_string($***) && is_array($value)))
-            throw createError('Invalid input for "'.contentstackGetFunctionName().'". Key should be string and value must be array.');
+            throw contentstackCreateError('Invalid input for "'.contentstackGetFunctionName().'". Key should be string and value must be array.');
         $query[$***] = array($operator => $value);
         return $query;
     }
@@ -209,7 +209,7 @@ if (!function_exists('contentstackPagination')) {
      * */
     function contentstackPagination($operator = '', $query = array(), $value = '') {
         if (!(!\Contentstack\Utility\isEmpty($value) && is_numeric($value)))
-            throw createError('Invalid input for "'.contentstackGetFunctionName().'", it should be Numeric.');
+            throw contentstackCreateError('Invalid input for "'.contentstackGetFunctionName().'", it should be Numeric.');
         $query[$operator] = $value;
         return $query;
     }
@@ -227,7 +227,7 @@ if (!function_exists('contentstackLanguage')) {
      * */
     function contentstackLanguage($operator = '', $query = array(), $value = '') {
         if (!(!\Contentstack\Utility\isEmpty($value) && is_string($value)))
-            throw createError('Invalid input for "'.contentstackGetFunctionName().'", it should be String.');
+            throw contentstackCreateError('Invalid input for "'.contentstackGetFunctionName().'", it should be String.');
         $query[$operator] = $value;
         return $query;
     }
@@ -245,7 +245,7 @@ if (!function_exists('contentstackSorting')) {
      * */
     function contentstackSorting($operator = '', $query = array(), $*** = '') {
         if (!(!\Contentstack\Utility\isEmpty($***) && is_string($***)))
-            throw createError('Invalid input for "'.contentstackGetFunctionName().'". Value should be valid field in entry');
+            throw contentstackCreateError('Invalid input for "'.contentstackGetFunctionName().'". Value should be valid field in entry');
         $query[$operator] = $***;
         return $query;
     }
@@ -296,7 +296,7 @@ if (!function_exists('contentstackExistence')) {
      * */
     function contentstackExistence($operator = '', $query = array(), $*** = '', $value = false) {
         if (!(!\Contentstack\Utility\isEmpty($***) && is_string($***)))
-            throw createError('Invalid input for "'.contentstackGetFunctionName().'". Key should be valid String field uid');
+            throw contentstackCreateError('Invalid input for "'.contentstackGetFunctionName().'". Key should be valid String field uid');
         $query[$***] = array($operator => $value);
         return $query;
     }
