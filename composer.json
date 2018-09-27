@@ -10,6 +10,6 @@
       "psr-4": {
           "Contentstack\\": "src/"
         },
-        "files": ["src/helper.php"]
+        "files": ["src/Support/helpers.php"]
     }
 }
