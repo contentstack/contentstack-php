@@ -1,11 +1,11 @@
 <?php
-namespace Contentstack\Stack;
+namespace Contentstack;
 
 use Contentstack\Models\Assets;
 use Contentstack\Support\Utility;
 use Contentstack\Models\ContentType;
 
-require_once __DIR__."/../../config.php";
+require_once __DIR__ . "/config.php";
 
 /*
  * Stack Class to initialize the provided parameter Stack

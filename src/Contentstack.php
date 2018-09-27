@@ -1,9 +1,7 @@
 <?php
 namespace Contentstack;
 
-use Contentstack\Stack\Stack;
-
-require_once __DIR__ . '/lib/models/stack.php';
+use Contentstack\Stack;
 
 /*
  *  Contentstack abstract class to provide access to Stack Object
