@@ -4,15 +4,15 @@
  * */
 namespace Contentstack\Stack\Assets;
 
-require_once __DIR__ . "/../helper.php";
+require_once dirname(__DIR__, 3) . "/loader.php";
 
+use Contentstack\Support\Utility;
 use Contentstack\Stack\ContentType\Query\Query;
- use Contentstack\Stack\ContentType\BaseQuery\BaseQuery;
-use Contentstack\Utility;
+use Contentstack\Stack\ContentType\BaseQuery\BaseQuery;
 
 
 require_once __DIR__.'/query.php';
- require_once __DIR__."/base_query.php";
+require_once __DIR__."/base_query.php";
 
 
 /*
@@ -24,16 +24,16 @@ class Assets extends BaseQuery {
     var $assetUid = '';
     var $stack = '';
     var $type = '';
-   
-   
+
+
     /*
-     * 
+     *
      * Assets constructor
      * @param
      *        string|assetUid - valid asset uid relevent to configured stack
-     *        stack - valid stack configured details     
+     *        stack - valid stack configured details
      * */
-    public function __construct($asset_uid = '', $stack = '') { 
+    public function __construct($asset_uid = '', $stack = '') {
 
          if($asset_uid == ''){
             $this->stack = $stack;
@@ -61,9 +61,8 @@ class Assets extends BaseQuery {
      * */
     public function fetch() {
         $this->operation = __FUNCTION__;
-       return \Contentstack\Utility\contentstackRequest($this, 'asset');
+       return Utility::contentstackRequest($this, 'asset');
     }
 
 
 }
-

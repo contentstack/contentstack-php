@@ -1,9 +1,9 @@
 <?php
 namespace Contentstack\Stack;
 
-use Contentstack\Utility;
-use Contentstack\Stack\ContentType\ContentType;
+use Contentstack\Support\Utility;
 use Contentstack\Stack\Assets\Assets;
+use Contentstack\Stack\ContentType\ContentType;
 
 require_once __DIR__."/content_type.php";
 require_once __DIR__."/assets.php";
@@ -28,7 +28,7 @@ class Stack {
      * Constructor of the Stack
      * */
     public function __construct($api_key = '', $access_token = '', $environment = '') {
-        $this->header = Utility\validateInput('stack', array('api_key' => $api_key, 'access_token' => $access_token, 'environment' => $environment));
+        $this->header = Utility::validateInput('stack', array('api_key' => $api_key, 'access_token' => $access_token, 'environment' => $environment));
         $this->environment = $this->header['environment'];
         unset($this->header['environment']);
         return $this;
@@ -75,7 +75,7 @@ class Stack {
             $url = (strpos($url, '?') === FALSE) ? $url .'?'.$params: $url .'&'.$params;
             return $url;
         } else {
-            \Contentstack\Utility\debug("Please provide valid url and array of transformation parameters.");
+            Utility::debug("Please provide valid url and array of transformation parameters.");
         }
     }
 
@@ -87,7 +87,7 @@ class Stack {
      * */
     public function getLastActivities() {
         $this->_query = array("only_last_activity" => "true");
-        return Utility\getLastActivites($this);
+        return Utility::getLastActivites($this);
     }
 
     /*
@@ -97,7 +97,7 @@ class Stack {
      * @return Stack
      * */
     public function setHost($host = '') {
-        Utility\validateInput('host', $host);
+        Utility::validateInput('host', $host);
         $this->host = $host;
         return $this;
     }
@@ -107,7 +107,7 @@ class Stack {
     }
 
     public function setProtocol($protocol = '') {
-        Utility\validateInput('protocol', $protocol);
+        Utility::validateInput('protocol', $protocol);
         $this->protocol = $protocol;
         return $this;
     }
@@ -117,7 +117,7 @@ class Stack {
     }
 
     public function setPort($port = '') {
-        Utility\validateInput('port', $port);
+        Utility::validateInput('port', $port);
         $this->port = $port;
         return $this;
     }
@@ -127,19 +127,19 @@ class Stack {
     }
 
     public function setAPIKEY($api_key = '') {
-        Utility\validateInput('api_key', $api_key);
+        Utility::validateInput('api_key', $api_key);
         $this->header['api_key'] = $api_key;
         return $this;
     }
 
     public function setAccessToken($access_token = '') {
-        Utility\validateInput('access_token', $access_token);
+        Utility::validateInput('access_token', $access_token);
         $this->header['access_token'] = $access_token;
         return $this;
     }
 
     public function setEnvironment($environment = '') {
-        Utility\validateInput('environment', $environment);
+        Utility::validateInput('environment', $environment);
         $this->environment = $environment;
         return $this;
     }

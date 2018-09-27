@@ -5,11 +5,10 @@
 
 namespace Contentstack\Stack\ContentType\Entry;
 
+use Contentstack\Support\Utility;
 use Contentstack\Stack\ContentType\BaseQuery\BaseQuery;
-use Contentstack\Utility;
 
 require_once __DIR__."/base_query.php";
-require_once __DIR__."/../utility.php";
 
 class Entry extends BaseQuery {
     var $operation;
@@ -26,7 +25,7 @@ class Entry extends BaseQuery {
     public function __construct($entryUid = '', $contentType = '') {
         $this->entryUid = $entryUid;
         parent::__construct($contentType, $this);
-        if(!\Contentstack\Utility\isEmpty($entryUid)) 
+        if(!Utility::isEmpty($entryUid))
             return $this;
     }
 
@@ -36,6 +35,6 @@ class Entry extends BaseQuery {
      * */
     public function fetch() {
         $this->operation = __FUNCTION__;
-        return \Contentstack\Utility\contentstackRequest($this);
+        return Utility::contentstackRequest($this);
     }
 }

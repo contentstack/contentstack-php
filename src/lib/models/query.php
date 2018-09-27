@@ -5,11 +5,10 @@
 
 namespace Contentstack\Stack\ContentType\Query;
 
+use Contentstack\Support\Utility;
 use Contentstack\Stack\ContentType\BaseQuery\BaseQuery;
-use Contentstack\Utility;
 
 require_once __DIR__."/base_query.php";
-require_once __DIR__."/../utility.php";
 
 class Query extends BaseQuery {
     var $operation;
@@ -25,7 +24,7 @@ class Query extends BaseQuery {
         $this->_query = array();
         $this->type = $type;
         parent::__construct($data, $this);
-    
+
     }
 
     /*
@@ -35,10 +34,10 @@ class Query extends BaseQuery {
     public function find() {
         $this->operation = __FUNCTION__;
         if($this->type == 'assets'){
-            return \Contentstack\Utility\contentstackRequest($this, 'assets');
+            return Utility::contentstackRequest($this, 'assets');
         }else if($this->type == 'contentType'){
-            return \Contentstack\Utility\contentstackRequest($this);
-    }        
+            return Utility::contentstackRequest($this);
+    }
     }
 
     /*
@@ -50,10 +49,10 @@ class Query extends BaseQuery {
         $this->operation = __FUNCTION__;
         $this->_query['limit'] = 1;
         if($this->type == 'assets'){
-            return \Contentstack\Utility\contentstackRequest($this, 'assets');
+            return Utility::contentstackRequest($this, 'assets');
         }else if($this->type == 'contentType'){
-            return \Contentstack\Utility\contentstackRequest($this);
+            return Utility::contentstackRequest($this);
     }
-        
+
     }
 }
