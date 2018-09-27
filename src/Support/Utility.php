@@ -4,10 +4,8 @@
  * */
 namespace Contentstack\Support;
 
-require_once dirname(__DIR__) . "/lib/models/result.php";
-
+use Contentstack\Result;
 use Contentstack\Exception;
-use Contentstack\Result\Result;
 
 class Utility {
   /*

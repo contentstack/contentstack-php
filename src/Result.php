@@ -1,5 +1,5 @@
 <?php
-namespace Contentstack\Result;
+namespace Contentstack;
 
 class Result {
     private $object;
@@ -11,7 +11,7 @@ class Result {
     public function __construct($result = '') {
         $this->object = $result;
 
-       
+
     }
 
     /*
@@ -34,6 +34,6 @@ class Result {
     public function get($key) {
 
         return ($key && is_string($key)) ? $this->object[$key] : NULL;
-    
+
     }
 }
