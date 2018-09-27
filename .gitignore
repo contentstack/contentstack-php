@@ -2,7 +2,6 @@
 .idea/
 composer.phar
 composer.lock
-composer.json
 vendor/
 test/report.html
 test/AssetsTestReport.html
