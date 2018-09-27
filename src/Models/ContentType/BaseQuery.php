@@ -1,8 +1,6 @@
 <?php
 
-namespace Contentstack\Stack\ContentType\BaseQuery;
-
-require_once dirname(__DIR__, 3) . "/loader.php";
+namespace Contentstack\Models\ContentType;
 
 use Contentstack\Support\Utility;
 

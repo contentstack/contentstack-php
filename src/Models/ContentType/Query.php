@@ -3,12 +3,10 @@
  * Dependency loading
  * */
 
-namespace Contentstack\Stack\ContentType\Query;
+namespace Contentstack\Models\ContentType;
 
 use Contentstack\Support\Utility;
-use Contentstack\Stack\ContentType\BaseQuery\BaseQuery;
-
-require_once __DIR__."/base_query.php";
+use Contentstack\Models\ContentType\BaseQuery;
 
 class Query extends BaseQuery {
     var $operation;

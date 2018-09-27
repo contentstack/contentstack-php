@@ -7,13 +7,8 @@ namespace Contentstack\Stack\Assets;
 require_once dirname(__DIR__, 3) . "/loader.php";
 
 use Contentstack\Support\Utility;
-use Contentstack\Stack\ContentType\Query\Query;
-use Contentstack\Stack\ContentType\BaseQuery\BaseQuery;
-
-
-require_once __DIR__.'/query.php';
-require_once __DIR__."/base_query.php";
-
+use Contentstack\Models\ContentType\Query;
+use Contentstack\Models\ContentType\BaseQuery;
 
 /*
  * Class Assets
