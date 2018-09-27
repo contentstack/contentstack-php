@@ -5,10 +5,9 @@
 namespace Contentstack\Support;
 
 require_once dirname(__DIR__) . "/lib/models/result.php";
-require_once dirname(__DIR__) . "/lib/models/csexception.php";
 
+use Contentstack\Exception;
 use Contentstack\Result\Result;
-use Contentstack\Error\CSException;
 
 class Utility {
   /*
@@ -259,7 +258,7 @@ class Utility {
               $response = self::wrapResult($response, $queryObject);
 
           } else {
-              throw new CSException($response, $httpcode);
+              throw new Exception($response, $httpcode);
           }
       }
       return $response;

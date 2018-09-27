@@ -1,11 +1,11 @@
 <?php
-namespace Contentstack\Error;
+namespace Contentstack;
 
 /*
- * CSException
- * CSException Class is used to wrap the REST API error
+ * Exception
+ * Exception Class is used to wrap the REST API error
  **/
-class CSException extends \Exception {
+class Exception extends \Exception {
     var $error_message;
     var $error_code;
     var $http_code;
