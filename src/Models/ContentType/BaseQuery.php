@@ -250,8 +250,8 @@ abstract class BaseQuery {
      *      langCode - Language code by default is "en-us"
      * @return Query
      * */
-    public function language($lang = '') {
-        $this->queryObject->_query = call_user_func('contentstackLanguage', $this->queryObject->_query, 'locale', $lang);
+    public function language($lang = 'en-us') {
+        $this->queryObject->_query = call_user_func('contentstackLanguage', 'locale', $this->queryObject->_query, $lang);
         return $this->queryObject;
     }
     /*
