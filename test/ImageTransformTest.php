@@ -30,7 +30,7 @@ class ImageTransformTest extends TestCase {
     }
 
     public function testSingleParamsImageTransform() {
-         $_object = self::$Stack->Assets()->Query()->toJSON()->find();
+         $_object = self::$Stack->Assets()->makeQuery()->toJSON()->find();
          $_uid = $_object[0][0]['uid'];
          $_asset = self::$Stack->Assets($_uid)->fetch();
          $_url   = $_asset->get('url');
@@ -40,11 +40,11 @@ class ImageTransformTest extends TestCase {
              parse_str($resize_data, $get_array_resize);
              $resize_default_array = array('height'=> 100,'weight'=> 100, 'disable' => 'upscale');
              $this->assertEquals($get_array_resize, $resize_default_array);
-        }       
+        }
     }
 
     public function testTwoParamsImageTransform() {
-         $_object = self::$Stack->Assets()->Query()->toJSON()->find();
+         $_object = self::$Stack->Assets()->makeQuery()->toJSON()->find();
          $_uid = $_object[0][0]['uid'];
          $_asset = self::$Stack->Assets($_uid)->fetch();
          $_url   = $_asset->get('url');
@@ -54,11 +54,11 @@ class ImageTransformTest extends TestCase {
              parse_str($crop_data, $get_array_crop);
              $crop_default_array = array('crop'=> 100,200);
              $this->assertEquals($get_array_crop, $crop_default_array);
-        }       
+        }
     }
 
     public function testThreeParamsImageTransforma() {
-         $_object = self::$Stack->Assets()->Query()->toJSON()->find();
+         $_object = self::$Stack->Assets()->makeQuery()->toJSON()->find();
          $_uid = $_object[0][0]['uid'];
          $_asset = self::$Stack->Assets($_uid)->fetch();
          $_url   = $_asset->get('url');
@@ -68,6 +68,6 @@ class ImageTransformTest extends TestCase {
              parse_str($resizecrop_data, $get_array_resizecrop);
              $resizecrop_default_array = array('height'=> 100,'weight'=> 100, 'disable' => 'upscale', 'crop'=> 100,200, 'orient'=> 2);
              $this->assertEquals($get_array_resizecrop, $resizecrop_default_array);
-         }       
+         }
     }
 }

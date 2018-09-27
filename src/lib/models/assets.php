@@ -24,16 +24,16 @@ class Assets extends BaseQuery {
     var $assetUid = '';
     var $stack = '';
     var $type = '';
-   
-   
+
+
     /*
-     * 
+     *
      * Assets constructor
      * @param
      *        string|assetUid - valid asset uid relevent to configured stack
-     *        stack - valid stack configured details     
+     *        stack - valid stack configured details
      * */
-    public function __construct($asset_uid = '', $stack = '') { 
+    public function __construct($asset_uid = '', $stack = '') {
 
          if($asset_uid == ''){
             $this->stack = $stack;
@@ -46,11 +46,11 @@ class Assets extends BaseQuery {
     }
 
     /*
-     * Query
-     * Query object to create the "Query" on the specified ContentType
+     * makeQuery
+     * Local method to create the "Query" on the specified ContentType
      * @returns Query
      * */
-    public function Query() {
+    public function makeQuery() {
         return new Query($this, $this->type);
     }
 
@@ -66,4 +66,3 @@ class Assets extends BaseQuery {
 
 
 }
-
