@@ -3,7 +3,7 @@ require_once __DIR__ . '/REST.php';
 require_once __DIR__ . '/constants.php';
 require_once __DIR__ . '/utility.php';
 
-require_once __DIR__ . '/../src/index.php';
+require_once __DIR__ . '/../loader.php';
 
 use Contentstack\Test\REST;
 
@@ -40,7 +40,7 @@ class ImageTransformTest extends TestCase {
              parse_str($resize_data, $get_array_resize);
              $resize_default_array = array('height'=> 100,'weight'=> 100, 'disable' => 'upscale');
              $this->assertEquals($get_array_resize, $resize_default_array);
-        }       
+        }
     }
 
     public function testTwoParamsImageTransform() {
@@ -54,7 +54,7 @@ class ImageTransformTest extends TestCase {
              parse_str($crop_data, $get_array_crop);
              $crop_default_array = array('crop'=> 100,200);
              $this->assertEquals($get_array_crop, $crop_default_array);
-        }       
+        }
     }
 
     public function testThreeParamsImageTransforma() {
@@ -68,6 +68,6 @@ class ImageTransformTest extends TestCase {
              parse_str($resizecrop_data, $get_array_resizecrop);
              $resizecrop_default_array = array('height'=> 100,'weight'=> 100, 'disable' => 'upscale', 'crop'=> 100,200, 'orient'=> 2);
              $this->assertEquals($get_array_resizecrop, $resizecrop_default_array);
-         }       
+         }
     }
 }

@@ -3,7 +3,7 @@ require_once __DIR__ . '/REST.php';
 require_once __DIR__ . '/constants.php';
 require_once __DIR__ . '/utility.php';
 
-require_once __DIR__ . '/../src/index.php';
+require_once __DIR__ . '/../loader.php';
 
 use Contentstack\Test\REST;
 
@@ -32,7 +32,7 @@ class AssetsTest extends TestCase {
     public function testAssetsFind() {
          $_assets = self::$Stack->Assets()->Query()->toJSON()->find();
          $this->assertArrayHasKey(0, $_assets);
-         $this->assertTrue(checkAssetsSorting($_assets[0])); 
+         $this->assertTrue(checkAssetsSorting($_assets[0]));
     }
 
     public function testAssetsFetch() {
@@ -78,7 +78,7 @@ class AssetsTest extends TestCase {
     public function testAssetsAddParam() {
          $_assets = self::$Stack->Assets()->Query()->addParam('include_dimension', 'true')->toJSON()->find();
           $this->assertTrue(array_key_exists('dimension', $_assets[0][0]));
-         
+
     }
 
 
@@ -92,7 +92,7 @@ class AssetsTest extends TestCase {
         }else{
             $this->assertTrue(('0'));
         }
-        
+
     }
 
     public function testAssetsFindIncludeCount() {
@@ -128,7 +128,7 @@ class AssetsTest extends TestCase {
         }
         } else {
             $this->assertTrue('0');
-        }       
+        }
     }
 
     public function testAssetsFindNotContainedIn() {
@@ -140,7 +140,7 @@ class AssetsTest extends TestCase {
                 $this->assertTrue((array_search($assets[0][$key]['content_type'], $_set) === false));
                 }
             } else {
-                  $this->assertTrue('0');  
+                  $this->assertTrue('0');
             }
     }
 
@@ -173,7 +173,7 @@ class AssetsTest extends TestCase {
             $this->assertTrue(($assets[0][$key]['file_size'] < $_set));
         }
         } else {
-            $this->assertTrue('0');     
+            $this->assertTrue('0');
         }
     }
 
@@ -186,7 +186,7 @@ class AssetsTest extends TestCase {
             //$this->assertTrue(($assets[0][$key]['file_size'] <= $_set));
             }
         } else {
-          $this->assertTrue('0');       
+          $this->assertTrue('0');
        }
     }
 
@@ -199,11 +199,11 @@ class AssetsTest extends TestCase {
             $this->assertTrue(($assets[0][$key]['file_size'] > $_set));
             }
         } else {
-              $this->assertTrue('0');                  
+              $this->assertTrue('0');
         }
     }
 
-    
+
     public function testAssetsFindGreaterThanEqualTo() {
         $_set = 7575;
         $assets = self::$Stack->Assets()->Query()->toJSON()->greaterThanEqualTo('file_size', $_set)->find();
@@ -213,7 +213,7 @@ class AssetsTest extends TestCase {
             $this->assertTrue(($assets[0][$key]['file_size'] >= $_set));
             }
         } else {
-              $this->assertTrue('0');    
+              $this->assertTrue('0');
         }
     }
 
@@ -393,5 +393,5 @@ class AssetsTest extends TestCase {
         }
         $this->assertTrue($flag);
     }
-   
+
 }

@@ -3,7 +3,7 @@ require_once __DIR__ . '/REST.php';
 require_once __DIR__ . '/constants.php';
 require_once __DIR__ . '/utility.php';
 
-require_once __DIR__ . '/../src/index.php';
+require_once __DIR__ . '/../loader.php';
 
 use Contentstack\Test\REST;
 
@@ -54,7 +54,7 @@ class EntriesTest extends TestCase {
         $this->assertArrayHasKey(0, $_entries);
         $this->assertArrayHasKey(1, $_entries);
         $this->assertTrue((count($_entries[0]) === ENTRY_COUNT));
-        $this->assertTrue(($_entries[1] === ENTRY_COUNT));  
+        $this->assertTrue(($_entries[1] === ENTRY_COUNT));
     }
 
     public function testFindSkip() {
@@ -80,7 +80,7 @@ class EntriesTest extends TestCase {
     public function testErrorMethod() {
 
         $_entries = self::$Stack->ContentType(CT_ContentType)->Query()->language()->toJSON()->find();
-         $this->assertArrayHasKey(0, $_entries);        
+         $this->assertArrayHasKey(0, $_entries);
          $this->assertTrue(checkEntriesSorting($_entries[0]));
     }
 
