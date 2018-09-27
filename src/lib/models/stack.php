@@ -7,8 +7,7 @@ use Contentstack\Stack\Assets\Assets;
 
 require_once __DIR__."/content_type.php";
 require_once __DIR__."/assets.php";
-//require_once __DIR__."/asset.php";
-require_once __DIR__."/../../config/index.php";
+require_once __DIR__."/../../config.php";
 
 /*
  * Stack Class to initialize the provided parameter Stack
@@ -41,7 +40,7 @@ class Stack {
      *      string|contentTypeId - valid content type uid relevant to configured stack
      * @return ContentType
      * */
-    public function ContentType($contentTypeId = '') { 
+    public function ContentType($contentTypeId = '') {
         return new ContentType($contentTypeId, $this);
     }
 
@@ -61,23 +60,23 @@ class Stack {
       /*
          * ImageTrasform
          * ImageTrasform function is define for image manipulation with different
-         * parameters in second parameter in array form 
-         * @param url : Image url on which we want to manipulate. 
+         * parameters in second parameter in array form
+         * @param url : Image url on which we want to manipulate.
          * @param parameters : It is an second parameter in which we want to place different manipulation key and value in array form
-         *      
-         * */    
-    public function ImageTrasform($url, $parameters){     
+         *
+         * */
+    public function ImageTrasform($url, $parameters){
         if (is_string($url) === TRUE && strlen($url) > 0 && is_array($parameters) === TRUE && count($parameters) > 0) {
             $params = array();
             foreach($parameters as $key => $value){
                 array_push($params, $key . '=' .$value);
-            }         
+            }
             $params = implode("&", $params);
             $url = (strpos($url, '?') === FALSE) ? $url .'?'.$params: $url .'&'.$params;
             return $url;
         } else {
             \Contentstack\Utility\debug("Please provide valid url and array of transformation parameters.");
-        }                                   
+        }
     }
 
 
@@ -144,7 +143,7 @@ class Stack {
         $this->environment = $environment;
         return $this;
     }
-    
+
     public function getAPIKEY() {
         return $this->header['api_key'];
     }

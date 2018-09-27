@@ -2,7 +2,6 @@
 /*
  * Constants for the SDK
  * */
-namespace Contentstack\Config;
 
 // Domain relevant constants
 define('HOST', 'cdn.contentstack.io');
