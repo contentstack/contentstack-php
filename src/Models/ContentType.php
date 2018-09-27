@@ -2,7 +2,7 @@
 /*
  * Dependency loading
  * */
-namespace Contentstack\Stack\ContentType;
+namespace Contentstack\Models;
 
 use Contentstack\Models\ContentType\Entry;
 use Contentstack\Models\ContentType\Query;

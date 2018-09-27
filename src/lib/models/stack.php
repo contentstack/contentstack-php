@@ -3,9 +3,8 @@ namespace Contentstack\Stack;
 
 use Contentstack\Support\Utility;
 use Contentstack\Stack\Assets\Assets;
-use Contentstack\Stack\ContentType\ContentType;
+use Contentstack\Models\ContentType;
 
-require_once __DIR__."/content_type.php";
 require_once __DIR__."/assets.php";
 require_once __DIR__."/../../config.php";
 
