@@ -2,9 +2,7 @@
 /*
  * Dependency loading
  * */
-namespace Contentstack\Stack\Assets;
-
-require_once dirname(__DIR__, 3) . "/loader.php";
+namespace Contentstack\Models;
 
 use Contentstack\Support\Utility;
 use Contentstack\Models\ContentType\Query;
