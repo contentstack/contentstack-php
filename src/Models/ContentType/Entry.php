@@ -6,7 +6,7 @@
 namespace Contentstack\Models\ContentType;
 
 use Contentstack\Support\Utility;
-use Contentstack\Stack\ContentType\BaseQuery\BaseQuery;
+use Contentstack\Models\ContentType\BaseQuery;
 
 class Entry extends BaseQuery {
     var $operation;
