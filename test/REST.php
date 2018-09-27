@@ -1,10 +1,8 @@
 <?php
 namespace Contentstack\Test;
 
-require_once __DIR__ . '/../src/config/index.php';
+require_once __DIR__ . '/../src/config.php';
 require_once __DIR__ . '/constants.php';
-
-use Contentstack\Config;
 
 class REST
 {
@@ -115,7 +113,7 @@ class REST
      * */
     public function createUserSession()
     {
-       $user = $this->sendRequest('user-session', array('user' => array('email' => 'Email-id', 'password' => 'password')));
+       $user = $this->sendRequest('user-session', array('user' => array('email' => EMAIL_ID, 'password' => PASSWORD)));
         if (isset($user['user'])) {
             $this->set('user', $user['user']);
             $this->headers['authtoken'] = (isset($user['user']['authtoken'])) ? $user['user']['authtoken'] : '';
@@ -139,7 +137,7 @@ class REST
             $this->headers['api_key'] = (isset($stack['stack']['api_key'])) ? $stack['stack']['api_key'] : '';
             echo "\nStack created.";
         } else {
-            echo "\nStack not created.".$stack;
+            echo "\nStack not created." . (string) $stack;
         }
     }
 
@@ -322,7 +320,7 @@ class REST
     }
 
     public function generateURL($type = '', $values = array())
-    {   
+    {
         $_url = PROTOCOL . '://' . HOST . ((!empty(PORT) && is_numeric(PORT)) ? ':' . PORT : '') . VERSION;
         switch ($type) {
             case 'stack':
