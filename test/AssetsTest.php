@@ -31,6 +31,7 @@ class AssetsTest extends TestCase {
 
     public function testAssetsFind() {
          $_assets = self::$Stack->Assets()->Query()->toJSON()->find();
+         
          $this->assertArrayHasKey(0, $_assets);
          $this->assertTrue(checkAssetsSorting($_assets[0])); 
     }
@@ -269,8 +270,8 @@ class AssetsTest extends TestCase {
     public function testAssetsFindLogicalAndQueryObject() {
         $_value = 6161;
         $query1 = self::$Stack->Assets()->Query()->greaterThanEqualTo('file_size', $_value);
-      //  \Contentstack\Utility\debug(($query1));
-       // \Contentstack\Utility\debug(($query2));
+         //  \Contentstack\Utility\debug(($query1));
+        // \Contentstack\Utility\debug(($query2));
        // return 0;
         $query2 = self::$Stack->Assets()->Query()->lessThanEqualTo('file_size', $_value);
         $assets = self::$Stack->Assets()->Query()->logicalAND($query1, $query2)->toJSON()->find();
