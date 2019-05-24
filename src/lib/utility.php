@@ -218,17 +218,20 @@ if(!function_exists('wrapResult')) {
                 case 'find':
                     $wrapper = array();
                     if(isKeySet($result, 'entries')) {
+                       if(!is_numeric($result['entries'])) {
                         for($i = 0, $_i = count($result['entries']); $i < $_i && !$flag; $i++) {
                             $result['entries'][$i] = new Result($result['entries'][$i]);
                         }
+                    }
                         array_push($wrapper, $result['entries']);
                     }
                     if(isKeySet($result, 'assets')) {
-                    for($i = 0, $_i = count($result['assets']); $i < $_i && !$flag; $i++) {
+                       if(!is_numeric($result['assets'])) {
+                        for($i = 0, $_i = count($result['assets']); $i < $_i && !$flag; $i++) {
                             $result['assets'][$i] = new Result($result['assets'][$i]);
                         }
-                        array_push($wrapper, $result['assets']);    
-                    
+                       } 
+                    array_push($wrapper, $result['assets']);    
                     }
                 
                     if(\Contentstack\Utility\isKeySet($result, 'schema')) 
@@ -255,6 +258,9 @@ if (!function_exists('contentstackRequest')) {
 
     function contentstackRequest($queryObject = '', $type = ''){
         $server_output = '';
+        // \Contentstack\Utility\debug(($queryObject));
+        // \Contentstack\Utility\debug(($type));
+
         if($queryObject) {
             $http = curl_init(contentstackUrl($queryObject, $type));  
 
@@ -268,9 +274,11 @@ if (!function_exists('contentstackRequest')) {
                         
             // status code extraction
             $httpcode = curl_getinfo($http, CURLINFO_HTTP_CODE);
+            //\Contentstack\Utility\debug(($httpcode));
             // close the curl            
             curl_close ($http);
             if($httpcode > 199 && $httpcode < 300) {
+                
                 // wrapper the server result
                 $response = wrapResult($response, $queryObject);
                                      

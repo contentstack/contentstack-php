@@ -77,11 +77,10 @@ class EntriesTest extends TestCase {
         $this->assertTrue(checkEntriesSorting($_entries[0]));
     }
 
-    public function testErrorMethod() {
-
-        $_entries = self::$Stack->ContentType(CT_ContentType)->Query()->language()->toJSON()->find();
-         $this->assertArrayHasKey(0, $_entries);        
-         $this->assertTrue(checkEntriesSorting($_entries[0]));
+    public function testFindLanguage() {
+        $_entries = self::$Stack->ContentType(CT_ContentType)->Query()->toJSON()->language('en-us')->find();
+        $this->assertArrayHasKey(0, $_entries);        
+        $this->assertTrue(checkEntriesSorting($_entries[0]));
     }
 
 

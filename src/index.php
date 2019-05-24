@@ -17,7 +17,7 @@ abstract class Contentstack {
      *      string|environment    : Environment whose content to be fetched.
      *  @return Stack
      * */
-    public static function Stack($api_key = '', $access_token = '', $environment = 'development') {
+    public static function Stack($api_key = '', $access_token = '', $environment = '') {
         return new Stack($api_key, $access_token, $environment);
     }
 }

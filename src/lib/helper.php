@@ -226,9 +226,10 @@ if (!function_exists('contentstackLanguage')) {
      * @return $query
      * */
     function contentstackLanguage($operator = '', $query = array(), $value = '') {
+       
         if (!(!\Contentstack\Utility\isEmpty($value) && is_string($value)))
             throw contentstackCreateError('Invalid input for "'.contentstackGetFunctionName().'", it should be String.');
-        $query[$operator] = $value;
+            $query[$operator] = $value; 
         return $query;
     }
 }
