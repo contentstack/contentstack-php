@@ -252,7 +252,7 @@ abstract class BaseQuery {
      * @return Query
      * */
     public function language($lang = '') {
-        $this->queryObject->_query = call_user_func('contentstackLanguage', $this->queryObject->_query, 'locale', $lang);
+        $this->queryObject->_query = call_user_func('contentstackLanguage', 'locale', $this->queryObject->_query, $lang);
         return $this->queryObject;
     }
     /*
