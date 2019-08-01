@@ -129,6 +129,17 @@ class EntriesTest extends TestCase {
         $this->assertTrue($_entries[1]['uid'] === CT_ContentType);
     }
 
+    public function testFindIncludeReferenceContentTypeUID() {
+        $_entries = self::$Stack->ContentType(CT_ContentType)->Query()->toJSON()->includeReferenceContentTypeUID()->find();
+        $_flag = "false";
+        $this->assertArrayHasKey(0, $_entries);
+        if($_entries[0][1]["reference"][0]['_content_type_uid']) {
+            $_flag = "true";
+        }
+        $this->assertTrue($_flag === "true");
+    }
+
+
     public function testFindIncludeContentTypeIncludeCount() {
         $_entries = self::$Stack->ContentType(CT_ContentType)->Query()->toJSON()->includeCount()->includeContentType()->find();
         $this->assertArrayHasKey(0, $_entries);

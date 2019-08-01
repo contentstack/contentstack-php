@@ -116,7 +116,7 @@ class REST
     public function createUserSession()
     {
        $user = $this->sendRequest('user-session', array('user' => array('email' => '', 'password' => '')));
-       \Contentstack\Utility\debug(($user));
+      // \Contentstack\Utility\debug(($user));
         if (isset($user['user'])) {
             $this->set('user', $user['user']);
             $this->headers['authtoken'] = (isset($user['user']['authtoken'])) ? $user['user']['authtoken'] : '';
@@ -133,7 +133,7 @@ class REST
     public function createStack()
     {
         $this->createUserSession();
-        $stack = $this->sendRequest('stack', array('stack' => array('name' => 'php-sdk-test')));
+        $stack = $this->sendRequest('stack', array('stack' => array('name' => 'php-sdk-testNew')));
         if (isset($stack['stack'])) {
             $this->set('stack', $stack['stack']);
             //$this->set('org_uid', $headers['blt2b4991176c6c1d25']);
