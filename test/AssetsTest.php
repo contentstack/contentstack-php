@@ -31,7 +31,6 @@ class AssetsTest extends TestCase {
 
     public function testAssetsFind() {
          $_assets = self::$Stack->Assets()->Query()->toJSON()->find();
-         
          $this->assertArrayHasKey(0, $_assets);
          $this->assertTrue(checkAssetsSorting($_assets[0])); 
     }
@@ -161,8 +160,9 @@ class AssetsTest extends TestCase {
     }
 
     public function testAssetsFindLessThan() {
-        $_set = 9684;
+        $_set = 7575;
         $assets = self::$Stack->Assets()->Query()->toJSON()->lessThan('file_size', $_set)->find();
+        \Contentstack\Utility\debug($assets);
         $this->assertArrayHasKey(0, $assets);
        if(count($assets[0]) !== 0){
         foreach ($assets[0] as $key => $val) {
@@ -174,7 +174,7 @@ class AssetsTest extends TestCase {
     }
 
     public function testAssetsFindLessThanEqualTo() {
-        $_set = 9684;
+        $_set = 12;
         $assets = self::$Stack->Assets()->Query()->toJSON()->lessThanEqualTo('file_size', $_set)->find();
         $this->assertArrayHasKey(0, $assets);
         if(count($assets[0]) !== 0) {
@@ -187,7 +187,7 @@ class AssetsTest extends TestCase {
     }
 
     public function testAssetsFindGreaterThan() {
-        $_set = 7575;
+        $_set = 12;
         $assets = self::$Stack->Assets()->Query()->toJSON()->greaterThan('file_size', $_set)->find();
         $this->assertArrayHasKey(0, $assets);
         if(count($assets[0]) !== 0) {
