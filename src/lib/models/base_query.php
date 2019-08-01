@@ -188,7 +188,6 @@ abstract class BaseQuery {
 
         /*
      * IncludeReferenceContentTypeUID
-     * @deprecated since verion 1.1.0
      * @Alternate includeContentType
      * This method includes the content type UIDs of the referenced entries returned in the response.
      * @param
