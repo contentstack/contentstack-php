@@ -6,6 +6,9 @@ composer.json
 vendor/
 test/report.html
 test/AssetsTestReport.html
+test/Assetsreport.html
 test/EntryTestReport.html
-test/ImagetransformTestReport.html
+test/Entryreport.html
+test/Entriesreport.html
+test/ImageTransformreport.html
 test/result.json
