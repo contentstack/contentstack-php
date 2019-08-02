@@ -188,7 +188,6 @@ abstract class BaseQuery {
 
         /*
      * IncludeReferenceContentTypeUID
-     * @Alternate includeContentType
      * This method includes the content type UIDs of the referenced entries returned in the response.
      * @param
      * @return Query
