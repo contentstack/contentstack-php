@@ -258,9 +258,7 @@ if (!function_exists('contentstackRequest')) {
 
     function contentstackRequest($queryObject = '', $type = ''){
         $server_output = '';
-        // \Contentstack\Utility\debug(($queryObject));
-        // \Contentstack\Utility\debug(($type));
-
+        
         if($queryObject) {
             $http = curl_init(contentstackUrl($queryObject, $type));  
 
