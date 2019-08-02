@@ -186,6 +186,17 @@ abstract class BaseQuery {
         return $this->queryObject;
     }
 
+        /*
+     * IncludeReferenceContentTypeUID
+     * This method includes the content type UIDs of the referenced entries returned in the response.
+     * @param
+     * @return Query
+     * */
+    public function includeReferenceContentTypeUID() {
+        $this->queryObject->_query = call_user_func('contentstackAddBoolean', 'include_reference_content_type_uid', $this->queryObject->_query);
+        return $this->queryObject;
+    }
+
     /*
      * includeContentType
      * To include content_type along with entries
