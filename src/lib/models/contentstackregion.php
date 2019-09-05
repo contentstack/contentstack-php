@@ -5,5 +5,5 @@
 namespace Contentstack\Contentstackregion;
 
 // Domain relevant constants
-define('Europe', 'eu');
+define('EU', 'eu');
 define('US', 'us');
