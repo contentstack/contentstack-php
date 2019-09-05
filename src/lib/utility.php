@@ -22,9 +22,16 @@ if (!function_exists('validateInput')) {
         try {
             switch ($type) {
                 case 'stack' :
+                if($input['region']) {
+                    if(!(isKeySet($input,'api_key') && isKeySet($input, 'access_token') && isKeySet($input, 'environment') && isKeySet($input, 'region')))
+                    $msg = 'Please provide valid api_key, access_token, environment and region';
+                break;
+                } else {
                     if(!(isKeySet($input,'api_key') && isKeySet($input, 'access_token') && isKeySet($input, 'environment')))
                         $msg = 'Please provide valid api_key, access_token and environment';
                     break;
+                }
+
                 case 'port' :
                     if(isEmpty($input) || !is_numeric($input))
                         $msg = 'Please provide valid string for '.$type;
