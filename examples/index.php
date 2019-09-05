@@ -1,6 +1,6 @@
 <html>
     <head>
-        <title>Built.io Contentstack PHP SDK</title>
+        <title>Contentstack PHP SDK</title>
     </head>
     <body>
         <h1>Welcome to Contentstack PHP SDK</h1>
