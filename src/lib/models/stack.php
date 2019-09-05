@@ -32,8 +32,8 @@ class Stack {
     public function __construct($api_*** = '', $access_token = '', $environment = '', $region = '') {
        
     
-        if($region && $region =="Europe") {
-            $this->host = Europe.'-'.HOST ;
+        if($region && $region =="EU") {
+            $this->host = EU.'-'.HOST;
         }
         $this->header = Utility\validateInput('stack', array('api_***' => $api_***, 'access_token' => $access_token, 'environment' => $environment, 'region' => $region));
         $this->environment = $this->header['environment'];
