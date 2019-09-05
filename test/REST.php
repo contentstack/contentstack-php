@@ -116,11 +116,11 @@ class REST
     public function createUserSession()
     {
        $user = $this->sendRequest('user-session', array('user' => array('email' => '', 'password' => '')));
-      // \Contentstack\Utility\debug(($user));
+       \Contentstack\Utility\debug(($user['user']['org_uid']));
         if (isset($user['user'])) {
             $this->set('user', $user['user']);
             $this->headers['authtoken'] = (isset($user['user']['authtoken'])) ? $user['user']['authtoken'] : '';
-            $this->headers['organization_uid'] = (isset($user['user']['org_uid']) && is_array($user['user']['org_uid'])) ? $user['user']['org_uid'][0] : '';
+            $this->headers['organization_uid'] = (isset($user['user']['blt2b4991176c6c1d25']) && is_array($user['user']['blt2b4991176c6c1d25'])) ? $user['user']['blt2b4991176c6c1d25'][0] : 'blt2b4991176c6c1d25';
             echo "\nUser Session created.";
         } else {
             echo "\nUser Session not created.";
@@ -133,7 +133,8 @@ class REST
     public function createStack()
     {
         $this->createUserSession();
-        $stack = $this->sendRequest('stack', array('stack' => array('name' => 'php-sdk-testNew')));
+        $stack = $this->sendRequest('stack', array('stack' => array('name' => 'php-sdk-test')));
+       // \Contentstack\Utility\debug(($stack));
         if (isset($stack['stack'])) {
             $this->set('stack', $stack['stack']);
             //$this->set('org_uid', $headers['blt2b4991176c6c1d25']);
