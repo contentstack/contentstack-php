@@ -38,6 +38,15 @@ class ContentType {
         return new Entry($entry_uid, $this);
     }
 
+          /*
+     * fetch
+     * Fetch the specific contenttypes
+     * */
+    public function fetch($params) {
+          $myArray = json_decode($params, true);
+          $this->_query = $myArray;
+          return \Contentstack\Utility\contentstackRequest($this);
+     }
     /*
      * Query
      * Query object to create the "Query" on the specified ContentType

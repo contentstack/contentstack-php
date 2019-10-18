@@ -25,6 +25,7 @@ class Query extends BaseQuery {
         $this->_query = array();
         $this->type = $type;
         parent::__construct($data, $this);
+       
     
     }
 
@@ -40,6 +41,7 @@ class Query extends BaseQuery {
             return \Contentstack\Utility\contentstackRequest($this);
     }        
     }
+  
 
     /*
      * findOne

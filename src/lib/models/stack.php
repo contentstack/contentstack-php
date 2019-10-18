@@ -7,7 +7,6 @@ use Contentstack\Stack\Assets\Assets;
 
 require_once __DIR__."/content_type.php";
 require_once __DIR__."/assets.php";
-//require_once __DIR__."/asset.php";
 require_once __DIR__."/../../config/index.php";
 
 /*
@@ -155,5 +154,11 @@ class Stack {
 
     public function getEnvironment() {
         return $this->environment;
+    }
+
+    public function getContentTypes($params) {
+        $myArray = json_decode($params, true);
+        $this->_query = $myArray;
+        return \Contentstack\Utility\contentstackRequest($this, "getcontentTypes");
     }
 }
