@@ -65,6 +65,7 @@ if(!function_exists('getDomain')) {
         if($query && isset($query->assets)) 
             $stack = $query->assets->stack;
         return $stack->getProtocol().'://'.$stack->getHost().':'.$stack->getPort().VERSION;
+        
     }
 }
 
@@ -85,6 +86,9 @@ if(!function_exists('contentstackUrl')) {
             case 'get_last_activites':
                 $URL = getDomain($queryObject).CONTENT_TYPES;
                 break;
+            case 'getcontentTypes':
+                $URL = getDomain($queryObject).CONTENT_TYPES;
+                break;    
             case 'asset':
                 $URL = getDomain($queryObject).ASSETS.$queryObject->assetUid;
                 break;
@@ -92,8 +96,8 @@ if(!function_exists('contentstackUrl')) {
                 $URL = getDomain($queryObject).ASSETS;
                 break;                      
             default:
-                $URL = getDomain($queryObject).CONTENT_TYPES.$queryObject->contentType->uid.ENTRIES;
-                if(isset($queryObject->entryUid)) $URL.=$queryObject->entryUid;
+            $URL = getDomain($queryObject).CONTENT_TYPES.$queryObject->contentType->uid.ENTRIES;                    
+            if(isset($queryObject->entryUid)) $URL.=$queryObject->entryUid;
         }
         $queryParams = generateQueryParams($queryObject);
         return $URL.'?'.$queryParams;
@@ -269,7 +273,8 @@ if (!function_exists('contentstackRequest')) {
             // receive server response ...
             curl_setopt($http, CURLOPT_RETURNTRANSFER, TRUE);
             $response = curl_exec($http);
-                        
+
+                     
             // status code extraction
             $httpcode = curl_getinfo($http, CURLINFO_HTTP_CODE);
             //\Contentstack\Utility\debug(($httpcode));
