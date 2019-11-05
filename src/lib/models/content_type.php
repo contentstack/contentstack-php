@@ -6,6 +6,7 @@ namespace Contentstack\Stack\ContentType;
 
 use Contentstack\Stack\ContentType\Entry\Entry;
 use Contentstack\Stack\ContentType\Query\Query;
+//use Contentstack\Stack\ContentType\Query\Fetch;
 
 require_once __DIR__.'/entry.php';
 require_once __DIR__.'/query.php';
@@ -14,6 +15,7 @@ require_once __DIR__.'/query.php';
  * Class ContentType
  * */
 class ContentType {
+    
     var $uid = '';
     var $stack = '';
 
@@ -42,9 +44,11 @@ class ContentType {
      * fetch
      * Fetch the specific contenttypes
      * */
-    public function fetch($params) {
-          $myArray = json_decode($params, true);
-          $this->_query = $myArray;
+    public function Fetch($params = null) {
+          if($params) {
+            $myArray = json_decode($params, true);
+            $this->_query = $myArray;
+          }        
           return \Contentstack\Utility\contentstackRequest($this);
      }
     /*
@@ -53,6 +57,7 @@ class ContentType {
      * @returns Query
      * */
     public function Query() {
+        \Contentstack\Utility\debug(("sndkcxcx cx n"));
         return new Query($this, $this->type);
     }
 }
