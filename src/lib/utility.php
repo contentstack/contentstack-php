@@ -96,10 +96,18 @@ if(!function_exists('contentstackUrl')) {
                 $URL = getDomain($queryObject).ASSETS;
                 break;                      
             default:
-            $URL = getDomain($queryObject).CONTENT_TYPES.$queryObject->contentType->uid.ENTRIES;                    
+
+            if($queryObject->_query && $queryObject->_query['include_global_field_schema'] || !$queryObject->contentType) {
+                $URL = getDomain($queryObject).CONTENT_TYPES.$queryObject->uid;    
+            } else {
+                $URL = getDomain($queryObject).CONTENT_TYPES.$queryObject->contentType->uid.ENTRIES;                    
+            }
             if(isset($queryObject->entryUid)) $URL.=$queryObject->entryUid;
         }
+        
         $queryParams = generateQueryParams($queryObject);
+        // \Contentstack\Utility\debug(($URL));
+        // \Contentstack\Utility\debug(($queryParams));
         return $URL.'?'.$queryParams;
 
     }
@@ -218,6 +226,10 @@ if(!function_exists('wrapResult')) {
                         $wrapper = (!$flag) ? new Result($result['entry']) : $result['entry'];
                     if(isKeySet($result, 'asset'))
                         $wrapper = (!$flag) ? new Result($result['asset']) : $result['asset'];
+                    if(\Contentstack\Utility\isKeySet($result, 'schema')) 
+                        array_push($wrapper, $result['schema']);
+                    if(\Contentstack\Utility\isKeySet($result, 'content_type')) 
+                        array_push($wrapper, $result['content_type']);    
                     break;
                 case 'find':
                     $wrapper = array();
@@ -273,7 +285,6 @@ if (!function_exists('contentstackRequest')) {
             // receive server response ...
             curl_setopt($http, CURLOPT_RETURNTRANSFER, TRUE);
             $response = curl_exec($http);
-
                      
             // status code extraction
             $httpcode = curl_getinfo($http, CURLINFO_HTTP_CODE);
