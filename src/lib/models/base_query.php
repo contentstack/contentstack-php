@@ -183,6 +183,7 @@ abstract class BaseQuery {
      * */
     public function includeSchema() {
         $this->queryObject->_query = call_user_func('contentstackAddBoolean', 'include_schema', $this->queryObject->_query);
+        
         return $this->queryObject;
     }
 
