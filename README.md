@@ -15,7 +15,7 @@ You need PHP version &gt;= 5.5.0 or later installed to use the Contentstack PHP 
 
 To use the PHP SDK, you need to perform the following steps:
 
-1. Download/clone the PHP SDK from [here](https://github.com/builtio-contentstack/contentstack-php.git). 
+1. Download/clone the PHP SDK from [here](https://www.contentstack.com/docs/platforms/php/php_sdk_latest). 
 2. Paste the downloaded ZIP file of the PHP SDK to a folder of your choice. 
 
 To initialize the SDK, you will need to specify the API Key, Access Token, and Environment Name of your stack.
