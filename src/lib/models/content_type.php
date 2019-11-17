@@ -57,7 +57,6 @@ class ContentType {
      * @returns Query
      * */
     public function Query() {
-        \Contentstack\Utility\debug(("sndkcxcx cx n"));
         return new Query($this, $this->type);
     }
 }
