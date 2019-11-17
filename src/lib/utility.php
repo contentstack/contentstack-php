@@ -97,11 +97,13 @@ if(!function_exists('contentstackUrl')) {
                 break;                      
             default:
 
-            if($queryObject->_query && $queryObject->_query['include_global_field_schema'] || !$queryObject->contentType) {
-                $URL = getDomain($queryObject).CONTENT_TYPES.$queryObject->uid;    
-            } else {
-                $URL = getDomain($queryObject).CONTENT_TYPES.$queryObject->contentType->uid.ENTRIES;                    
-            }
+            $URL = getDomain($queryObject).CONTENT_TYPES.$queryObject->contentType->uid.ENTRIES;
+           // \Contentstack\Utility\debug($queryObject);
+            // if($queryObject->_query && $queryObject->_query['include_global_field_schema']) {
+            //     $URL = getDomain($queryObject).CONTENT_TYPES.$queryObject->uid;    
+            // } else {
+            //     $URL = getDomain($queryObject).CONTENT_TYPES.$queryObject->contentType->uid.ENTRIES;                    
+            // }
             if(isset($queryObject->entryUid)) $URL.=$queryObject->entryUid;
         }
         
