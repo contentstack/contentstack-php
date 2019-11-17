@@ -5,7 +5,7 @@
 namespace Contentstack\Config;
 
 // Domain relevant constants
-define('HOST', 'dev6-new-api.contentstack.io');
+define('HOST', 'api.contentstack.io');
 define('PROTOCOL', 'https');
 define('VERSION', '/v3');
 define('PORT', 443);
