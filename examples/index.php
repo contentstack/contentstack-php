@@ -10,7 +10,8 @@
 ini_set('display_errors', 'On');
 use Contentstack\Contentstack;
 include_once "../src/index.php";
-   $stack = Contentstack::Stack('<API_KEY>', '<ACCESS_TOKEN>', '<ENVIRONMENT>', 'REGION');
+include_once "../src/contentstackregion.php";
+   $stack = Contentstack::Stack('', '', '');
 try {
     // \Contentstack\Utility\debug($stack);
        //$result = $stack->ContentType('test')->Query()->IncludeReferenceContentTypeUID()->toJSON()->find(); 
