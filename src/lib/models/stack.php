@@ -7,9 +7,7 @@ use Contentstack\Stack\Assets\Assets;
 
 require_once __DIR__."/content_type.php";
 require_once __DIR__."/assets.php";
-//require_once __DIR__."/asset.php";
 require_once __DIR__."/../../config/index.php";
-require_once __DIR__."/contentstackregion.php";
 
 /*
  * Stack Class to initialize the provided parameter Stack
@@ -31,9 +29,8 @@ class Stack {
      * */
     public function __construct($api_key = '', $access_token = '', $environment = '', $region = '') {
        
-    
-        if($region && $region =="EU") {
-            $this->host = EU.'-'.HOST;
+        if($region && $region =="eu" && $region !== "undefined") {
+            $this->host = $region.'-'.HOST;
         }
         $this->header = Utility\validateInput('stack', array('api_key' => $api_key, 'access_token' => $access_token, 'environment' => $environment, 'region' => $region));
         $this->environment = $this->header['environment'];
