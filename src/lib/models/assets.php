@@ -63,7 +63,5 @@ class Assets extends BaseQuery {
         $this->operation = __FUNCTION__;
        return \Contentstack\Utility\contentstackRequest($this, 'asset');
     }
-
-
 }
 
