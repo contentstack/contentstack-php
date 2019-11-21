@@ -6,6 +6,7 @@ namespace Contentstack\Stack\ContentType;
 
 use Contentstack\Stack\ContentType\Entry\Entry;
 use Contentstack\Stack\ContentType\Query\Query;
+//use Contentstack\Stack\ContentType\Query\Fetch;
 
 require_once __DIR__.'/entry.php';
 require_once __DIR__.'/query.php';
@@ -14,6 +15,7 @@ require_once __DIR__.'/query.php';
  * Class ContentType
  * */
 class ContentType {
+    
     var $uid = '';
     var $stack = '';
 
@@ -38,6 +40,17 @@ class ContentType {
         return new Entry($entry_uid, $this);
     }
 
+          /*
+     * fetch
+     * Fetch the specific contenttypes
+     * */
+    public function Fetch($params = null) {
+          if($params) {
+            $myArray = json_decode($params, true);
+            $this->_query = $myArray;
+          }        
+          return \Contentstack\Utility\contentstackRequest($this);
+     }
     /*
      * Query
      * Query object to create the "Query" on the specified ContentType
