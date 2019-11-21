@@ -159,4 +159,17 @@ class Stack {
     public function getEnvironment() {
         return $this->environment;
     }
+
+     /*
+     * This call returns comprehensive information of all the content types available in a particular stack in your account.
+     * @return Stack
+     * */
+    public function getContentTypes($params) {
+        if($params && $params !== "undefined") {
+            $myArray = json_decode($params, true);
+            $this->_query = $myArray;
+        }
+        
+        return \Contentstack\Utility\contentstackRequest($this, "getcontentTypes");
+    }
 }
