@@ -1,6 +1,6 @@
 <html>
     <head>
-        <title>Built.io Contentstack PHP SDK</title>
+        <title>Contentstack PHP SDK</title>
     </head>
     <body>
         <h1>Welcome to Contentstack PHP SDK</h1>
@@ -10,7 +10,8 @@
 ini_set('display_errors', 'On');
 use Contentstack\Contentstack;
 include_once "../src/index.php";
-   $stack = Contentstack::Stack('', '', '');
+include_once "../src/contentstackregion.php";
+   $stack = Contentstack::Stack('', '', '', '');
 try {
     // \Contentstack\Utility\debug($stack);
       //  $result = $stack->getContentTypes('{"include_snippet_schema": "false"}'); 
