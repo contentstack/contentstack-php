@@ -30,6 +30,7 @@ class EntriesTest extends TestCase {
     }
 
     public function testFind() {
+       // \Contentstack\Utility\debug(self::$Stack);
         $_entries = self::$Stack->ContentType(CT_ContentType)->Query()->toJSON()->find();
         $this->assertArrayHasKey(0, $_entries);
         $this->assertTrue((count($_entries[0]) === ENTRY_COUNT));
