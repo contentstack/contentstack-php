@@ -5,7 +5,7 @@ $base_folder = __DIR__;
 $composer = json_decode(file_get_contents("$base_folder/composer.json"), 1);
 
 if (!isset($composer['autoload'])) {
-  throw new \OutOfBoundsException('The autoload section is not defined in the compser.json file');
+  throw new \OutOfBoundsException('The autoload section is not defined in the composer.json file');
 }
 
 // Grab file paths then load them up.
