@@ -50,8 +50,11 @@ abstract class BaseQuery {
      * @return Query
      * */
     public function except($level = 'BASE', $field_uids = array()) {
-        $this->queryObject->_query = call_user_func('contentstackProjection', 'except', $this->queryObject->_query, $level, $field_uids);
-        return $this->queryObject;
+        if($field_uids && is_array($field_uids)) {
+            $this->queryObject->_query = call_user_func('contentstackProjection', 'except', $this->queryObject->_query, $level, $field_uids);
+            return $this->queryObject;
+        }
+        throw contentstackCreateError('field_uids must be an array');
     }
 
     /*
@@ -61,8 +64,11 @@ abstract class BaseQuery {
      * @return Query
      * */
     public function only($level = 'BASE', $field_uids = array()) {
-    $this->queryObject->_query = call_user_func('contentstackProjection', 'only', $this->queryObject->_query, $level, $field_uids);
-        return $this->queryObject;
+        if($field_uids && is_array($field_uids)) {
+            $this->queryObject->_query = call_user_func('contentstackProjection', 'only', $this->queryObject->_query, $level, $field_uids);
+            return $this->queryObject;
+        }
+        throw contentstackCreateError('field_uids must be an array');
     }
 
     /*
@@ -72,8 +78,11 @@ abstract class BaseQuery {
      * @return Query
      * */
     public function includeReference($field_uids = array()) {
-        $this->queryObject->_query = call_user_func('contentstackReferences', 'include', $this->queryObject->_query, $field_uids);
-        return $this->queryObject;
+        if($field_uids && is_array($field_uids)) {
+            $this->queryObject->_query = call_user_func('contentstackReferences', 'include', $this->queryObject->_query, $field_uids);
+            return $this->queryObject;
+        }
+        throw contentstackCreateError('field_uids must be an array');
     }
 
     /*
@@ -287,8 +296,11 @@ abstract class BaseQuery {
      * @return Query
      * */
     public function tags($tags = array()) {
-        $this->queryObject->_query = call_user_func('contentstackTags', 'tags', $this->queryObject->_query, $tags);
-        return $this->queryObject;
+        if($tags && is_array($tags)) {
+            $this->queryObject->_query = call_user_func('contentstackTags', 'tags', $this->queryObject->_query, $tags);
+            return $this->queryObject;
+        }
+        throw contentstackCreateError('tags must be an array');
     }
 
     /*
@@ -313,8 +325,11 @@ abstract class BaseQuery {
      * @return Query
      * */
     public function containedIn($field = '', $value = array()) {
-        $this->subQuery = call_user_func('contentstackContains', '$in', $this->subQuery, $field, $value);
-        return $this->queryObject;
+        if($value && is_array($value)) {
+            $this->subQuery = call_user_func('contentstackContains', '$in', $this->subQuery, $field, $value);
+            return $this->queryObject;
+        }
+        throw contentstackCreateError('value must be an array');
     }
 
     /*
@@ -326,8 +341,11 @@ abstract class BaseQuery {
      * @return Query
      * */
     public function notContainedIn($field = '', $value = array()) {
-        $this->subQuery = call_user_func('contentstackContains', '$nin', $this->subQuery, $field, $value);
-        return $this->queryObject;
+        if($value && is_array($value)) {
+            $this->subQuery = call_user_func('contentstackContains', '$nin', $this->subQuery, $field, $value);
+            return $this->queryObject;
+        }
+        throw contentstackCreateError('value must be an array');
     }
 
     /*
