@@ -422,12 +422,12 @@ abstract class BaseQuery {
     }
 
     /*
-     * query is used to add the raw/array query to filter the entries
+     * addQuery is used to add the raw/array query to filter the entries
      * @param
      *      array|query - array formatted query
      * @return Query
      * */
-    public function query($_query = array()) {
+    public function addQuery($_query = array()) {
         if($_query && is_array($_query)) {
             $this->subQuery = json_encode($_query);
             return $this->queryObject;
