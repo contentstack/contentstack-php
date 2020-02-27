@@ -1,39 +1,69 @@
 <?php
+
+/**
+ * Result
+ *  
+ * PHP version 5
+ * 
+ * @category  PHP
+ * @package   Contentstack
+ * @author    Uttam K Ukkoji <uttamukkoji@gmail.com>
+ * @author    Rohit Mishra <rhtmishra4545@gmail.com>
+ * @copyright 2012-2020 Contentstack. All Rights Reserved
+ * @license   https://github.com/contentstack/contentstack-php/blob/master/LICENSE.txt MIT Licence
+ * @link      https://pear.php.net/package/contentstack
+ * */
 namespace Contentstack\Result;
 
-class Result {
-    private $object;
+/**
+ * Class Result
+ * 
+ * @category  PHP
+ * @package   Contentstack
+ * @author    Uttam K Ukkoji <uttamukkoji@gmail.com>
+ * @author    Rohit Mishra <rhtmishra4545@gmail.com>
+ * @copyright 2012-2020 Contentstack. All Rights Reserved
+ * @license   https://github.com/contentstack/contentstack-php/blob/master/LICENSE.txt MIT Licence
+ * @link      https://pear.php.net/package/contentstack
+ * */
+class Result
+{
+    private $_object;
 
-    /*
+    /**
      * Result constructor
      * Result wrapper over the plain result for the future
+     * 
+     * @param object $result - Response object
      * */
-    public function __construct($result = '') {
-        $this->object = $result;
+    public function __construct($result = '') 
+    {
+        $this->_object = $result;
 
        
     }
 
-    /*
-     * toJSON
+    /**
      * To convert result object to json
-     * @param
+     * 
      * @return json format of the result
      * */
-    public function toJSON() {
-        return $this->object;
+    public function toJSON() 
+    {
+        return $this->_object;
     }
 
-    /*
-     * get
+    /**
      * Get the ***s from the object
-     * @param
-     *      string|*** - *** whose corresponding value to be retrieved
+     * 
+     * @param string $*** - *** whose corresponding value to be retrieved
+     * 
      * @return Value
      * */
-    public function get($***) {
+    public function get($***) 
+    {
 
-        return ($*** && is_string($***)) ? $this->object[$***] : NULL;
+        return ($*** && is_string($***)) ? $this->object[$***] : null;
     
     }
 }
