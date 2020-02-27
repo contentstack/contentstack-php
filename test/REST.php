@@ -12,6 +12,7 @@ class REST
     var $headers = array();
     var $ENTRIES = array();
     var $lang = array('en-us');
+    var $organizationUID = 'blt7d93f4fb8e6f74cb';
 
     public function __construct() {
         $this->ENTRIES['ctwithallfields'] = array();
@@ -115,12 +116,12 @@ class REST
      * */
     public function createUserSession()
     {
-       $user = $this->sendRequest('user-session', array('user' => array('email' => '', 'password' => '')));
-      // \Contentstack\Utility\debug(($user['user']['org_uid']));
+       $user = $this->sendRequest('user-session', array('user' => array('email' => 'uttam.ukkoji@contentstack.com', 'password' => 'c0ntentst@ck')));
         if (isset($user['user'])) {
             $this->set('user', $user['user']);
             $this->headers['authtoken'] = (isset($user['user']['authtoken'])) ? $user['user']['authtoken'] : '';
-            $this->headers['organization_uid'] = (isset($user['user']['blt2b4991176c6c1d25']) && is_array($user['user']['blt2b4991176c6c1d25'])) ? $user['user']['blt2b4991176c6c1d25'][0] : 'blt2b4991176c6c1d25';
+            echo $user['user'];
+            $this->headers['organization_uid'] = (isset($user['user'][$this->organizationUID]) && is_array($user['user'][$this->organizationUID])) ? $user['user'][$this->organizationUID][0] : $this->organizationUID;
             echo "\nUser Session created.";
         } else {
             echo "\nUser Session not created.";
@@ -134,14 +135,14 @@ class REST
     {
         $this->createUserSession();
         $stack = $this->sendRequest('stack', array('stack' => array('name' => 'php-sdk-test')));
-       // \Contentstack\Utility\debug(($stack));
         if (isset($stack['stack'])) {
             $this->set('stack', $stack['stack']);
-            //$this->set('org_uid', $headers['blt2b4991176c6c1d25']);
+            //$this->set('org_uid', $headers[$organizationUID]);
             $this->headers['api_key'] = (isset($stack['stack']['api_key'])) ? $stack['stack']['api_key'] : '';
             echo "\nStack created.";
         } else {
             echo "\nStack not created.".$stack;
+            print_r($stack);
         }
     }
 
@@ -316,7 +317,7 @@ class REST
         $transformedHeader = array();
         if (is_array($headers)) {
             $headers['Content-Type'] = 'application/json';
-            $headers['org_uid'] = 'blt2b4991176c6c1d25';
+            $headers['org_uid'] = $organizationUID;
             if (is_array($headers)) {
                 foreach ($headers as $key => $val) array_push($transformedHeader, $key . ':' . $val);
             }
