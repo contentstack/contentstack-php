@@ -1,12 +1,10 @@
 <?php
 require_once __DIR__ . '/REST.php';
 require_once __DIR__ . '/constants.php';
-require_once __DIR__ . '/utility.php';
 
 require_once __DIR__ . '/../src/index.php';
-
+require_once __DIR__ . '/utility.php';
 use Contentstack\Test\REST;
-
 use PHPUnit\Framework\TestCase;
 
 class EntriesTest extends TestCase {
@@ -16,21 +14,20 @@ class EntriesTest extends TestCase {
      * Setup before the test suites executes
      * @test
      */
-    public static function setUpbeforeClass() {
+    public static function setUpBeforeClass() : void {
         self::$rest = new REST();
         self::$Stack = Contentstack\Contentstack::Stack(self::$rest->getAPIKEY(), self::$rest->getAccessToken(),  self::$rest->getEnvironmentName());
     }
     /*
      * Tear Down after the test suites executes
      */
-    public static function tearDownAfterClass() {
+    public static function tearDownAfterClass() : void {
         if(ENV !== 'TEST_LOCAL') {
             self::$rest->deleteStack();
         }
     }
 
     public function testFind() {
-       // \Contentstack\Utility\debug(self::$Stack);
         $_entries = self::$Stack->ContentType(CT_ContentType)->Query()->toJSON()->find();
         $this->assertArrayHasKey(0, $_entries);
         $this->assertTrue((count($_entries[0]) === ENTRY_COUNT));
@@ -349,7 +346,7 @@ class EntriesTest extends TestCase {
     }
 
     public function testFindOnlyDefault() {
-        $_entries = self::$Stack->ContentType(CT_ContentType)->Query()->only(array('title', 'updated_at'))->toJSON()->find();
+        $_entries = self::$Stack->ContentType(CT_ContentType)->Query()->only('BASE', array('title', 'updated_at'))->toJSON()->find();
         $this->assertArrayHasKey(0, $_entries);
         $this->assertTrue((count($_entries[0]) === ENTRY_COUNT));
         $this->assertTrue(checkEntriesSorting($_entries[0]));
@@ -375,7 +372,7 @@ class EntriesTest extends TestCase {
     }
 
     public function testFindExceptDefault() {
-        $_entries = self::$Stack->ContentType(CT_ContentType)->Query()->except(array('title'))->toJSON()->find();
+        $_entries = self::$Stack->ContentType(CT_ContentType)->Query()->except('BASE', array('title'))->toJSON()->find();
         $this->assertArrayHasKey(0, $_entries);
         $this->assertTrue((count($_entries[0]) === ENTRY_COUNT));
         $this->assertTrue(checkEntriesSorting($_entries[0]));
