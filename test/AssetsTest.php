@@ -1,14 +1,13 @@
 <?php
 require_once __DIR__ . '/REST.php';
 require_once __DIR__ . '/constants.php';
-require_once __DIR__ . '/utility.php';
 
 require_once __DIR__ . '/../src/index.php';
-
+require_once __DIR__ . '/utility.php';
 use Contentstack\Test\REST;
 
 use PHPUnit\Framework\TestCase;
-
+use Contentstack\Support\Utility;
 class AssetsTest extends TestCase {
     public static $rest;
     public static $Stack;
@@ -16,14 +15,14 @@ class AssetsTest extends TestCase {
      * Setup before the test suites executes
      * @test
      */
-    public static function setUpbeforeClass() {
+    public static function setUpBeforeClass() : void {
         self::$rest = new REST();
         self::$Stack = Contentstack\Contentstack::Stack(self::$rest->getAPIKEY(), self::$rest->getAccessToken(),  self::$rest->getEnvironmentName());
     }
     /*
      * Tear Down after the test suites executes
      */
-    public static function tearDownAfterClass() {
+    public static function tearDownAfterClass() : void{
         if(ENV !== 'TEST_LOCAL') {
             self::$rest->deleteStack();
         }
@@ -162,7 +161,7 @@ class AssetsTest extends TestCase {
     public function testAssetsFindLessThan() {
         $_set = 7575;
         $assets = self::$Stack->Assets()->Query()->toJSON()->lessThan('file_size', $_set)->find();
-        \Contentstack\Utility\debug($assets);
+        Utility::debug($assets);
         $this->assertArrayHasKey(0, $assets);
        if(count($assets[0]) !== 0){
         foreach ($assets[0] as $key => $val) {
@@ -270,12 +269,10 @@ class AssetsTest extends TestCase {
     public function testAssetsFindLogicalAndQueryObject() {
         $_value = 6161;
         $query1 = self::$Stack->Assets()->Query()->greaterThanEqualTo('file_size', $_value);
-         //  \Contentstack\Utility\debug(($query1));
-        // \Contentstack\Utility\debug(($query2));
-       // return 0;
+       
         $query2 = self::$Stack->Assets()->Query()->lessThanEqualTo('file_size', $_value);
         $assets = self::$Stack->Assets()->Query()->logicalAND($query1, $query2)->toJSON()->find();
-      //  \Contentstack\Utility\debug(($assets));
+
         $this->assertArrayHasKey(0, $assets);
         $this->assertTrue(checkAssetsSorting($assets[0]));
     }
@@ -285,7 +282,6 @@ class AssetsTest extends TestCase {
         $query1 = self::$Stack->Assets()->Query()->greaterThanEqualTo('file_size', $_value);
         $query2 = self::$Stack->Assets()->Query()->lessThanEqualTo('file_size', $_value);
         $assets = self::$Stack->Assets()->Query()->logicalAND($query1, $query2)->toJSON()->find();
-       // \Contentstack\Utility\debug(($assets));
         $this->assertArrayHasKey(0, $assets);
         $this->assertTrue(checkAssetsSorting($assets[0]));
     }
@@ -368,7 +364,7 @@ class AssetsTest extends TestCase {
     // }
 
     public function testAssetsFindExceptDefault() {
-        $_assets = self::$Stack->Assets()->Query()->except(array('boolean'))->toJSON()->find();
+        $_assets = self::$Stack->Assets()->Query()->except('BASE',array('boolean'))->toJSON()->find();
         $this->assertArrayHasKey(0, $_assets);
         $assets = self::$Stack->Assets()->Query()->toJSON()->find();
         $assets_count = count($assets[0]);
