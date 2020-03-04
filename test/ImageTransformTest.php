@@ -16,14 +16,14 @@ class ImageTransformTest extends TestCase {
      * Setup before the test suites executes
      * @test
      */
-    public static function setUpbeforeClass() {
+    public static function setUpBeforeClass() : void {
         self::$rest = new REST();
         self::$Stack = Contentstack\Contentstack::Stack(self::$rest->getAPIKEY(), self::$rest->getAccessToken(),  self::$rest->getEnvironmentName());
     }
     /*
      * Tear Down after the test suites executes
      */
-    public static function tearDownAfterClass() {
+    public static function tearDownAfterClass() : void {
         if(ENV !== 'TEST_LOCAL') {
             self::$rest->deleteStack();
         }
