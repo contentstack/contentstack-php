@@ -1,7 +1,7 @@
-# PHP SDK for Built.io Contentstack - Unit Testing
+# PHP SDK for Contentstack - Unit Testing
 
 ## Prerequisite
- - Built.io Contentstack Account
+ - Contentstack Account
 
 ## Install phpunit
 

@@ -1,4 +1,7 @@
 <?php
+
+use Contentstack\Support\Utility;
+require_once __DIR__."/Utility.php";
 if(!function_exists('contentstackGetFunctionName')) {
     /*
      * To get the Query method name
@@ -21,7 +24,7 @@ if(!function_exists('contentstackCreateError')) {
      * @return Exception
      * */
     function contentstackCreateError($msg = '') {
-        if(!\Contentstack\Utility\isEmpty($msg)) return new Exception($msg);
+        if(!Utility::isEmpty($msg)) return new Exception($msg);
     }
 }
 
@@ -36,7 +39,7 @@ if (!function_exists('contentstackSearch')) {
      * @return $query
      * */
     function contentstackSearch($operator = '', $query = array(), $value = '') {
-        if(!(!\Contentstack\Utility\isEmpty($value) && is_string($value)))
+        if(!(!Utility::isEmpty($value) && is_string($value)))
             throw contentstackCreateError('Invalid input for "'.contentstackGetFunctionName().'". String value expected.');
         $query[$operator] = $value;
         return $query;
@@ -74,9 +77,9 @@ if (!function_exists('contentstackProjection')) {
             $value = $level;
             $level = 'BASE';
         }
-        if(!(!\Contentstack\Utility\isEmpty($level) && is_string($level) && is_array($value))) throw contentstackCreateError('Invalid Input');
-        if(!\Contentstack\Utility\isKeySet($query, $operator)) $query[$operator] = array();
-        if(!\Contentstack\Utility\isKeySet($query[$operator], $level)) $query[$operator][$level] = array();
+        if(!(!Utility::isEmpty($level) && is_string($level) && is_array($value))) throw contentstackCreateError('Invalid Input');
+        if(!Utility::isKeySet($query, $operator)) $query[$operator] = array();
+        if(!Utility::isKeySet($query[$operator], $level)) $query[$operator][$level] = array();
         $query[$operator][$level] = array_merge($query[$operator][$level], $value);
         return $query;
     }
@@ -96,7 +99,7 @@ if (!function_exists('contentstackRegexp')) {
      * */
     function contentstackRegexp($operator = '', $query = array(), $values = array()) {
         if(count($values) === 2 || count($values) === 3) {
-            if(\Contentstack\Utility\isEmpty($values[0]) && \Contentstack\Utility\isEmpty($values[1]) && is_string($values[0]) && is_string($values[1]))
+            if(Utility::isEmpty($values[0]) && Utility::isEmpty($values[1]) && is_string($values[0]) && is_string($values[1]))
                 throw contentstackCreateError('Invalid input for regex.Key must be string and value must be valid RegularExpression');
             if(isset($values[2]) && !(is_string($values[2]) && strlen($values[2]) > 0)) {
                 throw contentstackCreateError('Invalid options for regex. Please provide the valid options');
@@ -142,7 +145,7 @@ if (!function_exists('contentstackComparision')) {
      * @return $query
      * */
     function contentstackComparision($operator = '', $query = array(), $key = '', $value = '') {
-        if(!(!\Contentstack\Utility\isEmpty($key) && is_string($key) && !\Contentstack\Utility\isEmpty($value)))
+        if(!(!Utility::isEmpty($key) && is_string($key) && !Utility::isEmpty($value)))
             throw contentstackCreateError('Invalid input for "'.contentstackGetFunctionName().'". Key must be string and value should be valid not empty.');
         $query[$key] = array($operator => $value);
         return $query;
@@ -164,7 +167,7 @@ if (!function_exists('contentstackLogical')) {
         if(!(is_array($value) && count($value) > 0))
             throw contentstackCreateError('Invalid input for "'.contentstackGetFunctionName().'". At least one Query or array object is expected');
         foreach($value as $key => $_qry) {
-            if(!\Contentstack\Utility\isKeySet($query, $operator)) $query[$operator] = array();
+            if(!Utility::isKeySet($query, $operator)) $query[$operator] = array();
             if($_qry instanceof \Contentstack\Stack\ContentType\BaseQuery\BaseQuery)
                 array_push($query[$operator], $_qry->subQuery);
             else if(is_array($_qry))
@@ -190,7 +193,7 @@ if (!function_exists('contentstackContains')) {
      * @return $query
      * */
     function contentstackContains($operator = '', $query = array(), $key = '', $value = array()) {
-        if (!(!\Contentstack\Utility\isEmpty($key) && is_string($key) && is_array($value)))
+        if (!(!Utility::isEmpty($key) && is_string($key) && is_array($value)))
             throw contentstackCreateError('Invalid input for "'.contentstackGetFunctionName().'". Key should be string and value must be array.');
         $query[$key] = array($operator => $value);
         return $query;
@@ -208,7 +211,7 @@ if (!function_exists('contentstackPagination')) {
      * @return $query
      * */
     function contentstackPagination($operator = '', $query = array(), $value = '') {
-        if (!(!\Contentstack\Utility\isEmpty($value) && is_numeric($value)))
+        if (!(!Utility::isEmpty($value) && is_numeric($value)))
             throw contentstackCreateError('Invalid input for "'.contentstackGetFunctionName().'", it should be Numeric.');
         $query[$operator] = $value;
         return $query;
@@ -227,7 +230,7 @@ if (!function_exists('contentstackLanguage')) {
      * */
     function contentstackLanguage($operator = '', $query = array(), $value = '') {
        
-        if (!(!\Contentstack\Utility\isEmpty($value) && is_string($value)))
+        if (!(!Utility::isEmpty($value) && is_string($value)))
             throw contentstackCreateError('Invalid input for "'.contentstackGetFunctionName().'", it should be String.');
             $query[$operator] = $value; 
         return $query;
@@ -245,7 +248,7 @@ if (!function_exists('contentstackSorting')) {
      * @return $query
      * */
     function contentstackSorting($operator = '', $query = array(), $key = '') {
-        if (!(!\Contentstack\Utility\isEmpty($key) && is_string($key)))
+        if (!(!Utility::isEmpty($key) && is_string($key)))
             throw contentstackCreateError('Invalid input for "'.contentstackGetFunctionName().'". Value should be valid field in entry');
         $query[$operator] = $key;
         return $query;
@@ -296,7 +299,7 @@ if (!function_exists('contentstackExistence')) {
      * @return $query
      * */
     function contentstackExistence($operator = '', $query = array(), $key = '', $value = false) {
-        if (!(!\Contentstack\Utility\isEmpty($key) && is_string($key)))
+        if (!(!Utility::isEmpty($key) && is_string($key)))
             throw contentstackCreateError('Invalid input for "'.contentstackGetFunctionName().'". Key should be valid String field uid');
         $query[$key] = array($operator => $value);
         return $query;
