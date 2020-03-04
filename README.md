@@ -18,10 +18,10 @@ To use the PHP SDK, you need to perform the following steps:
 1. Download/clone the PHP SDK from [here](https://www.contentstack.com/docs/platforms/php/php_sdk_latest). 
 2. Paste the downloaded ZIP file of the PHP SDK to a folder of your choice. 
 
-To initialize the SDK, you will need to specify the API Key, Access Token, and Environment Name of your stack.
+To initialize the SDK, you will need to specify the API Key, Delivery Token, and Environment Name of your stack.
 
     use Contentstack\Contentstack;include_once "contentstack/index.php";
-    $stack = Contentstack::Stack(API_KEY, ACCESS_TOKEN, ENV_NAME);
+    $stack = Contentstack::Stack(API_KEY, DELIVERY_TOKEN, ENV_NAME);
 
 ### Key Concepts for using Contentstack
 
@@ -55,9 +55,9 @@ A publishing environment corresponds to one or more deployment servers or a cont
 To initialize the SDK, you need to provide values for the keys given in the snippet below:
 
     use Contentstack\Contentstack;include_once "contentstack/index.php";
-    $stack = Contentstack::Stack(API_KEY, ACCESS_TOKEN, ENV_NAME);
+    $stack = Contentstack::Stack(API_KEY, DELIVERY_TOKEN, ENV_NAME);
 
-To get the API credentials mentioned above, log in to your Contentstack account and then in your top panel navigation, go to Settings &gt; Stack to view the API Key and Access Token.
+To get the API credentials mentioned above, log in to your Contentstack account and then in your top panel navigation, go to Settings &gt; Stack to view the API Key and Delivery Token.
 
   
 

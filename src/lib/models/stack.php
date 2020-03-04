@@ -1,18 +1,40 @@
 <?php
+/**
+ * Stack Class to initialize the provided parameter Stack
+ *  
+ * PHP version 5
+ * 
+ * @category  PHP
+ * @package   Contentstack
+ * @author    Uttam K Ukkoji <uttamukkoji@gmail.com>
+ * @author    Rohit Mishra <rhtmishra4545@gmail.com>
+ * @copyright 2012-2020 Contentstack. All Rights Reserved
+ * @license   https://github.com/contentstack/contentstack-php/blob/master/LICENSE.txt MIT Licence
+ * @link      https://pear.php.net/package/contentstack
+ * */
 namespace Contentstack\Stack;
 
-use Contentstack\Utility;
+use Contentstack\Support\Utility;
 use Contentstack\Stack\ContentType\ContentType;
 use Contentstack\Stack\Assets\Assets;
 
 require_once __DIR__."/content_type.php";
 require_once __DIR__."/assets.php";
 require_once __DIR__."/../../config/index.php";
-
-/*
+require_once __DIR__."/../../Support/Utility.php";
+/**
  * Stack Class to initialize the provided parameter Stack
+ * 
+ * @category  PHP
+ * @package   Contentstack
+ * @author    Uttam K Ukkoji <uttamukkoji@gmail.com>
+ * @author    Rohit Mishra <rhtmishra4545@gmail.com>
+ * @copyright 2012-2020 Contentstack. All Rights Reserved
+ * @license   https://github.com/contentstack/contentstack-php/blob/master/LICENSE.txt MIT Licence
+ * @link      https://pear.php.net/package/contentstack
  * */
-class Stack {
+class Stack
+{
     /* header - array where all the headers for the request will be stored */
     var $header = array();
     /* host - Host to be used to fetch the content */
@@ -24,152 +46,264 @@ class Stack {
     /* environment - Environment on which content published to be retrieved */
     private $environment;
 
-    /*
+    /**
      * Constructor of the Stack
+     * 
+     * @param string $api_key        - API Key of Stack
+     * @param string $delivery_token - Delivery Token of Stack
+     * @param string $environment    - Environment Name of Stack
+     * @param string $region         - API Key of Stack
      * */
-    public function __construct($api_key = '', $access_token = '', $environment = '', $region = '') {
+    public function __construct(
+        $api_key = '', 
+        $delivery_token = '', 
+        $environment = '', 
+        $region = ''
+    ) {
        
-        if($region && $region =="eu" && $region !== "undefined") {
+        if ($region && $region =="eu" && $region !== "undefined") {
             $this->host = $region.'-'.HOST;
         }
-        $this->header = Utility\validateInput('stack', array('api_key' => $api_key, 'access_token' => $access_token, 'environment' => $environment, 'region' => $region));
+        $this->header = Utility::validateInput(
+            'stack', array('api_key' => $api_key, 
+            'access_token' => $delivery_token, 
+            'environment' => $environment, 
+            'region' => $region)
+        );
         $this->environment = $this->header['environment'];
         unset($this->header['environment']);
         return $this;
     }
 
-    /*
-     * To initialize the ContentType object from where the content will be fetched/retrieved
-     * @param
-     *      string|contentTypeId - valid content type uid relevant to configured stack
+    /**
+     * To initialize the ContentType object from 
+     * where the content will be fetched/retrieved.
+     * 
+     * @param string $contentTypeId - valid content type 
+     *                              uid relevant to configured stack
+     * 
      * @return ContentType
      * */
-    public function ContentType($contentTypeId = '') { 
+    public function ContentType($contentTypeId = '') 
+    { 
         return new ContentType($contentTypeId, $this);
     }
 
 
-    /*
-     * Assets
+    /**
      * Assets Class to initalize your Assets
-     * @param
-     *      string|assetUid - valid asset uid relevent to configured stack
+     * 
+     * @param string $assetUid - valid asset uid relevent to configured stack
      *
+     * @return Assets
      * */
-    public function Assets($assetUid = '') {
+    public function Assets($assetUid = '') 
+    {
         return new Assets($assetUid, $this);
     }
 
 
-      /*
-         * ImageTrasform
-         * ImageTrasform function is define for image manipulation with different
-         * parameters in second parameter in array form 
-         * @param url : Image url on which we want to manipulate. 
-         * @param parameters : It is an second parameter in which we want to place different manipulation key and value in array form
-         *      
-         * */    
-    public function ImageTrasform($url, $parameters){     
-        if (is_string($url) === TRUE && strlen($url) > 0 && is_array($parameters) === TRUE && count($parameters) > 0) {
+    /**
+     * ImageTrasform function is define for image manipulation with different
+     * 
+     * @param $url        : Image url on which we want to manipulate. 
+     * @param $parameters : It is an second parameter 
+     *                    in which we want to place different 
+     *                    manipulation key and value in array form
+     *      
+     * @return string
+     * */    
+    public function ImageTrasform($url, $parameters)
+    {     
+        if (is_string($url) === true && strlen($url) > 0 
+            && is_array($parameters) === true 
+            && count($parameters) > 0
+        ) {
             $params = array();
-            foreach($parameters as $key => $value){
+            foreach ($parameters as $key => $value) {
                 array_push($params, $key . '=' .$value);
             }         
             $params = implode("&", $params);
-            $url = (strpos($url, '?') === FALSE) ? $url .'?'.$params: $url .'&'.$params;
+
+            $url = (strpos($url, '?') === false) 
+            ? $url .'?'.$params: 
+            $url .'&'.$params;
+
             return $url;
         } else {
-            \Contentstack\Utility\debug("Please provide valid url and array of transformation parameters.");
+            Utility::debug(
+                "Please provide valid url 
+                and array of transformation parameters."
+            );
         }                                   
     }
 
 
 
-    /*
-     * To get the last_activity information of the configured environment from all the content types
+    /**
+     * To get the last_activity information of the 
+     * configured environment from all the content types
+     * 
      * @return Result
      * */
-    public function getLastActivities() {
+    public function getLastActivities()
+    {
         $this->_query = array("only_last_activity" => "true");
         return Utility\getLastActivites($this);
     }
 
-    /*
+    /**
      * To set the host on stack object
-     * @param
-     *      host - host name/ipaddress from where the content to be fetched
+     * 
+     * @param string $host - host name/ipaddress from where the content to be fetched
+     * 
      * @return Stack
      * */
-    public function setHost($host = '') {
+    public function setHost($host = '')
+    {
         Utility\validateInput('host', $host);
         $this->host = $host;
         return $this;
     }
-
-    public function getHost() {
+    /**
+     * This function returns host.
+     * 
+     * @return string
+     * */
+    public function getHost()
+    {
         return $this->host;
     }
-
-    public function setProtocol($protocol = '') {
+    /**
+     * This function sets protocol.
+     * 
+     * @param string $protocol - protocol type
+     * 
+     * @return Stack
+     * */
+    public function setProtocol($protocol = '')
+    {
         Utility\validateInput('protocol', $protocol);
         $this->protocol = $protocol;
         return $this;
     }
-
-    public function getProtocol() {
+    /**
+     * This function return protocol type.
+     * 
+     * @return string
+     * */
+    public function getProtocol()
+    {
         return $this->protocol;
     }
-
-    public function setPort($port = '') {
+    /**
+     * This function sets Port.
+     * 
+     * @param string $port - Port Number
+     * 
+     * @return Stack
+     * */
+    public function setPort($port = '')
+    {
         Utility\validateInput('port', $port);
         $this->port = $port;
         return $this;
     }
 
-    public function getPort() {
+    /**
+     * This function return Port.
+     * 
+     * @return string
+     * */
+    public function getPort()
+    {
         return $this->port;
     }
 
-    public function setAPIKEY($api_key = '') {
+    /**
+     * This function sets API Key.
+     * 
+     * @param string $api_key - Name of Environment
+     * 
+     * @return Stack
+     * */
+    public function setAPIKEY($api_key = '')
+    {
         Utility\validateInput('api_key', $api_key);
         $this->header['api_key'] = $api_key;
         return $this;
     }
-
-    public function setAccessToken($access_token = '') {
-        Utility\validateInput('access_token', $access_token);
-        $this->header['access_token'] = $access_token;
+    /**
+     * This function sets Delivery Token.
+     * 
+     * @param string $delivery_token - Name of Environment
+     * 
+     * @return Stack
+     * */
+    public function setDeliveryToken($delivery_token = '')
+    {
+        Utility\validateInput('access_token', $delivery_token);
+        $this->header['access_token'] = $delivery_token;
         return $this;
     }
 
-    public function setEnvironment($environment = '') {
+    /**
+     * This function sets environment name.
+     * 
+     * @param string $environment - Name of Environment
+     * 
+     * @return Stack
+     * */
+    public function setEnvironment($environment = '')
+    {
         Utility\validateInput('environment', $environment);
         $this->environment = $environment;
         return $this;
     }
     
-    public function getAPIKEY() {
+    /**
+     * This function returns API Key.
+     * 
+     * @return string
+     * */
+    public function getAPIKEY()
+    {
         return $this->header['api_key'];
     }
-
-    public function getAccessToken() {
+    /**
+     * This function returns Delivery Token.
+     * 
+     * @return string
+     * */
+    public function DeliveryToken()
+    {
         return $this->header['access_token'];
     }
-
-    public function getEnvironment() {
+    /**
+     * This function returns environment name.
+     * 
+     * @return string
+     * */
+    public function getEnvironment() 
+    {
         return $this->environment;
     }
 
-     /*
-     * This call returns comprehensive information of all the content types available in a particular stack in your account.
+    /**
+     * This call returns comprehensive information of all 
+     * the content types available in a particular stack in your account.
+     * 
+     * @param object $params - query params for getting content-type.
+     * 
      * @return Stack
      * */
-    public function getContentTypes($params) {
-        if($params && $params !== "undefined") {
+    public function getContentTypes($params) 
+    {
+        if ($params && $params !== "undefined") {
             $myArray = json_decode($params, true);
             $this->_query = $myArray;
         }
         
-        return \Contentstack\Utility\contentstackRequest($this, "getcontentTypes");
+        return Utility::contentstackRequest($this, "getcontentTypes");
     }
 }
