@@ -1,0 +1,33 @@
+{
+    "name": "contentstack/contentstack-php",
+    "description": "Contentstack is a headless CMS with an API-first approach that puts content at the centre. It is designed to simplify the process of publication by separating code from content.",
+    "type": "library",
+    "license": "MIT",
+    "***words": [
+        "Contentstack", "api"
+    ],
+    "authors": [
+        {
+            "name": "Contentstack",
+            "homepage": "https://www.contentstack.com/",
+            "role": "Owner"
+        },
+        {
+            "name": "Uttam K Ukkoji",
+            "email": "uttamukkoji@gmail.com",
+            "role": "Developer"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Contentstack\\": "src/"
+          },
+          "files": ["src/Support/helper.php"]
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^9.0"
+    },
+    "require": {
+        "php" : ">=5.5.0"
+    }
+}
