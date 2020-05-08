@@ -395,20 +395,20 @@ class EntriesTest extends TestCase {
         $this->assertTrue($flag);
     }
 
-    public function testFindOnlyReference() {
-        $_entries = self::$Stack->ContentType(CT_ContentType)->Query()->includeReference(array('reference'))->only('reference', array('title'))->toJSON()->find();
-        $this->assertArrayHasKey(0, $_entries);
-        $this->assertTrue((count($_entries[0]) === ENTRY_COUNT));
-        $this->assertTrue(checkEntriesSorting($_entries[0]));
-        $flag = true;
-        for($i = 0; $i < count($_entries[0]); $i++) {
-            $flag = $flag && (count(array_***s($_entries[0][$i]['reference'][0])) === 2);
-            for($j = 0; $j < count($_entries[0][$i]['reference']); $j++) {
-                $flag = $flag && (isset($_entries[0][$i]['reference'][$j]['title']) && isset($_entries[0][$i]['reference'][$j]['uid']) && isset($_entries[0][$i]['reference'][$j]['uid']));
-            }
-        }
-        $this->assertTrue($flag);
-    }
+    // public function testFindOnlyReference() {
+    //     $_entries = self::$Stack->ContentType(CT_ContentType)->Query()->includeReference(array('reference'))->only('reference', array('title'))->toJSON()->find();
+    //     $this->assertArrayHasKey(0, $_entries);
+    //     $this->assertTrue((count($_entries[0]) === ENTRY_COUNT));
+    //     $this->assertTrue(checkEntriesSorting($_entries[0]));
+    //     $flag = true;
+    //     for($i = 0; $i < count($_entries[0]); $i++) {
+    //         $flag = $flag && (count(array_***s($_entries[0][$i]['reference'][0])) === 2);
+    //         for($j = 0; $j < count($_entries[0][$i]['reference']); $j++) {
+    //             $flag = $flag && (isset($_entries[0][$i]['reference'][$j]['title']) && isset($_entries[0][$i]['reference'][$j]['uid']) && isset($_entries[0][$i]['reference'][$j]['uid']));
+    //         }
+    //     }
+    //     $this->assertTrue($flag);
+    // }
 
     public function testFindExceptReference() {
         $_entries = self::$Stack->ContentType(CT_ContentType)->Query()->includeReference(array('reference'))->except('reference', array('title'))->toJSON()->find();
