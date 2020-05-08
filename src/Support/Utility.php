@@ -255,9 +255,7 @@ class Utility
      * */
     public static function generateQueryParams($query = array())
     {
-        $QueryParams = Utility::generateQuery($query);
-        $Headers     = Utility::headers($query);
-        $result      = array_merge($QueryParams, $Headers);
+        $result = Utility::generateQuery($query);
         return http_build_query($result);
     }
 
@@ -370,14 +368,22 @@ class Utility
         if ($queryObject) {
             $http = curl_init(Utility::contentstackUrl($queryObject, $type));  
 
-            // setting the GET request
+            // setting the HTTP Headers
+            $Headers     = Utility::headers($queryObject);
+
+            $request_headers = array();
+            $request_headers[] = 'x-user-agent: contentstack-php/1.6.1';
+            $request_headers[] = 'api_key: '.$Headers["api_key"];
+            $request_headers[] = 'access_token: '.$Headers["access_token"];
+            curl_setopt($http, CURLOPT_HTTPHEADER, $request_headers);
+            
             curl_setopt($http, CURLOPT_HEADER, false);
             // setting the GET request
             curl_setopt($http, CURLOPT_CUSTOMREQUEST, "GET");
             // receive server response ...
             curl_setopt($http, CURLOPT_RETURNTRANSFER, true);
             $response = curl_exec($http);
-                     
+
             // status code extraction
             $httpcode = curl_getinfo($http, CURLINFO_HTTP_CODE);
 
