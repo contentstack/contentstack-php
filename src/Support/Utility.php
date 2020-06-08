@@ -18,7 +18,7 @@ require_once __DIR__ . "/../lib/models/result.php";
 require_once __DIR__ . "/../lib/models/csexception.php";
 
 use Contentstack\Error\CSException;
-use Contentstack\Result;
+use Contentstack\Result\Result;
 
 /**
  * Utility/Helper where all the helper and utility functions will be available.
