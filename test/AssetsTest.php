@@ -18,6 +18,9 @@ class AssetsTest extends TestCase {
     public static function setUpBeforeClass() : void {
         self::$rest = new REST();
         self::$Stack = Contentstack\Contentstack::Stack(self::$rest->getAPIKEY(), self::$rest->getAccessToken(),  self::$rest->getEnvironmentName());
+        if (!is_null($rest->getHost())) {
+            self::$Stack->setHost($rest->getHost());
+        }
     }
     /*
      * Tear Down after the test suites executes
