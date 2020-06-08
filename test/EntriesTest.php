@@ -11,6 +11,7 @@ use Contentstack\Support\Utility;
 class EntriesTest extends TestCase {
     public static $rest;
     public static $Stack;
+    public static $_uid;
     /*
      * Setup before the test suites executes
      * @test
@@ -18,7 +19,6 @@ class EntriesTest extends TestCase {
     public static function setUpBeforeClass() : void {
         self::$rest = new REST();
         self::$Stack = Contentstack\Contentstack::Stack(self::$rest->getAPIKEY(), self::$rest->getAccessToken(),  self::$rest->getEnvironmentName());
-        Utility::debug(is_null(self::$rest->getHost()));
         if (self::$rest->getHost() !== NULL) {
             self::$Stack->setHost(self::$rest->getHost());
         }
@@ -37,19 +37,17 @@ class EntriesTest extends TestCase {
         $this->assertArrayHasKey(0, $_entries);
         $this->assertTrue((count($_entries[0]) === ENTRY_COUNT));
         $this->assertTrue(checkEntriesSorting($_entries[0]));
-    }
-
-    public function testFindOne() {
-        $_entry = self::$Stack->ContentType(CT_ContentType)->Query()->toJSON()->findOne();
-       // $this->assertObjectHasAttribute('object', $_entry);
-        $this->assertEquals($_entry['title'], getResultEntries(CT_ContentType, ENTRY_COUNT - 1)['title']);
+        for($i = 0; $i < count($_entries[0]); $i++) {
+            if ($_entries[0][$i]['title'] === 'CB1-10') {
+                self::$_uid = $_entries[0][$i]['uid'];
+            }
+        }
     }
 
     public function testFetch() {
-        $_object = getResultEntries(CT_ContentType, 0);
-        $_uid = $_object['uid'];
-        $_entry = self::$Stack->ContentType(CT_ContentType)->Entry($_uid)->toJSON()->fetch();
-        $this->assertEquals($_entry['title'], $_object['title']);
+        $_entry = self::$Stack->ContentType(CT_ContentType)->Entry(self::$_uid)->toJSON()->fetch();
+        print_r($_entry['title']);
+        $this->assertEquals($_entry['title'], 'CB1-10');
     }
 
     public function testAddParam() {
