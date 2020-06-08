@@ -63,7 +63,7 @@ class Result
     public function get($***) 
     {
 
-        return ($*** && is_string($***)) ? $this->object[$***] : null;
+        return ($*** && is_string($***)) ? $this->_object[$***] : null;
     
     }
 }
