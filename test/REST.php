@@ -391,7 +391,6 @@ class REST
 
     public function getHost() {
         $host = $this->get('host');
-        print_r($host);
         if (gettype($host) === 'string') {
             return $host;
         }
