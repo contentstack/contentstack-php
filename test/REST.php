@@ -374,17 +374,28 @@ class REST
 
     public function getAccessToken() {
         $stack = $this->get('stack');
+        if (gettype($stack['delivery_token']) === 'string') {
+            return $stack['delivery_token'];
+        }
         return $stack['discrete_variables']['access_token'];
     }
 
-    public function getEnvironmentUID() {
-        $environment = $this->get('environment');
-        return $environment['uid'];
-    }
-
     public function getEnvironmentName() {
+        $stack = $this->get('stack');
+        if (gettype($stack['environment']) === 'string') {
+            return $stack['environment'];
+        }
         $environment = $this->get('environment');
         return $environment['name'];
+    }
+
+    public function getHost() {
+        $host = $this->get('host');
+        print_r($host);
+        if (gettype($host) === 'string') {
+            return $host;
+        }
+        return NULL;
     }
 }
 
