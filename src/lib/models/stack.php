@@ -62,7 +62,7 @@ class Stack
     ) {
        
         if ($region && $region =="eu" && $region !== "undefined") {
-            $this->host = $region.'-'.HOST;
+            $this->host = $region.'-cdn.contentstack.com';
         }
         $this->header = Utility::validateInput(
             'stack', array('api_key' => $api_key, 
