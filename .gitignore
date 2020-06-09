@@ -13,3 +13,5 @@ test/ImageTransformreport.html
 test/result.json
 examples/index.php
 .DS_Store
+tmp/
+stdout
