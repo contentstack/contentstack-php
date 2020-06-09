@@ -2,7 +2,7 @@
 
 define('ENV', 'TEST_LOCAL');
 define('RESULT_PATH', __DIR__.'/result.json');
-define('HOST', 'api.contentstack.io');
+define('TEST_HOST', 'api.contentstack.io');
 
 // how many entries we want to create
 define('ENTRY_COUNT', 10);
