@@ -327,7 +327,7 @@ class REST
 
     public function generateURL($type = '', $values = array())
     {   
-        $_url = PROTOCOL . '://' . HOST . ((!empty(PORT) && is_numeric(PORT)) ? ':' . PORT : '') . VERSION;
+        $_url = PROTOCOL . '://' . TEST_HOST . ((!empty(PORT) && is_numeric(PORT)) ? ':' . PORT : '') . VERSION;
         switch ($type) {
             case 'stack':
             case 'stack.delete':
