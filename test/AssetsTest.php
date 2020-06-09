@@ -5,6 +5,7 @@ require_once __DIR__ . '/constants.php';
 require_once __DIR__ . '/../src/index.php';
 require_once __DIR__ . '/utility.php';
 use Contentstack\Test\REST;
+use Contentstack\Contentstack;
 
 use PHPUnit\Framework\TestCase;
 use Contentstack\Support\Utility;
@@ -17,7 +18,7 @@ class AssetsTest extends TestCase {
      */
     public static function setUpBeforeClass() : void {
         self::$rest = new REST();
-        self::$Stack = Contentstack\Contentstack::Stack(self::$rest->getAPIKEY(), self::$rest->getAccessToken(),  self::$rest->getEnvironmentName());
+        self::$Stack = Contentstack::Stack(self::$rest->getAPIKEY(), self::$rest->getAccessToken(),  self::$rest->getEnvironmentName());
         if (self::$rest->getHost() !== NULL) {
             self::$Stack->setHost(self::$rest->getHost());
         }
