@@ -7,6 +7,7 @@ require_once __DIR__ . '/utility.php';
 use Contentstack\Test\REST;
 use PHPUnit\Framework\TestCase;
 use Contentstack\Support\Utility;
+use Contentstack\Contentstack;
 
 class EntriesTest extends TestCase {
     public static $rest;
@@ -18,7 +19,7 @@ class EntriesTest extends TestCase {
      */
     public static function setUpBeforeClass() : void {
         self::$rest = new REST();
-        self::$Stack = Contentstack\Contentstack::Stack(self::$rest->getAPIKEY(), self::$rest->getAccessToken(),  self::$rest->getEnvironmentName());
+        self::$Stack = Contentstack::Stack(self::$rest->getAPIKEY(), self::$rest->getAccessToken(),  self::$rest->getEnvironmentName());
         if (self::$rest->getHost() !== NULL) {
             self::$Stack->setHost(self::$rest->getHost());
         }
@@ -46,7 +47,7 @@ class EntriesTest extends TestCase {
 
     public function testFetch() {
         $_entry = self::$Stack->ContentType(CT_ContentType)->Entry(self::$_uid)->toJSON()->fetch();
-        print_r($_entry['title']);
+
         $this->assertEquals($_entry['title'], 'CB1-10');
     }
 
@@ -134,7 +135,7 @@ class EntriesTest extends TestCase {
         $_flag = "false";
         $this->assertArrayHasKey(0, $_entries);     
         for($i = 0; $i < count($_entries[0]); $i++) {
-            if($_entries[0][$i]["reference"][0]['_content_type_uid']) {
+            if(count($_entries[0][$i]["reference"]) > 0 && $_entries[0][$i]["reference"][0]['_content_type_uid'] !== NULL) {
                 $_flag = "true";
             }
         }
