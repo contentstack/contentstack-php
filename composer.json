@@ -25,7 +25,8 @@
           "files": ["src/Support/helper.php"]
     },
     "require-dev": {
-        "phpunit/phpunit": "^9.0"
+        "phpunit/phpunit": "^9.0",
+        "phpunit/php-code-coverage": "^8.0"
     },
     "require": {
         "php" : ">=5.5.0"
