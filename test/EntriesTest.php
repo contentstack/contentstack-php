@@ -6,17 +6,23 @@ require_once __DIR__ . '/../src/index.php';
 require_once __DIR__ . '/utility.php';
 use Contentstack\Test\REST;
 use PHPUnit\Framework\TestCase;
+use Contentstack\Support\Utility;
+use Contentstack\Contentstack;
 
 class EntriesTest extends TestCase {
     public static $rest;
     public static $Stack;
+    public static $_uid;
     /*
      * Setup before the test suites executes
      * @test
      */
     public static function setUpBeforeClass() : void {
         self::$rest = new REST();
-        self::$Stack = Contentstack\Contentstack::Stack(self::$rest->getAPIKEY(), self::$rest->getAccessToken(),  self::$rest->getEnvironmentName());
+        self::$Stack = Contentstack::Stack(self::$rest->getAPIKEY(), self::$rest->getAccessToken(),  self::$rest->getEnvironmentName());
+        if (self::$rest->getHost() !== NULL) {
+            self::$Stack->setHost(self::$rest->getHost());
+        }
     }
     /*
      * Tear Down after the test suites executes
@@ -32,19 +38,17 @@ class EntriesTest extends TestCase {
         $this->assertArrayHasKey(0, $_entries);
         $this->assertTrue((count($_entries[0]) === ENTRY_COUNT));
         $this->assertTrue(checkEntriesSorting($_entries[0]));
-    }
-
-    public function testFindOne() {
-        $_entry = self::$Stack->ContentType(CT_ContentType)->Query()->toJSON()->findOne();
-       // $this->assertObjectHasAttribute('object', $_entry);
-        $this->assertEquals($_entry['title'], getResultEntries(CT_ContentType, ENTRY_COUNT - 1)['title']);
+        for($i = 0; $i < count($_entries[0]); $i++) {
+            if ($_entries[0][$i]['title'] === 'CB1-10') {
+                self::$_uid = $_entries[0][$i]['uid'];
+            }
+        }
     }
 
     public function testFetch() {
-        $_object = getResultEntries(CT_ContentType, 0);
-        $_uid = $_object['uid'];
-        $_entry = self::$Stack->ContentType(CT_ContentType)->Entry($_uid)->toJSON()->fetch();
-        $this->assertEquals($_entry['title'], $_object['title']);
+        $_entry = self::$Stack->ContentType(CT_ContentType)->Entry(self::$_uid)->toJSON()->fetch();
+
+        $this->assertEquals($_entry['title'], 'CB1-10');
     }
 
     public function testAddParam() {
@@ -80,7 +84,6 @@ class EntriesTest extends TestCase {
         $this->assertArrayHasKey(0, $_entries);        
         $this->assertTrue(checkEntriesSorting($_entries[0]));
     }
-
 
     public function testFindSkipLimit() {
         $_entries1 = self::$Stack->ContentType(CT_ContentType)->Query()->toJSON()->find();
@@ -130,13 +133,14 @@ class EntriesTest extends TestCase {
     public function testFindIncludeReferenceContentTypeUID() {
         $_entries = self::$Stack->ContentType(CT_ContentType)->Query()->toJSON()->includeReferenceContentTypeUID()->find();
         $_flag = "false";
-        $this->assertArrayHasKey(0, $_entries);        
-        if($_entries[1]["reference"][0]['_content_type_uid']) {
-            $_flag = "true";
+        $this->assertArrayHasKey(0, $_entries);     
+        for($i = 0; $i < count($_entries[0]); $i++) {
+            if(count($_entries[0][$i]["reference"]) > 0 && $_entries[0][$i]["reference"][0]['_content_type_uid'] !== NULL) {
+                $_flag = "true";
+            }
         }
         $this->assertTrue($_flag === "true");
     }
-
 
     public function testFindIncludeContentTypeIncludeCount() {
         $_entries = self::$Stack->ContentType(CT_ContentType)->Query()->toJSON()->includeCount()->includeContentType()->find();
@@ -159,20 +163,6 @@ class EntriesTest extends TestCase {
         //$this->assertTrue((count($_entries[1]) === count(self::$rest->get('content_types')[1]['schema'])));
         $this->assertTrue(($_entries[2]) === ENTRY_COUNT);
     }
-
-    // public function testFindIncludeReference() {
-    //     $_entries = self::$Stack->ContentType(CT_ContentType)->Query()->toJSON()->includeReference(array('reference', 'group.reference'))->find();
-    //     $this->assertArrayHasKey(0, $_entries);
-    //     $this->assertTrue((count($_entries[0]) === ENTRY_COUNT));
-    //     $this->assertTrue(checkEntriesSorting($_entries[0]));
-    //     for($i = 0; $i < count($_entries[0]); $i++) {
-    //         $index = ($i % 2);
-    //         //$this->assertArrayHasKey(, $_entries[0][$i]['reference']);
-    //         //$this->assertArrayHasKey(0, $_entries[0][$i]['group']['reference']);
-    //         $this->assertTrue(($_entries[0][$i]['reference'][0]['title'] === self::$rest->get('entries.reference')[$index]['title']));
-    //         $this->assertTrue(($_entries[0][$i]['group']['reference'][0]['title'] === self::$rest->get('entries.reference')[~$index + 2]['title']));
-    //     }
-    // }
 
     public function testFindWhere() {
         $entries = self::$Stack->ContentType(CT_ContentType)->Query()->toJSON()->where('title', 'CB1-1')->find();
@@ -394,21 +384,6 @@ class EntriesTest extends TestCase {
         }
         $this->assertTrue($flag);
     }
-
-    // public function testFindOnlyReference() {
-    //     $_entries = self::$Stack->ContentType(CT_ContentType)->Query()->includeReference(array('reference'))->only('reference', array('title'))->toJSON()->find();
-    //     $this->assertArrayHasKey(0, $_entries);
-    //     $this->assertTrue((count($_entries[0]) === ENTRY_COUNT));
-    //     $this->assertTrue(checkEntriesSorting($_entries[0]));
-    //     $flag = true;
-    //     for($i = 0; $i < count($_entries[0]); $i++) {
-    //         $flag = $flag && (count(array_***s($_entries[0][$i]['reference'][0])) === 2);
-    //         for($j = 0; $j < count($_entries[0][$i]['reference']); $j++) {
-    //             $flag = $flag && (isset($_entries[0][$i]['reference'][$j]['title']) && isset($_entries[0][$i]['reference'][$j]['uid']) && isset($_entries[0][$i]['reference'][$j]['uid']));
-    //         }
-    //     }
-    //     $this->assertTrue($flag);
-    // }
 
     public function testFindExceptReference() {
         $_entries = self::$Stack->ContentType(CT_ContentType)->Query()->includeReference(array('reference'))->except('reference', array('title'))->toJSON()->find();

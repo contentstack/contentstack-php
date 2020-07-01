@@ -10,6 +10,7 @@ test/EntryTestReport.html
 test/Entryreport.html
 test/Entriesreport.html
 test/ImageTransformreport.html
-test/result.json
 examples/index.php
 .DS_Store
+tmp/
+stdout

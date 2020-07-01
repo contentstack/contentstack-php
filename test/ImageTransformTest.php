@@ -6,7 +6,7 @@ require_once __DIR__ . '/utility.php';
 require_once __DIR__ . '/../src/index.php';
 
 use Contentstack\Test\REST;
-
+use Contentstack\Contentstack;
 use PHPUnit\Framework\TestCase;
 
 class ImageTransformTest extends TestCase {
@@ -15,10 +15,14 @@ class ImageTransformTest extends TestCase {
     /*
      * Setup before the test suites executes
      * @test
+     * @covers Contentstack::Stack
      */
     public static function setUpBeforeClass() : void {
         self::$rest = new REST();
-        self::$Stack = Contentstack\Contentstack::Stack(self::$rest->getAPIKEY(), self::$rest->getAccessToken(),  self::$rest->getEnvironmentName());
+        self::$Stack = Contentstack::Stack(self::$rest->getAPIKEY(), self::$rest->getAccessToken(),  self::$rest->getEnvironmentName());
+        if (self::$rest->getHost() !== NULL) {
+            self::$Stack->setHost(self::$rest->getHost());
+        }
     }
     /*
      * Tear Down after the test suites executes
