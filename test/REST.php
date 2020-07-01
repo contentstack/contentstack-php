@@ -327,7 +327,7 @@ class REST
 
     public function generateURL($type = '', $values = array())
     {   
-        $_url = PROTOCOL . '://' . HOST . ((!empty(PORT) && is_numeric(PORT)) ? ':' . PORT : '') . VERSION;
+        $_url = PROTOCOL . '://' . TEST_HOST . ((!empty(PORT) && is_numeric(PORT)) ? ':' . PORT : '') . VERSION;
         switch ($type) {
             case 'stack':
             case 'stack.delete':
@@ -374,17 +374,27 @@ class REST
 
     public function getAccessToken() {
         $stack = $this->get('stack');
+        if (gettype($stack['delivery_token']) === 'string') {
+            return $stack['delivery_token'];
+        }
         return $stack['discrete_variables']['access_token'];
     }
 
-    public function getEnvironmentUID() {
-        $environment = $this->get('environment');
-        return $environment['uid'];
-    }
-
     public function getEnvironmentName() {
+        $stack = $this->get('stack');
+        if (gettype($stack['environment']) === 'string') {
+            return $stack['environment'];
+        }
         $environment = $this->get('environment');
         return $environment['name'];
+    }
+
+    public function getHost() {
+        $host = $this->get('host');
+        if (gettype($host) === 'string') {
+            return $host;
+        }
+        return NULL;
     }
 }
 

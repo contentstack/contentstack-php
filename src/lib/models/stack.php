@@ -62,7 +62,7 @@ class Stack
     ) {
        
         if ($region && $region =="eu" && $region !== "undefined") {
-            $this->host = $region.'-'.HOST;
+            $this->host = $region.'-cdn.contentstack.com';
         }
         $this->header = Utility::validateInput(
             'stack', array('api_key' => $api_key, 
@@ -149,7 +149,7 @@ class Stack
     public function getLastActivities()
     {
         $this->_query = array("only_last_activity" => "true");
-        return Utility\getLastActivites($this);
+        return Utility::getLastActivites($this);
     }
 
     /**
@@ -161,7 +161,7 @@ class Stack
      * */
     public function setHost($host = '')
     {
-        Utility\validateInput('host', $host);
+        Utility::validateInput('host', $host);
         $this->host = $host;
         return $this;
     }
@@ -183,7 +183,7 @@ class Stack
      * */
     public function setProtocol($protocol = '')
     {
-        Utility\validateInput('protocol', $protocol);
+        Utility::validateInput('protocol', $protocol);
         $this->protocol = $protocol;
         return $this;
     }
@@ -205,7 +205,7 @@ class Stack
      * */
     public function setPort($port = '')
     {
-        Utility\validateInput('port', $port);
+        Utility::validateInput('port', $port);
         $this->port = $port;
         return $this;
     }
@@ -229,7 +229,7 @@ class Stack
      * */
     public function setAPIKEY($api_key = '')
     {
-        Utility\validateInput('api_key', $api_key);
+        Utility::validateInput('api_key', $api_key);
         $this->header['api_key'] = $api_key;
         return $this;
     }
@@ -242,7 +242,7 @@ class Stack
      * */
     public function setDeliveryToken($delivery_token = '')
     {
-        Utility\validateInput('access_token', $delivery_token);
+        Utility::validateInput('access_token', $delivery_token);
         $this->header['access_token'] = $delivery_token;
         return $this;
     }
@@ -256,7 +256,7 @@ class Stack
      * */
     public function setEnvironment($environment = '')
     {
-        Utility\validateInput('environment', $environment);
+        Utility::validateInput('environment', $environment);
         $this->environment = $environment;
         return $this;
     }
