@@ -93,6 +93,24 @@ class AssetsTest extends TestCase {
         $this->assertTrue(($_assets[0]) === $assets_count);
     }
 
+    public function testIncludeFallback() {
+        $testArray = array("a"=>"en-us", "b" => "hi-in");
+        $_assets = self::$Stack->Assets()->Query()->toJSON()->language("hi-in")->includeFallback()->find();
+        $this->assertEquals(count($_assets[0]), 3);
+        for($i = 0; $i < count($_assets[0]); $i++) {
+            $this->assertContains($_assets[0][$i]["publish_details"]["locale"], $testArray);
+        }
+    }
+
+    public function testWithoutIncludeFallback() {
+        $_assets = self::$Stack->Assets()->Query()->toJSON()->language("hi-in")->find();
+        $this->assertArrayHasKey(0, $_assets);
+        $this->assertEquals(count($_assets[0]), 1);
+        for($i = 0; $i < count($_assets[0]); $i++) {
+            $this->assertEquals($_assets[0][$i]["publish_details"]["locale"], "hi-in");
+        }
+    }
+
     public function testAssetsFindIncludeCount() {
         $_assets = self::$Stack->Assets()->Query()->toJSON()->includeCount()->find();
         $assets = self::$Stack->Assets()->Query()->toJSON()->find();
