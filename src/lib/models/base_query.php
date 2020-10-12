@@ -292,6 +292,21 @@ abstract class BaseQuery
         return $this->queryObject;
     }
 
+    /** 
+     * To include fallback content if specified locale content is not publish.
+     * 
+     * @return Query
+    */
+    public function includeFallback() 
+    {
+        $this->queryObject->_query = call_user_func(
+            'contentstackAddBoolean', 
+            'include_fallback', 
+            $this->queryObject->_query
+        );
+        
+        return $this->queryObject;
+    }
     /**
      * To include schema along with entries
      * 
