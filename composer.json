@@ -1,5 +1,5 @@
 {
-    "name": "contentstack/contentstack-php",
+    "name": "contentstack/contentstack",
     "description": "Contentstack is a headless CMS with an API-first approach that puts content at the centre. It is designed to simplify the process of publication by separating code from content.",
     "type": "library",
     "license": "MIT",
