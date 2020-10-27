@@ -65,10 +65,13 @@ A publishing environment corresponds to one or more deployment servers or a cont
 ### Contentstack PHP SDK: 5-minute Quickstart
 
 #### Initializing your SDK 
+Install the library using [Composer](https://packagist.org/packages/contentstack/contentstack):
 
-To initialize the SDK, you need to provide values for the keys given in the snippet below:
+    composer require contentstack/contentstack
 
-    use Contentstack\Contentstack;include_once "contentstack/index.php";
+To initialize the SDK, you will need to specify the API Key, Delivery Token, and Environment Name of your stack.
+
+    use Contentstack\Contentstack;
     $stack = Contentstack::Stack(API_KEY, DELIVERY_TOKEN, ENV_NAME);
 
 To get the API credentials mentioned above, log in to your Contentstack account and then in your top panel navigation, go to Settings &gt; Stack to view the API Key and Delivery Token.
