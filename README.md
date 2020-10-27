@@ -13,6 +13,18 @@ You need PHP version &gt;= 5.5.0 or later installed to use the Contentstack PHP 
 
 ### Setup and Installation
 
+#### Install the library using [Composer](https://packagist.org/packages/contentstack/contentstack):
+To use the PHP SDK, you need to perform the following steps:
+
+    composer require contentstack/contentstack
+
+To initialize the SDK, you will need to specify the API Key, Delivery Token, and Environment Name of your stack.
+
+    use Contentstack\Contentstack;
+    $stack = Contentstack::Stack(API_KEY, DELIVERY_TOKEN, ENV_NAME);
+
+
+#### Download and install library:
 To use the PHP SDK, you need to perform the following steps:
 
 1. Download/clone the PHP SDK from [here](https://www.contentstack.com/docs/platforms/php/php_sdk_latest). 
@@ -20,8 +32,10 @@ To use the PHP SDK, you need to perform the following steps:
 
 To initialize the SDK, you will need to specify the API Key, Delivery Token, and Environment Name of your stack.
 
-    use Contentstack\Contentstack;include_once "contentstack/index.php";
+    use Contentstack\Contentstack;
+    include_once "contentstack/contentstack.php";
     $stack = Contentstack::Stack(API_KEY, DELIVERY_TOKEN, ENV_NAME);
+
 
 ### Key Concepts for using Contentstack
 
