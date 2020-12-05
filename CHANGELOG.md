@@ -2,13 +2,20 @@
 ## CHANGELOG
 ------------------------------------------------
 
-## Version 1.7.0
-###### Date: 
+## Version 1.8.0
+###### Date: 5-Dec-2020
 ### New Feature
     - Entry
       - Added support for function 'includeFallback'
     - Query 
       - Added support for function 'includeFallback'
+
+------------------------------------------------
+
+## Version 1.7.0
+###### Date: 27-Oct-2020
+### New Feature
+    - Packagist support added 
 
 ------------------------------------------------
 
