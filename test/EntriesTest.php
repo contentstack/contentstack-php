@@ -112,6 +112,25 @@ class EntriesTest extends TestCase {
         $this->assertTrue(($_entries[1] === ENTRY_COUNT));
     }
 
+    public function testIncludeFallback() {
+        $testArray = array("a"=>"en-us", "b" => "hi-in");
+        $_entries = self::$Stack->ContentType(CT_ContentType)->Query()->toJSON()->language("hi-in")->includeFallback()->find();
+        $this->assertArrayHasKey(0, $_entries);
+        $this->assertEquals(count($_entries[0]), ENTRY_COUNT);
+        for($i = 0; $i < count($_entries[0]); $i++) {
+            $this->assertContains($_entries[0][$i]["publish_details"]["locale"], $testArray);
+        }
+    }
+
+    public function testWithoutIncludeFallback() {
+        $_entries = self::$Stack->ContentType(CT_ContentType)->Query()->toJSON()->language("hi-in")->find();
+        $this->assertArrayHasKey(0, $_entries);
+        $this->assertEquals(count($_entries[0]), 1);
+        for($i = 0; $i < count($_entries[0]); $i++) {
+            $this->assertEquals($_entries[0][$i]["publish_details"]["locale"], "hi-in");
+        }
+    }
+
     public function testFindIncludeSchema() {
         $_entries = self::$Stack->ContentType(CT_ContentType)->Query()->toJSON()->includeSchema()->find();
         $this->assertArrayHasKey(0, $_entries);
