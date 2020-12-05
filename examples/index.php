@@ -8,10 +8,12 @@
 </html>
 <?php
 ini_set('display_errors', 'On');
+require_once __DIR__ . '/../src/contentstack.php';
+
 use Contentstack\Contentstack;
-include_once "../src/index.php";
-include_once "../src/contentstackregion.php";
-   $stack = Contentstack::Stack('', '', '', '');
+use Contentstack\Support\Utility;
+
+   $stack = Contentstack::Stack('', '', '');
 try {
     // \Contentstack\Utility\debug($stack);
       //  $result = $stack->getContentTypes('{"include_snippet_schema": "false"}'); 
@@ -20,9 +22,9 @@ try {
      // $result = $stack->ContentType('a')->Query()->includeSchema()->toJSON()->find();
       // $result = $stack->ContentType('ctwithallfields')->Query()->addParam('include_dimensions', true)->toJSON()->find();
      //  $result = $stack->ContentType('a')->Entry('blta07130f8b344b260')->includeContentType()->toJSON()->fetch();
-      // $result = $stack->Assets()->Query()->addParam('***', 'true')->toJSON()->find();
+      $result = $stack->Assets()->Query()->includeFallback()->toJSON()->find();
         //$result = $stack->Assets('blt9b5825dd804a9067')->addParam('include_dimension', 'true')->fetch();
-      // \Contentstack\Utility\debug(($result));
+      Utility::debug(($result));
 
 } catch(Exception $e) {
     echo "Message : ".$e->getMessage(); // returns message -> API -> error_message
