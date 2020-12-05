@@ -400,7 +400,7 @@ class AssetsTest extends TestCase {
     }
 
     public function testAssetsFindSearch() {
-        $_assets = self::$Stack->Assets()->Query()->search('image/jpeg')->toJSON()->find();
+        $_assets = self::$Stack->Assets()->Query()->search('image/jpeg')->language('en-us')->toJSON()->find();
         $this->assertArrayHasKey(0, $_assets);
         // $assets = self::$Stack->Assets()->Query()->toJSON()->find();
         // $assets_count = count($assets[0]);
