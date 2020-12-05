@@ -2,6 +2,16 @@
 ## CHANGELOG
 ------------------------------------------------
 
+## Version 1.7.0
+###### Date: 
+### New Feature
+    - Entry
+      - Added support for function 'includeFallback'
+    - Query 
+      - Added support for function 'includeFallback'
+
+------------------------------------------------
+
 ## Version 1.6.1
 ###### Date: 08-May-2020
 ### Bug
