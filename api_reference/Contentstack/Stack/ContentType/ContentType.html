@@ -24,7 +24,7 @@
             'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
             })(window,document,'script','dataLayer','GTM-WGP99J7');</script>
             <!-- End Google Tag Manager -->
-        
+    
     
     </head>
 
@@ -32,7 +32,7 @@
         <!-- Google Tag Manager (noscript) -->
   <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WGP99J7" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <!-- End Google Tag Manager (noscript) -->
-    <div id="content">
+            <div id="content">
         <div id="left-column">
                 <div id="control-panel">
                 <script>
@@ -97,6 +97,8 @@
         
     
 
+            <div class="description">
+            <p>Class ContentType</p>                                </div>
     
     
     
@@ -130,43 +132,40 @@
                     
                 </div>
                 <div class="col-md-8 type">
-                    <a href="#method___construct">__construct</a>($uid = &#039;&#039;, $stack = &#039;&#039;)
+                    <a href="#method___construct">__construct</a>(string $uid = &#039;&#039;, <abbr title="Contentstack\Stack\ContentType\Stack">Stack</abbr> $stack = &#039;&#039;)
         
-                                            <p class="no-description">No description</p>
-                                    </div>
+                                            <p>ContentType
+ContentType Class to initalize your ContentType</p>                </div>
                 <div class="col-md-2"></div>
             </div>
                     <div class="row">
                 <div class="col-md-2 type">
-                    
+                    <a href="../../../Contentstack/Stack/ContentType/Entry/Entry.html"><abbr title="Contentstack\Stack\ContentType\Entry\Entry">Entry</abbr></a>
                 </div>
                 <div class="col-md-8 type">
-                    <a href="#method_Entry">Entry</a>($entry_uid = &#039;&#039;)
+                    <a href="#method_Entry">Entry</a>(string $entry_uid = &#039;&#039;)
         
-                                            <p class="no-description">No description</p>
-                                    </div>
+                                            <p>Entry object to create the "Query" on the specified ContentType</p>                </div>
                 <div class="col-md-2"></div>
             </div>
                     <div class="row">
                 <div class="col-md-2 type">
-                    
+                    <abbr title="Contentstack\Stack\ContentType\Request">Request</abbr>
                 </div>
                 <div class="col-md-8 type">
-                    <a href="#method_Fetch">Fetch</a>($params = null)
+                    <a href="#method_fetch">fetch</a>(object $params = null)
         
-                                            <p class="no-description">No description</p>
-                                    </div>
+                                            <p>Fetch the specific contenttypes</p>                </div>
                 <div class="col-md-2"></div>
             </div>
                     <div class="row">
                 <div class="col-md-2 type">
-                    
+                    <a href="../../../Contentstack/Stack/ContentType/Query/Query.html"><abbr title="Contentstack\Stack\ContentType\Query\Query">Query</abbr></a>
                 </div>
                 <div class="col-md-8 type">
                     <a href="#method_Query">Query</a>()
         
-                                            <p class="no-description">No description</p>
-                                    </div>
+                                            <p>Query object to create the "Query" on the specified ContentType</p>                </div>
                 <div class="col-md-2"></div>
             </div>
             </div>
@@ -177,28 +176,37 @@
             <div id="method-details">
                     <div class="method-item">
                     <h3 id="method___construct">
-        <div class="location">at         line 28</div>
+        <div class="location">at         line 51</div>
         <code>                    
-    <strong>__construct</strong>($uid = &#039;&#039;, $stack = &#039;&#039;)
+    <strong>__construct</strong>(string $uid = &#039;&#039;, <abbr title="Contentstack\Stack\ContentType\Stack">Stack</abbr> $stack = &#039;&#039;)
         </code>
     </h3>
     <div class="details">
             
     
 
+                    <div class="method-description">
+                                    <p>ContentType
+ContentType Class to initalize your ContentType</p>                                                </div>
                 <div class="tags">
                             <h4>Parameters</h4>
 
                     <table class="table table-condensed">
                     <tr>
-                <td></td>
+                <td>string</td>
                 <td>$uid</td>
-                <td></td>
+                <td><ul>
+<li>valid content type uid</li>
+</ul>
+</td>
             </tr>
                     <tr>
-                <td></td>
+                <td><abbr title="Contentstack\Stack\ContentType\Stack">Stack</abbr></td>
                 <td>$stack</td>
-                <td></td>
+                <td><ul>
+<li>Stack Instance</li>
+</ul>
+</td>
             </tr>
             </table>
 
@@ -211,27 +219,41 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_Entry">
-        <div class="location">at         line 39</div>
-        <code>                    
-    <strong>Entry</strong>($entry_uid = &#039;&#039;)
+        <div class="location">at         line 65</div>
+        <code>                    <a href="../../../Contentstack/Stack/ContentType/Entry/Entry.html"><abbr title="Contentstack\Stack\ContentType\Entry\Entry">Entry</abbr></a>
+    <strong>Entry</strong>(string $entry_uid = &#039;&#039;)
         </code>
     </h3>
     <div class="details">
             
     
 
+                    <div class="method-description">
+                                    <p>Entry object to create the "Query" on the specified ContentType</p>                                                </div>
                 <div class="tags">
                             <h4>Parameters</h4>
 
                     <table class="table table-condensed">
                     <tr>
-                <td></td>
+                <td>string</td>
                 <td>$entry_uid</td>
-                <td></td>
+                <td><ul>
+<li>Entry uid to get details</li>
+</ul>
+</td>
             </tr>
             </table>
 
             
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td><a href="../../../Contentstack/Stack/ContentType/Entry/Entry.html"><abbr title="Contentstack\Stack\ContentType\Entry\Entry">Entry</abbr></a></td>
+            <td></td>
+        </tr>
+    </table>
+
             
             
                     </div>
@@ -239,28 +261,42 @@
 
             </div>
                     <div class="method-item">
-                    <h3 id="method_Fetch">
-        <div class="location">at         line 47</div>
-        <code>                    
-    <strong>Fetch</strong>($params = null)
+                    <h3 id="method_fetch">
+        <div class="location">at         line 77</div>
+        <code>                    <abbr title="Contentstack\Stack\ContentType\Request">Request</abbr>
+    <strong>fetch</strong>(object $params = null)
         </code>
     </h3>
     <div class="details">
             
     
 
+                    <div class="method-description">
+                                    <p>Fetch the specific contenttypes</p>                                                </div>
                 <div class="tags">
                             <h4>Parameters</h4>
 
                     <table class="table table-condensed">
                     <tr>
-                <td></td>
+                <td>object</td>
                 <td>$params</td>
-                <td></td>
+                <td><ul>
+<li>Parameters to fetch content</li>
+</ul>
+</td>
             </tr>
             </table>
 
             
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td><abbr title="Contentstack\Stack\ContentType\Request">Request</abbr></td>
+            <td></td>
+        </tr>
+    </table>
+
             
             
                     </div>
@@ -269,8 +305,8 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_Query">
-        <div class="location">at         line 59</div>
-        <code>                    
+        <div class="location">at         line 90</div>
+        <code>                    <a href="../../../Contentstack/Stack/ContentType/Query/Query.html"><abbr title="Contentstack\Stack\ContentType\Query\Query">Query</abbr></a>
     <strong>Query</strong>()
         </code>
     </h3>
@@ -278,8 +314,19 @@
             
     
 
+                    <div class="method-description">
+                                    <p>Query object to create the "Query" on the specified ContentType</p>                                                </div>
                 <div class="tags">
             
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td><a href="../../../Contentstack/Stack/ContentType/Query/Query.html"><abbr title="Contentstack\Stack\ContentType\Query\Query">Query</abbr></a></td>
+            <td></td>
+        </tr>
+    </table>
+
             
             
                     </div>

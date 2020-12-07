@@ -24,7 +24,7 @@
             'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
             })(window,document,'script','dataLayer','GTM-WGP99J7');</script>
             <!-- End Google Tag Manager -->
-        
+    
     
     </head>
 
@@ -32,7 +32,7 @@
            <!-- Google Tag Manager (noscript) -->
   <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WGP99J7" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <!-- End Google Tag Manager (noscript) -->
- <div id="content">
+            <div id="content">
         <div id="left-column">
                 <div id="control-panel">
                 <script>
@@ -97,6 +97,8 @@
         
     
 
+            <div class="description">
+            <p>Class Result</p>                                </div>
     
     
     
@@ -109,32 +111,30 @@
                     
                 </div>
                 <div class="col-md-8 type">
-                    <a href="#method___construct">__construct</a>($result = &#039;&#039;)
+                    <a href="#method___construct">__construct</a>(object $result = &#039;&#039;)
         
-                                            <p class="no-description">No description</p>
-                                    </div>
+                                            <p>Result constructor
+Result wrapper over the plain result for the future</p>                </div>
                 <div class="col-md-2"></div>
             </div>
                     <div class="row">
                 <div class="col-md-2 type">
-                    
+                    <abbr title="Contentstack\Result\json">json</abbr>
                 </div>
                 <div class="col-md-8 type">
                     <a href="#method_toJSON">toJSON</a>()
         
-                                            <p class="no-description">No description</p>
-                                    </div>
+                                            <p>To convert result object to json</p>                </div>
                 <div class="col-md-2"></div>
             </div>
                     <div class="row">
                 <div class="col-md-2 type">
-                    
+                    <abbr title="Contentstack\Result\Value">Value</abbr>
                 </div>
                 <div class="col-md-8 type">
-                    <a href="#method_get">get</a>($key)
+                    <a href="#method_get">get</a>(string $key)
         
-                                            <p class="no-description">No description</p>
-                                    </div>
+                                            <p>Get the keys from the object</p>                </div>
                 <div class="col-md-2"></div>
             </div>
             </div>
@@ -145,23 +145,29 @@
             <div id="method-details">
                     <div class="method-item">
                     <h3 id="method___construct">
-        <div class="location">at         line 11</div>
+        <div class="location">at         line 39</div>
         <code>                    
-    <strong>__construct</strong>($result = &#039;&#039;)
+    <strong>__construct</strong>(object $result = &#039;&#039;)
         </code>
     </h3>
     <div class="details">
             
     
 
+                    <div class="method-description">
+                                    <p>Result constructor
+Result wrapper over the plain result for the future</p>                                                </div>
                 <div class="tags">
                             <h4>Parameters</h4>
 
                     <table class="table table-condensed">
                     <tr>
-                <td></td>
+                <td>object</td>
                 <td>$result</td>
-                <td></td>
+                <td><ul>
+<li>Response object</li>
+</ul>
+</td>
             </tr>
             </table>
 
@@ -174,8 +180,8 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_toJSON">
-        <div class="location">at         line 23</div>
-        <code>                    
+        <div class="location">at         line 51</div>
+        <code>                    <abbr title="Contentstack\Result\json">json</abbr>
     <strong>toJSON</strong>()
         </code>
     </h3>
@@ -183,8 +189,19 @@
             
     
 
+                    <div class="method-description">
+                                    <p>To convert result object to json</p>                                                </div>
                 <div class="tags">
             
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td><abbr title="Contentstack\Result\json">json</abbr></td>
+            <td>format of the result</td>
+        </tr>
+    </table>
+
             
             
                     </div>
@@ -193,27 +210,41 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_get">
-        <div class="location">at         line 34</div>
-        <code>                    
-    <strong>get</strong>($key)
+        <div class="location">at         line 63</div>
+        <code>                    <abbr title="Contentstack\Result\Value">Value</abbr>
+    <strong>get</strong>(string $key)
         </code>
     </h3>
     <div class="details">
             
     
 
+                    <div class="method-description">
+                                    <p>Get the keys from the object</p>                                                </div>
                 <div class="tags">
                             <h4>Parameters</h4>
 
                     <table class="table table-condensed">
                     <tr>
-                <td></td>
+                <td>string</td>
                 <td>$key</td>
-                <td></td>
+                <td><ul>
+<li>key whose corresponding value to be retrieved</li>
+</ul>
+</td>
             </tr>
             </table>
 
             
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td><abbr title="Contentstack\Result\Value">Value</abbr></td>
+            <td></td>
+        </tr>
+    </table>
+
             
             
                     </div>

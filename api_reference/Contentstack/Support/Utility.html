@@ -1,0 +1,811 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="robots" content="index, follow, all" />
+    <title>Contentstack\Support\Utility | API</title>
+
+            <link rel="stylesheet" type="text/css" href="../../css/bootstrap.min.css">
+        <link rel="stylesheet" type="text/css" href="../../css/bootstrap-theme.min.css">
+        <link rel="stylesheet" type="text/css" href="../../css/sami.css">
+        <link rel="canonical" href="https://www.contentstack.com/docs/platforms/php/api-reference/" />
+        <script src="../../js/jquery-1.11.1.min.js"></script>
+        <script src="../../js/bootstrap.min.js"></script>
+        <script src="../../js/typeahead.min.js"></script>
+        <script src="../../sami.js"></script>
+        <meta name="MobileOptimized" content="width">
+        <meta name="HandheldFriendly" content="true">
+        <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+        <!-- Google Tag Manager -->
+        <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+            new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+            j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+            'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+            })(window,document,'script','dataLayer','GTM-WGP99J7');</script>
+            <!-- End Google Tag Manager -->
+    
+        
+    
+    </head>
+
+    <body id="class" data-name="class:Contentstack_Support_Utility" data-root-path="../../">
+        <!-- Google Tag Manager (noscript) -->
+        <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WGP99J7" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+        <!-- End Google Tag Manager (noscript) -->
+            <div id="content">
+        <div id="left-column">
+                <div id="control-panel">
+                <script>
+            $('option[data-version="'+window.projectVersion+'"]').prop('selected', true);
+        </script>
+        <form id="search-form" action="../../search.html" method="GET">
+            <span class="glyphicon glyphicon-search"></span>
+            <input name="search"
+                   class="typeahead form-control"
+                   type="search"
+                   placeholder="Search">
+        </form>
+    </div>
+
+                <div id="api-tree"></div>
+
+        </div>
+        <div id="right-column">
+                <nav id="site-nav" class="navbar navbar-default" role="navigation">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-elements">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="../../index.html">API</a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar-elements">
+                <ul class="nav navbar-nav">
+                    <li><a href="../../classes.html">Classes</a></li>
+                                            <li><a href="../../namespaces.html">Namespaces</a></li>
+                                        <li><a href="../../interfaces.html">Interfaces</a></li>
+                    <li><a href="../../traits.html">Traits</a></li>
+                    <li><a href="../../doc-index.html">Index</a></li>
+                    <li><a href="../../search.html">Search</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+                        <div class="namespace-breadcrumbs">
+            <ol class="breadcrumb">
+                <li><span class="label label-default">class</span></li>
+                        <li><a href="../../Contentstack.html">Contentstack</a></li><li class="backslash">\</li><li><a href="../../Contentstack/Support.html">Support</a></li><li class="backslash">\</li><li>Utility</li>
+            </ol>
+        </div>
+                <div id="page-content">
+                
+    <div class="page-header">
+        <h1>
+            Utility
+                
+        </h1>
+    </div>
+
+    <p>    class
+    <strong>Utility</strong>
+</p>
+
+        
+    
+
+            <div class="description">
+            <p>Utility/Helper where all the helper and utility functions will be available.</p>                                </div>
+    
+    
+    
+    
+            <h2>Methods</h2>
+
+            <div class="container-fluid underlined">
+                    <div class="row">
+                <div class="col-md-2 type">
+                    static&nbsp;array
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_validateInput">validateInput</a>(string $type = &#039;&#039;, object $input = array())
+        
+                                            <p>Validation for all the parameters required for the SDK</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    static&nbsp;String
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_getDomain">getDomain</a>(<abbr title="Contentstack\Support\Stack">Stack</abbr> $query)
+        
+                                            <p>Get the domain from the current object</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    static&nbsp;string
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_contentstackUrl">contentstackUrl</a>(object $queryObject = &#039;&#039;, string $type = &#039;&#039;)
+        
+                                            <p>Contentstack URL method to create the url based on the request</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    static&nbsp;array
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_headers">headers</a>(array $query = &#039;&#039;)
+        
+                                            <p>Header transformation as it required format</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    static&nbsp;<abbr title="Contentstack\Support\json">json</abbr>
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_generateQuery">generateQuery</a>(array $query = array())
+        
+                                            <p>POST formatted query for the API server</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    static&nbsp;<abbr title="Contentstack\Support\QueryParameters">QueryParameters</abbr>
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_generateQueryParams">generateQueryParams</a>(array $query = array())
+        
+                                            <p>Sending the GET requests with all the parameters in POST as well as GET</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    static&nbsp;<abbr title="Contentstack\Support\ResultWrapped">ResultWrapped</abbr>
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_wrapResult">wrapResult</a>(object $result = &#039;&#039;, object $queryObject = &#039;&#039;)
+        
+                                            <p>Wrap Result</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    static&nbsp;<a href="../../Contentstack/Result/Result.html"><abbr title="Contentstack\Result\Result">Result</abbr></a>
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_contentstackRequest">contentstackRequest</a>(object $queryObject = &#039;&#039;, object $type = &#039;&#039;)
+        
+                                            <p>Contentstack request to the API server based on the data</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    static&nbsp;boolean
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_isKeySet">isKeySet</a>(array $input = array(), string $key = &#039;&#039;)
+        
+                                            <p>Validate the key is set or not</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    static&nbsp;boolean
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_isEmpty">isEmpty</a>(object $input)
+        
+                                            <p>Validate the String</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    static&nbsp;object
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_getLastActivites">getLastActivites</a>(object $queryObject)
+        
+                                            <p>Get Last activities</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    static&nbsp;object
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_debug">debug</a>(object $input, boolean $exit = false)
+        
+                                            <p>DEBUGGING MESSAGE</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+            </div>
+
+
+        <h2>Details</h2>
+
+            <div id="method-details">
+                    <div class="method-item">
+                    <h3 id="method_validateInput">
+        <div class="location">at         line 44</div>
+        <code>        static            array
+    <strong>validateInput</strong>(string $type = &#039;&#039;, object $input = array())
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Validation for all the parameters required for the SDK</p>                                                </div>
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>string</td>
+                <td>$type</td>
+                <td><ul>
+<li>type of the value to be validated</li>
+</ul>
+</td>
+            </tr>
+                    <tr>
+                <td>object</td>
+                <td>$input</td>
+                <td><ul>
+<li>value of the respective type</li>
+</ul>
+</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>array</td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_getDomain">
+        <div class="location">at         line 111</div>
+        <code>        static            String
+    <strong>getDomain</strong>(<abbr title="Contentstack\Support\Stack">Stack</abbr> $query)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Get the domain from the current object</p>                                                </div>
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td><abbr title="Contentstack\Support\Stack">Stack</abbr></td>
+                <td>$query</td>
+                <td><ul>
+<li>Instance of S.tack</li>
+</ul>
+</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>String</td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_contentstackUrl">
+        <div class="location">at         line 137</div>
+        <code>        static            string
+    <strong>contentstackUrl</strong>(object $queryObject = &#039;&#039;, string $type = &#039;&#039;)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Contentstack URL method to create the url based on the request</p>                                                </div>
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>object</td>
+                <td>$queryObject</td>
+                <td><ul>
+<li>Query Object</li>
+</ul>
+</td>
+            </tr>
+                    <tr>
+                <td>string</td>
+                <td>$type</td>
+                <td><ul>
+<li>type for url</li>
+</ul>
+</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>string</td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_headers">
+        <div class="location">at         line 177</div>
+        <code>        static            array
+    <strong>headers</strong>(array $query = &#039;&#039;)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Header transformation as it required format</p>                                                </div>
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>array</td>
+                <td>$query</td>
+                <td><ul>
+<li>input headers in key value pair</li>
+</ul>
+</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>array</td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_generateQuery">
+        <div class="location">at         line 201</div>
+        <code>        static            <abbr title="Contentstack\Support\json">json</abbr>
+    <strong>generateQuery</strong>(array $query = array())
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>POST formatted query for the API server</p>                                                </div>
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>array</td>
+                <td>$query</td>
+                <td><ul>
+<li>Query array</li>
+</ul>
+</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td><abbr title="Contentstack\Support\json">json</abbr></td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_generateQueryParams">
+        <div class="location">at         line 256</div>
+        <code>        static            <abbr title="Contentstack\Support\QueryParameters">QueryParameters</abbr>
+    <strong>generateQueryParams</strong>(array $query = array())
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Sending the GET requests with all the parameters in POST as well as GET</p>                                                </div>
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>array</td>
+                <td>$query</td>
+                <td><ul>
+<li>Query array</li>
+</ul>
+</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td><abbr title="Contentstack\Support\QueryParameters">QueryParameters</abbr></td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_wrapResult">
+        <div class="location">at         line 270</div>
+        <code>        static            <abbr title="Contentstack\Support\ResultWrapped">ResultWrapped</abbr>
+    <strong>wrapResult</strong>(object $result = &#039;&#039;, object $queryObject = &#039;&#039;)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Wrap Result</p>                                                </div>
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>object</td>
+                <td>$result</td>
+                <td><ul>
+<li>Response content</li>
+</ul>
+</td>
+            </tr>
+                    <tr>
+                <td>object</td>
+                <td>$queryObject</td>
+                <td><ul>
+<li>Query object</li>
+</ul>
+</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td><abbr title="Contentstack\Support\ResultWrapped">ResultWrapped</abbr></td>
+            <td>Object</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_contentstackRequest">
+        <div class="location">at         line 364</div>
+        <code>        static            <a href="../../Contentstack/Result/Result.html"><abbr title="Contentstack\Result\Result">Result</abbr></a>
+    <strong>contentstackRequest</strong>(object $queryObject = &#039;&#039;, object $type = &#039;&#039;)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Contentstack request to the API server based on the data</p>                                                </div>
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>object</td>
+                <td>$queryObject</td>
+                <td><ul>
+<li>Query Object</li>
+</ul>
+</td>
+            </tr>
+                    <tr>
+                <td>object</td>
+                <td>$type</td>
+                <td><ul>
+<li>type of request</li>
+</ul>
+</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td><a href="../../Contentstack/Result/Result.html"><abbr title="Contentstack\Result\Result">Result</abbr></a></td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_isKeySet">
+        <div class="location">at         line 410</div>
+        <code>        static            boolean
+    <strong>isKeySet</strong>(array $input = array(), string $key = &#039;&#039;)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Validate the key is set or not</p>                                                </div>
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>array</td>
+                <td>$input</td>
+                <td><ul>
+<li>input</li>
+</ul>
+</td>
+            </tr>
+                    <tr>
+                <td>string</td>
+                <td>$key</td>
+                <td><ul>
+<li>key to check</li>
+</ul>
+</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>boolean</td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_isEmpty">
+        <div class="location">at         line 422</div>
+        <code>        static            boolean
+    <strong>isEmpty</strong>(object $input)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Validate the String</p>                                                </div>
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>object</td>
+                <td>$input</td>
+                <td><ul>
+<li>object to check for empty</li>
+</ul>
+</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>boolean</td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_getLastActivites">
+        <div class="location">at         line 434</div>
+        <code>        static            object
+    <strong>getLastActivites</strong>(object $queryObject)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>Get Last activities</p>                                                </div>
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>object</td>
+                <td>$queryObject</td>
+                <td><ul>
+<li>query object</li>
+</ul>
+</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>object</td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_debug">
+        <div class="location">at         line 447</div>
+        <code>        static            object
+    <strong>debug</strong>(object $input, boolean $exit = false)
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>DEBUGGING MESSAGE</p>                                                </div>
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>object</td>
+                <td>$input</td>
+                <td><ul>
+<li>object to debug</li>
+</ul>
+</td>
+            </tr>
+                    <tr>
+                <td>boolean</td>
+                <td>$exit</td>
+                <td><ul>
+<li>to exit on debug</li>
+</ul>
+</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>object</td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+            </div>
+            </div>
+
+    
+            </div>
+                <div id="footer">
+        Generated by <a href="http://sami.sensiolabs.org/">Sami, the API Documentation Generator</a>.
+    </div>
+
+        </div>
+    </div>
+    </body>
+
+</html>
