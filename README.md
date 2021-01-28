@@ -20,8 +20,10 @@ To use the PHP SDK, you need to perform the following steps:
 
 To initialize the SDK, you will need to specify the API Key, Delivery Token, and Environment Name of your stack.
 
-    use Contentstack\Contentstack;
-    $stack = Contentstack::Stack(API_KEY, DELIVERY_TOKEN, ENV_NAME);
+```php
+use Contentstack\Contentstack;
+$stack = Contentstack::Stack(API_KEY, DELIVERY_TOKEN, ENV_NAME);
+```
 
 
 #### Download and install library:
@@ -32,9 +34,11 @@ To use the PHP SDK, you need to perform the following steps:
 
 To initialize the SDK, you will need to specify the API Key, Delivery Token, and Environment Name of your stack.
 
-    use Contentstack\Contentstack;
-    include_once "contentstack/contentstack.php";
-    $stack = Contentstack::Stack(API_KEY, DELIVERY_TOKEN, ENV_NAME);
+```php
+use Contentstack\Contentstack;
+include_once "contentstack/contentstack.php";
+$stack = Contentstack::Stack(API_KEY, DELIVERY_TOKEN, ENV_NAME);
+```
 
 
 ### Key Concepts for using Contentstack
@@ -59,8 +63,7 @@ Assets refer to all the media files (images, videos, PDFs, audio files, and so o
 
 A publishing environment corresponds to one or more deployment servers or a content delivery destination where the entries need to be published. Learn how to work with [Environments](https://www.contentstack.com/docs/guide/environments). 
 
-  
-  
+
 
 ### Contentstack PHP SDK: 5-minute Quickstart
 
@@ -69,31 +72,35 @@ Install the library using [Composer](https://packagist.org/packages/contentstack
 
     composer require contentstack/contentstack
 
+
 To initialize the SDK, you will need to specify the API Key, Delivery Token, and Environment Name of your stack.
 
-    use Contentstack\Contentstack;
-    $stack = Contentstack::Stack(API_KEY, DELIVERY_TOKEN, ENV_NAME);
+```php
+use Contentstack\Contentstack;
+$stack = Contentstack::Stack(API_KEY, DELIVERY_TOKEN, ENV_NAME);
+```
 
 To get the API credentials mentioned above, log in to your Contentstack account and then in your top panel navigation, go to Settings &gt; Stack to view the API Key and Delivery Token.
 
-  
+
 
 #### Querying content from your stack
 
 To find all entries  of a content type, use the query given below:
 
-    $result = $stack->ContentType(CONTENT_TYPE_UID)->Query()->toJSON()->includeCount()->includeContentType()->find()
-    // $result[0] - array of entries
-    // $result[1] - content type
-    // $result[2] - count of the entries
-
-  
-  
+```php
+$result = $stack->ContentType(CONTENT_TYPE_UID)->Query()->toJSON()->includeCount()->includeContentType()->find();
+// $result[0] - array of entries
+// $result[1] - content type
+// $result[2] - count of the entries
+```
 
 To fetch a specific entry from a content type, use the following query:
 
-    $result = $stack->ContentType(CONTENT_TYPE_UID)->Entry(ENTRY_UID)->toJSON()->fetch()
-    // $result - entry object
+```php
+$result = $stack->ContentType(CONTENT_TYPE_UID)->Entry(ENTRY_UID)->toJSON()->fetch();
+// $result - entry object
+```
 
 ### Advanced Queries
 
@@ -115,22 +122,24 @@ You can use the Image Delivery API functions in this SDK as well. Here are a few
 
 // set the image quality to 100.
 
-    imageUrl = Stack->imageTransform(imageUrl, array(
-    'quality'=> 100));
+```php
+$imageUrl = $stack->imageTransform(imageUrl, array('quality' => 100));
+```
 
 // resize the image by specifying width and height.
 
-    imageUrl = Stack->imageTransform(imageUrl, array(
-    'width'=> 100,
-    'height'=> 100
-    ));
+```php
+$imageUrl = $stack->imageTransform(imageUrl, array(
+  'width' => 100,
+  'height' => 100
+));
+```
 
 // enable auto optimization for the image.
 
-    imageUrl = Stack->imageTransform(imageUrl, array(
-    'auto'=> 'webp'
-    ))
-
+```php
+$imageUrl = $stack->imageTransform(imageUrl, array('auto' => 'webp'));
+```
 
 
 ### Helpful Links
