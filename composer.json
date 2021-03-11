@@ -27,9 +27,16 @@
     "require-dev": {
         "phpunit/phpunit": "^9.0",
         "phpunit/php-code-coverage": "^8.0",
-        "sami/sami": "^4.1"
+        "sami/sami": "^4.1",
+        "contentstack/utils": "dev-master"
     },
     "require": {
         "php" : ">=5.5.0"
-    }
+    },
+    "repositories": [
+        {
+            "type": "path",
+            "url": "../contentstack-utils-php/"
+        }
+    ]
 }
