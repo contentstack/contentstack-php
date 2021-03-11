@@ -8,6 +8,7 @@ use Contentstack\Test\REST;
 use PHPUnit\Framework\TestCase;
 use Contentstack\Support\Utility;
 use Contentstack\Contentstack;
+use Contentstack\Utils\Model\Option;
 
 class EntriesTest extends TestCase {
     public static $rest;
@@ -149,6 +150,14 @@ class EntriesTest extends TestCase {
         $this->assertTrue($_entries[1]['uid'] === CT_ContentType);
     }
 
+    public function testFindIncludeEmbeddedItems() {
+        $_entries = self::$Stack->ContentType(CT_ContentType)->Query()->toJSON()->includeEmbeddedItems()->find();
+        for($i = 0; $i < count($_entries[0]); $i++) {
+            $embedded = Contentstack::renderContent('', new Option($_entries[0][$i]));
+        }
+        $this->assertArrayHasKey(0, $_entries);
+        $this->assertTrue((count($_entries[0]) === ENTRY_COUNT));
+    }
     public function testFindIncludeReferenceContentTypeUID() {
         $_entries = self::$Stack->ContentType(CT_ContentType)->Query()->toJSON()->includeReferenceContentTypeUID()->find();
         $_flag = "false";
