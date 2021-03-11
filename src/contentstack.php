@@ -15,6 +15,8 @@
 namespace Contentstack;
 
 use Contentstack\Stack\Stack;
+use Contentstack\Utils\Utils;
+use Contentstack\Utils\Model\Option;
 
 require_once __DIR__ . '/lib/models/stack.php';
 
@@ -47,5 +49,15 @@ abstract class Contentstack
         $region = ''
     ) {
         return new Stack($api_***, $access_token, $environment, $region);
+    }
+
+    public static function renderContent(string $content, Option $option): string 
+    {
+        return Utils::renderContent($content, $option);
+    }
+
+    public static function renderContents(array $contents, Option $option): array
+    {
+        return Utils::renderContents($contents, $option);
     }
 }
