@@ -358,6 +358,21 @@ abstract class BaseQuery
     }
 
     /**
+     * To include Embedded Items along with entries
+     * 
+     * @return Query
+     * */
+    public function includeEmbeddedItems() 
+    {
+        $this->queryObject->_query = call_user_func(
+            'contentstackAddBoolean', 
+            'include_embedded_items', 
+            $this->queryObject->_query
+        );
+        return $this->queryObject;
+    }
+
+    /**
      * To include the count of entries based on the results
      * 
      * @return Query
