@@ -205,8 +205,8 @@ class Utility
             $query->_query['environment'] = $query->contentType
                 ->stack->getEnvironment();
             $subQuery = array();
-            if (count($query->subQuery) > 0) {
-                $subQuery['query'] = json_encode($query->subQuery);
+            if (isset($query->subQuery)) {
+                $subQuery['query'] = $query->subQuery;
             }
 
             $include_schema = array_search(
