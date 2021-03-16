@@ -676,7 +676,7 @@ abstract class BaseQuery
     public function addQuery($_query = array()) 
     {
         if ($_query && is_array($_query)) {
-            $this->subQuery = json_encode($_query);
+            $this->subQuery = $_query;
             return $this->queryObject;
         }
         throw contentstackCreateError("Provide valid query");
