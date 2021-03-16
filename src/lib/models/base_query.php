@@ -128,7 +128,7 @@ abstract class BaseQuery
      * */
     public function includeReference($field_uids = array()) 
     {
-        if ($field_uids && is_array($field_uids)) {
+        if (is_array($field_uids)) {
             $this->queryObject->_query = call_user_func(
                 'contentstackReferences', 
                 'include', 
@@ -465,7 +465,7 @@ abstract class BaseQuery
      * */
     public function tags($tags = array()) 
     {
-        if ($tags && is_array($tags)) {
+        if (is_array($tags)) {
             $this->queryObject->_query = call_user_func(
                 'contentstackTags', 
                 'tags', 
@@ -508,7 +508,7 @@ abstract class BaseQuery
      * */
     public function containedIn($field = '', $value = array()) 
     {
-        if ($value && is_array($value)) {
+        if (is_array($value)) {
             $this->subQuery = call_user_func(
                 'contentstackContains', 
                 '$in', 
@@ -533,7 +533,7 @@ abstract class BaseQuery
      * */
     public function notContainedIn($field = '', $value = array()) 
     {
-        if ($value && is_array($value)) {
+        if (is_array($value)) {
             $this->subQuery = call_user_func(
                 'contentstackContains', 
                 '$nin',
@@ -675,7 +675,7 @@ abstract class BaseQuery
      * */
     public function addQuery($_query = array()) 
     {
-        if ($_query && is_array($_query)) {
+        if (is_array($_query)) {
             $this->subQuery = $_query;
             return $this->queryObject;
         }
