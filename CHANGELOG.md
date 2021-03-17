@@ -2,6 +2,14 @@
 ## CHANGELOG
 ------------------------------------------------
 
+## Version 1.8.1
+###### Date: 17-Mar-2021
+### Bug Fix
+- Updated addQuery method to pass non encoded Json to Query object
+- Removed parameter check on functions those pass default values.
+
+------------------------------------------------
+
 ## Version 1.8.0
 ###### Date: 5-Dec-2020
 ### New Feature
