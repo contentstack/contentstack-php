@@ -14,11 +14,8 @@
  * */
 namespace Contentstack\Support;
 
-require_once __DIR__ . "/../lib/models/result.php";
-require_once __DIR__ . "/../lib/models/csexception.php";
-
 use Contentstack\Error\CSException;
-use Contentstack\Result\Result;
+use Contentstack\Stack\Result;
 
 /**
  * Utility/Helper where all the helper and utility functions will be available.
@@ -153,7 +150,10 @@ class Utility
             break;
         case 'assets':
             $URL = Utility::getDomain($queryObject).ASSETS;
-            break;                      
+            break;
+        case 'sync':
+            $URL = Utility::getDomain($queryObject).SYNC;
+            break;                     
         default:
             $URL = Utility::getDomain($queryObject).CONTENT_TYPES
             .$queryObject->contentType->uid.ENTRIES;
