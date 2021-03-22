@@ -13,7 +13,7 @@
  * @license   https://github.com/contentstack/contentstack-php/blob/master/LICENSE.txt MIT Licence
  * @link      https://pear.php.net/package/contentstack
  * */
-namespace Contentstack\Result;
+namespace Contentstack\Stack;
 
 /**
  * Class Result
