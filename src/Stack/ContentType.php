@@ -15,15 +15,11 @@
  * @link      https://pear.php.net/package/contentstack
  * */
 
-namespace Contentstack\Stack\ContentType;
+namespace Contentstack\Stack;
 
-use Contentstack\Stack\ContentType\Entry\Entry;
-use Contentstack\Stack\ContentType\Query\Query;
-//use Contentstack\Stack\ContentType\Query\Fetch;
+use Contentstack\Stack\ContentType\Entry;
+use Contentstack\Stack\ContentType\Query;
 use Contentstack\Support\Utility;
-require_once __DIR__.'/entry.php';
-require_once __DIR__.'/query.php';
-require_once __DIR__."/../../Support/Utility.php";
 /**
  * Class ContentType
  *  
