@@ -14,11 +14,11 @@
  * @link      https://pear.php.net/package/contentstack
  * */
 
-namespace Contentstack\Stack\ContentType\BaseQuery;
+namespace Contentstack\Stack;
 use Contentstack\Support\Utility;
 
-require_once __DIR__ . "/../../Support/helper.php";
-require_once __DIR__."/../../Support/Utility.php";
+require_once __DIR__ . "/../Support/helper.php";
+
 /**
  * BaseQuery
  * Base Class where all the Queries will be created
@@ -128,7 +128,7 @@ abstract class BaseQuery
      * */
     public function includeReference($field_uids = array()) 
     {
-        if (is_array($field_uids)) {
+        if ($field_uids && is_array($field_uids)) {
             $this->queryObject->_query = call_user_func(
                 'contentstackReferences', 
                 'include', 
@@ -465,7 +465,7 @@ abstract class BaseQuery
      * */
     public function tags($tags = array()) 
     {
-        if (is_array($tags)) {
+        if ($tags && is_array($tags)) {
             $this->queryObject->_query = call_user_func(
                 'contentstackTags', 
                 'tags', 
@@ -508,7 +508,7 @@ abstract class BaseQuery
      * */
     public function containedIn($field = '', $value = array()) 
     {
-        if (is_array($value)) {
+        if ($value && is_array($value)) {
             $this->subQuery = call_user_func(
                 'contentstackContains', 
                 '$in', 
@@ -533,7 +533,7 @@ abstract class BaseQuery
      * */
     public function notContainedIn($field = '', $value = array()) 
     {
-        if (is_array($value)) {
+        if ($value && is_array($value)) {
             $this->subQuery = call_user_func(
                 'contentstackContains', 
                 '$nin',
@@ -675,8 +675,8 @@ abstract class BaseQuery
      * */
     public function addQuery($_query = array()) 
     {
-        if (is_array($_query)) {
-            $this->subQuery = $_query;
+        if ($_query && is_array($_query)) {
+            $this->subQuery = json_encode($_query);
             return $this->queryObject;
         }
         throw contentstackCreateError("Provide valid query");
