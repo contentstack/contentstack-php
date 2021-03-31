@@ -65,7 +65,7 @@ class Stack
             'stack', array('api_key' => $api_key, 
             'access_token' => $delivery_token, 
             'environment' => $environment, 
-            'region' => $config['region'])
+            'region' => $config['region'] ?? '')
         );
         $this->environment = $this->header['environment'];
         unset($this->header['environment']);
