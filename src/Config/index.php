@@ -25,3 +25,4 @@ define('CONTENT_TYPES', '/content_types/');
 define('ENTRIES', '/entries/');
 define('ASSETS', '/assets/');
 define('ENVIRONMENTS', '/environments/');
+define('SYNC', '/stacks/sync/');
