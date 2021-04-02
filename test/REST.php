@@ -1,7 +1,6 @@
 <?php
 namespace Contentstack\Test;
 
-require_once __DIR__ . '/../src/config/index.php';
 require_once __DIR__ . '/constants.php';
 
 use Contentstack\Config;
