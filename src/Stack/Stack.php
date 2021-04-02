@@ -15,13 +15,10 @@
 namespace Contentstack\Stack;
 
 use Contentstack\Support\Utility;
-use Contentstack\Stack\ContentType\ContentType;
-use Contentstack\Stack\Assets\Assets;
+use Contentstack\Stack\ContentType;
+use Contentstack\Stack\Assets;
 
-require_once __DIR__."/content_type.php";
-require_once __DIR__."/assets.php";
-require_once __DIR__."/../../config/index.php";
-require_once __DIR__."/../../Support/Utility.php";
+require_once __DIR__."/../Config/index.php";
 /**
  * Stack Class to initialize the provided parameter Stack
  * 
@@ -58,17 +55,17 @@ class Stack
         $api_*** = '', 
         $delivery_token = '', 
         $environment = '', 
-        $region = ''
+        $config = array('region'=> '')
     ) {
        
-        if ($region && $region =="eu" && $region !== "undefined") {
-            $this->host = $region.'-cdn.contentstack.com';
+        if ($config && $config !== "undefined" && $config['region'] !== "undefined" && $config['region'] =="eu" ) {
+            $this->host = $config['region'].'-cdn.contentstack.com';
         }
         $this->header = Utility::validateInput(
             'stack', array('api_***' => $api_***, 
             'access_token' => $delivery_token, 
             'environment' => $environment, 
-            'region' => $region)
+            'region' => $config['region'] ?? '')
         );
         $this->environment = $this->header['environment'];
         unset($this->header['environment']);
@@ -305,5 +302,20 @@ class Stack
         }
         
         return Utility::contentstackRequest($this, "getcontentTypes");
+    }
+
+    /**
+     * Syncs your Contentstack data with your app and ensures that the data is always up-to-date by providing delta updates
+     * 
+     * @param object $params -  params is an object that supports ‘locale’, ‘start_date’, ‘content_type_uid’, and ‘type’ queries.
+     * 
+     * @return Stack
+     * */
+    public function sync($params) 
+    {
+        if ($params && $params !== "undefined") {
+            $this->_query = $params;
+        }
+        return Utility::contentstackRequest($this, "sync");
     }
 }
