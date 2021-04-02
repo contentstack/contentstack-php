@@ -2,7 +2,6 @@
 require_once __DIR__ . '/REST.php';
 require_once __DIR__ . '/constants.php';
 
-require_once __DIR__ . '/../src/contentstack.php';
 require_once __DIR__ . '/utility.php';
 use Contentstack\Test\REST;
 use PHPUnit\Framework\TestCase;
