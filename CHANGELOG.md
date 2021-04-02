@@ -2,6 +2,15 @@
 ## CHANGELOG
 ------------------------------------------------
 
+## Version 2.0.0
+###### Date: 02-Apr-2021
+### New Feature
+ - Sync API support added
+### Enhancement
+ - Added PSR 4 Standardized implementation.
+
+------------------------------------------------
+
 ## Version 1.8.1
 ###### Date: 17-Mar-2021
 ### Bug Fix
