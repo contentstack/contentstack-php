@@ -7,39 +7,23 @@
 
             <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css">
         <link rel="stylesheet" type="text/css" href="../css/bootstrap-theme.min.css">
-        <link rel="stylesheet" type="text/css" href="../css/sami.css">
-        <link rel="canonical" href="https://www.contentstack.com/docs/platforms/php/api-reference/" />
-        <script src="../js/jquery-1.11.1.min.js"></script>
-        <script src="../js/bootstrap.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="../css/doctum.css">
+        <link rel="stylesheet" type="text/css" href="../fonts/doctum-font.css">
+        <script src="../js/jquery-3.5.1.slim.min.js"></script>
+        <script async defer src="../js/bootstrap.min.js"></script>
         <script src="../js/typeahead.min.js"></script>
-        <script src="../sami.js"></script>
+        <script src="../doctum.js"></script>
         <meta name="MobileOptimized" content="width">
         <meta name="HandheldFriendly" content="true">
         <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
-        <link rel="shortcut icon" href="./favicon.ico">
-        <!-- Google Tag Manager -->
-        <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-            new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-            j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-            'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-            })(window,document,'script','dataLayer','GTM-WGP99J7');</script>
-            <!-- End Google Tag Manager -->
-    
-    
     </head>
 
     <body id="class" data-name="class:Contentstack_Contentstack" data-root-path="../">
-        <!-- Google Tag Manager (noscript) -->
-        <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WGP99J7" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-        <!-- End Google Tag Manager (noscript) -->
-                  <div id="content">
+            <div id="content">
         <div id="left-column">
                 <div id="control-panel">
-                <script>
-            $('option[data-version="'+window.projectVersion+'"]').prop('selected', true);
-        </script>
-        <form id="search-form" action="../search.html" method="GET">
-            <span class="glyphicon glyphicon-search"></span>
+                <form id="search-form" action="../search.html">
+            <span class="icon icon-search"></span>
             <input name="search"
                    class="typeahead form-control"
                    type="search"
@@ -65,8 +49,8 @@
             <div class="collapse navbar-collapse" id="navbar-elements">
                 <ul class="nav navbar-nav">
                     <li><a href="../classes.html">Classes</a></li>
-                                            <li><a href="../namespaces.html">Namespaces</a></li>
-                                        <li><a href="../interfaces.html">Interfaces</a></li>
+                    <li><a href="../namespaces.html">Namespaces</a></li>
+                    <li><a href="../interfaces.html">Interfaces</a></li>
                     <li><a href="../traits.html">Traits</a></li>
                     <li><a href="../doc-index.html">Index</a></li>
                     <li><a href="../search.html">Search</a></li>
@@ -90,7 +74,7 @@
         </h1>
     </div>
 
-    <p>abstract     class
+    <p>    abstract     class
     <strong>Contentstack</strong>
 </p>
 
@@ -108,10 +92,10 @@
             <div class="container-fluid underlined">
                     <div class="row">
                 <div class="col-md-2 type">
-                    static&nbsp;<a href="../Contentstack/Stack/Stack.html"><abbr title="Contentstack\Stack\Stack">Stack</abbr></a>
+                    static&nbsp;Stack
                 </div>
                 <div class="col-md-8 type">
-                    <a href="#method_Stack">Stack</a>(string $api_key = &#039;&#039;, string $access_token = &#039;&#039;, string $environment = &#039;&#039;, <a href="../Contentstack/ContentstackRegion.html"><abbr title="Contentstack\ContentstackRegion">ContentstackRegion</abbr></a> $region = &#039;&#039;)
+                    <a href="#method_Stack">Stack</a>(string $api_key = &#039;&#039;, string $access_token = &#039;&#039;, string $environment = &#039;&#039;, array $config = array(&#039;region&#039; =&gt; &#039;&#039;))
         
                                             <p>Static method for the Stack constructor</p>                </div>
                 <div class="col-md-2"></div>
@@ -124,9 +108,9 @@
             <div id="method-details">
                     <div class="method-item">
                     <h3 id="method_Stack">
-        <div class="location">at         line 44</div>
-        <code>        static            <a href="../Contentstack/Stack/Stack.html"><abbr title="Contentstack\Stack\Stack">Stack</abbr></a>
-    <strong>Stack</strong>(string $api_key = &#039;&#039;, string $access_token = &#039;&#039;, string $environment = &#039;&#039;, <a href="../Contentstack/ContentstackRegion.html"><abbr title="Contentstack\ContentstackRegion">ContentstackRegion</abbr></a> $region = &#039;&#039;)
+        <div class="location">at line 42</div>
+        <code>        static            Stack
+    <strong>Stack</strong>(string $api_key = &#039;&#039;, string $access_token = &#039;&#039;, string $environment = &#039;&#039;, array $config = array(&#039;region&#039; =&gt; &#039;&#039;))
         </code>
     </h3>
     <div class="details">
@@ -155,9 +139,9 @@
                 <td>: Environment Name.</td>
             </tr>
                     <tr>
-                <td><a href="../Contentstack/ContentstackRegion.html"><abbr title="Contentstack\ContentstackRegion">ContentstackRegion</abbr></a></td>
-                <td>$region</td>
-                <td>: Region name of Contentstack.</td>
+                <td>array</td>
+                <td>$config</td>
+                <td>: Stack Configuration to provide region.</td>
             </tr>
             </table>
 
@@ -166,7 +150,7 @@
 
                     <table class="table table-condensed">
         <tr>
-            <td><a href="../Contentstack/Stack/Stack.html"><abbr title="Contentstack\Stack\Stack">Stack</abbr></a></td>
+            <td>Stack</td>
             <td></td>
         </tr>
     </table>
@@ -180,12 +164,8 @@
             </div>
 
     
-            </div>
-                <div id="footer">
-        Generated by <a href="http://sami.sensiolabs.org/">Sami, the API Documentation Generator</a>.
-    </div>
-
-        </div>
+            </div><div id="footer">
+        Generated by <a href="https://github.com/code-lts/doctum">Doctum, a API Documentation generator and fork of Sami</a>.</div></div>
     </div>
     </body>
 

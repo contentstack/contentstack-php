@@ -24,8 +24,14 @@ To initialize the SDK, you will need to specify the API Key, Delivery Token, and
 use Contentstack\Contentstack;
 $stack = Contentstack::Stack(API_KEY, DELIVERY_TOKEN, ENV_NAME);
 ```
+For Setting the European Region:
+If you want to set and use European region, refer to the code below:
 
-
+```php
+use Contentstack\Contentstack;
+use Contentstack\ContentstackRegion;
+$stack = Contentstack::Stack(API_KEY, DELIVERY_TOKEN, ENV_NAME, array('region'=> ContentstackRegion.EU));
+```
 #### Download and install library:
 To use the PHP SDK, you need to perform the following steps:
 
