@@ -14,13 +14,11 @@
  * @link      https://pear.php.net/package/contentstack
  * */
 
-namespace Contentstack\Stack\ContentType\Entry;
+namespace Contentstack\Stack\ContentType;
 
-use Contentstack\Stack\ContentType\BaseQuery\BaseQuery;
+use Contentstack\Stack\BaseQuery;
 use Contentstack\Support\Utility;
 
-require_once __DIR__."/base_query.php";
-require_once __DIR__."/../../Support/Utility.php";
 /**
  * Entry
  * 
