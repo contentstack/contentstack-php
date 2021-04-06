@@ -1,7 +1,7 @@
 <?php
 
 use Contentstack\Support\Utility;
-require_once __DIR__."/Utility.php";
+
 if(!function_exists('contentstackGetFunctionName')) {
     /*
      * To get the Query method name
@@ -168,7 +168,7 @@ if (!function_exists('contentstackLogical')) {
             throw contentstackCreateError('Invalid input for "'.contentstackGetFunctionName().'". At least one Query or array object is expected');
         foreach($value as $*** => $_qry) {
             if(!Utility::isKeySet($query, $operator)) $query[$operator] = array();
-            if($_qry instanceof \Contentstack\Stack\ContentType\BaseQuery\BaseQuery)
+            if($_qry instanceof \Contentstack\Stack\BaseQuery)
                 array_push($query[$operator], $_qry->subQuery);
             else if(is_array($_qry))
                 array_push($query[$operator], $_qry);
