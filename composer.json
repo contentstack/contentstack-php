@@ -27,16 +27,14 @@
     "require-dev": {
         "phpunit/phpunit": "^9.0",
         "phpunit/php-code-coverage": "^8.0",
-        "sami/sami": "^4.1",
-        "contentstack/utils": "dev-master"
+        "code-lts/doctum": "^5.3"
+    },
+    "scripts": {
+        "generate:docs": "vendor/bin/doctum.php update ./config.php",
+        "test": "vendor/bin/phpunit"
     },
     "require": {
-        "php" : ">=5.5.0"
-    },
-    "repositories": [
-        {
-            "type": "path",
-            "url": "../contentstack-utils-php/"
-        }
-    ]
+        "php" : ">=5.5.0",
+        "contentstack/utils": "^1.0"
+    }
 }
