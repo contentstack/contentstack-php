@@ -7,6 +7,7 @@ use Contentstack\Test\REST;
 use PHPUnit\Framework\TestCase;
 use Contentstack\Support\Utility;
 use Contentstack\Contentstack;
+use Contentstack\Utils\Model\Option;
 
 class EntriesTest extends TestCase {
     public static $rest;
@@ -148,6 +149,18 @@ class EntriesTest extends TestCase {
         $this->assertTrue($_entries[1]['uid'] === CT_ContentType);
     }
 
+    public function testFindIncludeEmbeddedItems() {
+        $_entries = self::$Stack->ContentType('rte_embed')->Query()->toJSON()->includeEmbeddedItems()->find();
+        
+        for($i = 0; $i < count($_entries[0]); $i++) {
+            print_r($_entries[0][$i]["rich_text_editor"]);
+            if ($_entries[0][$i]["rich_text_editor"] !== "undefined") {
+                $embedded = Contentstack::renderContent($_entries[0][$i]["rich_text_editor"], new Option($_entries[0][$i]));
+            }
+        }
+        $this->assertArrayHasKey(0, $_entries);
+
+    }
     public function testFindIncludeReferenceContentTypeUID() {
         $_entries = self::$Stack->ContentType(CT_ContentType)->Query()->toJSON()->includeReferenceContentTypeUID()->find();
         $_flag = "false";
