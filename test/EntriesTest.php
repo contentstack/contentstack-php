@@ -150,11 +150,10 @@ class EntriesTest extends TestCase {
     }
 
     public function testFindIncludeEmbeddedItems() {
-        $_entries = self::$Stack->ContentType('rte_embed')->Query()->toJSON()->includeEmbeddedItems()->find();
+        $_entries = self::$Stack->ContentType(CT_ContentType)->Query()->toJSON()->includeEmbeddedItems()->find();
         
         for($i = 0; $i < count($_entries[0]); $i++) {
-            print_r($_entries[0][$i]["rich_text_editor"]);
-            if ($_entries[0][$i]["rich_text_editor"] !== "undefined") {
+            if ($_entries[0][$i]["rich_text_editor"]) {
                 $embedded = Contentstack::renderContent($_entries[0][$i]["rich_text_editor"], new Option($_entries[0][$i]));
             }
         }
