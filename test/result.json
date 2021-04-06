@@ -1,8 +1,3 @@
 {
-    "stack": {
-        "api_key": "bltf3ce50cd42c8f415",
-        "delivery_token": "cs5d01445f9916f7018c9b4494",
-        "environment": "mobile"
-    },
-    "host":"cdn.contentstack.io"
+   
 }
