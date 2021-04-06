@@ -14,11 +14,11 @@
  * @link      https://pear.php.net/package/contentstack
  * */
 
-namespace Contentstack\Stack\ContentType\BaseQuery;
+namespace Contentstack\Stack;
 use Contentstack\Support\Utility;
 
-require_once __DIR__ . "/../../Support/helper.php";
-require_once __DIR__."/../../Support/Utility.php";
+require_once __DIR__ . "/../Support/helper.php";
+
 /**
  * BaseQuery
  * Base Class where all the Queries will be created
@@ -365,9 +365,10 @@ abstract class BaseQuery
     public function includeEmbeddedItems() 
     {
         $this->queryObject->_query = call_user_func(
-            'contentstackAddBoolean', 
+            'contentstackReferences', 
             'include_embedded_items', 
-            $this->queryObject->_query
+            $this->queryObject->_query,
+            ["BASE"]
         );
         return $this->queryObject;
     }
