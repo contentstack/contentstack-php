@@ -14,19 +14,13 @@
  * @license   https://github.com/contentstack/contentstack-php/blob/master/LICENSE.txt MIT Licence
  * @link      https://pear.php.net/package/contentstack
  * */
-namespace Contentstack\Stack\Assets;
+namespace Contentstack\Stack;
 
-require_once __DIR__ . "/../../Support/helper.php";
+require_once __DIR__ . "/../Support/helper.php";
 
-use Contentstack\Stack\ContentType\Query\Query;
-use Contentstack\Stack\ContentType\BaseQuery\BaseQuery;
+use Contentstack\Stack\ContentType\Query;
+use Contentstack\Stack\BaseQuery;
 use Contentstack\Support\Utility;
-
-
-require_once __DIR__.'/query.php';
-require_once __DIR__."/base_query.php";
-require_once __DIR__."/../../Support/Utility.php";
-
 
 /**
  * Assets refer to all the media files (images, videos, PDFs, 
