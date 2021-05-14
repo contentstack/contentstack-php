@@ -35,14 +35,18 @@ $stack = Contentstack::Stack(API_KEY, DELIVERY_TOKEN, ENV_NAME, array('region'=>
 #### Download and install library:
 To use the PHP SDK, you need to perform the following steps:
 
-1. Download/clone the PHP SDK from [here](https://www.contentstack.com/docs/platforms/php/php_sdk_latest). 
-2. Paste the downloaded ZIP file of the PHP SDK to a folder of your choice. 
+1. [Download](https://www.contentstack.com/docs/platforms/php/php_sdk_latest) the PHP SDK
+2. Create `dependencies` folder in your project directory
+3. Move this downloaded zip file to a `dependencies` folder
+4. Download the [MabeEnum](https://github.com/marc-mabe/php-enum)
+5. Create `marc-mabe` folder inside the `dependencies` folder
+6. Move the `php-enum` folder inside the `marc-mabe` folder
 
 To initialize the SDK, you will need to specify the API Key, Delivery Token, and Environment Name of your stack.
 
 ```php
+include_once __DIR__ . '/dependencies/contentstack/index.php';
 use Contentstack\Contentstack;
-include_once "contentstack/contentstack.php";
 $stack = Contentstack::Stack(API_KEY, DELIVERY_TOKEN, ENV_NAME);
 ```
 

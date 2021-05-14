@@ -280,6 +280,16 @@ the referenced entries returned in the response.</p>                </div>
                     Query
                 </div>
                 <div class="col-md-8 type">
+                    <a href="#method_includeEmbeddedItems">includeEmbeddedItems</a>()
+        
+                                            <p>To include Embedded Items along with entries</p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    Query
+                </div>
+                <div class="col-md-8 type">
                     <a href="#method_includeCount">includeCount</a>()
         
                                             <p>To include the count of entries based on the results</p>                </div>
@@ -1108,8 +1118,38 @@ the referenced entries returned in the response.</p>                            
 
             </div>
                     <div class="method-item">
-                    <h3 id="method_includeCount">
+                    <h3 id="method_includeEmbeddedItems">
         <div class="location">at line 365</div>
+        <code>                    Query
+    <strong>includeEmbeddedItems</strong>()
+        </code>
+    </h3>
+    <div class="details">
+            
+    
+
+                    <div class="method-description">
+                                    <p>To include Embedded Items along with entries</p>                                                </div>
+                <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>Query</td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_includeCount">
+        <div class="location">at line 381</div>
         <code>                    Query
     <strong>includeCount</strong>()
         </code>
@@ -1139,7 +1179,7 @@ the referenced entries returned in the response.</p>                            
             </div>
                     <div class="method-item">
                     <h3 id="method_count">
-        <div class="location">at line 380</div>
+        <div class="location">at line 396</div>
         <code>                    Query
     <strong>count</strong>()
         </code>
@@ -1169,7 +1209,7 @@ the referenced entries returned in the response.</p>                            
             </div>
                     <div class="method-item">
                     <h3 id="method_includeOwner">
-        <div class="location">at line 396</div>
+        <div class="location">at line 412</div>
         <code>                    Query
     <strong>includeOwner</strong>()
         </code>
@@ -1199,7 +1239,7 @@ the referenced entries returned in the response.</p>                            
             </div>
                     <div class="method-item">
                     <h3 id="method_addParam">
-        <div class="location">at line 414</div>
+        <div class="location">at line 430</div>
         <code>                    Query
     <strong>addParam</strong>(string $key = &#039;&#039;, string $value = &#039;&#039;)
         </code>
@@ -1250,7 +1290,7 @@ the referenced entries returned in the response.</p>                            
             </div>
                     <div class="method-item">
                     <h3 id="method_language">
-        <div class="location">at line 432</div>
+        <div class="location">at line 448</div>
         <code>                    Query
     <strong>language</strong>($lang = &#039;&#039;)
         </code>
@@ -1293,7 +1333,7 @@ the referenced entries returned in the response.</p>                            
             </div>
                     <div class="method-item">
                     <h3 id="method_skip">
-        <div class="location">at line 449</div>
+        <div class="location">at line 465</div>
         <code>                    Query
     <strong>skip</strong>(int $skip = 0)
         </code>
@@ -1336,7 +1376,7 @@ the referenced entries returned in the response.</p>                            
             </div>
                     <div class="method-item">
                     <h3 id="method_tags">
-        <div class="location">at line 466</div>
+        <div class="location">at line 482</div>
         <code>                    Query
     <strong>tags</strong>(array $tags = array())
         </code>
@@ -1379,7 +1419,7 @@ the referenced entries returned in the response.</p>                            
             </div>
                     <div class="method-item">
                     <h3 id="method_limit">
-        <div class="location">at line 487</div>
+        <div class="location">at line 503</div>
         <code>                    Query
     <strong>limit</strong>(int $limit = &#039;&#039;)
         </code>
@@ -1422,7 +1462,7 @@ the referenced entries returned in the response.</p>                            
             </div>
                     <div class="method-item">
                     <h3 id="method_containedIn">
-        <div class="location">at line 509</div>
+        <div class="location">at line 525</div>
         <code>                    Query
     <strong>containedIn</strong>(string $field = &#039;&#039;, array $value = array())
         </code>
@@ -1475,7 +1515,7 @@ comparision is going to happen</li>
             </div>
                     <div class="method-item">
                     <h3 id="method_notContainedIn">
-        <div class="location">at line 534</div>
+        <div class="location">at line 550</div>
         <code>                    Query
     <strong>notContainedIn</strong>(string $field = &#039;&#039;, array $value = array())
         </code>
@@ -1528,7 +1568,7 @@ comparision is going to happen</li>
             </div>
                     <div class="method-item">
                     <h3 id="method_where">
-        <div class="location">at line 558</div>
+        <div class="location">at line 574</div>
         <code>                    Query
     <strong>where</strong>(string $key = &#039;&#039;, string $value = &#039;&#039;)
         </code>
@@ -1580,7 +1620,7 @@ comparision needs to be done</li>
             </div>
                     <div class="method-item">
                     <h3 id="method_lessThan">
-        <div class="location">at line 575</div>
+        <div class="location">at line 591</div>
         <code>                    Query
     <strong>lessThan</strong>(string $field = &#039;&#039;, string $value = &#039;&#039;)
         </code>
@@ -1632,7 +1672,7 @@ comparision needs to be done</li>
             </div>
                     <div class="method-item">
                     <h3 id="method_lessThanEqualTo">
-        <div class="location">at line 596</div>
+        <div class="location">at line 612</div>
         <code>                    Query
     <strong>lessThanEqualTo</strong>(string $field = &#039;&#039;, string $value = &#039;&#039;)
         </code>
@@ -1684,7 +1724,7 @@ comparision needs to be done</li>
             </div>
                     <div class="method-item">
                     <h3 id="method_greaterThan">
-        <div class="location">at line 617</div>
+        <div class="location">at line 633</div>
         <code>                    Query
     <strong>greaterThan</strong>(string $field = &#039;&#039;, string $value = &#039;&#039;)
         </code>
@@ -1736,7 +1776,7 @@ comparision needs to be done</li>
             </div>
                     <div class="method-item">
                     <h3 id="method_greaterThanEqualTo">
-        <div class="location">at line 638</div>
+        <div class="location">at line 654</div>
         <code>                    Query
     <strong>greaterThanEqualTo</strong>(string $field = &#039;&#039;, string $value = &#039;&#039;)
         </code>
@@ -1788,7 +1828,7 @@ comparision needs to be done</li>
             </div>
                     <div class="method-item">
                     <h3 id="method_notEqualTo">
-        <div class="location">at line 659</div>
+        <div class="location">at line 675</div>
         <code>                    Query
     <strong>notEqualTo</strong>(string $field = &#039;&#039;, string $value = &#039;&#039;)
         </code>
@@ -1840,7 +1880,7 @@ comparision needs to be done</li>
             </div>
                     <div class="method-item">
                     <h3 id="method_addQuery">
-        <div class="location">at line 676</div>
+        <div class="location">at line 692</div>
         <code>                    Query
     <strong>addQuery</strong>(array $_query = array())
         </code>
@@ -1883,7 +1923,7 @@ comparision needs to be done</li>
             </div>
                     <div class="method-item">
                     <h3 id="method_getQuery">
-        <div class="location">at line 690</div>
+        <div class="location">at line 706</div>
         <code>                    query
     <strong>getQuery</strong>()
         </code>
