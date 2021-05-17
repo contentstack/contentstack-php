@@ -55,7 +55,7 @@ class Stack
         $api_key = '', 
         $delivery_token = '', 
         $environment = '', 
-        $config = array('region'=> '')
+        $config = array('region'=> '', 'branch'=> '')
     ) {
        
         if ($config && $config !== "undefined" && $config['region'] !== "undefined" && $config['region'] =="eu" ) {
@@ -65,7 +65,8 @@ class Stack
             'stack', array('api_key' => $api_key, 
             'access_token' => $delivery_token, 
             'environment' => $environment, 
-            'region' => $config['region'] ?? '')
+            'region' => $config['region'] ?? '',
+            'branch' => $config['branch'] ?? '')
         );
         $this->environment = $this->header['environment'];
         unset($this->header['environment']);
@@ -220,7 +221,7 @@ class Stack
     /**
      * This function sets API Key.
      * 
-     * @param string $api_key - Name of Environment
+     * @param string $api_key - API Key
      * 
      * @return Stack
      * */
@@ -233,7 +234,7 @@ class Stack
     /**
      * This function sets Delivery Token.
      * 
-     * @param string $delivery_token - Name of Environment
+     * @param string $delivery_token - Delivery Token
      * 
      * @return Stack
      * */
@@ -284,6 +285,31 @@ class Stack
     public function getEnvironment() 
     {
         return $this->environment;
+    }
+
+
+    /**
+     * This function sets Branch.
+     * 
+     * @param string $branch - Name of branch
+     * 
+     * @return Stack
+     * */
+    public function setBranch($branch = '')
+    {
+        Utility::validateInput('branch', $branch);
+        $this->header['branch'] = $branch;
+        return $this;
+    }
+
+    /**
+     * This function returns Branch.
+     * 
+     * @return string
+     * */
+    public function Branch()
+    {
+        return $this->header['branch'];
     }
 
     /**
