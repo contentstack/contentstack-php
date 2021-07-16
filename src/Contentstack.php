@@ -60,4 +60,14 @@ abstract class Contentstack
     {
         return Utils::renderContents($contents, $option);
     }
+
+    public static function jsonToHtml(object $content, Option $option): string 
+    {
+        return Utils::jsonToHtml($content, $option);
+    }
+
+    public static function jsonArrayToHtml(array $contents, Option $option): array
+    {
+        return Utils::jsonArrayToHtml($contents, $option);
+    }
 }
