@@ -33,6 +33,11 @@ class EntriesTest extends TestCase {
         }
     }
 
+    public function testJsonRTE () {
+        $jsonObject = json_decode('{ "uid":"0d7fd", "_version":13, "attrs":{ }, "children":[{"type":"p","attrs":{},"uid":"0a1b5676aa510e5a","children":[{"text":"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed condimentum iaculis magna in vehicula. Vestibulum vitae convallis lacus. Praesent a diam iaculis turpis rhoncus faucibus. Aliquam sed pulvinar sem."}]}],"type":"doc"}');
+        $result = Contentstack::jsonToHtml($jsonObject, new Option());
+        $this->assertEquals('<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed condimentum iaculis magna in vehicula. Vestibulum vitae convallis lacus. Praesent a diam iaculis turpis rhoncus faucibus. Aliquam sed pulvinar sem.</p>', $result);
+    }
     public function testFind() {
         $_entries = self::$Stack->ContentType(CT_ContentType)->Query()->toJSON()->find();
         $this->assertArrayHasKey(0, $_entries);
