@@ -55,10 +55,10 @@ class Stack
         $api_key = '', 
         $delivery_token = '', 
         $environment = '', 
-        $config = array('region'=> '')
+        $config = array('region'=> '', 'live_preview' => array())
     ) {
        
-        if ($config && $config !== "undefined" && $config['region'] !== "undefined" && $config['region'] =="eu" ) {
+        if ($config && $config !== "undefined" && array_key_exists('region', $config) && $config['region'] !== "undefined" && $config['region'] =="eu" ) {
             $this->host = $config['region'].'-cdn.contentstack.com';
         }
         $this->header = Utility::validateInput(
@@ -69,6 +69,7 @@ class Stack
         );
         $this->environment = $this->header['environment'];
         unset($this->header['environment']);
+        $this->live_preview = $config['live_preview'] ?? array();
         return $this;
     }
 
@@ -136,6 +137,10 @@ class Stack
     }
 
 
+    public function LivePreviewQuery($parameters) {
+        $this->live_preview['hash'] = $parameters['hash'] ?? 'init';
+        $this->live_preview['content_type_uid'] = $parameters['content_type_uid'];
+    }
 
     /**
      * To get the last_activity information of the 
