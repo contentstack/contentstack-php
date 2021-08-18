@@ -98,6 +98,13 @@ class Utility
             throw new \Exception($e->getMessage());
         }
     }
+
+    public static function isLivePreview($query) {
+        if ($query && isset($query->contentType)) { 
+            return ($query->contentType->stack->live_preview['enable'] == true && array_***_exists('content_type_uid', $query->contentType->stack->live_preview) && $query->contentType->uid == $query->contentType->stack->live_preview['content_type_uid']);
+        }
+        return false;
+    }
     /**
      * Get the domain from the current object
      * 
@@ -109,7 +116,7 @@ class Utility
     {
         $stack = $query;  
         if ($query && isset($query->contentType)) { 
-            $stack = $query->contentType->stack; 
+            $stack = $query->contentType->stack;
         }
         if ($query && isset($query->stack)) {
             $stack = $query->stack;
@@ -117,8 +124,12 @@ class Utility
         if ($query && isset($query->assets)) {
             $stack = $query->assets->stack;
         }
+        $host = $stack->getHost();
+        if (Utility::isLivePreview($query)) {
+            $host = $stack->live_preview['host'];
+        }
         return $stack->getProtocol()
-            .'://'.$stack->getHost()
+            .'://'.$host
             .':'
             .$stack->getPort().VERSION;
     }
@@ -136,8 +147,10 @@ class Utility
         $URL = '';
         switch ($type) {
         case 'set_environment':
-            $URL = Utility::getDomain($queryObject).ENVIRONMENTS.''
-            .$queryObject->contentType->stack->getEnvironment();
+            if (!Utility::isLivePreview($queryObject)) {
+                $URL = Utility::getDomain($queryObject).ENVIRONMENTS.''
+                .$queryObject->contentType->stack->getEnvironment();
+            }
             break;
         case 'get_last_activites':
             $URL = Utility::getDomain($queryObject).CONTENT_TYPES;
@@ -374,7 +387,12 @@ class Utility
             $request_headers = array();
             $request_headers[] = 'x-user-agent: contentstack-php/1.6.1';
             $request_headers[] = 'api_***: '.$Headers["api_***"];
-            $request_headers[] = 'access_token: '.$Headers["access_token"];
+            if (Utility::isLivePreview($queryObject)) {
+                $request_headers[] = 'authorization: '.$queryObject->contentType->stack->live_preview['authorization'] ;
+                $request_headers[] = 'hash: '.($queryObject->contentType->stack->live_preview['hash'] ?? 'init');
+            }else {
+                $request_headers[] = 'access_token: '.$Headers["access_token"];
+            }
             curl_setopt($http, CURLOPT_HTTPHEADER, $request_headers);
             
             curl_setopt($http, CURLOPT_HEADER, false);
