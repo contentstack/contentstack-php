@@ -138,7 +138,7 @@ class Stack
 
 
     public function LivePreviewQuery($parameters) {
-        $this->live_preview['hash'] = $parameters['hash'] ?? 'init';
+        $this->live_preview['hash'] = $parameters['live_preview'] ?? 'init';
         $this->live_preview['content_type_uid'] = $parameters['content_type_uid'];
     }
 
