@@ -28,7 +28,7 @@ class EntriesTest extends TestCase {
         self::$LivePreviewStack = Contentstack::Stack(self::$rest->getAPIKEY(), self::$rest->getAccessToken(),  self::$rest->getEnvironmentName(), array('live_preview' => array(
             'enable'=> true,
             'host' => 'preview.contentstack.com',
-            'authorization' => 'token'
+            'management_token' => 'token'
         )));
 
     }
