@@ -379,6 +379,9 @@ class Utility
         $server_output = '';
         
         if ($queryObject) {
+            if (Utility::isLivePreview($queryObject)) {
+                $queryObject->_query['live_preview'] = ($queryObject->contentType->stack->live_preview['live_preview'] ?? 'init');
+            }
             $http = curl_init(Utility::contentstackUrl($queryObject, $type));  
 
             // setting the HTTP Headers
@@ -388,8 +391,7 @@ class Utility
             $request_headers[] = 'x-user-agent: contentstack-php/1.6.1';
             $request_headers[] = 'api_key: '.$Headers["api_key"];
             if (Utility::isLivePreview($queryObject)) {
-                $request_headers[] = 'authorization: '.$queryObject->contentType->stack->live_preview['authorization'] ;
-                $request_headers[] = 'hash: '.($queryObject->contentType->stack->live_preview['hash'] ?? 'init');
+                $request_headers[] = 'authorization: '.$queryObject->contentType->stack->live_preview['management_token'] ;
             }else {
                 $request_headers[] = 'access_token: '.$Headers["access_token"];
             }
