@@ -8,7 +8,7 @@
  * @package   Contentstack
  * @author    Uttam K Ukkoji <uttamukkoji@gmail.com>
  * @author    Rohit Mishra <rhtmishra4545@gmail.com>
- * @copyright 2012-2020 Contentstack. All Rights Reserved
+ * @copyright 2012-2021 Contentstack. All Rights Reserved
  * @license   https://github.com/contentstack/contentstack-php/blob/master/LICENSE.txt MIT Licence
  * @link      https://pear.php.net/package/contentstack
  */
@@ -26,7 +26,7 @@ use Contentstack\Utils\Model\Option;
  * @package   Contentstack
  * @author    Uttam K Ukkoji <uttamukkoji@gmail.com>
  * @author    Rohit Mishra <rhtmishra4545@gmail.com>
- * @copyright 2012-2020 Contentstack. All Rights Reserved
+ * @copyright 2012-2021 Contentstack. All Rights Reserved
  * @license   https://github.com/contentstack/contentstack-php/blob/master/LICENSE.txt MIT Licence
  * @link      https://pear.php.net/package/contentstack
  */
@@ -46,7 +46,7 @@ abstract class Contentstack
     public static function Stack($api_*** = '',
         $access_token = '',
         $environment = '',
-        $config = array('region'=> '', 'live_preview' => array('enable' => false))
+        $config = array('region'=> '', 'live_preview' => array('enable' => false, 'host' => 'api.contentstack.io'))
     ) {
         return new Stack($api_***, $access_token, $environment, $config);
     }
