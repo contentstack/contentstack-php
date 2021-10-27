@@ -46,7 +46,7 @@ abstract class Contentstack
     public static function Stack($api_*** = '',
         $access_token = '',
         $environment = '',
-        $config = array('region'=> '', 'live_preview' => array('enable' => false, 'host' => 'api.contentstack.io'))
+        $config = array('region'=> '', 'branch'=> '', 'live_preview' => array('enable' => false, 'host' => 'api.contentstack.io'))
     ) {
         return new Stack($api_***, $access_token, $environment, $config);
     }
