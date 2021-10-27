@@ -2,9 +2,10 @@
 ## CHANGELOG
 ------------------------------------------------
 ## Version 2.1.0
-###### Date: 14-Oct-2021
+###### Date: 29-Oct-2021
 ### New Feature
     - Live Preview feature support added
+    - Content branching feature support added
 ------------------------------------------------
 
 ## Version 2.0.0
