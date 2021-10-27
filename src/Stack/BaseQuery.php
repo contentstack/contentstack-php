@@ -307,6 +307,23 @@ abstract class BaseQuery
         
         return $this->queryObject;
     }
+
+    /** 
+     * To include branch of publish content.
+     * 
+     * @return Query
+    */
+    public function includeBranch() 
+    {
+        $this->queryObject->_query = call_user_func(
+            'contentstackAddBoolean', 
+            'include_branch', 
+            $this->queryObject->_query
+        );
+        
+        return $this->queryObject;
+    }
+
     /**
      * To include schema along with entries
      * 
