@@ -395,6 +395,9 @@ class Utility
             }else {
                 $request_headers[] = 'access_token: '.$Headers["access_token"];
             }
+            if ($Headers["branch"] !== '' && $Headers["branch"] !== "undefined") {
+                $request_headers[] = 'branch: '.$Headers["branch"];
+            }
             curl_setopt($http, CURLOPT_HTTPHEADER, $request_headers);
             
             curl_setopt($http, CURLOPT_HEADER, false);
