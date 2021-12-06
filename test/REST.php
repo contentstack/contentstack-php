@@ -25,7 +25,7 @@ class REST
         unset($value['roles']);
         return $value;
     }
-    
+
     /*
      * Set method is used to add the variable to the private variable of current instance
      * @param
