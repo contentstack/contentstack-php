@@ -11,4 +11,5 @@ define('LIMIT_ENTRY_COUNT', 10);
 
 
 // fpr query test params
+define('CT_REF', 'reference');
 define('CT_ContentType', 'ctwithallfields');
