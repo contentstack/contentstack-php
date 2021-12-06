@@ -143,6 +143,7 @@ abstract class BaseQuery
     /**
      * To search the given string in the entries
      * 
+     * @deprecated since verion 2.2.0
      * @param $search - string to be search in entries
      * 
      * @return Query
