@@ -105,6 +105,7 @@ class Utility
         }
         return false;
     }
+
     /**
      * Get the domain from the current object
      * 
@@ -129,7 +130,7 @@ class Utility
             $host = $stack->live_preview['host'];
         }
         return $stack->getProtocol()
-            .'://'.$host
+            .'://'.$stack->getHost()
             .':'
             .$stack->getPort().VERSION;
     }
