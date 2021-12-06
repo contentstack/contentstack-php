@@ -137,7 +137,6 @@ class Stack
         }                                   
     }
 
-
     public function LivePreviewQuery($parameters) {
         $this->live_preview['live_preview'] = $parameters['live_preview'] ?? 'init';
         $this->live_preview['content_type_uid'] = $parameters['content_type_uid'];
@@ -291,7 +290,6 @@ class Stack
     {
         return $this->environment;
     }
-
 
     /**
      * This function sets Branch.

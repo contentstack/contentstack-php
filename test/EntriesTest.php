@@ -24,7 +24,6 @@ class EntriesTest extends TestCase {
         if (self::$rest->getHost() !== NULL) {
             self::$Stack->setHost(self::$rest->getHost());
         }
-
         self::$LivePreviewStack = Contentstack::Stack(self::$rest->getAPIKEY(), self::$rest->getAccessToken(),  self::$rest->getEnvironmentName(), array('live_preview' => array(
             'enable'=> true,
             'host' => 'preview.contentstack.com',
