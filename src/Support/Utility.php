@@ -8,7 +8,7 @@
  * @package   Contentstack
  * @author    Uttam K Ukkoji <uttamukkoji@gmail.com>
  * @author    Rohit Mishra <rhtmishra4545@gmail.com>
- * @copyright 2012-2020 Contentstack. All Rights Reserved
+ * @copyright 2012-2021 Contentstack. All Rights Reserved
  * @license   https://github.com/contentstack/contentstack-php/blob/master/LICENSE.txt MIT Licence
  * @link      https://pear.php.net/package/contentstack
  * */
@@ -24,7 +24,7 @@ use Contentstack\Stack\Result;
  * @package   Contentstack
  * @author    Uttam K Ukkoji <uttamukkoji@gmail.com>
  * @author    Rohit Mishra <rhtmishra4545@gmail.com>
- * @copyright 2012-2020 Contentstack. All Rights Reserved
+ * @copyright 2012-2021 Contentstack. All Rights Reserved
  * @license   https://github.com/contentstack/contentstack-php/blob/master/LICENSE.txt MIT Licence
  * @link      https://pear.php.net/package/contentstack
  * */
@@ -98,6 +98,14 @@ class Utility
             throw new \Exception($e->getMessage());
         }
     }
+
+    public static function isLivePreview($query) {
+        if ($query && isset($query->contentType)) { 
+            return ($query->contentType->stack->live_preview['enable'] == true && array_key_exists('content_type_uid', $query->contentType->stack->live_preview) && $query->contentType->uid == $query->contentType->stack->live_preview['content_type_uid']);
+        }
+        return false;
+    }
+
     /**
      * Get the domain from the current object
      * 
@@ -109,13 +117,17 @@ class Utility
     {
         $stack = $query;  
         if ($query && isset($query->contentType)) { 
-            $stack = $query->contentType->stack; 
+            $stack = $query->contentType->stack;
         }
         if ($query && isset($query->stack)) {
             $stack = $query->stack;
         }
         if ($query && isset($query->assets)) {
             $stack = $query->assets->stack;
+        }
+        $host = $stack->getHost();
+        if (Utility::isLivePreview($query)) {
+            $host = $stack->live_preview['host'];
         }
         return $stack->getProtocol()
             .'://'.$stack->getHost()
@@ -136,8 +148,10 @@ class Utility
         $URL = '';
         switch ($type) {
         case 'set_environment':
-            $URL = Utility::getDomain($queryObject).ENVIRONMENTS.''
-            .$queryObject->contentType->stack->getEnvironment();
+            if (!Utility::isLivePreview($queryObject)) {
+                $URL = Utility::getDomain($queryObject).ENVIRONMENTS.''
+                .$queryObject->contentType->stack->getEnvironment();
+            }
             break;
         case 'get_last_activites':
             $URL = Utility::getDomain($queryObject).CONTENT_TYPES;
@@ -366,15 +380,25 @@ class Utility
         $server_output = '';
         
         if ($queryObject) {
+            if (Utility::isLivePreview($queryObject)) {
+                $queryObject->_query['live_preview'] = ($queryObject->contentType->stack->live_preview['live_preview'] ?? 'init');
+            }
             $http = curl_init(Utility::contentstackUrl($queryObject, $type));  
 
             // setting the HTTP Headers
             $Headers     = Utility::headers($queryObject);
 
             $request_headers = array();
-            $request_headers[] = 'x-user-agent: contentstack-php/1.6.1';
+            $request_headers[] = 'x-user-agent: contentstack-php/2.1.0';
             $request_headers[] = 'api_key: '.$Headers["api_key"];
-            $request_headers[] = 'access_token: '.$Headers["access_token"];
+            if (Utility::isLivePreview($queryObject)) {
+                $request_headers[] = 'authorization: '.$queryObject->contentType->stack->live_preview['management_token'] ;
+            }else {
+                $request_headers[] = 'access_token: '.$Headers["access_token"];
+            }
+            if ($Headers["branch"] !== '' && $Headers["branch"] !== "undefined") {
+                $request_headers[] = 'branch: '.$Headers["branch"];
+            }
             curl_setopt($http, CURLOPT_HTTPHEADER, $request_headers);
             
             curl_setopt($http, CURLOPT_HEADER, false);
