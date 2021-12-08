@@ -12,6 +12,7 @@ use Contentstack\Utils\Model\Option;
 class EntriesTest extends TestCase {
     public static $rest;
     public static $Stack;
+    public static $LivePreviewStack;
     public static $_uid;
     /*
      * Setup before the test suites executes
@@ -23,6 +24,12 @@ class EntriesTest extends TestCase {
         if (self::$rest->getHost() !== NULL) {
             self::$Stack->setHost(self::$rest->getHost());
         }
+        self::$LivePreviewStack = Contentstack::Stack(self::$rest->getAPIKEY(), self::$rest->getAccessToken(),  self::$rest->getEnvironmentName(), array('live_preview' => array(
+            'enable'=> true,
+            'host' => 'preview.contentstack.com',
+            'management_token' => 'token'
+        )));
+
     }
     /*
      * Tear Down after the test suites executes
@@ -47,6 +54,21 @@ class EntriesTest extends TestCase {
             if ($_entries[0][$i]['title'] === 'CB1-10') {
                 self::$_uid = $_entries[0][$i]['uid'];
             }
+        }
+    }
+    public function testLivePreviewEntry () {
+        $_entry = self::$LivePreviewStack->ContentType(CT_ContentType)->Entry(self::$_uid)->toJSON()->fetch();
+
+        $this->assertEquals($_entry['title'], 'CB1-10');
+    }
+
+    public function testLivePreviewEntrywithQuery () {
+        try {
+            self::$LivePreviewStack->livePreviewQuery(array('content_type_uid' => CT_ContentType));
+            $_entry = self::$LivePreviewStack->ContentType(CT_ContentType)->Entry(self::$_uid)->toJSON()->fetch();
+    
+        } catch (Exception $e) {
+            $this->assertTrue(true);  
         }
     }
 
