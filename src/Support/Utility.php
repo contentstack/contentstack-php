@@ -101,7 +101,7 @@ class Utility
 
     public static function isLivePreview($query) {
         if ($query && isset($query->contentType)) { 
-            return ($query->contentType->stack->live_preview['enable'] == true && array_key_exists('content_type_uid', $query->contentType->stack->live_preview) && $query->contentType->uid == $query->contentType->stack->live_preview['content_type_uid']);
+            return ($query->contentType->stack->live_preview['enable'] == true && array_key_exists('content_type_uid', $query->contentType->stack->live_preview) && strcmp($query->contentType->uid, $query->contentType->stack->live_preview['content_type_uid']) == 0);
         }
         return false;
     }
@@ -130,7 +130,7 @@ class Utility
             $host = $stack->live_preview['host'];
         }
         return $stack->getProtocol()
-            .'://'.$stack->getHost()
+            .'://'.$host
             .':'
             .$stack->getPort().VERSION;
     }
