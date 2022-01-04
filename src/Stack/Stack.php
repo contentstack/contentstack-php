@@ -57,9 +57,10 @@ class Stack
         $environment = '', 
         $config = array('region'=> '', 'branch'=> '', 'live_preview' => array())
     ) {
-       
+        $previewHost = 'api.contentstack.io';
         if ($config && $config !== "undefined" && array_key_exists('region', $config) && $config['region'] !== "undefined" && $config['region'] =="eu" ) {
             $this->host = $config['region'].'-cdn.contentstack.com';
+            $previewHost =  $config['region'].'-api.contentstack.com';
         }
         $this->header = Utility::validateInput(
             'stack', array('api_key' => $api_key, 
@@ -70,7 +71,8 @@ class Stack
         );
         $this->environment = $this->header['environment'];
         unset($this->header['environment']);
-        $this->live_preview = $config['live_preview'] ?? array();
+        $livePreview = array('enable' => false, 'host' => $previewHost);
+        $this->live_preview = $config['live_preview'] ? array_merge($livePreview, $config['live_preview']) : $livePreview;
         return $this;
     }
 
@@ -139,7 +141,7 @@ class Stack
 
     public function LivePreviewQuery($parameters) {
         $this->live_preview['live_preview'] = $parameters['live_preview'] ?? 'init';
-        $this->live_preview['content_type_uid'] = $parameters['content_type_uid'];
+        $this->live_preview['content_type_uid'] = $parameters['content_type_uid'] ?? null;
     }
 
     /**
