@@ -65,7 +65,13 @@ abstract class BaseQuery
     /**
      * To transform the Result object to server response content
      * 
-     * @return Result|array
+     * @example  //Converting response array to JSON format 
+     * 
+     * use Contentstack\Contentstack;
+     * $stack = Contentstack::Stack("API_KEY", "DELIVERY_TOKEN", "ENVIRONMENT");
+     * $result = $stack->ContentType('CONTENT_TYPE_UID')->Query()->toJSON()->find();
+     * 
+     * @return JSON
      * */
     public function toJSON() 
     {
@@ -78,6 +84,16 @@ abstract class BaseQuery
      * 
      * @param string $level      - 
      * @param array  $field_uids - field uids as array
+     * 
+     * @example In the Product content type, if we need to retrieve the data of entries of all the 
+     * other fields except the Price in USD parameter, you can send the parameter as:
+     * 
+     * except(string $level = 'BASE', array $field_uids = array())
+     * 
+     * use Contentstack\Contentstack;
+     * $stack = Contentstack::Stack("API_KEY", "DELIVERY_TOKEN", "ENVIRONMENT");
+     * $result = $stack->ContentType('product')->Entry('CONTENTTYPE_UID')->toJSON()->except('BASE',array('price'))->fetch();
+     *
      * 
      * @return Query
      * */
@@ -102,7 +118,16 @@ abstract class BaseQuery
      * @param string $level      - 
      * @param array  $field_uids - field uids as array
      * 
-     * @return Query
+     * @example In the Product content type, if we need to retrieve the data of only the Price in USD
+     *  parameter of all the entries, you can send the parameter as: 
+     * 
+     * only(string $level = 'BASE', array $field_uids = array())
+     * 
+     * use Contentstack\Contentstack;
+     * $stack = Contentstack::Stack("API_KEY", "DELIVERY_TOKEN", "ENVIRONMENT");
+     * $result = $stack->ContentType('product')->Entry('  ')->toJSON()->only('BASE',array('price'))->fetch();
+     * 
+     * @return Query|Entry
      * */
     public function only($level = 'BASE', $field_uids = array()) 
     {
@@ -123,6 +148,18 @@ abstract class BaseQuery
      * To include reference(s) of other content type in entries
      * 
      * @param $field_uids - array of reference field uids
+     * 
+     * @example //In the Product content type, there is a reference field called Categories, which refers entries of another content type. Let’s assume that you had 
+     * created an entry for the Product content type, and the value selected in the Categories field was ‘Mobiles’. If you fetch the entry using 
+     * the ‘Get a Single Entry’ API request, you would get all the details of the entry in the response, but the value against the Categories field 
+     * would be UID of the referenced entry (i.e., UID of the ‘Mobiles’ entry in this case).
+     * 
+     *  //In order to fetch the details of the entry used in the Categories reference field, you need to 
+     *  //use the include[] parameter in the following manner:
+     * 
+     * use Contentstack\Contentstack;
+     * $stack = Contentstack::Stack("API_KEY", "DELIVERY_TOKEN", "ENVIRONMENT");
+     * $results = $stack->ContentType('product')->Query()->toJSON()->includeReference(array('categories'))->find();
      * 
      * @return Query
      * */
@@ -146,6 +183,13 @@ abstract class BaseQuery
      * @deprecated since verion 2.2.0
      * @param $search - string to be search in entries
      * 
+     * @example In the Product content type, you have a entry text 'contentstack' in your content type, and you want to retrieve all the entries within this content type that have 
+     * values for this field anywhere with 'contentstack'.
+     * 
+     * use Contentstack\Contentstack;
+     * $stack = Contentstack::Stack("API_KEY", "DELIVERY_TOKEN", "ENVIRONMENT");
+     * $result = $stack->ContentType('product')->Query()->toJSON()->search('contentstack')->find();
+     * 
      * @return Query
      * */
     public function search($search = '') 
@@ -165,6 +209,18 @@ abstract class BaseQuery
      * @param $field_uid - field on which the regular 
      *                   expression test is going to perform
      * @param $regex     - Regular Expression Object
+     * 
+     * @example In the Product content type, you have a field named Color ("uid":"color") in your content type, and you want to retrieve all the entries within this content type that have 
+     * values for this field starting with 'Bl'.
+     * 
+     * use Contentstack\Contentstack;
+     * $stack = Contentstack::Stack("API_KEY", "DELIVERY_TOKEN", "ENVIRONMENT");
+     * $result = $stack->ContentType('product')->Query()->toJSON()->regex('color','^B1')->find();
+     * 
+     * Now, in order to perform a case-insensitive search, you can use the $options key to specify any regular expressions options:
+     * use Contentstack\Contentstack;
+     * $stack = Contentstack::Stack("API_KEY", "DELIVERY_TOKEN", "ENVIRONMENT");
+     * $result = $stack->ContentType('product')->Query()->toJSON()->regex('color','^B1','i')->find();
      * 
      * @return Query
      * */
@@ -186,6 +242,15 @@ abstract class BaseQuery
      * 
      * @param $query - Query Object or plain json object
      * 
+     * @example Let’s say you want to retrieve entries in which the Title field is set to 'Redmi Note 
+     * 3' and the Color field is 'Gold'. The query to be used for such a case would be:
+     * 
+     * use Contentstack\Contentstack;
+     * $stack = Contentstack::Stack("API_KEY", "DELIVERY_TOKEN", "ENVIRONMENT");
+     * $query1 = $stack->ContentType('product')->Query()->where('title', 'Redmi Note 3');
+     * $query2 = $stack->ContentType('product')->Query()->where('color', 'Gold');
+     * $entries = $stack->ContentType('product')->Query()->logicalAND($query1, $query2)->toJSON()->find();
+     * 
      * @return Query
      * */
     public function logicalAND() 
@@ -203,6 +268,15 @@ abstract class BaseQuery
      * Logical OR queries are pushed
      * 
      * @param $query - Query Object or plain json object
+     * 
+     * @example Let’s say you want to retrieve entries in which either the value for the Color field is 'Gold' or 'Black'. 
+     * The query to be used for such a case would be:
+     * 
+     * use Contentstack\Contentstack;
+     * $stack = Contentstack::Stack("API_KEY", "DELIVERY_TOKEN", "ENVIRONMENT");
+     * $query1 = $stack->ContentType('product')->Query()->where('color', 'Black');
+     * $query2 = $stack->ContentType('product')->Query()->where('color', 'Gold');
+     * $entries = $stack->ContentType('product')->Query()->logicalOR($query1, $query2)->toJSON()->find();
      * 
      * @return Query
      * */
@@ -222,6 +296,12 @@ abstract class BaseQuery
      * 
      * @param $field_uid - field uid to be sorted
      * 
+     * @example In the Product content type, if you wish to sort the entries with respect to their prices in ascending order.
+     * 
+     * use Contentstack\Contentstack;
+     * $stack = Contentstack::Stack("API_KEY", "DELIVERY_TOKEN", "ENVIRONMENT");
+     * $result = $stack->ContentType('product')->Query()->toJSON()->ascending('price')->find();
+     * 
      * @return Query
      * */
     public function ascending($field_uid = '') 
@@ -239,6 +319,12 @@ abstract class BaseQuery
      * To sort the entries in descending order of the specified field
      * 
      * @param $field_uid - field uid to be sorted
+     * 
+     * @example In the Product content type, if you wish to sort the entries with respect to their prices in descending order.
+     * 
+     * use Contentstack\Contentstack;
+     * $stack = Contentstack::Stack("API_KEY", "DELIVERY_TOKEN", "ENVIRONMENT");
+     * $result = $stack->ContentType('product')->Query()->toJSON()->descending('price')->find();
      * 
      * @return Query
      * */
@@ -258,6 +344,12 @@ abstract class BaseQuery
      * 
      * @param $field_uid - field uid against the 
      *                   value not existence is checked
+     * 
+     * @example In the Product content type, if we need to retrieve the data of entries of all the other fields except the Price in USD parameter.
+     * 
+     * use Contentstack\Contentstack;
+     * $stack = Contentstack::Stack("API_KEY", "DELIVERY_TOKEN", "ENVIRONMENT");
+     * $result = $stack->ContentType('product')->Query()->toJSON()->notExists('price')->find();
      * 
      * @return Query
      * */
@@ -279,6 +371,12 @@ abstract class BaseQuery
      * @param $field_uid - field uid against the 
      *                   value existence is checked
      * 
+     * @example In the Product content type, if we need to retrieve the data of only the Price in USD parameter of all the entries.
+     * 
+     * use Contentstack\Contentstack;
+     * $stack = Contentstack::Stack("API_KEY", "DELIVERY_TOKEN", "ENVIRONMENT");
+     * $result = $stack->ContentType('product')->Query()->toJSON()->exists('price')->find();
+     * 
      * @return Query
      * */
     public function exists($field_uid = '') 
@@ -296,6 +394,12 @@ abstract class BaseQuery
     /** 
      * To include fallback content if specified locale content is not publish.
      * 
+     * @example 
+     * 
+     * use Contentstack\Contentstack;
+     * $stack = Contentstack::Stack("API_KEY", "DELIVERY_TOKEN", "ENVIRONMENT");
+     * $result = $stack->ContentType('product')->Query()->toJSON()->includeFallback()->find();
+     * 
      * @return Query
     */
     public function includeFallback() 
@@ -311,6 +415,12 @@ abstract class BaseQuery
 
     /** 
      * To include branch of publish content.
+     * 
+     * @example 
+     * 
+     * use Contentstack\Contentstack;
+     * $stack = Contentstack::Stack("API_KEY", "DELIVERY_TOKEN", "ENVIRONMENT");
+     * $result = $stack->ContentType('product')->Query()->toJSON()->includeBranch()->find();
      * 
      * @return Query
     */
@@ -331,6 +441,12 @@ abstract class BaseQuery
      * @deprecated since verion 1.1.0
      * @Alternate  includeContentType
      * 
+     * @example 
+     * 
+     * use Contentstack\Contentstack;
+     * $stack = Contentstack::Stack("API_KEY", "DELIVERY_TOKEN", "ENVIRONMENT");
+     * $result = $stack->ContentType('product')->Query()->toJSON()->includeSchema()->find();
+     * 
      * @return Query
      * */
     public function includeSchema() 
@@ -348,6 +464,12 @@ abstract class BaseQuery
      * This method includes the content type UIDs of 
      * the referenced entries returned in the response.
      * 
+     * @example 
+     * 
+     * use Contentstack\Contentstack;
+     * $stack = Contentstack::Stack("API_KEY", "DELIVERY_TOKEN", "ENVIRONMENT");
+     * $result = $stack->ContentType('product')->Query()->toJSON()->includeReferenceContentTypeUID()->find();
+     * 
      * @return Query
      * */
     public function includeReferenceContentTypeUID() 
@@ -363,6 +485,12 @@ abstract class BaseQuery
     /**
      * To include content_type along with entries
      * 
+     * @example 
+     * 
+     * use Contentstack\Contentstack;
+     * $stack = Contentstack::Stack("API_KEY", "DELIVERY_TOKEN", "ENVIRONMENT");
+     * $result = $stack->ContentType('product')->Query()->toJSON()->includeContentType()->find();
+     * 
      * @return Query
      * */
     public function includeContentType() 
@@ -377,6 +505,12 @@ abstract class BaseQuery
 
     /**
      * To include Embedded Items along with entries
+     * 
+     * @example 
+     * 
+     * use Contentstack\Contentstack;
+     * $stack = Contentstack::Stack("API_KEY", "DELIVERY_TOKEN", "ENVIRONMENT");
+     * $result = $stack->ContentType('product')->Query()->toJSON()->includeEmbeddedItems()->find();
      * 
      * @return Query
      * */
@@ -394,6 +528,12 @@ abstract class BaseQuery
     /**
      * To include the count of entries based on the results
      * 
+     * @example 
+     * 
+     * use Contentstack\Contentstack;
+     * $stack = Contentstack::Stack("API_KEY", "DELIVERY_TOKEN", "ENVIRONMENT");
+     * $result = $stack->ContentType('product')->Query()->toJSON()->includeCount()->find();
+     * 
      * @return Query
      * */
     public function includeCount() 
@@ -408,6 +548,12 @@ abstract class BaseQuery
 
     /**
      * To get only count result
+     * 
+     * @example 
+     * 
+     * use Contentstack\Contentstack;
+     * $stack = Contentstack::Stack("API_KEY", "DELIVERY_TOKEN", "ENVIRONMENT");
+     * $result = $stack->ContentType('product')->Query()->toJSON()->count()->find();
      * 
      * @return Query
      * */
@@ -425,6 +571,12 @@ abstract class BaseQuery
     /**
      * To include the owner of entries based on the results
      *
+     * @example 
+     * 
+     * use Contentstack\Contentstack;
+     * $stack = Contentstack::Stack("API_KEY", "DELIVERY_TOKEN", "ENVIRONMENT");
+     * $result = $stack->ContentType('product')->Query()->toJSON()->includeOwner()->find();
+     * 
      * @return Query
      * */
     public function includeOwner() 
@@ -442,6 +594,12 @@ abstract class BaseQuery
      * 
      * @param string $key   - Name of key in string
      * @param string $value - Value of the key in string
+     * 
+     * @example 
+     * 
+     * use Contentstack\Contentstack;
+     * $stack = Contentstack::Stack("API_KEY", "DELIVERY_TOKEN", "ENVIRONMENT");
+     * $result = $stack->ContentType('product')->Query()->addParam('include_count', 'true')->toJSON()->find();
      * 
      * @return Query
      * */
@@ -461,6 +619,12 @@ abstract class BaseQuery
      * 
      * @param $lang - Language code by default is "en-us"
      * 
+     * @example 
+     * 
+     * use Contentstack\Contentstack;
+     * $stack = Contentstack::Stack("API_KEY", "DELIVERY_TOKEN", "ENVIRONMENT");
+     * $result = $stack->ContentType('product')->Query()->toJSON()->language('en-us')->find();
+     * 
      * @return Query
      * */
     public function language($lang = '') 
@@ -478,6 +642,13 @@ abstract class BaseQuery
      * 
      * @param int $skip - valid number
      * 
+     * @example The skip parameter will skip a specific number of entries in the output. So, for example, if the content type contains around 12 entries 
+     * and you want to skip the first 2 entries to get only the last 10 in the response body, you need to specify ‘2’ here.
+     * 
+     * use Contentstack\Contentstack;
+     * $stack = Contentstack::Stack("API_KEY", "DELIVERY_TOKEN", "ENVIRONMENT");
+     * $result = $stack->ContentType('product')->Query()->toJSON()->skip(2)->find();
+     * 
      * @return Query
      * */
     public function skip($skip = 0)
@@ -494,6 +665,12 @@ abstract class BaseQuery
      * Result set entries should have tags specified
      * 
      * @param array $tags - array of tags you want to match in the entries tags
+     * 
+     * @example 
+     * 
+     * use Contentstack\Contentstack;
+     * $stack = Contentstack::Stack("API_KEY", "DELIVERY_TOKEN", "ENVIRONMENT");
+     * $result = $stack->ContentType('product')->Query()->toJSON()->tags(array('Vivo','Gold'))->find();
      * 
      * @return Query
      * */
@@ -516,6 +693,13 @@ abstract class BaseQuery
      * 
      * @param int $limit - valid number
      * 
+     * @example The limit parameter will return a specific number of entries in the output. 
+     * So for example, if the content type contains more than 100 entries and you wish to fetch only the first 2 entries, you need to specify '2' as value in this parameter.
+     * 
+     * use Contentstack\Contentstack;
+     * $stack = Contentstack::Stack("API_KEY", "DELIVERY_TOKEN", "ENVIRONMENT");
+     * $result = $stack->ContentType('product')->Query()->toJSON()->limit(2)->find();
+     * 
      * @return Query
      * */
     public function limit($limit = '') 
@@ -537,6 +721,12 @@ abstract class BaseQuery
      *                      comparision needs to be done
      * @param array  $value - array value against which 
      *                      comparision is going to happen
+     * 
+     * @example 
+     * 
+     * use Contentstack\Contentstack;
+     * $stack = Contentstack::Stack("API_KEY", "DELIVERY_TOKEN", "ENVIRONMENT");
+     * $result = $stack->ContentType('product')->Query()->toJSON()->containedIn('title',array('Redmi','Samsung'))->find();
      * 
      * @return Query
      * */
@@ -563,6 +753,12 @@ abstract class BaseQuery
      * @param array  $value - array value against which 
      *                      comparision is going to happen
      * 
+     * @example 
+     * 
+     * use Contentstack\Contentstack;
+     * $stack = Contentstack::Stack("API_KEY", "DELIVERY_TOKEN", "ENVIRONMENT");
+     * $result = $stack->ContentType('product')->Query()->toJSON()->notContainedIn('title',array('Redmi','Samsung'))->find();
+     * 
      * @return Query
      * */
     public function notContainedIn($field = '', $value = array()) 
@@ -587,6 +783,13 @@ abstract class BaseQuery
      *                      comparision needs to be done
      * @param string $value - value against which comparision is going to happen
      * 
+     * @example  In the Products content type, you have a field named Title ("uid":"title") field. If, for instance,
+     *  you want to retrieve all the entries in which the value for the Title field is 'Redmi 3S', you can set the parameters as:
+     * 
+     * use Contentstack\Contentstack;
+     * $stack = Contentstack::Stack("API_KEY", "DELIVERY_TOKEN", "ENVIRONMENT");
+     * $result = $stack->ContentType('product')->Query()->toJSON()->where('title','Redmi 3S')->find();
+     * 
      * @return Query
      * */
     public function where($key = '', $value = '') 
@@ -603,6 +806,12 @@ abstract class BaseQuery
      * @param string $field - field in the entry against which 
      *                      comparision needs to be done
      * @param string $value - value against which comparision is going to happen
+     * 
+     * @example Let’s say you want to retrieve all the entries that have value of the Price in USD field set to a value that is less than but not equal to 600. You can send the parameter as:
+     * 
+     * use Contentstack\Contentstack;
+     * $stack = Contentstack::Stack("API_KEY", "DELIVERY_TOKEN", "ENVIRONMENT");
+     * $result = $stack->ContentType('product')->Query()->toJSON()->lessThan('price','600')->find();
      * 
      * @return Query
      * */
@@ -625,6 +834,12 @@ abstract class BaseQuery
      *                      comparision needs to be done
      * @param string $value - value against which comparision is going to happen
      * 
+     * @example Let’s say you want to retrieve all the entries that have value of the Price in USD field set to a value that is less than or equal to 146. To achieve this, send the parameter as:
+     * 
+     * use Contentstack\Contentstack;
+     * $stack = Contentstack::Stack("API_KEY", "DELIVERY_TOKEN", "ENVIRONMENT");
+     * $result = $stack->ContentType('product')->Query()->toJSON()->lessThanEqualTo('price','146')->find();
+     * 
      * @return Query
      * */
     public function lessThanEqualTo($field = '', $value = '') 
@@ -645,6 +860,12 @@ abstract class BaseQuery
      * @param string $field - field in the entry against which 
      *                      comparision needs to be done
      * @param string $value - value against which comparision is going to happen
+     * 
+     * @example Let’s say you want to retrieve all the entries that have value of the Price in USD field set to a value that is greater than but not equal to 146. You can send the parameter as:
+     * 
+     * use Contentstack\Contentstack;
+     * $stack = Contentstack::Stack("API_KEY", "DELIVERY_TOKEN", "ENVIRONMENT");
+     * $result = $stack->ContentType('product')->Query()->toJSON()->greaterThan('price','146')->find();
      * 
      * @return Query
      * */
@@ -667,6 +888,12 @@ abstract class BaseQuery
      *                      comparision needs to be done
      * @param string $value - value against which comparision is going to happen
      * 
+     * @example Let’s say you want to retrieve all the entries that have value of the Price in USD field set to a value that is less than and equal to 146. You can send the parameter as:
+     * 
+     * use Contentstack\Contentstack;
+     * $stack = Contentstack::Stack("API_KEY", "DELIVERY_TOKEN", "ENVIRONMENT");
+     * $result = $stack->ContentType('product')->Query()->toJSON()->greaterThanEqualTo('price','146')->find();
+     * 
      * @return Query
      * */
     public function greaterThanEqualTo($field = '', $value = '') 
@@ -688,6 +915,12 @@ abstract class BaseQuery
      *                      comparision needs to be done
      * @param string $value - value against which comparision is going to happen
      * 
+     * @example Let’s say you want to retrieve all the entries that have value of the Price in USD field set to a value that is not equal to 500. You can send the parameter as:
+     * 
+     * use Contentstack\Contentstack;
+     * $stack = Contentstack::Stack("API_KEY", "DELIVERY_TOKEN", "ENVIRONMENT");
+     * $result = $stack->ContentType('product')->Query()->toJSON()->notEqualTo('price','500')->find();
+     * 
      * @return Query
      * */
     public function notEqualTo($field = '', $value = '') 
@@ -705,12 +938,20 @@ abstract class BaseQuery
      * 
      * @param array $_query - array formatted query
      * 
+     * @example
+     * 
+     * use Contentstack\Contentstack;
+     * $stack = Contentstack::Stack("API_KEY", "DELIVERY_TOKEN", "ENVIRONMENT");
+     * $_set = ['vivo', 'samsung', 'redmi 3', 'apple'];
+     * $query1 = $stack->ContentType('product')->Query()->lessThan('title', $_set)->getQuery();
+     * $_entries = $stack->ContentType('product')->Query()->addQuery($query1)->toJSON()->find();
+     * 
      * @return Query
      * */
     public function addQuery($_query = array()) 
     {
         if ($_query && is_array($_query)) {
-            $this->subQuery = json_encode($_query);
+            $this->subQuery = $_query;
             return $this->queryObject;
         }
         throw contentstackCreateError("Provide valid query");
@@ -718,6 +959,12 @@ abstract class BaseQuery
 
     /**
      * Get the raw/array query from the current instance of Query/Entry
+     * 
+     * @example
+     * 
+     * use Contentstack\Contentstack;
+     * $stack = Contentstack::Stack("API_KEY", "DELIVERY_TOKEN", "ENVIRONMENT");
+     * $query1 = $stack->ContentType('product')->Query()->greaterThan('price', '5000')->getQuery();
      * 
      * @return query
      * */
