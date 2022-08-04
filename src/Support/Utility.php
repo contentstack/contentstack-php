@@ -375,10 +375,10 @@ class Utility
      * 
      * @return Result
      * */
-    public static function contentstackRequest($queryObject = '', $type = '')
+    public static function send_request($queryObject = '', $type = '')
     {
         $server_output = '';
-        
+
         if ($queryObject) {
             if (Utility::isLivePreview($queryObject)) {
                 $queryObject->_query['live_preview'] = ($queryObject->contentType->stack->live_preview['live_preview'] ?? 'init');
@@ -399,6 +399,10 @@ class Utility
             if ($Headers["branch"] !== '' && $Headers["branch"] !== "undefined") {
                 $request_headers[] = 'branch: '.$Headers["branch"];
             }
+
+            $proxy_details = $queryObject->contentType->stack->proxy;
+            $timeout = $queryObject->contentType->stack->timeout;
+
             curl_setopt($http, CURLOPT_HTTPHEADER, $request_headers);
             
             curl_setopt($http, CURLOPT_HEADER, false);
@@ -406,22 +410,69 @@ class Utility
             curl_setopt($http, CURLOPT_CUSTOMREQUEST, "GET");
             // receive server response ...
             curl_setopt($http, CURLOPT_RETURNTRANSFER, true);
-            $response = curl_exec($http);
+            // set the cURL time out
+            curl_setopt($http, CURLOPT_TIMEOUT_MS, $timeout);
 
+            if(array_key_exists("url",$proxy_details) && array_key_exists("port",$proxy_details)){
+                if($proxy_details['url'] != '' && $proxy_details['port'] != '') {
+
+                    // Set the proxy IP
+                    curl_setopt($http, CURLOPT_PROXY, $proxy_details['url']);
+                    // Set the port
+                    curl_setopt($http, CURLOPT_PROXYPORT, $proxy_details['port']);
+                    
+                }
+            }
+            if(array_key_exists("username",$proxy_details) && array_key_exists("password",$proxy_details)){
+                if($proxy_details['username'] != '' && $proxy_details['password'] != '') {
+
+                    $proxyauth = $proxy_details['username'].":".$proxy_details['password'];
+                    // Set the username and password
+                    curl_setopt($http, CURLOPT_PROXYUSERPWD, $proxyauth);
+                    
+                }
+            }
+
+            $response = curl_exec($http);
             // status code extraction
             $httpcode = curl_getinfo($http, CURLINFO_HTTP_CODE);
-
+            
             // close the curl            
             curl_close($http);
             if ($httpcode > 199 && $httpcode < 300) {
                 // wrapper the server result
-                $response = Utility::wrapResult($response, $queryObject);            
-            } else {
-                throw new CSException($response, $httpcode);
+                $response = Utility::wrapResult($response, $queryObject);  
+                   
+            }elseif($httpcode == 0){
+                $response = array( 'error_message' => 'cURL couldn’t hook up with the proxy IP address and port used', 'error_code' => '407');
+            } 
+            else{
+                $response = Utility::wrapResult($response, $httpcode);
             }
         }
+        $response += ['httpcode' => $httpcode];
         return $response;
     }
+
+    public static function contentstackRequest($queryObject = '', $type = '', $count = 0)
+    {
+        $retryDelay = $queryObject->contentType->stack->retryDelay;
+        $retryLimit = $queryObject->contentType->stack->retryLimit;
+        $errorRetry = $queryObject->contentType->stack->errorRetry;
+        $response = Utility::send_request($queryObject, $type);
+
+        if(in_array( $response['httpcode'] ,$errorRetry)){
+            if($count < $retryLimit){
+                $retryDelay = round($retryDelay/1000); //converting retry_delay from milliseconds into seconds
+                sleep($retryDelay); //sleep method requires time in seconds
+                $count += 1;
+                $response = Utility::contentstackRequest($queryObject, $type, $count);
+            }
+        }
+        unset($response['httpcode']);
+        return $response;
+    }
+
 
     /**
      * Validate the key is set or not
