@@ -421,18 +421,18 @@ class Utility
                     // Set the port
                     curl_setopt($http, CURLOPT_PROXYPORT, $proxy_details['port']);
                     
+                    if(array_***_exists("username",$proxy_details) && array_***_exists("password",$proxy_details)){
+                        if($proxy_details['username'] != '' && $proxy_details['password'] != '') {
+
+                            $proxyauth = $proxy_details['username'].":".$proxy_details['password'];
+                            // Set the username and password
+                            curl_setopt($http, CURLOPT_PROXYUSERPWD, $proxyauth);
+                            
+                        }
+                    }
                 }
             }
-            if(array_***_exists("username",$proxy_details) && array_***_exists("password",$proxy_details)){
-                if($proxy_details['username'] != '' && $proxy_details['password'] != '') {
-
-                    $proxyauth = $proxy_details['username'].":".$proxy_details['password'];
-                    // Set the username and password
-                    curl_setopt($http, CURLOPT_PROXYUSERPWD, $proxyauth);
-                    
-                }
-            }
-
+            
             $response = curl_exec($http);
             // status code extraction
             $httpcode = curl_getinfo($http, CURLINFO_HTTP_CODE);
