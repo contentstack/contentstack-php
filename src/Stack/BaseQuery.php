@@ -538,6 +538,12 @@ abstract class BaseQuery
      * @param array  $value - array value against which 
      *                      comparision is going to happen
      * 
+     * Example 1 - Array Equals Operator Within Group
+     * containedIn("title", ["Electronics", "Apparel"])
+     * 
+     * Example 2 - Array Equals Operator Within Modular Blocks
+     * containedIn("additional_info.deals.deal_name", ["Christmas Deal", "Summer Deal"]) 
+     *
      * @return Query
      * */
     public function containedIn($field = '', $value = array()) 
@@ -562,6 +568,12 @@ abstract class BaseQuery
      *                      comparision needs to be done
      * @param array  $value - array value against which 
      *                      comparision is going to happen
+     * 
+     * Example 1 - Array Not-equals Operator Within Group
+     * notContainedIn("title", ["Electronics", "Apparel"])
+     * 
+     * Example 2 - Array Not-equals Operator Within Modular Blocks
+     * notContainedIn("additional_info.deals.deal_name", ["Christmas Deal", "Summer Deal"]) 
      * 
      * @return Query
      * */
