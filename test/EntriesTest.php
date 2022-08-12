@@ -66,7 +66,6 @@ class EntriesTest extends TestCase {
         try {
             self::$LivePreviewStack->livePreviewQuery(array('content_type_uid' => CT_ContentType));
             $_entry = self::$LivePreviewStack->ContentType(CT_ContentType)->Entry(self::$_uid)->toJSON()->fetch();
-    
         } catch (Exception $e) {
             $this->assertTrue(true);  
         }
@@ -178,9 +177,8 @@ class EntriesTest extends TestCase {
 
     public function testFindIncludeEmbeddedItems() {
         $_entries = self::$Stack->ContentType(CT_ContentType)->Query()->toJSON()->includeEmbeddedItems()->find();
-        
         for($i = 0; $i < count($_entries[0]); $i++) {
-            if ($_entries[0][$i]["rich_text_editor"]) {
+            if (array_***_exists('rich_text_editor', $_entries[0][$i])) {
                 $embedded = Contentstack::renderContent($_entries[0][$i]["rich_text_editor"], new Option($_entries[0][$i]));
             }
         }
@@ -340,12 +338,16 @@ class EntriesTest extends TestCase {
     public function testGetContentTypes() {
         $globalfield = '{"include_global_field_schema": "true"}';
         $content_type = self::$Stack->getContentTypes($globalfield);
-        for($i = 0; $i < count($content_type['content_types'][1]['schema']); $i++) {
-            if($content_type['content_types'][1]['schema'][$i]['data_type'] === 'global_field') {
-                $flag = (isset($content_type['content_types'][1]['schema'][$i]['schema']));
-                $this->assertTrue($flag);
+        for ($j = 0; $j < count($content_type['content_types']); $j++)
+        {
+            for($i = 0; $i < count($content_type['content_types'][$j]['schema']); $i++) {
+                if($content_type['content_types'][$j]['schema'][$i]['data_type'] === 'global_field') {
+                    $flag = (isset($content_type['content_types'][$j]['schema'][$i]['schema']));
+                    $this->assertTrue($flag);
+                }
             }
         }
+        
     }
 
     public function testFindLogicalOrQueryObject() {
