@@ -337,7 +337,7 @@ class Stack
             $this->_query = $myArray;
         }
         
-        return Utility::contentstackRequest($this, "getcontentTypes");
+        return Utility::contentstackRequest($this, $this, "getcontentTypes");
     }
 
     /**
@@ -352,6 +352,6 @@ class Stack
         if ($params && $params !== "undefined") {
             $this->_query = $params;
         }
-        return Utility::contentstackRequest($this, "sync");
+        return Utility::contentstackRequest($this, $this, "sync");
     }
 }
