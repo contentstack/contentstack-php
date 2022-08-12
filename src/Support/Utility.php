@@ -375,10 +375,11 @@ class Utility
      * 
      * @return Result
      * */
-    public static function send_request($queryObject = '', $type = '')
+    public static function contentstackRequest($stack, $queryObject = '', $type = '', $count = 0)
     {
-        $server_output = '';
-
+        $retryDelay = $stack->retryDelay;
+        $retryLimit = $stack->retryLimit;
+        $errorRetry = $stack->errorRetry;
         if ($queryObject) {
             if (Utility::isLivePreview($queryObject)) {
                 $queryObject->_query['live_preview'] = ($queryObject->contentType->stack->live_preview['live_preview'] ?? 'init');
@@ -400,8 +401,8 @@ class Utility
                 $request_headers[] = 'branch: '.$Headers["branch"];
             }
 
-            $proxy_details = $queryObject->contentType->stack->proxy;
-            $timeout = $queryObject->contentType->stack->timeout;
+            $proxy_details = $stack->proxy;
+            $timeout = $stack->timeout;
 
             curl_setopt($http, CURLOPT_HTTPHEADER, $request_headers);
             
@@ -439,37 +440,23 @@ class Utility
             
             // close the curl            
             curl_close($http);
-            if ($httpcode > 199 && $httpcode < 300) {
-                // wrapper the server result
-                $response = Utility::wrapResult($response, $queryObject);  
-                   
-            }elseif($httpcode == 0){
-                $response = array( 'error_message' => 'cURL couldn’t hook up with the proxy IP address and port used', 'error_code' => '407');
-            } 
-            else{
-                $response = Utility::wrapResult($response, $httpcode);
+            if(in_array($httpcode,$errorRetry)){
+                if($count < $retryLimit){
+                    $retryDelay = round($retryDelay/1000); //converting retry_delay from milliseconds into seconds
+                    sleep($retryDelay); //sleep method requires time in seconds
+                    $count += 1;
+                    return Utility::contentstackRequest($stack, $queryObject, $type, $count);
+                }
+            } else {
+                if ($httpcode > 199 && $httpcode < 300) {
+                    // wrapper the server result
+                    $response = Utility::wrapResult($response, $queryObject);  
+                }
+                else{
+                    throw new CSException($response, $httpcode);
+                }
             }
         }
-        $response += ['httpcode' => $httpcode];
-        return $response;
-    }
-
-    public static function contentstackRequest($queryObject = '', $type = '', $count = 0)
-    {
-        $retryDelay = $queryObject->contentType->stack->retryDelay;
-        $retryLimit = $queryObject->contentType->stack->retryLimit;
-        $errorRetry = $queryObject->contentType->stack->errorRetry;
-        $response = Utility::send_request($queryObject, $type);
-
-        if(in_array( $response['httpcode'] ,$errorRetry)){
-            if($count < $retryLimit){
-                $retryDelay = round($retryDelay/1000); //converting retry_delay from milliseconds into seconds
-                sleep($retryDelay); //sleep method requires time in seconds
-                $count += 1;
-                $response = Utility::contentstackRequest($queryObject, $type, $count);
-            }
-        }
-        unset($response['httpcode']);
         return $response;
     }
 

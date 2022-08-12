@@ -81,7 +81,7 @@ class Assets extends BaseQuery
     public function fetch()
     {
         $this->operation = __FUNCTION__;
-        return Utility::contentstackRequest($this, 'asset');
+        return Utility::contentstackRequest($this->stack, $this, 'asset');
     }
 }
 
