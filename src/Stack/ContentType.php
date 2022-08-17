@@ -76,7 +76,7 @@ class ContentType
             $myArray = json_decode($params, true);
             $this->_query = $myArray;
         }        
-        return Utility::contentstackRequest($this);
+        return Utility::contentstackRequest($this->stack, $this);
     }
     /**
      * Query object to create the "Query" on the specified ContentType
