@@ -73,6 +73,11 @@ class Stack
         unset($this->header['environment']);
         $livePreview = array('enable' => false, 'host' => $previewHost);
         $this->live_preview = $config['live_preview'] ? array_merge($livePreview, $config['live_preview']) : $livePreview;
+        $this->proxy = array_***_exists("proxy",$config) ? $config['proxy'] : array('proxy'=>array());
+        $this->timeout = array_***_exists("timeout",$config) ? $config['timeout'] : '3000';
+        $this->retryDelay = array_***_exists("retryDelay",$config) ? $config['retryDelay'] : '3000';
+        $this->retryLimit = array_***_exists("retryLimit",$config) ? $config['retryLimit'] : '5';
+        $this->errorRetry = array_***_exists("errorRetry",$config) ? $config['errorRetry'] : array('errorRetry'=>array(408, 429));
         return $this;
     }
 
@@ -332,7 +337,7 @@ class Stack
             $this->_query = $myArray;
         }
         
-        return Utility::contentstackRequest($this, "getcontentTypes");
+        return Utility::contentstackRequest($this, $this, "getcontentTypes");
     }
 
     /**
@@ -347,6 +352,6 @@ class Stack
         if ($params && $params !== "undefined") {
             $this->_query = $params;
         }
-        return Utility::contentstackRequest($this, "sync");
+        return Utility::contentstackRequest($this, $this, "sync");
     }
 }
