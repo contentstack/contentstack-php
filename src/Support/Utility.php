@@ -378,6 +378,11 @@ class Utility
     public static function contentstackRequest($queryObject = '', $type = '')
     {
         $server_output = '';
+        STATIC $live_response = ''; //static variable
+        STATIC $non_live_response = '';
+        STATIC $live_response_decode = '';
+        STATIC $entry_uid = '';
+        STATIC $content_type_uid = '';
         
         if ($queryObject) {
             if (Utility::isLivePreview($queryObject)) {
@@ -414,6 +419,19 @@ class Utility
             // close the curl            
             curl_close($http);
             if ($httpcode > 199 && $httpcode < 300) {
+                if (!Utility::isLivePreview($queryObject)) {
+                    $result = json_decode($response, true);
+                    Utility::to_render_content($result, $entry_uid, $live_response_decode);
+                    $response = json_encode($result, true);
+
+                }
+                else
+                {
+                    $entry_uid = $queryObject->entryUid;
+                    $content_type_uid = $queryObject->contentType->uid;
+                    $live_response_decode = json_decode($response, true);
+
+                }
                 // wrapper the server result
                 $response = Utility::wrapResult($response, $queryObject);            
             } else {
@@ -421,6 +439,19 @@ class Utility
             }
         }
         return $response;
+    }
+
+    public static function to_render_content(&$resp, $entry_uid, $live_response_decode ){
+        if (is_array($resp)) {
+            if(array_***_exists('uid', $resp) && $resp['uid'] == $entry_uid){
+                $resp = $live_response_decode;
+            }else
+            {
+               foreach ($resp as $*** => $value) {
+                     Utility::to_render_content($resp[$***], $entry_uid, $live_response_decode);           
+                }  
+            }
+        }
     }
 
     /**
