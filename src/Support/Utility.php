@@ -378,8 +378,6 @@ class Utility
     public static function contentstackRequest($queryObject = '', $type = '')
     {
         $server_output = '';
-        STATIC $live_response = ''; //static variable
-        STATIC $non_live_response = '';
         STATIC $live_response_decode = '';
         STATIC $entry_uid = '';
         STATIC $content_type_uid = '';
