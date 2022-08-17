@@ -375,13 +375,16 @@ class Utility
      * 
      * @return Result
      * */
-    public static function contentstackRequest($queryObject = '', $type = '')
+    public static function contentstackRequest($stack, $queryObject = '', $type = '', $count = 0)
     {
         $server_output = '';
         STATIC $live_response_decode = '';
         STATIC $entry_uid = '';
         STATIC $content_type_uid = '';
         
+        $retryDelay = $stack->retryDelay;
+        $retryLimit = $stack->retryLimit;
+        $errorRetry = $stack->errorRetry;
         if ($queryObject) {
             if (Utility::isLivePreview($queryObject)) {
                 $queryObject->_query['live_preview'] = ($queryObject->contentType->stack->live_preview['live_preview'] ?? 'init');
@@ -402,6 +405,10 @@ class Utility
             if ($Headers["branch"] !== '' && $Headers["branch"] !== "undefined") {
                 $request_headers[] = 'branch: '.$Headers["branch"];
             }
+
+            $proxy_details = $stack->proxy;
+            $timeout = $stack->timeout;
+
             curl_setopt($http, CURLOPT_HTTPHEADER, $request_headers);
             
             curl_setopt($http, CURLOPT_HEADER, false);
@@ -409,15 +416,46 @@ class Utility
             curl_setopt($http, CURLOPT_CUSTOMREQUEST, "GET");
             // receive server response ...
             curl_setopt($http, CURLOPT_RETURNTRANSFER, true);
-            $response = curl_exec($http);
+            // set the cURL time out
+            curl_setopt($http, CURLOPT_TIMEOUT_MS, $timeout);
 
+            if(array_key_exists("url",$proxy_details) && array_key_exists("port",$proxy_details)){
+                if($proxy_details['url'] != '' && $proxy_details['port'] != '') {
+
+                    // Set the proxy IP
+                    curl_setopt($http, CURLOPT_PROXY, $proxy_details['url']);
+                    // Set the port
+                    curl_setopt($http, CURLOPT_PROXYPORT, $proxy_details['port']);
+                    
+                    if(array_key_exists("username",$proxy_details) && array_key_exists("password",$proxy_details)){
+                        if($proxy_details['username'] != '' && $proxy_details['password'] != '') {
+
+                            $proxyauth = $proxy_details['username'].":".$proxy_details['password'];
+                            // Set the username and password
+                            curl_setopt($http, CURLOPT_PROXYUSERPWD, $proxyauth);
+                            
+                        }
+                    }
+                }
+            }
+            
+            $response = curl_exec($http);
             // status code extraction
             $httpcode = curl_getinfo($http, CURLINFO_HTTP_CODE);
-
+            
             // close the curl            
             curl_close($http);
-            if ($httpcode > 199 && $httpcode < 300) {
-                if (!Utility::isLivePreview($queryObject)) {
+                           
+            if(in_array($httpcode,$errorRetry)){
+                if($count < $retryLimit){
+                    $retryDelay = round($retryDelay/1000); //converting retry_delay from milliseconds into seconds
+                    sleep($retryDelay); //sleep method requires time in seconds
+                    $count += 1;
+                    return Utility::contentstackRequest($stack, $queryObject, $type, $count);
+                }
+            } else {
+                if ($httpcode > 199 && $httpcode < 300) {
+                    if (!Utility::isLivePreview($queryObject)) {
                     $result = json_decode($response, true);
                     Utility::to_render_content($result, $entry_uid, $live_response_decode);
                     $response = json_encode($result, true);
@@ -430,14 +468,18 @@ class Utility
                     $live_response_decode = json_decode($response, true);
 
                 }
-                // wrapper the server result
-                $response = Utility::wrapResult($response, $queryObject);            
-            } else {
-                throw new CSException($response, $httpcode);
+                    // wrapper the server result
+                    $response = Utility::wrapResult($response, $queryObject);  
+                }
+                else{
+                    throw new CSException($response, $httpcode);
+                }
             }
         }
+        
         return $response;
     }
+
 
     public static function to_render_content(&$resp, $entry_uid, $live_response_decode ){
         if (is_array($resp)) {
@@ -451,6 +493,7 @@ class Utility
             }
         }
     }
+
 
     /**
      * Validate the key is set or not
