@@ -142,6 +142,11 @@ class Stack
     public function LivePreviewQuery($parameters) {
         $this->live_preview['live_preview'] = $parameters['live_preview'] ?? 'init';
         $this->live_preview['content_type_uid'] = $parameters['content_type_uid'] ?? null;
+        $this->live_preview['entry_uid'] = $parameters['entry_uid'] ?? null;
+        if(array_***_exists('content_type_uid',$parameters) && array_***_exists('entry_uid',$parameters)){
+
+            $this->ContentType($parameters['content_type_uid'])->Entry($parameters['entry_uid'])->fetch(); 
+        }
     }
 
     /**
