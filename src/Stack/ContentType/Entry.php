@@ -60,6 +60,6 @@ class Entry extends BaseQuery
     public function fetch()
     {
         $this->operation = __FUNCTION__;
-        return Utility::contentstackRequest($this);
+        return Utility::contentstackRequest($this->contentType->stack, $this);
     }
 }
