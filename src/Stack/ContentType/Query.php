@@ -56,9 +56,9 @@ class Query extends BaseQuery
     {
         $this->operation = __FUNCTION__;
         if ($this->type == 'assets') {
-            return Utility::contentstackRequest($this, 'assets');
+            return Utility::contentstackRequest($this->assets->stack, $this, 'assets');
         } else if ($this->type == 'contentType') {
-            return Utility::contentstackRequest($this);
+            return Utility::contentstackRequest($this->contentType->stack, $this);
         }        
     }
   
@@ -75,9 +75,9 @@ class Query extends BaseQuery
         $this->operation = __FUNCTION__;
         $this->_query['limit'] = 1;
         if ($this->type == 'assets') {
-            return Utility::contentstackRequest($this, 'assets');
+            return Utility::contentstackRequest($this->assets->stack, $this, 'assets');
         } elseif ($this->type == 'contentType') {
-            return Utility::contentstackRequest($this);
+            return Utility::contentstackRequest($this->contentType->stack, $this);
         }
     }
 }
