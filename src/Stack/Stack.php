@@ -58,7 +58,7 @@ class Stack
         $config = array('region'=> '', 'branch'=> '', 'live_preview' => array())
     ) {
         $previewHost = 'api.contentstack.io';
-        if ($config && $config !== "undefined" && array_key_exists('region', $config) && $config['region'] !== "undefined" && $config['region'] =="eu" ) {
+        if ($config && $config !== "undefined" && array_key_exists('region', $config) && $config['region'] !== "undefined" && $config['region'] !== "us" ) {
             $this->host = $config['region'].'-cdn.contentstack.com';
             $previewHost =  $config['region'].'-api.contentstack.com';
         }
