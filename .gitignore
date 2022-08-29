@@ -15,3 +15,5 @@ examples/index.php
 tmp/
 test/result.json
 stdout
+build
+cache
