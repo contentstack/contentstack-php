@@ -29,4 +29,5 @@ class ContentstackRegion
 {
     const EU= "eu";
     const US= "us";
+    const AZURE_NA= "azure-na";
 }
