@@ -395,7 +395,7 @@ class Utility
             $Headers     = Utility::headers($queryObject);
 
             $request_headers = array();
-            $request_headers[] = 'x-user-agent: contentstack-php/2.3.0';
+            $request_headers[] = 'x-user-agent: contentstack-php/2.3.1';
             $request_headers[] = 'api_key: '.$Headers["api_key"];
             if (Utility::isLivePreview($queryObject)) {
                 $request_headers[] = 'authorization: '.$queryObject->contentType->stack->live_preview['management_token'] ;
