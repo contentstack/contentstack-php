@@ -377,6 +377,11 @@ class Utility
      * */
     public static function contentstackRequest($stack, $queryObject = '', $type = '', $count = 0)
     {
+        $server_output = '';
+        STATIC $live_response_decode = '';
+        STATIC $entry_uid = '';
+        STATIC $content_type_uid = '';
+        
         $retryDelay = $stack->retryDelay;
         $retryLimit = $stack->retryLimit;
         $errorRetry = $stack->errorRetry;
@@ -390,7 +395,7 @@ class Utility
             $Headers     = Utility::headers($queryObject);
 
             $request_headers = array();
-            $request_headers[] = 'x-user-agent: contentstack-php/2.1.0';
+            $request_headers[] = 'x-user-agent: contentstack-php/2.3.1';
             $request_headers[] = 'api_key: '.$Headers["api_key"];
             if (Utility::isLivePreview($queryObject)) {
                 $request_headers[] = 'authorization: '.$queryObject->contentType->stack->live_preview['management_token'] ;
@@ -440,6 +445,7 @@ class Utility
             
             // close the curl            
             curl_close($http);
+                           
             if(in_array($httpcode,$errorRetry)){
                 if($count < $retryLimit){
                     $retryDelay = round($retryDelay/1000); //converting retry_delay from milliseconds into seconds
@@ -449,6 +455,19 @@ class Utility
                 }
             } else {
                 if ($httpcode > 199 && $httpcode < 300) {
+                    if (!Utility::isLivePreview($queryObject)) {
+                    $result = json_decode($response, true);
+                    Utility::to_render_content($result, $entry_uid, $live_response_decode);
+                    $response = json_encode($result, true);
+
+                }
+                else
+                {
+                    $entry_uid = $queryObject->entryUid;
+                    $content_type_uid = $queryObject->contentType->uid;
+                    $live_response_decode = json_decode($response, true);
+
+                }
                     // wrapper the server result
                     $response = Utility::wrapResult($response, $queryObject);  
                 }
@@ -457,7 +476,22 @@ class Utility
                 }
             }
         }
+        
         return $response;
+    }
+
+
+    public static function to_render_content(&$resp, $entry_uid, $live_response_decode ){
+        if (is_array($resp)) {
+            if(array_key_exists('uid', $resp) && $resp['uid'] == $entry_uid){
+                $resp = $live_response_decode;
+            }else
+            {
+               foreach ($resp as $key => $value) {
+                     Utility::to_render_content($resp[$key], $entry_uid, $live_response_decode);           
+                }  
+            }
+        }
     }
 
 

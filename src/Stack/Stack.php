@@ -58,7 +58,7 @@ class Stack
         $config = array('region'=> '', 'branch'=> '', 'live_preview' => array())
     ) {
         $previewHost = 'api.contentstack.io';
-        if ($config && $config !== "undefined" && array_key_exists('region', $config) && $config['region'] !== "undefined" && $config['region'] =="eu" ) {
+        if ($config && $config !== "undefined" && array_key_exists('region', $config) && $config['region'] !== "undefined" && $config['region'] !== "us" ) {
             $this->host = $config['region'].'-cdn.contentstack.com';
             $previewHost =  $config['region'].'-api.contentstack.com';
         }
@@ -147,6 +147,11 @@ class Stack
     public function LivePreviewQuery($parameters) {
         $this->live_preview['live_preview'] = $parameters['live_preview'] ?? 'init';
         $this->live_preview['content_type_uid'] = $parameters['content_type_uid'] ?? null;
+        $this->live_preview['entry_uid'] = $parameters['entry_uid'] ?? null;
+        if(array_key_exists('content_type_uid',$parameters) && array_key_exists('entry_uid',$parameters)){
+
+            $this->ContentType($parameters['content_type_uid'])->Entry($parameters['entry_uid'])->fetch(); 
+        }
     }
 
     /**
