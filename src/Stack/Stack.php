@@ -78,6 +78,8 @@ class Stack
         $this->retryDelay = array_key_exists("retryDelay",$config) ? $config['retryDelay'] : '3000';
         $this->retryLimit = array_key_exists("retryLimit",$config) ? $config['retryLimit'] : '5';
         $this->errorRetry = array_key_exists("errorRetry",$config) ? $config['errorRetry'] : array('errorRetry'=>array(408, 429));
+        $this->plugins = array_key_exists("plugins",$config) ? $config['plugins'] : array('plugins'=>array());
+
         return $this;
     }
 

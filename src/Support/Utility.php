@@ -385,6 +385,8 @@ class Utility
         $retryDelay = $stack->retryDelay;
         $retryLimit = $stack->retryLimit;
         $errorRetry = $stack->errorRetry;
+        $plugins = $stack->plugins;
+
         if ($queryObject) {
             if (Utility::isLivePreview($queryObject)) {
                 $queryObject->_query['live_preview'] = ($queryObject->contentType->stack->live_preview['live_preview'] ?? 'init');
@@ -408,6 +410,10 @@ class Utility
 
             $proxy_details = $stack->proxy;
             $timeout = $stack->timeout;
+
+            foreach($plugins as $plugin){
+                $plugin->onRequest($stack, $http, $request_headers);
+            }
 
             curl_setopt($http, CURLOPT_HTTPHEADER, $request_headers);
             
@@ -457,6 +463,9 @@ class Utility
                 if ($httpcode > 199 && $httpcode < 300) {
                     if (!Utility::isLivePreview($queryObject)) {
                     $result = json_decode($response, true);
+                    foreach($plugins as $plugin){
+                        $result = $plugin->onResponse($stack, $http, $request_headers, $result);
+                    }
                     Utility::to_render_content($result, $entry_uid, $live_response_decode);
                     $response = json_encode($result, true);
 
