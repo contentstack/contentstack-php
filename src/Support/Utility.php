@@ -465,8 +465,13 @@ class Utility
                 {
                     $entry_uid = $queryObject->entryUid;
                     $content_type_uid = $queryObject->contentType->uid;
-                    $live_response_decode = json_decode($response, true);
-
+                    $response_decode = json_decode($response, true);
+                    if (Utility::isKeySet($response_decode, 'entry')) {
+                        $live_response_decode = $response_decode['entry'];
+                    }
+                    else{
+                        $live_response_decode = $response_decode;
+                    }
                 }
                     // wrapper the server result
                     $response = Utility::wrapResult($response, $queryObject);  
