@@ -39,14 +39,15 @@ abstract class Contentstack
      * @param string             $access_token : Contentstack Stack ACCESS TOKEN.
      * @param string             $environment  : Environment Name.
      * @param array              $config       : Stack Configuration to provide region.
-     * @param ContentstackRegion $region       : Region name of Contentstack.
-
+     * @param ContentstackRegion $region       : Region name of Contentstack. (default region 'us')
+     * 
      * @return Stack
      * */
+
     public static function Stack($api_*** = '',
         $access_token = '',
         $environment = '',
-        $config = array('region'=> '', 'branch'=> '', 'live_preview' => array('enable' => false, 'host' => 'api.contentstack.io'))
+        $config = array('region'=> 'us', 'branch'=> '', 'live_preview' => array('enable' => false, 'host' => 'api.contentstack.io'))
     ) {
         return new Stack($api_***, $access_token, $environment, $config);
     }
