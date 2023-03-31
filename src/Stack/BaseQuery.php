@@ -547,6 +547,30 @@ abstract class BaseQuery
     }
 
     /**
+     * To include the Metadata of entries based on the results
+     * 
+     * @example 
+     * 
+     * use Contentstack\Contentstack;
+     * $stack = Contentstack::Stack("API_KEY", "DELIVERY_TOKEN", "ENVIRONMENT");
+     * $result = $stack->ContentType('product')->Query()->toJSON()->includeMetadata()->find();
+     * 
+     * @return Query
+     * */
+
+
+    public function includeMetadata() 
+    {
+        $this->queryObject->_query = call_user_func(
+            'contentstackAddBoolean', 
+            'include_metadata', 
+            $this->queryObject->_query
+        );
+        return $this->queryObject;
+    }
+
+
+    /**
      * To get only count result
      * 
      * @example 
@@ -604,6 +628,7 @@ abstract class BaseQuery
      * @return Query
      * */
     public function addParam($key = '', $value = '') 
+    public function addParam($key = '', $value = '')
     {
         $this->queryObject->_query = call_user_func(
             'contentstackAddParam', 
