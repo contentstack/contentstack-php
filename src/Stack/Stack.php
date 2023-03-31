@@ -49,13 +49,14 @@ class Stack
      * @param string $api_***        - API Key of Stack
      * @param string $delivery_token - Delivery Token of Stack
      * @param string $environment    - Environment Name of Stack
-     * @param string $region         - API Key of Stack
+     * @param string $region         - Region name of Contentstack. (default region 'us')
+     * 
      * */
     public function __construct(
         $api_*** = '', 
         $delivery_token = '', 
         $environment = '', 
-        $config = array('region'=> '', 'branch'=> '', 'live_preview' => array())
+        $config = array('region'=> 'us', 'branch'=> '', 'live_preview' => array())
     ) {
         $previewHost = 'api.contentstack.io';
         if ($config && $config !== "undefined" && array_***_exists('region', $config) && $config['region'] !== "undefined" && $config['region'] !== "us" ) {
