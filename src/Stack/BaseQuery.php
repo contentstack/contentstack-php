@@ -627,7 +627,6 @@ abstract class BaseQuery
      * 
      * @return Query
      * */
-    public function addParam($key = '', $value = '') 
     public function addParam($key = '', $value = '')
     {
         $this->queryObject->_query = call_user_func(
