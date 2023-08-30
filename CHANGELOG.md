@@ -1,11 +1,65 @@
 
 ## CHANGELOG
 ------------------------------------------------
-## Version 2.1.0
-###### Date: 29-Oct-2021
+## Version 2.3.4
+###### Date: 30-Aug-2023
+### Enhancement
+    - PHP version 8.2 support
+
+------------------------------------------------
+## Version 2.3.3
+###### Date: 31-Mar-2023
+### Enhancement
+    - add support for include_metada for PHP SDK
+    - set default region to 'us'
+    - Issue while fetching the entry using PHP SDK
+
+------------------------------------------------
+## Version 2.3.2
+###### Date: 01-Feb-2023
+### Enhancement
+    - Live preview reference entry extra field issue resolved
+
+------------------------------------------------
+## Version 2.3.1
+###### Date: 09-Sep-2022
+### Enhancement
+    - Reference update within entry support added in live preview.
+
+------------------------------------------------
+## Version 2.3.0
+###### Date: 17-Aug-2022
 ### New Feature
-    - Live Preview feature support added
-    - Content branching feature support added
+    - Http request proxy support
+    - Retry request on failure
+
+------------------------------------------------
+## Version 2.2.1
+###### Date: 14-Jan-2022
+### Bug Fix
+    - Host bug for live preview resolved
+
+------------------------------------------------
+## Version 2.2.0
+###### Date: 08-Dec-2021
+### New Feature
+    - Live Preview feature added
+
+------------------------------------------------
+
+## Version 2.1.1
+###### Date: 16-Jul-2021
+### New Feature
+    - Utils SDK package update to support Json RTE to Html Parsing
+
+------------------------------------------------
+
+## Version 2.1.0
+###### Date: 06-Apr-2021
+### Enhancement
+ - includeEmbeddedItems function added in Entry and Query Module
+ - Utils SDK support added in SDK
+
 ------------------------------------------------
 
 ## Version 2.0.0
