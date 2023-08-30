@@ -30,6 +30,7 @@ require_once __DIR__."/../Config/index.php";
  * @license   https://github.com/contentstack/contentstack-php/blob/master/LICENSE.txt MIT Licence
  * @link      https://pear.php.net/package/contentstack
  * */
+#[\AllowDynamicProperties]
 class Stack
 {
     /* header - array where all the headers for the request will be stored */

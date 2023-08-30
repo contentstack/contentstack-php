@@ -30,6 +30,7 @@ use Contentstack\Utils\Model\Option;
  * @license   https://github.com/contentstack/contentstack-php/blob/master/LICENSE.txt MIT Licence
  * @link      https://pear.php.net/package/contentstack
  */
+#[\AllowDynamicProperties]
 abstract class Contentstack
 {
     /**
