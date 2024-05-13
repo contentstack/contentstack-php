@@ -1,5 +1,11 @@
 
 ## CHANGELOG
+
+------------------------------------------------
+## Version 2.4.0
+###### Date: 13-May-2024
+### Enhancement
+    - GCP support implementation
 ------------------------------------------------
 ## Version 2.3.4
 ###### Date: 30-Aug-2023
