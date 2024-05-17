@@ -92,8 +92,8 @@ if (!function_exists('contentstackRegexp')) {
      * @param
      *      $operator - query operator
      *      $query - Query object
-     *      $*** - *** of the query
-     *      $value - value to be set against ***
+     *      $key - key of the query
+     *      $value - value to be set against key
      *      $options - options for the regular expression
      * @return $query
      * */
@@ -140,14 +140,14 @@ if (!function_exists('contentstackComparision')) {
      * @param
      *      $operator - query operator
      *      $query - Query object
-     *      $*** - *** of the query
-     *      $value - value to be set against ***
+     *      $key - key of the query
+     *      $value - value to be set against key
      * @return $query
      * */
-    function contentstackComparision($operator = '', $query = array(), $*** = '', $value = '') {
-        if(!(!Utility::isEmpty($***) && is_string($***) && !Utility::isEmpty($value)))
+    function contentstackComparision($operator = '', $query = array(), $key = '', $value = '') {
+        if(!(!Utility::isEmpty($key) && is_string($key) && !Utility::isEmpty($value)))
             throw contentstackCreateError('Invalid input for "'.contentstackGetFunctionName().'". Key must be string and value should be valid not empty.');
-        $query[$***] = array($operator => $value);
+        $query[$key] = array($operator => $value);
         return $query;
     }
 }
@@ -166,7 +166,7 @@ if (!function_exists('contentstackLogical')) {
     function contentstackLogical($operator = '', $query = array(), $value = array()) {
         if(!(is_array($value) && count($value) > 0))
             throw contentstackCreateError('Invalid input for "'.contentstackGetFunctionName().'". At least one Query or array object is expected');
-        foreach($value as $*** => $_qry) {
+        foreach($value as $key => $_qry) {
             if(!Utility::isKeySet($query, $operator)) $query[$operator] = array();
             if($_qry instanceof \Contentstack\Stack\BaseQuery)
                 array_push($query[$operator], $_qry->subQuery);
@@ -188,14 +188,14 @@ if (!function_exists('contentstackContains')) {
      * @param
      *      $operator - query operator
      *      $query - Query object
-     *      $*** - *** of the query
-     *      $value - array of value to be set against ***
+     *      $key - key of the query
+     *      $value - array of value to be set against key
      * @return $query
      * */
-    function contentstackContains($operator = '', $query = array(), $*** = '', $value = array()) {
-        if (!(!Utility::isEmpty($***) && is_string($***) && is_array($value)))
+    function contentstackContains($operator = '', $query = array(), $key = '', $value = array()) {
+        if (!(!Utility::isEmpty($key) && is_string($key) && is_array($value)))
             throw contentstackCreateError('Invalid input for "'.contentstackGetFunctionName().'". Key should be string and value must be array.');
-        $query[$***] = array($operator => $value);
+        $query[$key] = array($operator => $value);
         return $query;
     }
 }
@@ -205,9 +205,9 @@ if (!function_exists('contentstackPagination')) {
      * pagination
      * Creates the skip and limit parameters
      * @param
-     *      $operator - *** of the query
+     *      $operator - key of the query
      *      $query - Query object
-     *      $value - value to be set against ***
+     *      $value - value to be set against key
      * @return $query
      * */
     function contentstackPagination($operator = '', $query = array(), $value = '') {
@@ -223,9 +223,9 @@ if (!function_exists('contentstackLanguage')) {
      * language
      * Set the locale on the Query
      * @param
-     *      $operator - *** of the query
+     *      $operator - key of the query
      *      $query - Query object
-     *      $value - value to be set against ***
+     *      $value - value to be set against key
      * @return $query
      * */
     function contentstackLanguage($operator = '', $query = array(), $value = '') {
@@ -242,15 +242,15 @@ if (!function_exists('contentstackSorting')) {
      * sort
      * sort the field based on the query
      * @param
-     *      $operator - *** of the query
+     *      $operator - key of the query
      *      $query - Query object
      *      $field_uid - field_uid which is to be use for sorting
      * @return $query
      * */
-    function contentstackSorting($operator = '', $query = array(), $*** = '') {
-        if (!(!Utility::isEmpty($***) && is_string($***)))
+    function contentstackSorting($operator = '', $query = array(), $key = '') {
+        if (!(!Utility::isEmpty($key) && is_string($key)))
             throw contentstackCreateError('Invalid input for "'.contentstackGetFunctionName().'". Value should be valid field in entry');
-        $query[$operator] = $***;
+        $query[$operator] = $key;
         return $query;
     }
 }
@@ -260,9 +260,9 @@ if (!function_exists('contentstackAddBoolean')) {
      * addBoolean
      * Set the boolean parameter on the Query
      * @param
-     *      $operator - *** of the query
+     *      $operator - key of the query
      *      $query - Query object
-     *      $value - value to be set against ***
+     *      $value - value to be set against key
      * @return $query
      * */
     function contentstackAddBoolean($operator = '', $query = array()) {
@@ -276,13 +276,13 @@ if (!function_exists('contentstackAddParam')) {
      * AddParam
      * Set the locale on the Query
      * @param
-     *      $operator - *** of the query
+     *      $operator - key of the query
      *      $query - Query object
-     *      $value - value to be set against ***
+     *      $value - value to be set against key
      * @return $query
      * */
-    function contentstackAddParam($*** = '', $query = array(), $value = '') {
-        $query[$***] =  $value;
+    function contentstackAddParam($key = '', $query = array(), $value = '') {
+        $query[$key] =  $value;
         return $query;
     }
 }
@@ -294,14 +294,14 @@ if (!function_exists('contentstackExistence')) {
      * @param
      *      $operator - $operator of the query
      *      $query - Query object
-     *      $*** - field_uid against which query to be checked
-     *      $value - value to be set against ***
+     *      $key - field_uid against which query to be checked
+     *      $value - value to be set against key
      * @return $query
      * */
-    function contentstackExistence($operator = '', $query = array(), $*** = '', $value = false) {
-        if (!(!Utility::isEmpty($***) && is_string($***)))
+    function contentstackExistence($operator = '', $query = array(), $key = '', $value = false) {
+        if (!(!Utility::isEmpty($key) && is_string($key)))
             throw contentstackCreateError('Invalid input for "'.contentstackGetFunctionName().'". Key should be valid String field uid');
-        $query[$***] = array($operator => $value);
+        $query[$key] = array($operator => $value);
         return $query;
     }
 }
