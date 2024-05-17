@@ -36,7 +36,7 @@ abstract class Contentstack
     /**
      * Static method for the Stack constructor
      * 
-     * @param string             $api_***      : Contentstack Stack API KEY.
+     * @param string             $api_key      : Contentstack Stack API KEY.
      * @param string             $access_token : Contentstack Stack ACCESS TOKEN.
      * @param string             $environment  : Environment Name.
      * @param array              $config       : Stack Configuration to provide region.
@@ -45,12 +45,12 @@ abstract class Contentstack
      * @return Stack
      * */
 
-    public static function Stack($api_*** = '',
+    public static function Stack($api_key = '',
         $access_token = '',
         $environment = '',
         $config = array('region'=> 'us', 'branch'=> '', 'live_preview' => array('enable' => false, 'host' => 'api.contentstack.io'))
     ) {
-        return new Stack($api_***, $access_token, $environment, $config);
+        return new Stack($api_key, $access_token, $environment, $config);
     }
 
     public static function renderContent(string $content, Option $option): string 

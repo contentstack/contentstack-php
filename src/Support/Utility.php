@@ -46,22 +46,22 @@ class Utility
             switch ($type) {
             case 'stack' :
                 if ($input['region']) {
-                    if (!(Utility::isKeySet($input, 'api_***') 
+                    if (!(Utility::isKeySet($input, 'api_key') 
                         && Utility::isKeySet($input, 'access_token') 
                         && Utility::isKeySet($input, 'environment') 
                         && Utility::isKeySet($input, 'region'))
                     ) {
-                        $msg = 'Please provide valid api_***, 
+                        $msg = 'Please provide valid api_key, 
                             access_token, 
                             environment and region';
                     }
                     break;
                 } else {
-                    if (!(Utility::isKeySet($input, 'api_***') 
+                    if (!(Utility::isKeySet($input, 'api_key') 
                         && Utility::isKeySet($input, 'access_token') 
                         && Utility::isKeySet($input, 'environment'))
                     ) {
-                        $msg = 'Please provide valid api_***, 
+                        $msg = 'Please provide valid api_key, 
                         access_token and environment';
                     }
                     break;
@@ -84,7 +84,7 @@ class Utility
             case 'host' :
             case 'access_token' :
             case 'environment' :
-            case 'api_***' :
+            case 'api_key' :
                 if (Utility::isEmpty($input) || !is_string($input)) {
                     $msg = 'Please provide valid string for '.$type;
                 }
@@ -102,7 +102,7 @@ class Utility
 
     public static function isLivePreview($query) {
         if ($query && isset($query->contentType)) { 
-            return ($query->contentType->stack->live_preview['enable'] == true && array_***_exists('content_type_uid', $query->contentType->stack->live_preview) && strcmp($query->contentType->uid, $query->contentType->stack->live_preview['content_type_uid']) == 0);
+            return ($query->contentType->stack->live_preview['enable'] == true && array_key_exists('content_type_uid', $query->contentType->stack->live_preview) && strcmp($query->contentType->uid, $query->contentType->stack->live_preview['content_type_uid']) == 0);
         }
         return false;
     }
@@ -185,7 +185,7 @@ class Utility
     /**
      * Header transformation as it required format
      * 
-     * @param array $query - input headers in *** value pair
+     * @param array $query - input headers in key value pair
      * 
      * @return array
      * */
@@ -226,16 +226,16 @@ class Utility
 
             $include_schema = array_search(
                 'include_schema',
-                array_***s($query->_query)
+                array_keys($query->_query)
             );
             $include_content_type = array_search(
                 'include_content_type', 
-                array_***s($query->_query)
+                array_keys($query->_query)
             );
 
             if ($include_schema < $include_content_type) {
-                foreach ($query->_query as $*** => $value) {
-                    if ($*** == 'include_schema') { 
+                foreach ($query->_query as $key => $value) {
+                    if ($key == 'include_schema') { 
                         unset($query->_query['include_schema']);
                         $query->_query["include_schema"] = "true";
                     }
@@ -397,7 +397,7 @@ class Utility
 
             $request_headers = array();
             $request_headers[] = 'x-user-agent: contentstack-php/2.3.1';
-            $request_headers[] = 'api_***: '.$Headers["api_***"];
+            $request_headers[] = 'api_key: '.$Headers["api_key"];
             if (Utility::isLivePreview($queryObject)) {
                 $request_headers[] = 'authorization: '.$queryObject->contentType->stack->live_preview['management_token'] ;
             }else {
@@ -420,7 +420,7 @@ class Utility
             // set the cURL time out
             curl_setopt($http, CURLOPT_TIMEOUT_MS, $timeout);
 
-            if(array_***_exists("url",$proxy_details) && array_***_exists("port",$proxy_details)){
+            if(array_key_exists("url",$proxy_details) && array_key_exists("port",$proxy_details)){
                 if($proxy_details['url'] != '' && $proxy_details['port'] != '') {
 
                     // Set the proxy IP
@@ -428,7 +428,7 @@ class Utility
                     // Set the port
                     curl_setopt($http, CURLOPT_PROXYPORT, $proxy_details['port']);
                     
-                    if(array_***_exists("username",$proxy_details) && array_***_exists("password",$proxy_details)){
+                    if(array_key_exists("username",$proxy_details) && array_key_exists("password",$proxy_details)){
                         if($proxy_details['username'] != '' && $proxy_details['password'] != '') {
 
                             $proxyauth = $proxy_details['username'].":".$proxy_details['password'];
@@ -489,12 +489,12 @@ class Utility
 
     public static function to_render_content(&$resp, $entry_uid, $live_response_decode ){
         if (is_array($resp)) {
-            if(array_***_exists('uid', $resp) && $resp['uid'] == $entry_uid){
+            if(array_key_exists('uid', $resp) && $resp['uid'] == $entry_uid){
                 $resp = $live_response_decode;
             }else
             {
-               foreach ($resp as $*** => $value) {
-                     Utility::to_render_content($resp[$***], $entry_uid, $live_response_decode);           
+               foreach ($resp as $key => $value) {
+                     Utility::to_render_content($resp[$key], $entry_uid, $live_response_decode);           
                 }  
             }
         }
@@ -502,16 +502,16 @@ class Utility
 
 
     /**
-     * Validate the *** is set or not
+     * Validate the key is set or not
      * 
      * @param array  $input - input 
-     * @param string $***   - *** to check
+     * @param string $key   - key to check
      * 
      * @return boolean
      * */
-    public static function isKeySet($input = array(), $*** = '')
+    public static function isKeySet($input = array(), $key = '')
     {
-        return ($*** && isset($input[$***])) ? true : false;
+        return ($key && isset($input[$key])) ? true : false;
     }
 
     /**

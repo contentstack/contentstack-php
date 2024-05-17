@@ -55,16 +55,16 @@ class Result
     }
 
     /**
-     * Get the ***s from the object
+     * Get the keys from the object
      * 
-     * @param string $*** - *** whose corresponding value to be retrieved
+     * @param string $key - key whose corresponding value to be retrieved
      * 
      * @return Value
      * */
-    public function get($***) 
+    public function get($key) 
     {
 
-        return ($*** && is_string($***)) ? $this->_object[$***] : null;
+        return ($key && is_string($key)) ? $this->_object[$key] : null;
     
     }
 }

@@ -59,7 +59,7 @@
             ],
             "description": "Contentstack is a headless CMS with an API-first approach that puts content at the centre. It is designed to simplify the process of publication by separating code from content.",
             "homepage": "https://github.com/contentstack/contentstack-utils-php",
-            "***words": [
+            "keywords": [
                 "Contentstack",
                 "utils"
             ],
@@ -122,7 +122,7 @@
             ],
             "description": "Simple and fast implementation of enumerations with native PHP",
             "homepage": "https://github.com/marc-mabe/php-enum",
-            "***words": [
+            "keywords": [
                 "enum",
                 "enum-map",
                 "enum-set",
@@ -192,7 +192,7 @@
             ],
             "description": "CLI tools to manage output errors formatting for junit, checkstyle, teamcity, gitlab and github error formats",
             "homepage": "https://github.com/code-lts/cli-tools",
-            "***words": [
+            "keywords": [
                 "checkstyle",
                 "cli",
                 "formatters",
@@ -272,7 +272,7 @@
             ],
             "description": "Doctum, a PHP API documentation generator. Fork of Sami",
             "homepage": "https://github.com/code-lts/doctum",
-            "***words": [
+            "keywords": [
                 "generator",
                 "phpdoc"
             ],
@@ -380,7 +380,7 @@
             ],
             "description": "Parser for Markdown.",
             "homepage": "http://parsedown.org",
-            "***words": [
+            "keywords": [
                 "markdown",
                 "parser"
             ],
@@ -430,7 +430,7 @@
                 "MIT"
             ],
             "description": "Create deep copies (clones) of your objects",
-            "***words": [
+            "keywords": [
                 "clone",
                 "copy",
                 "duplicate",
@@ -495,7 +495,7 @@
                 }
             ],
             "description": "A PHP parser written in PHP",
-            "***words": [
+            "keywords": [
                 "parser",
                 "php"
             ],
@@ -548,7 +548,7 @@
                 }
             ],
             "description": "Detect continuous integration environment and provide unified access to properties of current build",
-            "***words": [
+            "keywords": [
                 "CircleCI",
                 "Codeship",
                 "Wercker",
@@ -734,7 +734,7 @@
             ],
             "description": "Common reflection classes used by phpdocumentor to reflect the code structure",
             "homepage": "http://www.phpdoc.org",
-            "***words": [
+            "keywords": [
                 "FQSEN",
                 "phpDocumentor",
                 "phpdoc",
@@ -908,7 +908,7 @@
                 }
             ],
             "description": "Internationalization support for Twig via the gettext library",
-            "***words": [
+            "keywords": [
                 "gettext",
                 "i18n"
             ],
@@ -1025,7 +1025,7 @@
             ],
             "description": "Library that provides collection, processing, and rendering functionality for PHP code coverage information.",
             "homepage": "https://github.com/sebastianbergmann/php-code-coverage",
-            "***words": [
+            "keywords": [
                 "coverage",
                 "testing",
                 "xunit"
@@ -1087,7 +1087,7 @@
             ],
             "description": "FilterIterator implementation that filters files based on a list of suffixes.",
             "homepage": "https://github.com/sebastianbergmann/php-file-iterator/",
-            "***words": [
+            "keywords": [
                 "filesystem",
                 "iterator"
             ],
@@ -1152,7 +1152,7 @@
             ],
             "description": "Invoke callables with a timeout",
             "homepage": "https://github.com/sebastianbergmann/php-invoker/",
-            "***words": [
+            "keywords": [
                 "process"
             ],
             "support": {
@@ -1211,7 +1211,7 @@
             ],
             "description": "Simple template engine.",
             "homepage": "https://github.com/sebastianbergmann/php-text-template/",
-            "***words": [
+            "keywords": [
                 "template"
             ],
             "support": {
@@ -1270,7 +1270,7 @@
             ],
             "description": "Utility class for timing",
             "homepage": "https://github.com/sebastianbergmann/php-timer/",
-            "***words": [
+            "keywords": [
                 "timer"
             ],
             "support": {
@@ -1360,7 +1360,7 @@
             ],
             "description": "The PHP Unit Testing framework.",
             "homepage": "https://phpunit.de/",
-            "***words": [
+            "keywords": [
                 "phpunit",
                 "testing",
                 "xunit"
@@ -1426,7 +1426,7 @@
             ],
             "description": "Common Container Interface (PHP FIG PSR-11)",
             "homepage": "https://github.com/php-fig/container",
-            "***words": [
+            "keywords": [
                 "PSR-11",
                 "container",
                 "container-interface",
@@ -1665,7 +1665,7 @@
             ],
             "description": "Provides the functionality to compare PHP values for equality",
             "homepage": "https://github.com/sebastianbergmann/comparator",
-            "***words": [
+            "keywords": [
                 "comparator",
                 "compare",
                 "equality"
@@ -1788,7 +1788,7 @@
             ],
             "description": "Diff implementation",
             "homepage": "https://github.com/sebastianbergmann/diff",
-            "***words": [
+            "keywords": [
                 "diff",
                 "udiff",
                 "unidiff",
@@ -1853,7 +1853,7 @@
             ],
             "description": "Provides functionality to handle HHVM/PHP environments",
             "homepage": "https://github.com/sebastianbergmann/environment",
-            "***words": [
+            "keywords": [
                 "Xdebug",
                 "environment",
                 "hhvm"
@@ -1932,7 +1932,7 @@
             ],
             "description": "Provides the functionality to export PHP variables for visualization",
             "homepage": "https://www.github.com/sebastianbergmann/exporter",
-            "***words": [
+            "keywords": [
                 "export",
                 "exporter"
             ],
@@ -1994,7 +1994,7 @@
             ],
             "description": "Snapshotting of global state",
             "homepage": "http://www.github.com/sebastianbergmann/global-state",
-            "***words": [
+            "keywords": [
                 "global state"
             ],
             "support": {
@@ -2416,7 +2416,7 @@
             ],
             "description": "Eases the creation of beautiful and testable command line interfaces",
             "homepage": "https://symfony.com",
-            "***words": [
+            "keywords": [
                 "cli",
                 "command-line",
                 "console",
@@ -2692,7 +2692,7 @@
             ],
             "description": "Symfony polyfill for ctype functions",
             "homepage": "https://symfony.com",
-            "***words": [
+            "keywords": [
                 "compatibility",
                 "ctype",
                 "polyfill",
@@ -2771,7 +2771,7 @@
             ],
             "description": "Symfony polyfill for intl's grapheme_* functions",
             "homepage": "https://symfony.com",
-            "***words": [
+            "keywords": [
                 "compatibility",
                 "grapheme",
                 "intl",
@@ -2855,7 +2855,7 @@
             ],
             "description": "Symfony polyfill for intl's Normalizer class and related functions",
             "homepage": "https://symfony.com",
-            "***words": [
+            "keywords": [
                 "compatibility",
                 "intl",
                 "normalizer",
@@ -2939,7 +2939,7 @@
             ],
             "description": "Symfony polyfill for the Mbstring extension",
             "homepage": "https://symfony.com",
-            "***words": [
+            "keywords": [
                 "compatibility",
                 "mbstring",
                 "polyfill",
@@ -3081,7 +3081,7 @@
             ],
             "description": "Generic abstractions related to writing services",
             "homepage": "https://symfony.com",
-            "***words": [
+            "keywords": [
                 "abstractions",
                 "contracts",
                 "decoupling",
@@ -3167,7 +3167,7 @@
             ],
             "description": "Provides an object-oriented API to strings and deals with bytes, UTF-8 code points and grapheme clusters in a unified way",
             "homepage": "https://symfony.com",
-            "***words": [
+            "keywords": [
                 "grapheme",
                 "i18n",
                 "string",
@@ -3368,7 +3368,7 @@
             ],
             "description": "Twig, the flexible, fast, and secure template language for PHP",
             "homepage": "https://twig.symfony.com",
-            "***words": [
+            "keywords": [
                 "templating"
             ],
             "support": {
@@ -3429,7 +3429,7 @@
             ],
             "description": "PHP library/api to provide Internationalisation and Localisation",
             "homepage": "https://github.com/wdes/php-I18n-l10n",
-            "***words": [
+            "keywords": [
                 "composer-package",
                 "gettext",
                 "i18n",
@@ -3493,7 +3493,7 @@
                 }
             ],
             "description": "Assertions to validate method input/output with nice error messages.",
-            "***words": [
+            "keywords": [
                 "assert",
                 "check",
                 "validate"
