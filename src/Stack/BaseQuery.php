@@ -218,7 +218,7 @@ abstract class BaseQuery
      * $stack = Contentstack::Stack("API_KEY", "DELIVERY_TOKEN", "ENVIRONMENT");
      * $result = $stack->ContentType('product')->Query()->toJSON()->regex('color','^B1')->find();
      * 
-     * Now, in order to perform a case-insensitive search, you can use the $options *** to specify any regular expressions options:
+     * Now, in order to perform a case-insensitive search, you can use the $options key to specify any regular expressions options:
      * use Contentstack\Contentstack;
      * $stack = Contentstack::Stack("API_KEY", "DELIVERY_TOKEN", "ENVIRONMENT");
      * $result = $stack->ContentType('product')->Query()->toJSON()->regex('color','^B1','i')->find();
@@ -617,8 +617,8 @@ abstract class BaseQuery
     /**
      * To add query parameter in query
      * 
-     * @param string $***   - Name of *** in string
-     * @param string $value - Value of the *** in string
+     * @param string $key   - Name of key in string
+     * @param string $value - Value of the key in string
      * 
      * @example 
      * 
@@ -628,11 +628,11 @@ abstract class BaseQuery
      * 
      * @return Query
      * */
-    public function addParam($*** = '', $value = '')
+    public function addParam($key = '', $value = '')
     {
         $this->queryObject->_query = call_user_func(
             'contentstackAddParam', 
-            $***, 
+            $key, 
             $this->queryObject->_query, 
             $value
         );
@@ -815,7 +815,7 @@ abstract class BaseQuery
     /**
      * Query the field which has exact value as specified
      * 
-     * @param string $***   - field in the entry against which 
+     * @param string $key   - field in the entry against which 
      *                      comparision needs to be done
      * @param string $value - value against which comparision is going to happen
      * 
@@ -828,10 +828,10 @@ abstract class BaseQuery
      * 
      * @return Query
      * */
-    public function where($*** = '', $value = '') 
+    public function where($key = '', $value = '') 
     {
-        if (!Utility::isEmpty($***)) {
-            $this->subQuery[$***] = $value;
+        if (!Utility::isEmpty($key)) {
+            $this->subQuery[$key] = $value;
         }
         return $this->queryObject;
     }

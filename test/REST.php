@@ -16,7 +16,7 @@ class REST
     }
 
     /*
-     * Remove system ***s from the values
+     * Remove system keys from the values
      * */
     public function sanatize($value = array())
     {
@@ -29,11 +29,11 @@ class REST
     /*
      * Set method is used to add the variable to the private variable of current instance
      * @param
-     *      string|$***  - *** which will hold the value
-     *      array|$value - value of the ***
+     *      string|$key  - key which will hold the value
+     *      array|$value - value of the key
      * @return null
      * */
-    public function set($*** = '', $value = '')
+    public function set($key = '', $value = '')
     {
         // unset values
         if (is_array($value) && isset($value[0]) && is_array($value[0])) {
@@ -47,24 +47,24 @@ class REST
         // unset values
 
         // before set get the data
-        $tmpValue = ($this->get($***)) ? $this->get($***) : array();
-        $this->results[$***] = array_merge($value, $tmpValue);
+        $tmpValue = ($this->get($key)) ? $this->get($key) : array();
+        $this->results[$key] = array_merge($value, $tmpValue);
     }
 
     /*
-     * Get method is used to fetch the matched ***'s value of current instance
+     * Get method is used to fetch the matched key's value of current instance
      * @param
-     *      string|$***  - *** which will hold the value
+     *      string|$key  - key which will hold the value
      * @return string|array|$value
      * */
-    public function get($*** = '')
+    public function get($key = '')
     {
-        return ($*** && isset($this->results[$***])) ? $this->results[$***] : array();
+        return ($key && isset($this->results[$key])) ? $this->results[$key] : array();
     }
 
     public function getAPIKEY() {
         $stack = $this->get('stack');
-        return $stack['api_***'];
+        return $stack['api_key'];
     }
 
     public function getAccessToken() {
