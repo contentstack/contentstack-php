@@ -47,25 +47,25 @@ class Stack
     /**
      * Constructor of the Stack
      * 
-     * @param string $api_***        - API Key of Stack
+     * @param string $api_key        - API Key of Stack
      * @param string $delivery_token - Delivery Token of Stack
      * @param string $environment    - Environment Name of Stack
      * @param string $region         - Region name of Contentstack. (default region 'us')
      * 
      * */
     public function __construct(
-        $api_*** = '', 
+        $api_key = '', 
         $delivery_token = '', 
         $environment = '', 
         $config = array('region'=> 'us', 'branch'=> '', 'live_preview' => array())
     ) {
         $previewHost = 'api.contentstack.io';
-        if ($config && $config !== "undefined" && array_***_exists('region', $config) && $config['region'] !== "undefined" && $config['region'] !== "us" ) {
+        if ($config && $config !== "undefined" && array_key_exists('region', $config) && $config['region'] !== "undefined" && $config['region'] !== "us" ) {
             $this->host = $config['region'].'-cdn.contentstack.com';
             $previewHost =  $config['region'].'-api.contentstack.com';
         }
         $this->header = Utility::validateInput(
-            'stack', array('api_***' => $api_***, 
+            'stack', array('api_key' => $api_key, 
             'access_token' => $delivery_token, 
             'environment' => $environment, 
             'region' => $config['region'] ?? '',
@@ -75,11 +75,11 @@ class Stack
         unset($this->header['environment']);
         $livePreview = array('enable' => false, 'host' => $previewHost);
         $this->live_preview = $config['live_preview'] ? array_merge($livePreview, $config['live_preview']) : $livePreview;
-        $this->proxy = array_***_exists("proxy",$config) ? $config['proxy'] : array('proxy'=>array());
-        $this->timeout = array_***_exists("timeout",$config) ? $config['timeout'] : '3000';
-        $this->retryDelay = array_***_exists("retryDelay",$config) ? $config['retryDelay'] : '3000';
-        $this->retryLimit = array_***_exists("retryLimit",$config) ? $config['retryLimit'] : '5';
-        $this->errorRetry = array_***_exists("errorRetry",$config) ? $config['errorRetry'] : array('errorRetry'=>array(408, 429));
+        $this->proxy = array_key_exists("proxy",$config) ? $config['proxy'] : array('proxy'=>array());
+        $this->timeout = array_key_exists("timeout",$config) ? $config['timeout'] : '3000';
+        $this->retryDelay = array_key_exists("retryDelay",$config) ? $config['retryDelay'] : '3000';
+        $this->retryLimit = array_key_exists("retryLimit",$config) ? $config['retryLimit'] : '5';
+        $this->errorRetry = array_key_exists("errorRetry",$config) ? $config['errorRetry'] : array('errorRetry'=>array(408, 429));
         return $this;
     }
 
@@ -117,7 +117,7 @@ class Stack
      * @param $url        : Image url on which we want to manipulate. 
      * @param $parameters : It is an second parameter 
      *                    in which we want to place different 
-     *                    manipulation *** and value in array form
+     *                    manipulation key and value in array form
      *      
      * @return string
      * */    
@@ -128,8 +128,8 @@ class Stack
             && count($parameters) > 0
         ) {
             $params = array();
-            foreach ($parameters as $*** => $value) {
-                array_push($params, $*** . '=' .$value);
+            foreach ($parameters as $key => $value) {
+                array_push($params, $key . '=' .$value);
             }         
             $params = implode("&", $params);
 
@@ -150,7 +150,7 @@ class Stack
         $this->live_preview['live_preview'] = $parameters['live_preview'] ?? 'init';
         $this->live_preview['content_type_uid'] = $parameters['content_type_uid'] ?? null;
         $this->live_preview['entry_uid'] = $parameters['entry_uid'] ?? null;
-        if(array_***_exists('content_type_uid',$parameters) && array_***_exists('entry_uid',$parameters)){
+        if(array_key_exists('content_type_uid',$parameters) && array_key_exists('entry_uid',$parameters)){
 
             $this->ContentType($parameters['content_type_uid'])->Entry($parameters['entry_uid'])->fetch(); 
         }
@@ -239,14 +239,14 @@ class Stack
     /**
      * This function sets API Key.
      * 
-     * @param string $api_*** - API Key
+     * @param string $api_key - API Key
      * 
      * @return Stack
      * */
-    public function setAPIKEY($api_*** = '')
+    public function setAPIKEY($api_key = '')
     {
-        Utility::validateInput('api_***', $api_***);
-        $this->header['api_***'] = $api_***;
+        Utility::validateInput('api_key', $api_key);
+        $this->header['api_key'] = $api_key;
         return $this;
     }
     /**
@@ -284,7 +284,7 @@ class Stack
      * */
     public function getAPIKEY()
     {
-        return $this->header['api_***'];
+        return $this->header['api_key'];
     }
     /**
      * This function returns Delivery Token.

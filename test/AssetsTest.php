@@ -80,7 +80,7 @@ class AssetsTest extends TestCase {
 
     public function testAssetsAddParam() {
          $_assets = self::$Stack->Assets()->Query()->addParam('include_dimension', 'true')->toJSON()->find();
-          $this->assertTrue(array_***_exists('dimension', $_assets[0][0]));
+          $this->assertTrue(array_key_exists('dimension', $_assets[0][0]));
     }
 
 
@@ -138,8 +138,8 @@ class AssetsTest extends TestCase {
         $assets = self::$Stack->Assets()->Query()->toJSON()->containedIn('content_type', $_set)->find();
         $this->assertArrayHasKey(0, $assets);
         if(count($assets[0]) !== 0){
-            foreach ($assets[0] as $*** => $val) {
-            $this->assertTrue((array_search($assets[0][$***]['content_type'], $_set) !== false));
+            foreach ($assets[0] as $key => $val) {
+            $this->assertTrue((array_search($assets[0][$key]['content_type'], $_set) !== false));
         }
         } else {
             $this->assertTrue('0');
@@ -151,8 +151,8 @@ class AssetsTest extends TestCase {
         $assets= self::$Stack->Assets()->Query()->toJSON()->notContainedIn('content_type', $_set)->find();
         $this->assertArrayHasKey(0, $assets);
          if(count($assets[0]) !== 0){
-            foreach ($assets[0] as $*** => $val) {
-                $this->assertTrue((array_search($assets[0][$***]['content_type'], $_set) === false));
+            foreach ($assets[0] as $key => $val) {
+                $this->assertTrue((array_search($assets[0][$key]['content_type'], $_set) === false));
                 }
             } else {
                   $this->assertTrue('0');  
@@ -184,8 +184,8 @@ class AssetsTest extends TestCase {
         $assets = self::$Stack->Assets()->Query()->toJSON()->lessThan('file_size', $_set)->find();
         $this->assertArrayHasKey(0, $assets);
        if(count($assets[0]) !== 0){
-        foreach ($assets[0] as $*** => $val) {
-            $this->assertTrue(($assets[0][$***]['file_size'] < $_set));
+        foreach ($assets[0] as $key => $val) {
+            $this->assertTrue(($assets[0][$key]['file_size'] < $_set));
         }
         } else {
             $this->assertTrue('0');     
@@ -197,8 +197,8 @@ class AssetsTest extends TestCase {
         $assets = self::$Stack->Assets()->Query()->toJSON()->lessThanEqualTo('file_size', $_set)->find();
         $this->assertArrayHasKey(0, $assets);
         if(count($assets[0]) !== 0) {
-        foreach ($assets[0] as $*** => $val) {
-            //$this->assertTrue(($assets[0][$***]['file_size'] <= $_set));
+        foreach ($assets[0] as $key => $val) {
+            //$this->assertTrue(($assets[0][$key]['file_size'] <= $_set));
             }
         } else {
           $this->assertTrue('0');       
@@ -210,8 +210,8 @@ class AssetsTest extends TestCase {
         $assets = self::$Stack->Assets()->Query()->toJSON()->greaterThan('file_size', $_set)->find();
         $this->assertArrayHasKey(0, $assets);
         if(count($assets[0]) !== 0) {
-        foreach ($assets[0] as $*** => $val) {
-            $this->assertTrue(($assets[0][$***]['file_size'] > $_set));
+        foreach ($assets[0] as $key => $val) {
+            $this->assertTrue(($assets[0][$key]['file_size'] > $_set));
             }
         } else {
               $this->assertTrue('0');                  
@@ -224,8 +224,8 @@ class AssetsTest extends TestCase {
         $assets = self::$Stack->Assets()->Query()->toJSON()->greaterThanEqualTo('file_size', $_set)->find();
         $this->assertArrayHasKey(0, $assets);
         if(count($assets[0]) !== 0) {
-        foreach ($assets[0] as $*** => $val) {
-            $this->assertTrue(($assets[0][$***]['file_size'] >= $_set));
+        foreach ($assets[0] as $key => $val) {
+            $this->assertTrue(($assets[0][$key]['file_size'] >= $_set));
             }
         } else {
               $this->assertTrue('0');    
@@ -239,8 +239,8 @@ class AssetsTest extends TestCase {
         $assets = self::$Stack->Assets()->Query()->toJSON()->notEqualTo('file_size', $_set)->find();
         $this->assertArrayHasKey(0, $assets);
       //  $this->assertTrue((count($assets[0]) === $_assets_count));
-        foreach ($assets[0] as $*** => $val) {
-            $this->assertTrue(($assets[0][$***]['file_size'] !== $_set));
+        foreach ($assets[0] as $key => $val) {
+            $this->assertTrue(($assets[0][$key]['file_size'] !== $_set));
         }
     }
 
@@ -251,8 +251,8 @@ class AssetsTest extends TestCase {
         $this->assertArrayHasKey(0, $assets);
         $this->assertTrue((count($assets[0]) === $_assets_count));
         if(count($_assets[0]) !== 0) {
-        foreach ($assets[0] as $*** => $val) {
-            $this->assertTrue(isset($assets[0][$***]['title']));
+        foreach ($assets[0] as $key => $val) {
+            $this->assertTrue(isset($assets[0][$key]['title']));
         }
         } else {
                $this->assertTrue('0');
@@ -316,7 +316,7 @@ class AssetsTest extends TestCase {
         $this->assertTrue(checkAssetsSorting($_assets[0]));
         $flag = true;
         for($i = 0; $i < count($_assets[0]); $i++) {
-            $flag = $flag && (count(array_***s($_assets[0][$i])) === 6 && isset($_assets[0][$i]['updated_at']) && isset($_assets[0][$i]['filename']) && isset($_assets[0][$i]['ACL']) && isset($_assets[0][$i]['title']) && isset($_assets[0][$i]['uid']));
+            $flag = $flag && (count(array_keys($_assets[0][$i])) === 6 && isset($_assets[0][$i]['updated_at']) && isset($_assets[0][$i]['filename']) && isset($_assets[0][$i]['ACL']) && isset($_assets[0][$i]['title']) && isset($_assets[0][$i]['uid']));
         }
         $this->assertTrue($flag);
     }
@@ -365,7 +365,7 @@ class AssetsTest extends TestCase {
         $this->assertTrue(checkAssetsSorting($_assets[0]));
         $flag = true;
         for($i = 0; $i < count($_assets[0]); $i++) {
-            $flag = $flag && (!array_search('title', array_***s($_assets[0][$i])));
+            $flag = $flag && (!array_search('title', array_keys($_assets[0][$i])));
         }
         $this->assertTrue($flag);
     }
@@ -379,7 +379,7 @@ class AssetsTest extends TestCase {
         $this->assertTrue(checkAssetsSorting($_assets[0]));
         $flag = true;
         for($i = 0; $i < count($_assets[0]); $i++) {
-            $flag = $flag && (count(array_***s($_assets[0][$i])) === 6 && isset($_assets[0][$i]['updated_at']) && isset($_assets[0][$i]['filename']) && isset($_assets[0][$i]['ACL']) && isset($_assets[0][$i]['title']) && isset($_assets[0][$i]['uid']));
+            $flag = $flag && (count(array_keys($_assets[0][$i])) === 6 && isset($_assets[0][$i]['updated_at']) && isset($_assets[0][$i]['filename']) && isset($_assets[0][$i]['ACL']) && isset($_assets[0][$i]['title']) && isset($_assets[0][$i]['uid']));
         }
         $this->assertTrue($flag);
     }
@@ -393,7 +393,7 @@ class AssetsTest extends TestCase {
         $this->assertTrue(checkAssetsSorting($_assets[0]));
         $flag = true;
         for($i = 0; $i < count($_assets[0]); $i++) {
-            $flag = $flag && (!array_search('boolean', array_***s($_assets[0][$i])));
+            $flag = $flag && (!array_search('boolean', array_keys($_assets[0][$i])));
         }
         $this->assertTrue($flag);
     }

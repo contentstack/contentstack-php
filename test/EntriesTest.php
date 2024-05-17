@@ -178,7 +178,7 @@ class EntriesTest extends TestCase {
     public function testFindIncludeEmbeddedItems() {
         $_entries = self::$Stack->ContentType(CT_ContentType)->Query()->toJSON()->includeEmbeddedItems()->find();
         for($i = 0; $i < count($_entries[0]); $i++) {
-            if (array_***_exists('rich_text_editor', $_entries[0][$i])) {
+            if (array_key_exists('rich_text_editor', $_entries[0][$i])) {
                 $embedded = Contentstack::renderContent($_entries[0][$i]["rich_text_editor"], new Option($_entries[0][$i]));
             }
         }
@@ -232,8 +232,8 @@ class EntriesTest extends TestCase {
         $entries = self::$Stack->ContentType(CT_ContentType)->Query()->toJSON()->containedIn('number1', $_set)->find();
         $this->assertArrayHasKey(0, $entries);
         $this->assertTrue((count($entries[0]) === $_actualCount));
-        foreach ($entries[0] as $*** => $val) {
-            $this->assertTrue((array_search($entries[0][$***]['number1'], $_set) !== false));
+        foreach ($entries[0] as $key => $val) {
+            $this->assertTrue((array_search($entries[0][$key]['number1'], $_set) !== false));
         }
     }
 
@@ -243,8 +243,8 @@ class EntriesTest extends TestCase {
         $entries = self::$Stack->ContentType(CT_ContentType)->Query()->toJSON()->notContainedIn('number1', $_set)->find();
         $this->assertArrayHasKey(0, $entries);
         $this->assertTrue((count($entries[0]) === $_actualCount));
-        foreach ($entries[0] as $*** => $val) {
-            $this->assertTrue((array_search($entries[0][$***]['number1'], $_set) === false));
+        foreach ($entries[0] as $key => $val) {
+            $this->assertTrue((array_search($entries[0][$key]['number1'], $_set) === false));
         }
     }
 
@@ -254,8 +254,8 @@ class EntriesTest extends TestCase {
         $entries = self::$Stack->ContentType(CT_ContentType)->Query()->toJSON()->lessThan('group.number', $_set)->find();
         $this->assertArrayHasKey(0, $entries);
         $this->assertTrue((count($entries[0]) === $_actualCount));
-        foreach ($entries[0] as $*** => $val) {
-            $this->assertTrue(($entries[0][$***]['group']['number'] < $_set));
+        foreach ($entries[0] as $key => $val) {
+            $this->assertTrue(($entries[0][$key]['group']['number'] < $_set));
         }
     }
 
@@ -264,8 +264,8 @@ class EntriesTest extends TestCase {
         $entries = self::$Stack->ContentType(CT_ContentType)->Query()->toJSON()->lessThanEqualTo('group.number', $_set)->find();
         $this->assertArrayHasKey(0, $entries);
         $this->assertTrue((count($entries[0]) === $_actualCount));
-        foreach ($entries[0] as $*** => $val) {
-            $this->assertTrue(($entries[0][$***]['group']['number'] <= $_set));
+        foreach ($entries[0] as $key => $val) {
+            $this->assertTrue(($entries[0][$key]['group']['number'] <= $_set));
         }
     }
 
@@ -275,8 +275,8 @@ class EntriesTest extends TestCase {
         $entries = self::$Stack->ContentType(CT_ContentType)->Query()->toJSON()->greaterThan('group.number', $_set)->find();
         $this->assertArrayHasKey(0, $entries);
         $this->assertTrue((count($entries[0]) === $_actualCount));
-        foreach ($entries[0] as $*** => $val) {
-            $this->assertTrue(($entries[0][$***]['group']['number'] > $_set));
+        foreach ($entries[0] as $key => $val) {
+            $this->assertTrue(($entries[0][$key]['group']['number'] > $_set));
         }
     }
 
@@ -286,8 +286,8 @@ class EntriesTest extends TestCase {
         $entries = self::$Stack->ContentType(CT_ContentType)->Query()->toJSON()->greaterThanEqualTo('group.number', $_set)->find();
         $this->assertArrayHasKey(0, $entries);
         $this->assertTrue((count($entries[0]) === $_actualCount));
-        foreach ($entries[0] as $*** => $val) {
-            $this->assertTrue(($entries[0][$***]['group']['number'] >= $_set));
+        foreach ($entries[0] as $key => $val) {
+            $this->assertTrue(($entries[0][$key]['group']['number'] >= $_set));
         }
     }
 
@@ -297,8 +297,8 @@ class EntriesTest extends TestCase {
         $entries = self::$Stack->ContentType(CT_ContentType)->Query()->toJSON()->notEqualTo('group.number', $_set)->find();
         $this->assertArrayHasKey(0, $entries);
         $this->assertTrue((count($entries[0]) === $_actualCount));
-        foreach ($entries[0] as $*** => $val) {
-            $this->assertTrue(($entries[0][$***]['group']['number'] !== $_set));
+        foreach ($entries[0] as $key => $val) {
+            $this->assertTrue(($entries[0][$key]['group']['number'] !== $_set));
         }
     }
 
@@ -307,8 +307,8 @@ class EntriesTest extends TestCase {
         $entries = self::$Stack->ContentType(CT_ContentType)->Query()->toJSON()->exists('boolean')->find();
         $this->assertArrayHasKey(0, $entries);
         $this->assertTrue((count($entries[0]) === $_actualCount));
-        foreach ($entries[0] as $*** => $val) {
-            $this->assertTrue(isset($entries[0][$***]['boolean']));
+        foreach ($entries[0] as $key => $val) {
+            $this->assertTrue(isset($entries[0][$key]['boolean']));
         }
     }
 
@@ -401,8 +401,8 @@ class EntriesTest extends TestCase {
         $this->assertTrue(checkEntriesSorting($_entries[0]));
         $flag = true;
         for($i = 0; $i < count($_entries[0]); $i++) {
-            $flag = $flag && (count(array_***s($_entries[0][$i])) === 3 && isset($_entries[0][$i]['updated_at']) && isset($_entries[0][$i]['title']) && isset($_entries[0][$i]['uid']));
-            /*$flag = $flag && (count(array_***s($_entries[0][$i])) === 4 && isset($_entries[0][$i]['url']) && isset($_entries[0][$i]['updated_at']) && isset($_entries[0][$i]['title']) && isset($_entries[0][$i]['uid']));*/
+            $flag = $flag && (count(array_keys($_entries[0][$i])) === 3 && isset($_entries[0][$i]['updated_at']) && isset($_entries[0][$i]['title']) && isset($_entries[0][$i]['uid']));
+            /*$flag = $flag && (count(array_keys($_entries[0][$i])) === 4 && isset($_entries[0][$i]['url']) && isset($_entries[0][$i]['updated_at']) && isset($_entries[0][$i]['title']) && isset($_entries[0][$i]['uid']));*/
         }
         $this->assertTrue($flag);
     }
@@ -414,8 +414,8 @@ class EntriesTest extends TestCase {
         $this->assertTrue(checkEntriesSorting($_entries[0]));
         $flag = true;
         for($i = 0; $i < count($_entries[0]); $i++) {
-            $flag = $flag && (count(array_***s($_entries[0][$i])) === 3 && isset($_entries[0][$i]['updated_at']) && isset($_entries[0][$i]['title']) && isset($_entries[0][$i]['uid']));
-            /*$flag = $flag && (count(array_***s($_entries[0][$i])) === 4 && isset($_entries[0][$i]['url']) && isset($_entries[0][$i]['updated_at']) && isset($_entries[0][$i]['title']) && isset($_entries[0][$i]['uid']));*/
+            $flag = $flag && (count(array_keys($_entries[0][$i])) === 3 && isset($_entries[0][$i]['updated_at']) && isset($_entries[0][$i]['title']) && isset($_entries[0][$i]['uid']));
+            /*$flag = $flag && (count(array_keys($_entries[0][$i])) === 4 && isset($_entries[0][$i]['url']) && isset($_entries[0][$i]['updated_at']) && isset($_entries[0][$i]['title']) && isset($_entries[0][$i]['uid']));*/
         }
         $this->assertTrue($flag);
     }
@@ -427,7 +427,7 @@ class EntriesTest extends TestCase {
         $this->assertTrue(checkEntriesSorting($_entries[0]));
         $flag = true;
         for($i = 0; $i < count($_entries[0]); $i++) {
-            $flag = $flag && (!array_search('title', array_***s($_entries[0][$i])));
+            $flag = $flag && (!array_search('title', array_keys($_entries[0][$i])));
         }
         $this->assertTrue($flag);
     }
@@ -439,7 +439,7 @@ class EntriesTest extends TestCase {
         $this->assertTrue(checkEntriesSorting($_entries[0]));
         $flag = true;
         for($i = 0; $i < count($_entries[0]); $i++) {
-            $flag = $flag && (!array_search('title', array_***s($_entries[0][$i])));
+            $flag = $flag && (!array_search('title', array_keys($_entries[0][$i])));
         }
         $this->assertTrue($flag);
     }

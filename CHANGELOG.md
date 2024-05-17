@@ -105,7 +105,7 @@
 ## Version 1.6.1
 ###### Date: 08-May-2020
 ### Bug
-    - Stack api *** and access token moved to header
+    - Stack api key and access token moved to header
 ------------------------------------------------
 
 ## Version 1.6.0
