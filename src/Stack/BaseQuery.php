@@ -16,6 +16,7 @@
 
 namespace Contentstack\Stack;
 use Contentstack\Support\Utility;
+use Contentstack\Error\ErrorMessages;
 
 require_once __DIR__ . "/../Support/helper.php";
 
@@ -110,7 +111,7 @@ abstract class BaseQuery
             );
             return $this->queryObject;
         }
-        throw contentstackCreateError('field_uids must be an array');
+        throw contentstackCreateError(ErrorMessages::FIELD_UIDS_ARRAY);
     }
 
     /**
@@ -142,7 +143,7 @@ abstract class BaseQuery
             );
             return $this->queryObject;
         }
-        throw contentstackCreateError('field_uids must be an array');
+        throw contentstackCreateError(ErrorMessages::FIELD_UIDS_ARRAY);
     }
 
     /**
@@ -175,7 +176,7 @@ abstract class BaseQuery
             );
             return $this->queryObject;
         }
-        throw contentstackCreateError('field_uids must be an array');
+        throw contentstackCreateError(ErrorMessages::FIELD_UIDS_ARRAY);
     }
 
     /**
@@ -710,7 +711,7 @@ abstract class BaseQuery
             );
             return $this->queryObject;
         }
-        throw contentstackCreateError('tags must be an array');
+        throw contentstackCreateError(ErrorMessages::TAGS_ARRAY);
     }
 
     /**
@@ -773,7 +774,7 @@ abstract class BaseQuery
             );
             return $this->queryObject;
         }
-        throw contentstackCreateError('value must be an array');
+        throw contentstackCreateError(ErrorMessages::VALUE_ARRAY);
     }
 
     /**
@@ -809,7 +810,7 @@ abstract class BaseQuery
             );
             return $this->queryObject;
         }
-        throw contentstackCreateError('value must be an array');
+        throw contentstackCreateError(ErrorMessages::VALUE_ARRAY);
     }
 
     /**
@@ -990,7 +991,7 @@ abstract class BaseQuery
             $this->subQuery = $_query;
             return $this->queryObject;
         }
-        throw contentstackCreateError("Provide valid query");
+        throw contentstackCreateError(ErrorMessages::INVALID_QUERY);
     }
 
     /**
