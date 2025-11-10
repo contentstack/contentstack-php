@@ -2,6 +2,11 @@
 ## CHANGELOG
 
 ------------------------------------------------
+## Version 2.4.1
+###### Date: 10-November-2025
+### Enhancement
+    - Improved Error messages
+------------------------------------------------
 ## Version 2.4.0
 ###### Date: 13-May-2024
 ### Enhancement
