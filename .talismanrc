@@ -1,3 +1,6 @@
 fileignoreconfig:
+- filename: .github/workflows/secrets-scan.yml
+  ignore_detectors:
+    - filecontent
 - filename: test/REST.php
   checksum: 975e995f6196587e33e246c66b366aa99f9a79cb3fd44366f7ab6134495f2201
