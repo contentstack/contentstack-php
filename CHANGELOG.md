@@ -1,6 +1,10 @@
 
 ## CHANGELOG
-
+------------------------------------------------
+## Version 2.4.2
+###### Date: 05-January-2026
+### Security fix
+    - Fixed snyk security issues
 ------------------------------------------------
 ## Version 2.4.1
 ###### Date: 10-November-2025
