@@ -95,7 +95,6 @@ class Utility
             }
             return $input;
         } catch (\Exception $e) {
-            echo "Validation Exception: ".$e->getMessage();
             throw new \Exception($e->getMessage());
         }
     }
