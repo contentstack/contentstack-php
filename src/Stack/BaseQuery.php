@@ -1010,7 +1010,7 @@ abstract class BaseQuery
         try {
             return json_decode(json_encode($this->subQuery), true);
         } catch (\Exception $e) {
-            echo $e->getMessage();
+            throw new \Exception($e->getMessage());
         }
     }   
 }
