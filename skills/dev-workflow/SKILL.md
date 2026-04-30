@@ -13,7 +13,7 @@ description: Branches, CI expectations, Composer test/docs, PR hygiene for Conte
 ## Branches
 
 - Use feature branches (e.g. `feat/...`, `fix/...`, ticket branches).
-- **`.github/workflows/check-branch.yml`** blocks pull requests into **`master`** unless the head branch is **`staging`** (SRE policy). Prefer PRs to **`staging`** when targeting a master release train.
+- Release flow is direct **`development` -> `master`** (no `staging` intermediate branch).
 - **Policy / SCA** workflows may run on PRs (see `.github/workflows/policy-scan.yml`, `sca-scan.yml`).
 
 ## Running tests and build
