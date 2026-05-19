@@ -206,6 +206,21 @@ class Utility
     }
 
     /**
+     * Format variant UID(s) for the x-cs-variant-uid request header.
+     *
+     * @param string|array $variantUidOrUids - Variant UID or list of variant UIDs
+     *
+     * @return string
+     */
+    public static function formatVariantUids($variantUidOrUids = '')
+    {
+        if (is_array($variantUidOrUids)) {
+            return implode(', ', $variantUidOrUids);
+        }
+        return $variantUidOrUids;
+    }
+
+    /**
      * POST formatted query for the API server
      * 
      * @param array $query - Query array
@@ -402,8 +417,15 @@ class Utility
             }else {
                 $request_headers[] = 'access_token: '.$Headers["access_token"];
             }
-            if ($Headers["branch"] !== '' && $Headers["branch"] !== "undefined") {
-                $request_headers[] = 'branch: '.$Headers["branch"];
+            if (isset($queryObject->variantUid) && !Utility::isEmpty($queryObject->variantUid)) {
+                $request_headers[] = 'x-cs-variant-uid: '.Utility::formatVariantUids($queryObject->variantUid);
+            }
+            $branch = $Headers["branch"] ?? '';
+            if (isset($queryObject->variantBranch) && !Utility::isEmpty($queryObject->variantBranch)) {
+                $branch = $queryObject->variantBranch;
+            }
+            if ($branch !== '' && $branch !== "undefined") {
+                $request_headers[] = 'branch: '.$branch;
             }
 
             $proxy_details = $stack->proxy;

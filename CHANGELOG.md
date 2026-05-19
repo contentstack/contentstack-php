@@ -1,6 +1,11 @@
 
 ## CHANGELOG
 ------------------------------------------------
+## Version 2.4.3
+###### Date: 19-May-2026
+### Enhancement
+    - Added entry variants support with optional branch scoping via `variants()` on Entry and Query
+------------------------------------------------
 ## Version 2.4.2
 ###### Date: 05-January-2026
 ### Security fix
