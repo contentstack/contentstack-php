@@ -17,3 +17,4 @@ test/result.json
 stdout
 build
 cache
+src/assets/regions.json

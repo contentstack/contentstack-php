@@ -27,9 +27,11 @@ namespace Contentstack;
  * */
 class ContentstackRegion
 {
-    const EU= "eu";
-    const US= "us";
-    const AZURE_NA= "azure-na";
-    const AZURE_EU= "azure-eu";
-    const GCP_NA= "gcp-na";
+    const US       = "us";
+    const EU       = "eu";
+    const AU       = "au";
+    const AZURE_NA = "azure-na";
+    const AZURE_EU = "azure-eu";
+    const GCP_NA   = "gcp-na";
+    const GCP_EU   = "gcp-eu";
 }
