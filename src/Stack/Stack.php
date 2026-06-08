@@ -14,6 +14,7 @@
  * */
 namespace Contentstack\Stack;
 
+use Contentstack\Endpoint;
 use Contentstack\Support\Utility;
 use Contentstack\Stack\ContentType;
 use Contentstack\Stack\Assets;
@@ -54,15 +55,33 @@ class Stack
      * 
      * */
     public function __construct(
-        $api_key = '', 
-        $delivery_token = '', 
-        $environment = '', 
+        $api_key = '',
+        $delivery_token = '',
+        $environment = '',
         $config = array('region'=> 'us', 'branch'=> '', 'live_preview' => array())
     ) {
         $previewHost = 'api.contentstack.io';
-        if ($config && $config !== "undefined" && array_key_exists('region', $config) && $config['region'] !== "undefined" && $config['region'] !== "us" ) {
-            $this->host = $config['region'].'-cdn.contentstack.com';
-            $previewHost =  $config['region'].'-api.contentstack.com';
+
+        $region = (is_array($config) && isset($config['region']) && $config['region'] !== 'undefined')
+            ? (string) $config['region']
+            : 'us';
+
+        // Explicit host in config takes precedence over region-derived host.
+        if (is_array($config) && !empty($config['host'])) {
+            $this->host  = $config['host'];
+            $previewHost = !empty($config['previewHost']) ? $config['previewHost'] : $previewHost;
+        } else {
+            try {
+                $this->host  = Endpoint::getContentstackEndpoint($region, 'contentDelivery', true);
+                $previewHost = Endpoint::getContentstackEndpoint($region, 'contentManagement', true);
+            } catch (\InvalidArgumentException $e) {
+                // Unknown region — fall back to the legacy pattern so custom-region
+                // code written before this feature was added continues to work.
+                if ($region !== 'us' && $region !== '') {
+                    $this->host  = $region . '-cdn.contentstack.com';
+                    $previewHost = $region . '-api.contentstack.com';
+                }
+            }
         }
         $this->header = Utility::validateInput(
             'stack', array('api_key' => $api_key, 
@@ -74,7 +93,7 @@ class Stack
         $this->environment = $this->header['environment'];
         unset($this->header['environment']);
         $livePreview = array('enable' => false, 'host' => $previewHost);
-        $this->live_preview = $config['live_preview'] ? array_merge($livePreview, $config['live_preview']) : $livePreview;
+        $this->live_preview = (!empty($config['live_preview'])) ? array_merge($livePreview, $config['live_preview']) : $livePreview;
         $this->proxy = array_key_exists("proxy",$config) ? $config['proxy'] : array('proxy'=>array());
         $this->timeout = array_key_exists("timeout",$config) ? $config['timeout'] : '3000';
         $this->retryDelay = array_key_exists("retryDelay",$config) ? $config['retryDelay'] : '3000';
