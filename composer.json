@@ -30,8 +30,11 @@
         "code-lts/doctum": "^5.3"
     },
     "scripts": {
+        "post-install-cmd": ["@php scripts/download-regions.php"],
+        "post-update-cmd":  ["@php scripts/download-regions.php"],
         "generate:docs": "vendor/bin/doctum.php update ./config.php",
-        "test": "vendor/bin/phpunit"
+        "test": "vendor/bin/phpunit",
+        "refresh-regions": "@php scripts/download-regions.php"
     },
     "require": {
         "php" : ">=5.5.0",

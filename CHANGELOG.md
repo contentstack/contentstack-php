@@ -1,6 +1,11 @@
 
 ## CHANGELOG
 ------------------------------------------------
+## Version 2.5.0
+###### Date: 15-June-2026
+### Enhancement
+    - Added support for custom URL endpoint integration
+------------------------------------------------
 ## Version 2.4.2
 ###### Date: 05-January-2026
 ### Security fix
