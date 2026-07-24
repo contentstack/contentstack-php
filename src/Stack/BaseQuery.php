@@ -415,6 +415,51 @@ abstract class BaseQuery
         return $this->queryObject;
     }
 
+    /**
+     * Scope entry requests to one or more entry variants.
+     *
+     * Pass a single variant UID (string) or multiple variant UIDs (array).
+     * Optionally pass a branch name to scope the request to that branch;
+     * when omitted, the stack-level branch (if set) is used.
+     *
+     * @param string|array $variantUidOrUids - Variant UID or list of variant UIDs
+     * @param string       $branchName        - Optional branch name for the request
+     *
+     * @example
+     * use Contentstack\Contentstack;
+     * $stack = Contentstack::Stack("API_KEY", "DELIVERY_TOKEN", "ENVIRONMENT");
+     * $result = $stack->ContentType('product')->Entry('ENTRY_UID')->variants('VARIANT_UID', 'branch_name')->toJSON()->fetch();
+     * $entries = $stack->ContentType('product')->Entry()->variants(array('variant1', 'variant2'), 'branch_name')->toJSON()->find();
+     *
+     * @return Query|Entry
+     */
+    public function variants($variantUidOrUids = '', $branchName = '')
+    {
+        if (Utility::isEmpty($variantUidOrUids)) {
+            throw contentstackCreateError(ErrorMessages::VARIANT_UIDS_REQUIRED);
+        }
+        if (is_array($variantUidOrUids)) {
+            if (count($variantUidOrUids) === 0) {
+                throw contentstackCreateError(ErrorMessages::VARIANT_UIDS_REQUIRED);
+            }
+            foreach ($variantUidOrUids as $variantUid) {
+                if (Utility::isEmpty($variantUid) || !is_string($variantUid)) {
+                    throw contentstackCreateError(ErrorMessages::INVALID_VARIANT_UIDS);
+                }
+            }
+        } elseif (!is_string($variantUidOrUids)) {
+            throw contentstackCreateError(ErrorMessages::INVALID_VARIANT_UIDS);
+        }
+        if (!Utility::isEmpty($branchName) && !is_string($branchName)) {
+            throw contentstackCreateError(ErrorMessages::INVALID_VARIANT_UIDS);
+        }
+        $this->queryObject->variantUid = $variantUidOrUids;
+        if (!Utility::isEmpty($branchName)) {
+            $this->queryObject->variantBranch = $branchName;
+        }
+        return $this->queryObject;
+    }
+
     /** 
      * To include branch of publish content.
      * 

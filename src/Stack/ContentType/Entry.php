@@ -54,6 +54,17 @@ class Entry extends BaseQuery
     }
 
     /**
+     * Get all entries for the content type (used without an entry UID).
+     *
+     * @return Request
+     */
+    public function find()
+    {
+        $this->operation = __FUNCTION__;
+        return Utility::contentstackRequest($this->contentType->stack, $this);
+    }
+
+    /**
      * Fetch the specified entry
      * 
      * @return Request

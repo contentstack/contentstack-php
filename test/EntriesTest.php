@@ -509,4 +509,5 @@ class EntriesTest extends TestCase {
         }
         $this->assertTrue($flag);
     }
+
 }

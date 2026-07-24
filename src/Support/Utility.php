@@ -206,6 +206,21 @@ class Utility
     }
 
     /**
+     * Format variant UID(s) for the x-cs-variant-uid request header.
+     *
+     * @param string|array $variantUidOrUids - Variant UID or list of variant UIDs
+     *
+     * @return string
+     */
+    public static function formatVariantUids($variantUidOrUids = '')
+    {
+        if (is_array($variantUidOrUids)) {
+            return implode(', ', $variantUidOrUids);
+        }
+        return $variantUidOrUids;
+    }
+
+    /**
      * POST formatted query for the API server
      * 
      * @param array $query - Query array
@@ -395,15 +410,22 @@ class Utility
             $Headers     = Utility::headers($queryObject);
 
             $request_headers = array();
-            $request_headers[] = 'x-user-agent: contentstack-php/2.5.0';
+            $request_headers[] = 'x-user-agent: contentstack-php/2.6.0';
             $request_headers[] = 'api_key: '.$Headers["api_key"];
             if (Utility::isLivePreview($queryObject)) {
                 $request_headers[] = 'authorization: '.$queryObject->contentType->stack->live_preview['management_token'] ;
             }else {
                 $request_headers[] = 'access_token: '.$Headers["access_token"];
             }
-            if ($Headers["branch"] !== '' && $Headers["branch"] !== "undefined") {
-                $request_headers[] = 'branch: '.$Headers["branch"];
+            if (isset($queryObject->variantUid) && !Utility::isEmpty($queryObject->variantUid)) {
+                $request_headers[] = 'x-cs-variant-uid: '.Utility::formatVariantUids($queryObject->variantUid);
+            }
+            $branch = $Headers["branch"] ?? '';
+            if (isset($queryObject->variantBranch) && !Utility::isEmpty($queryObject->variantBranch)) {
+                $branch = $queryObject->variantBranch;
+            }
+            if ($branch !== '' && $branch !== "undefined") {
+                $request_headers[] = 'branch: '.$branch;
             }
 
             $proxy_details = $stack->proxy;

@@ -18,6 +18,8 @@ class ErrorMessages
     const TAGS_ARRAY = 'Tags must be an array. Convert the value to an array and try again.';
     const VALUE_ARRAY = 'Value must be an array. Convert the value to an array and try again.';
     const INVALID_QUERY = 'Invalid query. Update the query and try again.';
+    const VARIANT_UIDS_REQUIRED = 'Variant UID(s) are required. Provide a variant UID string or an array of variant UID strings and try again.';
+    const INVALID_VARIANT_UIDS = 'Invalid variant UID(s). Use a string for a single variant UID or an array of variant UID strings and try again.';
 
     // helper.php error messages
     const INVALID_STRING_INPUT = 'Invalid input for "%s". Use a string value and try again.';
