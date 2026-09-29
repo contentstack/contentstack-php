@@ -5,6 +5,9 @@ on:
 jobs:
   security-sca:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pull-requests: write
     steps:
       - uses: actions/checkout@master
       - name: Run Snyk to check for vulnerabilities
@@ -13,3 +16,6 @@ jobs:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
         with:
           args: --fail-on=all
+          json: true
+        continue-on-error: true
+      - uses: contentstack/sca-policy@main
