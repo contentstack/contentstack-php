@@ -35,7 +35,7 @@ $stack = Contentstack::Stack(API_KEY, DELIVERY_TOKEN, ENV_NAME, array('region'=>
 #### Download and install library:
 To use the PHP SDK, you need to perform the following steps:
 
-1. [Download](https://www.contentstack.com/docs/platforms/php/php_sdk_latest) the PHP SDK
+1. [Download](https://www.contentstack.com/docs/developers/sdks/content-delivery-sdk/php/download-php-sdk) the PHP SDK
 2. Create `dependencies` folder in your project directory
 3. Move this downloaded zip file to a `dependencies` folder
 4. Download the [MabeEnum](https://github.com/marc-mabe/php-enum)
@@ -55,23 +55,23 @@ $stack = Contentstack::Stack(API_KEY, DELIVERY_TOKEN, ENV_NAME);
 
 #### Stack
 
-A stack is like a container that holds the content of your app. Learn more about [Stacks](https://www.contentstack.com/docs/guide/stack).
+A stack is like a container that holds the content of your app. Learn more about [Stacks](https://www.contentstack.com/docs/developers/set-up-stack/about-stack).
 
 #### Content Type
 
-Content type lets you define the structure or blueprint of a page or a section of your digital property. It is a form-like page that gives Content Managers an interface to input and upload content. [Read more](https://www.contentstack.com/docs/guide/content-types).
+Content type lets you define the structure or blueprint of a page or a section of your digital property. It is a form-like page that gives Content Managers an interface to input and upload content. [Read more](https://www.contentstack.com/docs/developers/create-content-types/about-content-types).
 
 #### Entry
 
-An entry is the actual piece of content created using one of the defined content types. Learn more about [Entries](https://www.contentstack.com/docs/guide/content-management#working-with-entries). 
+An entry is the actual piece of content created using one of the defined content types. Learn more about [Entries](https://www.contentstack.com/docs/content-managers/author-content/about-entries). 
 
 #### Asset
 
-Assets refer to all the media files (images, videos, PDFs, audio files, and so on) uploaded to Contentstack. These files can be used in multiple entries. Read more about [Assets](https://www.contentstack.com/docs/guide/content-management#working-with-assets). 
+Assets refer to all the media files (images, videos, PDFs, audio files, and so on) uploaded to Contentstack. These files can be used in multiple entries. Read more about [Assets](https://www.contentstack.com/docs/content-managers/author-content/about-assets). 
 
 #### Environment
 
-A publishing environment corresponds to one or more deployment servers or a content delivery destination where the entries need to be published. Learn how to work with [Environments](https://www.contentstack.com/docs/guide/environments). 
+A publishing environment corresponds to one or more deployment servers or a content delivery destination where the entries need to be published. Learn how to work with [Environments](https://www.contentstack.com/docs/developers/set-up-environments/about-environments). 
 
 
 
@@ -116,7 +116,7 @@ $result = $stack->ContentType(CONTENT_TYPE_UID)->Entry(ENTRY_UID)->toJSON()->fet
 
 You can query for content types, entries, assets and more using our PHP API Reference. 
 
-[PHP API Reference Doc](https://www.contentstack.com/docs/platforms/php/api-reference/)
+[PHP API Reference Doc](https://www.contentstack.com/docs/developers/sdks/content-delivery-sdk/php/reference)
 
   
 
@@ -156,5 +156,5 @@ $imageUrl = $stack->imageTransform(imageUrl, array('auto' => 'webp'));
 
 - [Contentstack Website](https://www.contentstack.com) 
 - [Official Documentation](https://www.contentstack.com/docs) 
-- [Content Delivery API Docs](https://www.contentstack.com/docs/apis/content-delivery-api/) 
+- [Content Delivery API Docs](https://www.contentstack.com/docs/developers/apis/content-delivery-api) 
 
