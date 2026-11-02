@@ -7,7 +7,7 @@
     </body>
 </html>
 <?php
-ini_set('display_errors', 'On');
+ini_set('display_errors', 'Off');
 require_once __DIR__ . '/../src/contentstack.php';
 
 use Contentstack\Contentstack;
@@ -27,7 +27,9 @@ try {
       Utility::debug(($result));
 
 } catch(Exception $e) {
-    echo "Message : ".$e->getMessage(); // returns message -> API -> error_message
-    echo "Code : ".$e->getCode(); // returns number -> API -> error_code
-    echo "Errors : ".print_r($e->getErrors()); // returns array -> API -> errors
+    // Log the details server-side; never echo them to the client.
+    error_log("Message : ".$e->getMessage()); // returns message -> API -> error_message
+    error_log("Code : ".$e->getCode()); // returns number -> API -> error_code
+    error_log("Errors : ".print_r($e->getErrors(), true)); // returns array -> API -> errors
+    echo "The request failed. See the server log for details.";
 }
